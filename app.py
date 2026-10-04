@@ -829,24 +829,33 @@ div[data-testid="stPopoverBody"] {{
 }}
 
 /* ==================== TACTILE QUIZ OPTION CARDS ==================== */
-.st-key-quiz_options_container {{
+.st-key-quiz_options_container,
+div[data-testid="stVerticalBlock"]:has(div[class*="st-key-opt_btn_"]) {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.52rem !important;
+    gap: 0.55rem !important;
     margin: 0.35rem 0 0.65rem !important;
-}}
-
-.st-key-quiz_options_container div[data-testid="stButton"] {{
     width: 100% !important;
-}}
+}
 
-.st-key-quiz_options_container div[data-testid="stButton"] button {{
+.st-key-quiz_options_container div[data-testid="stButton"],
+div[class*="st-key-opt_btn_"],
+div[class*="st-key-opt_btn_"] div[data-testid="stButton"] {
     width: 100% !important;
-    min-height: 48px !important;
-    padding: 0.75rem 1.1rem !important;
-    text-align: left !important;
+}
+
+div.stElementContainer[class*="st-key-opt_btn_"] div[data-testid="stButton"] button,
+.st-key-quiz_options_container button,
+div[class*="st-key-opt_btn_"] button,
+div[data-testid="stVerticalBlock"]:has(div[class*="st-key-opt_btn_"]) div[data-testid="stButton"] button {
+    display: flex !important;
+    flex-direction: row !important;
     justify-content: flex-start !important;
-    align-items: center !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    min-height: 52px !important;
+    padding: 0.85rem 1.15rem !important;
     border-radius: var(--radius-md) !important;
     background: var(--quiz-opt-unsel-bg) !important;
     backdrop-filter: blur(16px) !important;
@@ -855,51 +864,95 @@ div[data-testid="stPopoverBody"] {{
     box-shadow: var(--glass-shadow-soft) !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
     white-space: normal !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
     cursor: pointer !important;
-}}
+}
 
-.st-key-quiz_options_container div[data-testid="stButton"] button *,
-.st-key-quiz_options_container div[data-testid="stButton"] button p,
-.st-key-quiz_options_container div[data-testid="stButton"] button span {{
-    color: var(--quiz-opt-unsel-text) !important;
+/* Force markdown container inside option buttons to take full width and left align */
+div.stElementContainer[class*="st-key-opt_btn_"] button div[data-testid="stMarkdownContainer"],
+.st-key-quiz_options_container button div[data-testid="stMarkdownContainer"],
+div[class*="st-key-opt_btn_"] button div[data-testid="stMarkdownContainer"],
+div[data-testid="stVerticalBlock"]:has(div[class*="st-key-opt_btn_"]) button div[data-testid="stMarkdownContainer"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
     text-align: left !important;
-}}
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
-.st-key-quiz_options_container div[data-testid="stButton"] button:hover {{
+/* Force p and text elements inside option buttons to take full width and align left */
+div.stElementContainer[class*="st-key-opt_btn_"] button div[data-testid="stMarkdownContainer"] p,
+.st-key-quiz_options_container button div[data-testid="stMarkdownContainer"] p,
+div[class*="st-key-opt_btn_"] button div[data-testid="stMarkdownContainer"] p,
+div[data-testid="stVerticalBlock"]:has(div[class*="st-key-opt_btn_"]) button div[data-testid="stMarkdownContainer"] p,
+div[class*="st-key-opt_btn_"] button p,
+.st-key-quiz_options_container button p {
+    color: var(--quiz-opt-unsel-text) !important;
+    font-size: 0.94rem !important;
+    line-height: 1.52 !important;
+    text-align: left !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: block !important;
+}
+
+/* Consistent spacing and bold weight for A. / B. prefix */
+div[class*="st-key-opt_btn_"] button strong,
+.st-key-quiz_options_container button strong {
+    font-weight: 800 !important;
+    margin-right: 0.35rem !important;
+    color: var(--text-title) !important;
+    display: inline-block !important;
+}
+
+div.stElementContainer[class*="st-key-opt_btn_"] button:hover,
+.st-key-quiz_options_container button:hover,
+div[class*="st-key-opt_btn_"] button:hover {
     transform: translateY(-1.5px) !important;
     border-color: var(--border-primary) !important;
     background: var(--btn-secondary-bg-hover) !important;
     box-shadow: var(--glass-shadow-hover) !important;
-}}
+}
 
-.st-key-quiz_options_container div[data-testid="stButton"] button:hover *,
-.st-key-quiz_options_container div[data-testid="stButton"] button:hover p,
-.st-key-quiz_options_container div[data-testid="stButton"] button:hover span {{
+div.stElementContainer[class*="st-key-opt_btn_"] button:hover p,
+.st-key-quiz_options_container button:hover p,
+div[class*="st-key-opt_btn_"] button:hover p,
+div.stElementContainer[class*="st-key-opt_btn_"] button:hover span,
+.st-key-quiz_options_container button:hover span,
+div[class*="st-key-opt_btn_"] button:hover span {
     color: var(--text-title) !important;
-}}
+}
 
-.st-key-quiz_options_container div[data-testid="stButton"] button:active {{
+div.stElementContainer[class*="st-key-opt_btn_"] button:active,
+.st-key-quiz_options_container button:active,
+div[class*="st-key-opt_btn_"] button:active {
     transform: translateY(1px) scale(0.995) !important;
-}}
+}
 
 /* Selected option card */
-.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"],
-.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] {{
+div.stElementContainer[class*="st-key-opt_btn_"] button[kind="primary"],
+div.stElementContainer[class*="st-key-opt_btn_"] button[data-testid*="primary"],
+.st-key-quiz_options_container button[kind="primary"],
+.st-key-quiz_options_container button[data-testid*="primary"],
+div[class*="st-key-opt_btn_"] button[kind="primary"],
+div[class*="st-key-opt_btn_"] button[data-testid*="primary"] {
     background: var(--quiz-opt-sel-bg) !important;
     border: 2px solid var(--quiz-opt-sel-border) !important;
     box-shadow: 0 0 0 1px var(--quiz-opt-sel-border), 0 8px 20px -3px rgba(79, 70, 229, 0.22) !important;
-}}
+}
 
-.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"] *,
-.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] *,
-.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"] p,
-.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] p,
-.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"] span,
-.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] span {{
+div.stElementContainer[class*="st-key-opt_btn_"] button[kind="primary"] p,
+div.stElementContainer[class*="st-key-opt_btn_"] button[data-testid*="primary"] p,
+.st-key-quiz_options_container button[kind="primary"] p,
+.st-key-quiz_options_container button[data-testid*="primary"] p,
+div[class*="st-key-opt_btn_"] button[kind="primary"] p,
+div[class*="st-key-opt_btn_"] button[data-testid*="primary"] p {
     color: var(--quiz-opt-sel-text) !important;
-    font-weight: 800 !important;
-}}
+    font-weight: 700 !important;
+}
 
 /* ==================== BUTTONS CLEAN, TACTILE & HIGH CONTRAST (WCAG AAA) ==================== */
 /* Primary Action Buttons (Mulai Asesmen, Ulangi Asesmen, Lihat Hasil) */
@@ -1619,21 +1672,29 @@ div[data-baseweb="tab-panel"] {{
         font-size: 0.93rem !important;
         line-height: 1.46 !important;
     }}
-    .st-key-quiz_options_container {{
-        gap: 0.42rem !important;
+    .st-key-quiz_options_container,
+    div[data-testid="stVerticalBlock"]:has(div[class*="st-key-opt_btn_"]) {
+        gap: 0.45rem !important;
         margin: 0.25rem 0 0.5rem !important;
-    }}
-    .st-key-quiz_options_container div[data-testid="stButton"] button {{
-        min-height: 44px !important;
-        padding: 0.6rem 0.85rem !important;
-        font-size: 0.86rem !important;
-        line-height: 1.4 !important;
+    }
+    .st-key-quiz_options_container button,
+    div[class*="st-key-opt_btn_"] button,
+    div.stElementContainer[class*="st-key-opt_btn_"] div[data-testid="stButton"] button {
+        min-height: 46px !important;
+        padding: 0.65rem 0.95rem !important;
+        font-size: 0.88rem !important;
+        line-height: 1.45 !important;
         border-radius: 9px !important;
-    }}
-    .st-key-quiz_options_container div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] p {{
-        font-size: 0.86rem !important;
-        line-height: 1.4 !important;
-    }}
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+    .st-key-quiz_options_container button div[data-testid="stMarkdownContainer"] p,
+    div[class*="st-key-opt_btn_"] button div[data-testid="stMarkdownContainer"] p,
+    div[class*="st-key-opt_btn_"] button p {
+        font-size: 0.88rem !important;
+        line-height: 1.45 !important;
+        text-align: left !important;
+    }
     button[data-testid="baseButton-primary"], button[data-testid="baseButton-secondary"] {{
         min-height: 38px !important;
         font-size: 0.86rem !important;
@@ -1871,7 +1932,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
     render_html(f"""
     <div class="scenario-compact-card" style="border-left: 4px solid var(--{temp_class}-color);">
         <div class="scenario-compact-dim-detail">{dim_detail}</div>
-        <div class="scenario-compact-text">"{q['scenario']}"</div>
+        <div class="scenario-compact-text">{q['scenario']}</div>
     </div>
     """)
 
@@ -1886,13 +1947,13 @@ def render_quiz(engine: PersonalityEngine) -> None:
     is_first_sel = (current_ans == code_first)
     is_second_sel = (current_ans == code_second)
 
-    label_1 = f"**A.** &nbsp; {opt_first['text']}"
+    label_1 = f"**A.** {opt_first['text']}"
     if is_first_sel:
-        label_1 += " &nbsp; :material/check_circle: *(Terpilih)*"
+        label_1 += " :material/check_circle: *(Terpilih)*"
 
-    label_2 = f"**B.** &nbsp; {opt_second['text']}"
+    label_2 = f"**B.** {opt_second['text']}"
     if is_second_sel:
-        label_2 += " &nbsp; :material/check_circle: *(Terpilih)*"
+        label_2 += " :material/check_circle: *(Terpilih)*"
 
     # 5. Options Interactive Cards
     with st.container(key="quiz_options_container"):

@@ -3,7 +3,7 @@
     "id": 1,
     "dim": "EI",
     "cog_tag": "Fe/Ti",
-    "scenario": "Lagi asyik nongkrong bareng teman, tiba-tiba di tengah acara baterai sosialmu mulai habis drastis. Biasanya respon alamimu...",
+    "scenario": "Lagi asyik nongkrong bareng teman, tiba-tiba di tengah acara baterai sosialmu mulai habis drastis. Biasanya respons alamimu...",
     "opt_a": {
       "text": "Tetap lanjut nimbrung dan nyari obrolan seru, karena interaksi justru bisa naikin mood dan energimu lagi.",
       "dim": "E",
@@ -35,7 +35,7 @@
     "id": 3,
     "dim": "EI",
     "cog_tag": "Fe/Ti",
-    "scenario": "Diminta speak up atau presentasi dadakan di depan forum tanpa persiapan matang. Respon spontanmu...",
+    "scenario": "Diminta speak up atau presentasi dadakan di depan forum tanpa persiapan matang. Respons spontanmu...",
     "opt_a": {
       "text": "Santai aja, langsung ngomong sambil mikir di tempat. Adrenalinnya justru bikin kamu lebih luwes.",
       "dim": "E",
@@ -58,7 +58,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Beneran butuh jeda hening sendirian tanpa distraksi dan tanpa harus mikirin respon ke siapapun.",
+      "text": "Beneran butuh jeda hening sendirian tanpa distraksi dan tanpa harus mikirin respons ke siapapun.",
       "dim": "I",
       "val": 1
     }
@@ -186,7 +186,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Kirim chat teks singkat dulu, biar masing-masing punya waktu luang nyaman buat merespon.",
+      "text": "Kirim chat teks singkat dulu, biar masing-masing punya waktu luang nyaman buat merespons.",
       "dim": "I",
       "val": 1
     }
@@ -309,7 +309,7 @@
     "cog_tag": "Se/Ni",
     "scenario": "Waktu kamu lagi scrolling membaca artikel, thread, atau buku, bacaan yang paling bikin nagih...",
     "opt_a": {
-      "text": "Panduan praktis, tips terapan harian, atau kisah nyata yang bisa langsung kamu praktekkan.",
+      "text": "Panduan praktis, tips terapan harian, atau kisah nyata yang bisa langsung kamu praktikkan.",
       "dim": "S",
       "val": 1
     },
@@ -339,9 +339,9 @@
     "id": 22,
     "dim": "SN",
     "cog_tag": "Se/Ni",
-    "scenario": "Saat diajak berdiskusi tentang rencana hidup 3-5 tahun ke depan. Respon alamimu...",
+    "scenario": "Saat diajak berdiskusi tentang rencana hidup 3-5 tahun ke depan. Respons alamimu...",
     "opt_a": {
-      "text": "Fokus pada langkah riil jangka pendek yang sudah pasti: target tabungan, jenjang karir, dan kesiapan saat ini.",
+      "text": "Fokus pada langkah riil jangka pendek yang sudah pasti: target tabungan, jenjang karier, dan kesiapan saat ini.",
       "dim": "S",
       "val": 1
     },
@@ -501,7 +501,7 @@
     "cog_tag": "Fe/Ti",
     "scenario": "Sahabatmu datang sambil menangis karena baru saja diputusin atau dapat masalah berat. Hal pertama yang kamu tawarkan...",
     "opt_a": {
-      "text": "Bantu menganalisis masalahnya secara tenang dan cari solusi konkrit biar situasi dia lekas membaik.",
+      "text": "Bantu menganalisis masalahnya secara tenang dan cari solusi konkret biar situasi dia lekas membaik.",
       "dim": "T",
       "val": 1
     },
@@ -515,7 +515,7 @@
     "id": 33,
     "dim": "TF",
     "cog_tag": "Ti/Fe",
-    "scenario": "Lagi diskusi seru dan ada teman yang menyebarkan argumen atau informasi yang jelas-jelas keliru secara fakta. Responmu...",
+    "scenario": "Lagi diskusi seru dan ada teman yang menyebarkan argumen atau informasi yang jelas-jelas keliru secara fakta. Responsmu...",
     "opt_a": {
       "text": "Langsung mengoreksi faktanya secara tegas di forum, karena kebenaran data lebih penting daripada sungkan.",
       "dim": "T",
@@ -595,7 +595,7 @@
     "id": 38,
     "dim": "JP",
     "cog_tag": "Je/Pe",
-    "scenario": "Jumat malam tiba-tiba diajak teman liburan singkat ke luar kota besok pagi tanpa persiapan. Responmu...",
+    "scenario": "Jumat malam tiba-tiba diajak teman liburan singkat ke luar kota besok pagi tanpa persiapan. Responsmu...",
     "opt_a": {
       "text": "Ragu kalau serba mendadak; kamu butuh kepastian minimal soal tempat menginap, transportasi, dan perkiraan biayanya.",
       "dim": "J",
@@ -629,7 +629,7 @@
     "cog_tag": "Je/Pe",
     "scenario": "Melihat meja kerja, kamar, atau file-file di komputermu, kondisinya cenderung...",
     "opt_a": {
-      "text": "Tertata rapi dan terorganisir di foldernya masing-masing, risih kalau barang-barang berserakan nggak pada tempatnya.",
+      "text": "Tertata rapi dan terorganisasi di foldernya masing-masing, risih kalau barang-barang berserakan nggak pada tempatnya.",
       "dim": "J",
       "val": 1
     },
