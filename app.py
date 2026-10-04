@@ -1,7 +1,6 @@
 from __future__ import annotations
 import random
 import textwrap
-import time
 import streamlit as st
 from engine import PersonalityEngine, MBTIResult
 from profiles import get_profile, get_all_profiles, get_avatar_base64
@@ -25,7 +24,7 @@ def render_avatar_img(code: str, size: int = 90, alt: str = "") -> str:
     return (
         f'<img src="data:image/svg+xml;base64,{b64}" alt="{alt}" '
         f'width="{size}" height="{size}" '
-        f'style="object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.06));" />'
+        f'style="object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 6px 14px rgba(0,0,0,0.08));" />'
     )
 
 
@@ -33,72 +32,71 @@ APP_STYLES = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 
-/* ==================== CLAYMORPHISM & GLASSMORPHISM DESIGN TOKENS ==================== */
+/* ==================== GLASSMORPHISM & TACTILE DESIGN TOKENS ==================== */
 :root {
     --bg-canvas: #F8FAFC;
-    --surface-card: #FFFFFF;
-    --surface-subtle: #F1F5F9;
+    --surface-glass: rgba(255, 255, 255, 0.78);
+    --surface-glass-strong: rgba(255, 255, 255, 0.90);
+    --surface-glass-subtle: rgba(255, 255, 255, 0.58);
     
-    --border-light: #E2E8F0;
-    --border-medium: #CBD5E1;
+    --border-glass: 1.5px solid rgba(255, 255, 255, 0.85);
+    --border-glass-subtle: 1px solid rgba(226, 232, 240, 0.8);
     --border-primary: #4F46E5;
     
-    --text-title: #1E1B4B;
+    --text-title: #0F172A;
     --text-main: #1E293B;
     --text-body: #475569;
     --text-muted: #64748B;
     
     /* 4 Temperament Theme Colors */
     --nt-color: #4F46E5;
-    --nt-bg: #EEF2FF;
+    --nt-bg: rgba(238, 242, 255, 0.85);
     --nt-border: #C7D2FE;
     
     --nf-color: #059669;
-    --nf-bg: #ECFDF5;
+    --nf-bg: rgba(236, 253, 245, 0.85);
     --nf-border: #A7F3D0;
     
     --sj-color: #0284C7;
-    --sj-bg: #F0F9FF;
+    --sj-bg: rgba(240, 249, 255, 0.85);
     --sj-border: #BAE6FD;
     
     --sp-color: #D97706;
-    --sp-bg: #FFFBEB;
+    --sp-bg: rgba(255, 251, 235, 0.85);
     --sp-border: #FDE68A;
 
     /* Geometry */
-    --radius-clay: 22px;
+    --radius-hero: 24px;
     --radius-card: 18px;
     --radius-md: 12px;
     --radius-pill: 9999px;
     
-    /* Claymorphism Dual Shadows */
-    --shadow-clay: 
-        0 14px 28px -4px rgba(79, 70, 229, 0.08),
-        0 4px 10px -2px rgba(15, 23, 42, 0.03),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
-        inset -4px -4px 8px rgba(15, 23, 42, 0.035);
+    /* Pure Glassmorphic Soft Shadows */
+    --glass-shadow: 
+        0 14px 34px -4px rgba(31, 38, 135, 0.07),
+        0 2px 8px -1px rgba(15, 23, 42, 0.03),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
         
-    --shadow-clay-hover: 
-        0 18px 36px -4px rgba(79, 70, 229, 0.12),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
-        inset -4px -4px 8px rgba(15, 23, 42, 0.035);
+    --glass-shadow-hover: 
+        0 20px 42px -4px rgba(79, 70, 229, 0.14),
+        0 4px 12px -2px rgba(15, 23, 42, 0.04),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
         
-    --shadow-clay-soft:
-        0 8px 18px -3px rgba(79, 70, 229, 0.05),
-        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
-        inset -3px -3px 6px rgba(15, 23, 42, 0.025);
-        
-    /* Glassmorphism Accents */
-    --glass-bg: rgba(255, 255, 255, 0.72);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.65);
-    --glass-shadow: 0 4px 14px rgba(31, 38, 135, 0.05);
+    --glass-shadow-soft:
+        0 8px 20px -3px rgba(31, 38, 135, 0.05),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
-/* Base App Layout */
+/* Atmospheric Canvas Background */
 html, body, [class*="css"], .stApp {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
     color: var(--text-main) !important;
-    background-color: var(--bg-canvas) !important;
+    background: 
+        radial-gradient(ellipse 75% 45% at 15% -5%, rgba(99, 102, 241, 0.12), transparent 55%),
+        radial-gradient(ellipse 65% 45% at 85% 15%, rgba(16, 185, 129, 0.09), transparent 50%),
+        radial-gradient(ellipse 65% 55% at 50% 100%, rgba(2, 132, 199, 0.08), transparent 55%),
+        #F8FAFC !important;
+    background-attachment: fixed !important;
 }
 
 header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
@@ -106,19 +104,41 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
 }
 
 .main .block-container {
-    padding: 2.4rem 1.4rem 4.8rem !important;
+    padding: 2.2rem 1.4rem 4.5rem !important;
     max-width: 880px !important;
 }
 
-/* ==================== CLAYMORPHIC HERO CONTAINER ==================== */
+/* Glassmorphism for Streamlit Native Containers */
+[data-testid="stVerticalBlockBorderWrapper"] > div {
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: var(--border-glass) !important;
+    border-radius: var(--radius-card) !important;
+    box-shadow: var(--glass-shadow-soft) !important;
+}
+
+/* Popover Glassmorphic Style */
+div[data-testid="stPopoverBody"] {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+    border-radius: var(--radius-card) !important;
+    box-shadow: 0 18px 40px -4px rgba(31, 38, 135, 0.15) !important;
+}
+
+/* ==================== GLASSMORPHIC HERO CONTAINER ==================== */
 .friendly-hero {
-    background: var(--surface-card);
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
-    border-radius: var(--radius-clay);
-    box-shadow: var(--shadow-clay);
+    background: var(--surface-glass);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: var(--border-glass);
+    border-radius: var(--radius-hero);
+    box-shadow: var(--glass-shadow);
     padding: 2.6rem 2.2rem 2.2rem;
     text-align: center;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.3rem;
     position: relative;
     overflow: hidden;
 }
@@ -142,12 +162,12 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.04em;
-    background: var(--glass-bg);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: #4338CA;
-    border: var(--glass-border);
-    box-shadow: var(--glass-shadow);
+    border: 1px solid rgba(199, 210, 254, 0.7);
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
 }
 
 .pill-row-cluster {
@@ -162,15 +182,16 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-body);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 0.35rem 0.95rem;
     border-radius: var(--radius-pill);
-    border: 1px solid var(--border-light);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
-/* ==================== 3 PILLARS PROPORTIONAL GRID ==================== */
+/* ==================== 3 PILLARS GLASS GRID ==================== */
 .pillar-grid-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -185,22 +206,25 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
 }
 
 .pillar-card {
-    background: #FFFFFF;
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: var(--radius-card);
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
-    box-shadow: var(--shadow-clay-soft);
+    border: var(--border-glass);
+    box-shadow: var(--glass-shadow-soft);
     padding: 1.35rem 1.25rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
     box-sizing: border-box;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
 }
 
 .pillar-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-clay);
+    transform: translateY(-3px);
+    box-shadow: var(--glass-shadow-hover);
+    background: var(--surface-glass-strong);
 }
 
 .pillar-title {
@@ -209,9 +233,6 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     font-weight: 700;
     color: var(--text-title);
     margin: 0 0 0.45rem;
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
 }
 
 .pillar-desc {
@@ -264,10 +285,12 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
 }
 
 .char-card {
-    background: #FFFFFF;
+    background: var(--surface-glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-radius: 20px;
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
-    box-shadow: var(--shadow-clay-soft);
+    border: var(--border-glass);
+    box-shadow: var(--glass-shadow-soft);
     padding: 1.4rem 1.1rem 1.25rem;
     display: flex;
     flex-direction: column;
@@ -281,7 +304,8 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
 
 .char-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-clay-hover);
+    background: var(--surface-glass-strong);
+    box-shadow: var(--glass-shadow-hover);
 }
 
 .char-avatar-pod {
@@ -292,16 +316,13 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     align-items: center;
     justify-content: center;
     margin-bottom: 0.85rem;
-    box-shadow: 
-        inset 3px 3px 6px rgba(15, 23, 42, 0.04),
-        inset -3px -3px 6px rgba(255, 255, 255, 0.95),
-        0 6px 14px rgba(79, 70, 229, 0.06);
     border: 2px solid rgba(255, 255, 255, 0.9);
-    transition: transform 0.2s ease;
+    box-shadow: 0 6px 16px rgba(31, 38, 135, 0.08);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .char-card:hover .char-avatar-pod {
-    transform: scale(1.06);
+    transform: scale(1.07);
 }
 
 .char-code-badge {
@@ -337,20 +358,72 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     font-weight: 700;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(226, 232, 240, 0.85);
     border-radius: var(--radius-pill);
     padding: 0.22rem 0.7rem;
     color: var(--text-muted);
 }
 
+/* ==================== REAL-TIME QUIZ PROGRESS BAR ==================== */
+.quiz-progress-wrapper {
+    margin: 0.9rem 0 1.25rem;
+    padding: 0.75rem 1.1rem;
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--border-glass);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow-soft);
+}
+
+.quiz-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.quiz-progress-text {
+    color: var(--text-title);
+    letter-spacing: 0.02em;
+}
+
+.quiz-progress-pct {
+    color: #4F46E5;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+}
+
+.quiz-progress-track {
+    height: 10px;
+    background: rgba(226, 232, 240, 0.75);
+    border-radius: 9999px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.quiz-progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #6366F1 0%, #3B82F6 50%, #10B981 100%);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+    transition: width 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* ==================== QUIZ SCENARIO CONTAINER ==================== */
 .scenario-friendly-card {
-    background: var(--surface-card);
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
-    border-radius: var(--radius-clay);
+    background: var(--surface-glass);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: var(--border-glass);
+    border-radius: var(--radius-hero);
     padding: 1.85rem 2rem 1.6rem;
-    box-shadow: var(--shadow-clay);
-    margin-bottom: 1.2rem;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 1.1rem;
     position: relative;
 }
 
@@ -358,9 +431,9 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.9rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid #F1F5F9;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.7);
 }
 
 .scenario-quote-highlight {
@@ -368,109 +441,183 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     font-weight: 700;
     line-height: 1.72;
     color: var(--text-title);
-    margin: 0.6rem 0 1.25rem;
+    margin: 0.5rem 0 1rem;
     letter-spacing: -0.015em;
 }
 
-/* ==================== TACTILE CLAY RADIO OPTIONS ==================== */
-div[data-testid="stRadio"] > div[role="radiogroup"] {
+/* ==================== TACTILE QUIZ OPTION CARDS ==================== */
+.st-key-quiz_options_container {
     display: flex !important;
     flex-direction: column !important;
     gap: 0.95rem !important;
+    margin: 1.1rem 0 1.25rem !important;
 }
 
-div[data-testid="stRadio"] label[data-baseweb="radio"] {
-    background: var(--surface-card) !important;
+.st-key-quiz_options_container div[data-testid="stButton"] {
+    width: 100% !important;
+}
+
+.st-key-quiz_options_container div[data-testid="stButton"] button {
+    width: 100% !important;
+    min-height: 76px !important;
+    padding: 1.2rem 1.55rem !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
     border-radius: var(--radius-card) !important;
-    border: 1.5px solid var(--border-light) !important;
-    padding: 1.25rem 1.45rem !important;
-    margin: 0 !important;
-    cursor: pointer !important;
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: var(--border-glass) !important;
+    box-shadow: var(--glass-shadow) !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    box-shadow: var(--shadow-clay-soft) !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    gap: 1rem !important;
-    min-height: 60px !important;
-}
-
-div[data-testid="stRadio"] label[data-baseweb="radio"]:hover {
-    border-color: #A5B4FC !important;
-    background: #FAF5FF !important;
-    transform: translateY(-2px) !important;
-    box-shadow: var(--shadow-clay) !important;
-}
-
-div[data-testid="stRadio"] label[data-baseweb="radio"]:active {
-    transform: translateY(0) !important;
-}
-
-div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) {
-    background: #FFFFFF !important;
-    border-color: #4F46E5 !important;
-    box-shadow: 0 0 0 2px #4F46E5, var(--shadow-clay) !important;
-    transform: translateY(-1px) !important;
-}
-
-div[data-testid="stRadio"] label[data-baseweb="radio"] div[data-testid="stMarkdownContainer"] p {
+    white-space: normal !important;
+    word-break: break-word !important;
+    color: var(--text-body) !important;
     font-size: 0.98rem !important;
     line-height: 1.64 !important;
-    color: var(--text-body) !important;
     font-weight: 500 !important;
-    margin: 0 !important;
+    cursor: pointer !important;
 }
 
-div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) div[data-testid="stMarkdownContainer"] p {
-    font-weight: 700 !important;
+.st-key-quiz_options_container div[data-testid="stButton"] button:hover {
+    transform: translateY(-2.5px) scale(1.002) !important;
+    border-color: #818CF8 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: var(--glass-shadow-hover) !important;
     color: var(--text-title) !important;
 }
 
-/* ==================== BUTTONS CLEAN & TACTILE ==================== */
-button[data-testid="baseButton-primary"], button[data-testid="baseButton-secondary"] {
-    min-height: 48px !important;
-    font-weight: 700 !important;
-    font-size: 0.95rem !important;
-    border-radius: var(--radius-md) !important;
-    transition: all 0.18s ease !important;
+.st-key-quiz_options_container div[data-testid="stButton"] button:active {
+    transform: translateY(1px) scale(0.995) !important;
 }
 
+.st-key-quiz_options_container div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] {
+    width: 100% !important;
+    text-align: left !important;
+}
+
+.st-key-quiz_options_container div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] p {
+    margin: 0 !important;
+    font-size: 0.98rem !important;
+    line-height: 1.64 !important;
+    text-align: left !important;
+}
+
+/* Selected Option Highlight State */
+.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"],
+.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid="baseButton-primary"] {
+    background: rgba(238, 242, 255, 0.95) !important;
+    border-color: #4F46E5 !important;
+    color: #1E1B4B !important;
+    box-shadow: 0 0 0 2px #4F46E5, 0 12px 28px -4px rgba(79, 70, 229, 0.22) !important;
+    font-weight: 600 !important;
+}
+
+/* ==================== BUTTONS CLEAN & TACTILE ==================== */
 button[data-testid="baseButton-primary"] {
     background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%) !important;
     color: #FFFFFF !important;
-    border: none !important;
-    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+    min-height: 48px !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    letter-spacing: -0.01em !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 button[data-testid="baseButton-primary"]:hover {
-    transform: translateY(-1.5px) !important;
-    box-shadow: 0 8px 22px rgba(79, 70, 229, 0.35) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 26px rgba(79, 70, 229, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
     background: linear-gradient(135deg, #4338CA 0%, #3730A3 100%) !important;
 }
 
 button[data-testid="baseButton-primary"]:active {
-    transform: translateY(0.5px) !important;
+    transform: translateY(1px) scale(0.995) !important;
 }
 
 button[data-testid="baseButton-secondary"] {
-    background: #FFFFFF !important;
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     color: var(--text-main) !important;
-    border: 1.5px solid var(--border-light) !important;
-    box-shadow: var(--shadow-clay-soft) !important;
+    border: var(--border-glass) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--glass-shadow-soft) !important;
+    min-height: 48px !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 button[data-testid="baseButton-secondary"]:hover {
-    border-color: var(--border-medium) !important;
-    background: #F8FAFC !important;
-    transform: translateY(-1.5px) !important;
+    border-color: #CBD5E1 !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 22px rgba(31, 38, 135, 0.08) !important;
 }
 
-/* ==================== RESULT HERO CLAY & GLASS ==================== */
-/* ==================== RESULT HERO CLAY & GLASS ==================== */
+button[data-testid="baseButton-secondary"]:active {
+    transform: translateY(1px) scale(0.995) !important;
+}
+
+/* ==================== SEGMENTED GLASS TABS (NO HORIZONTAL SCROLL) ==================== */
+div[data-baseweb="tab-list"] {
+    display: flex !important;
+    width: 100% !important;
+    gap: 0.35rem !important;
+    background: rgba(241, 245, 249, 0.75) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    padding: 0.35rem !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    overflow-x: hidden !important;
+    margin-bottom: 1.1rem !important;
+}
+
+div[data-baseweb="tab-list"] button[data-baseweb="tab"] {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    padding: 0.55rem 0.35rem !important;
+    font-size: 0.86rem !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    border-radius: 9px !important;
+    color: var(--text-body) !important;
+    white-space: nowrap !important;
+    border: none !important;
+    background: transparent !important;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+div[data-baseweb="tab-list"] button[data-baseweb="tab"]:hover {
+    color: var(--text-title) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+div[data-baseweb="tab-list"] button[data-baseweb="tab"][aria-selected="true"] {
+    background: #FFFFFF !important;
+    color: var(--text-title) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
+    display: none !important;
+}
+
+/* ==================== RESULT HERO & SEAMLESS CHARACTER ==================== */
 .friendly-result-hero {
-    background: var(--surface-card);
-    border: 1.5px solid rgba(255, 255, 255, 0.95);
-    border-radius: var(--radius-clay);
-    box-shadow: var(--shadow-clay);
+    background: var(--surface-glass);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: var(--border-glass);
+    border-radius: var(--radius-hero);
+    box-shadow: var(--glass-shadow);
     padding: 2.2rem 2.2rem 2rem;
     margin-bottom: 1.4rem;
     position: relative;
@@ -526,43 +673,45 @@ button[data-testid="baseButton-secondary"]:hover {
     line-height: 1.25;
 }
 
-.hero-avatar-pod {
+/* Seamless Avatar: Tanpa Card Pod, Karakter Menyatu Alami */
+.hero-avatar-seamless {
     flex-shrink: 0;
     width: 140px;
     height: 140px;
-    border-radius: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 
-        0 12px 24px rgba(79, 70, 229, 0.10),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
-        inset -4px -4px 8px rgba(15, 23, 42, 0.04);
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    padding: 0.7rem;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-    box-sizing: border-box;
+    position: relative;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
 }
 
-.hero-avatar-pod:hover {
-    transform: scale(1.04) rotate(-1deg);
-    box-shadow: 
-        0 16px 32px rgba(79, 70, 229, 0.14),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
-        inset -4px -4px 8px rgba(15, 23, 42, 0.04);
+.hero-avatar-seamless img {
+    width: 130px !important;
+    height: 130px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.hero-avatar-seamless:hover img {
+    transform: scale(1.06) translateY(-2px);
+    filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.16));
 }
 
 .hero-tagline-quote {
     font-size: 0.98rem;
     line-height: 1.68;
     color: var(--text-body);
-    background: rgba(248, 250, 252, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: var(--radius-md);
     padding: 1rem 1.35rem;
     margin: 0 0 1.2rem;
-    border: 1px solid var(--border-light);
+    border: 1px solid rgba(226, 232, 240, 0.7);
     font-weight: 500;
     box-sizing: border-box;
 }
@@ -573,7 +722,7 @@ button[data-testid="baseButton-secondary"]:hover {
     line-height: 1.76;
     margin: 0;
     padding-top: 1.15rem;
-    border-top: 1px solid #F1F5F9;
+    border-top: 1px solid rgba(226, 232, 240, 0.7);
 }
 
 @media (max-width: 680px) {
@@ -588,9 +737,14 @@ button[data-testid="baseButton-secondary"]:hover {
         align-items: center;
     }
     
-    .hero-avatar-pod {
-        width: 124px;
-        height: 124px;
+    .hero-avatar-seamless {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero-avatar-seamless img {
+        width: 110px !important;
+        height: 110px !important;
     }
     
     .hero-tagline-quote {
@@ -611,7 +765,6 @@ button[data-testid="baseButton-secondary"]:hover {
     font-size: 0.88rem;
 }
 
-/* Standout style untuk hasil dominan kita */
 .pole-winner {
     font-weight: 800 !important;
     color: #1E1B4B !important;
@@ -625,22 +778,21 @@ button[data-testid="baseButton-secondary"]:hover {
     box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
-/* Redup style untuk kutub yang bukan hasil kita */
 .pole-muted {
     font-weight: 500 !important;
     color: #94A3B8 !important;
-    opacity: 0.48 !important;
+    opacity: 0.52 !important;
     font-size: 0.84rem !important;
     padding: 0.24rem 0.5rem;
 }
 
 .spectrum-track-bg {
     height: 16px;
-    background: #E2E8F0;
+    background: rgba(226, 232, 240, 0.8);
     border-radius: var(--radius-pill);
     position: relative;
     overflow: hidden;
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.08);
 }
 
 .spectrum-fill-progress {
@@ -663,12 +815,20 @@ button[data-testid="baseButton-secondary"]:hover {
 
 /* ==================== COGNITIVE LAYERS ==================== */
 .cog-layer-friendly-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border-light);
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--border-glass-subtle);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-clay-soft);
+    box-shadow: var(--glass-shadow-soft);
     padding: 1.15rem 1.3rem;
     margin-bottom: 0.85rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cog-layer-friendly-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glass-shadow);
 }
 
 .cog-layer-header {
@@ -712,14 +872,14 @@ button[data-testid="baseButton-secondary"]:hover {
 
 /* ==================== TEXT COPY AREA ==================== */
 .copy-box-area {
-    background: #F8FAFC;
+    background: rgba(248, 250, 252, 0.85);
     border-radius: var(--radius-md);
     padding: 1.1rem;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.82rem;
     color: var(--text-main);
     line-height: 1.7;
-    border: 1px solid var(--border-light);
+    border: 1px solid rgba(226, 232, 240, 0.85);
     user-select: all;
     margin: 0.6rem 0;
     white-space: pre-wrap;
@@ -749,8 +909,6 @@ def init_session() -> None:
         "answers": {},
         "current_q": 0,
         "result": None,
-        "auto_advance": True,
-        "trigger_advance_for": None,
         "shuffled_options": {},
     }
     for key, val in defaults.items():
@@ -764,7 +922,6 @@ def start_quiz_session(engine: PersonalityEngine) -> None:
     st.session_state.answers = {}
     st.session_state.result = None
     questions = engine.get_questions()
-    # Randomise letak urutan opsi A dan B untuk setiap soal
     st.session_state.shuffled_options = {q["id"]: (random.random() < 0.5) for q in questions}
 
 
@@ -787,12 +944,12 @@ def render_home(engine: PersonalityEngine) -> None:
     </div>
     """)
 
-    # 3 Methodology Pillars (Proportional Grid)
+    # 3 Methodology Pillars (Glassmorphism Grid)
     render_html("""
     <div class="pillar-grid-row">
         <div class="pillar-card">
             <div class="pillar-title">Dilema realistis</div>
-            <p class="pillar-desc">Pilihan situasinya membumi dan nyata, nggak ada opsi klise atau jebakan jawaban yang dibuat-buat.</p>
+            <p class="pillar-desc">Pilihan situasinya membumi dan nyata, tanpa opsi klise atau jebakan jawaban yang dibuat-buat.</p>
         </div>
         <div class="pillar-card">
             <div class="pillar-title">Spektrum fleksibel</div>
@@ -817,10 +974,10 @@ def render_home(engine: PersonalityEngine) -> None:
 
     all_prof = get_all_profiles()
     tab_nt, tab_nf, tab_sj, tab_sp = st.tabs([
-        ":material/psychology: Analis (NT)",
-        ":material/favorite: Diplomat (NF)",
-        ":material/shield: Pengawal (SJ)",
-        ":material/explore: Penjelajah (SP)",
+        "Analis (NT)",
+        "Diplomat (NF)",
+        "Pengawal (SJ)",
+        "Penjelajah (SP)",
     ])
 
     groups = {
@@ -896,20 +1053,20 @@ def render_quiz(engine: PersonalityEngine) -> None:
         st.session_state.shuffled_options = {item["id"]: (random.random() < 0.5) for item in questions}
 
     dim_map = {
-        "EI": ("Mind", "Sumber energi: Kumpul seru vs Me-time tenang", "#4F46E5", "#EEF2FF", "#C7D2FE"),
-        "SN": ("Energy", "Cara olah info: Fakta konkret vs Ide & kemungkinan", "#059669", "#ECFDF5", "#A7F3D0"),
-        "TF": ("Nature", "Cara ambil keputusan: Logika objektif vs Rasa & empati", "#0284C7", "#F0F9FF", "#BAE6FD"),
-        "JP": ("Tactics", "Pola keseharian: Rencana teratur vs Fleksibel santai", "#D97706", "#FFFBEB", "#FDE68A"),
+        "EI": ("Mind", "Sumber energi: Kumpul seru vs Me-time tenang", "#4F46E5", "rgba(238, 242, 255, 0.85)", "#C7D2FE"),
+        "SN": ("Energy", "Cara olah info: Fakta konkret vs Ide & kemungkinan", "#059669", "rgba(236, 253, 245, 0.85)", "#A7F3D0"),
+        "TF": ("Nature", "Cara ambil keputusan: Logika objektif vs Rasa & empati", "#0284C7", "rgba(240, 249, 255, 0.85)", "#BAE6FD"),
+        "JP": ("Tactics", "Pola keseharian: Rencana teratur vs Fleksibel santai", "#D97706", "rgba(255, 251, 235, 0.85)", "#FDE68A"),
     }
     dim_name, dim_detail, dim_col, dim_bg, dim_bdr = dim_map.get(
-        q["dim"], (q["dim"], "", "#4F46E5", "#EEF2FF", "#C7D2FE")
+        q["dim"], (q["dim"], "", "#4F46E5", "rgba(238, 242, 255, 0.85)", "#C7D2FE")
     )
 
-    # Header and Navigation Container
+    # Header and Navigation Container (Clean, no toggle)
     with st.container(border=True):
-        col_meta, col_jump, col_adv = st.columns([3, 1.8, 1.6], vertical_alignment="center")
+        col_meta, col_jump = st.columns([3.5, 1.5], vertical_alignment="center")
         with col_meta:
-            badge_html = f'<span style="background:{dim_bg}; color:{dim_col}; border:1px solid {dim_bdr}; padding:0.28rem 0.85rem; border-radius:9999px; font-size:0.78rem; font-weight:800; letter-spacing:0.04em;">{dim_name} ({q["dim"]})</span>'
+            badge_html = f'<span style="background:{dim_bg}; color:{dim_col}; border:1px solid {dim_bdr}; padding:0.25rem 0.85rem; border-radius:9999px; font-size:0.78rem; font-weight:800; letter-spacing:0.04em;">{dim_name} ({q["dim"]})</span>'
             st.markdown(f"**Butir {current_idx + 1:02d} / {total:02d}** · {badge_html}", unsafe_allow_html=True)
             st.caption(dim_detail)
         with col_jump:
@@ -928,13 +1085,22 @@ def render_quiz(engine: PersonalityEngine) -> None:
                     if c_slot.button(lbl, key=f"jump_{i}", width="stretch"):
                         st.session_state.current_q = i
                         st.rerun()
-        with col_adv:
-            auto_val = st.toggle("Lanjut otomatis", value=st.session_state.auto_advance, key="toggle_auto_adv")
-            st.session_state.auto_advance = auto_val
 
-    st.progress((answered_count) / total)
+    # Real-Time Glassmorphic Progress Bar
+    pct = (answered_count / total) * 100.0
+    render_html(f"""
+    <div class="quiz-progress-wrapper">
+        <div class="quiz-progress-meta">
+            <span class="quiz-progress-text">Progres Jawaban</span>
+            <span class="quiz-progress-pct">{answered_count} dari {total} butir ({pct:.0f}%)</span>
+        </div>
+        <div class="quiz-progress-track">
+            <div class="quiz-progress-fill" style="width: {pct}%;"></div>
+        </div>
+    </div>
+    """)
 
-    # Scenario Card
+    # Scenario Card (Glassmorphism)
     render_html(f"""
     <div class="scenario-friendly-card" style="border-top: 4px solid {dim_col};">
         <div class="scenario-top-bar">
@@ -949,62 +1115,74 @@ def render_quiz(engine: PersonalityEngine) -> None:
     is_flipped = st.session_state.shuffled_options.get(q_id, False)
     opt_first = q["opt_b"] if is_flipped else q["opt_a"]
     opt_second = q["opt_a"] if is_flipped else q["opt_b"]
-    options = [opt_first["text"], opt_second["text"]]
+    code_first = "B" if is_flipped else "A"
+    code_second = "A" if is_flipped else "B"
 
     current_ans = st.session_state.answers.get(q_id)
-    default_idx = None
-    if current_ans == "A":
-        default_idx = 1 if is_flipped else 0
-    elif current_ans == "B":
-        default_idx = 0 if is_flipped else 1
+    is_first_sel = (current_ans == code_first)
+    is_second_sel = (current_ans == code_second)
 
-    selected_option = st.radio(
-        label=f"Pilihan Butir {current_idx + 1}",
-        options=options,
-        index=default_idx,
-        key=f"radio_q_{current_idx}",
-        label_visibility="collapsed"
-    )
+    label_1 = f"**A.** &nbsp; {opt_first['text']}"
+    if is_first_sel:
+        label_1 += " &nbsp; :material/check_circle: *(Terpilih)*"
 
-    if selected_option is not None:
-        chosen_code = "A" if selected_option == q["opt_a"]["text"] else "B"
-        if st.session_state.answers.get(q_id) != chosen_code:
-            st.session_state.answers[q_id] = chosen_code
-            if st.session_state.auto_advance and current_idx < total - 1:
-                st.session_state.trigger_advance_for = current_idx
+    label_2 = f"**B.** &nbsp; {opt_second['text']}"
+    if is_second_sel:
+        label_2 += " &nbsp; :material/check_circle: *(Terpilih)*"
 
-    st.markdown("<div style='height:0.8rem;'></div>", unsafe_allow_html=True)
-
-    # Bottom Navigation Controls
-    col_prev, col_next = st.columns([1, 1], gap="medium")
-    with col_prev:
-        if st.button("Sebelumnya", key=f"btn_p_{current_idx}", type="secondary", icon=":material/arrow_back:", disabled=(current_idx == 0), width="stretch"):
-            st.session_state.current_q -= 1
+    # Options Interactive Cards: Sekali klik langsung tercatat & otomatis beralih butir
+    with st.container(key="quiz_options_container"):
+        if st.button(
+            label_1,
+            key=f"opt_btn_{current_idx}_0",
+            type="primary" if is_first_sel else "secondary",
+            width="stretch"
+        ):
+            st.session_state.answers[q_id] = code_first
+            if current_idx < total - 1:
+                st.session_state.current_q = current_idx + 1
             st.rerun()
 
-    with col_next:
-        if current_idx < total - 1:
-            is_answered = q_id in st.session_state.answers
-            next_label = "Berikutnya" if is_answered else "Pilih satu opsi terlebih dahulu"
-            if st.button(next_label, key=f"btn_n_{current_idx}", type="primary", icon=":material/arrow_forward:", disabled=not is_answered, width="stretch"):
-                st.session_state.current_q += 1
+        if st.button(
+            label_2,
+            key=f"opt_btn_{current_idx}_1",
+            type="primary" if is_second_sel else "secondary",
+            width="stretch"
+        ):
+            st.session_state.answers[q_id] = code_second
+            if current_idx < total - 1:
+                st.session_state.current_q = current_idx + 1
+            st.rerun()
+
+    st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
+
+    # Bottom Navigation Controls (Sebelumnya + Selesaikan di akhir, Tanpa tombol Berikutnya)
+    if current_idx == total - 1:
+        col_prev, col_finish = st.columns([1, 1.6], gap="medium", vertical_alignment="center")
+        with col_prev:
+            if st.button("Sebelumnya", key=f"btn_p_{current_idx}", type="secondary", icon=":material/arrow_back:", disabled=(current_idx == 0), width="stretch"):
+                st.session_state.current_q -= 1
                 st.rerun()
-        else:
+        with col_finish:
             all_done = (len(st.session_state.answers) == total)
-            btn_finish_label = "Lihat hasil analisis" if all_done else f"Jawab seluruh butir ({answered_count}/{total})"
-            if st.button(btn_finish_label, key="btn_finish_test", type="primary", icon=":material/insights:", disabled=not all_done, width="stretch"):
+            finish_label = "Lihat hasil analisis" if all_done else f"Jawab seluruh butir ({len(st.session_state.answers)}/{total})"
+            if st.button(finish_label, key="btn_finish_test", type="primary", icon=":material/insights:", disabled=not all_done, width="stretch"):
                 with st.spinner("Mengkalkulasi kecenderungan tipe kepribadian dan pola pikirmu..."):
                     result = engine.compute_result(st.session_state.answers)
                     st.session_state.result = result
                     st.session_state.page = "result"
                     st.rerun()
-
-    # Trigger auto-advance if activated
-    if st.session_state.trigger_advance_for == current_idx:
-        st.session_state.trigger_advance_for = None
-        time.sleep(0.18)
-        st.session_state.current_q += 1
-        st.rerun()
+    else:
+        col_prev, col_hint = st.columns([1, 1.6], gap="medium", vertical_alignment="center")
+        with col_prev:
+            if st.button("Sebelumnya", key=f"btn_p_{current_idx}", type="secondary", icon=":material/arrow_back:", disabled=(current_idx == 0), width="stretch"):
+                st.session_state.current_q -= 1
+                st.rerun()
+        with col_hint:
+            if q_id in st.session_state.answers:
+                st.caption(":material/check: Opsi tersimpan. Klik salah satu opsi untuk lanjut ke butir berikutnya.")
+            else:
+                st.caption("Klik salah satu opsi di atas untuk langsung beralih ke butir selanjutnya.")
 
 
 def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
@@ -1015,9 +1193,9 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     border_color = profile.get("border_color", "#C7D2FE")
     archetype = profile.get("archetype", result.mbti_type)
     summary_narrative = profile.get("summary", "")
-    avatar_hero_tag = render_avatar_img(result.mbti_type, size=110, alt=archetype)
+    avatar_hero_tag = render_avatar_img(result.mbti_type, size=130, alt=archetype)
 
-    # Hero Result Presentation (Claymorphic + Glassmorphic Hero yang Presisi & Simetris)
+    # Hero Result: Karakter Menyatu Alami Tanpa Card Pod
     render_html(f"""
     <div class="friendly-result-hero" style="border-top: 5px solid {theme_color};">
         <div class="hero-result-header">
@@ -1028,11 +1206,11 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
                 <div class="hero-type-code" style="color:{theme_color};">{result.mbti_type}</div>
                 <h2 class="hero-archetype-title">{archetype}</h2>
             </div>
-            <div class="hero-avatar-pod" style="background:{bg_tint}; border-color:{border_color};">
+            <div class="hero-avatar-seamless">
                 {avatar_hero_tag}
             </div>
         </div>
-        <div class="hero-tagline-quote" style="border-left: 4px solid {theme_color}; background: {bg_tint}45;">
+        <div class="hero-tagline-quote" style="border-left: 4px solid {theme_color}; background: {bg_tint}55;">
             "{profile.get('tagline', '')}"
         </div>
         <p class="hero-narrative-text">
@@ -1057,12 +1235,12 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
                 "Ini tanda bagus kalau kamu punya fleksibilitas tinggi: bisa menyesuaikan diri dengan luwes sesuai situasi dan kebutuhan momen yang kamu hadapi!"
             )
 
-    # Spectrum Rows Generator (Bersih tanpa teks di tengah, Standout vs Redup)
+    # Spectrum Rows Generator
     dim_pairs = {
-        "EI": ("Ekstraversi (Sosial)", "Introversi (Me-Time)", "#4F46E5", "#EEF2FF", "#C7D2FE"),
-        "SN": ("Penginderaan (Fakta Nyata)", "Intuisi (Ide & Kemungkinan)", "#059669", "#ECFDF5", "#A7F3D0"),
-        "TF": ("Pemikiran (Logika Objektif)", "Perasaan (Rasa & Empati)", "#0284C7", "#F0F9FF", "#BAE6FD"),
-        "JP": ("Penilaian (Rencana Teratur)", "Eksplorasi (Fleksibel Santai)", "#D97706", "#FFFBEB", "#FDE68A"),
+        "EI": ("Ekstraversi (Sosial)", "Introversi (Me-Time)", "#4F46E5", "rgba(238, 242, 255, 0.85)", "#C7D2FE"),
+        "SN": ("Penginderaan (Fakta Nyata)", "Intuisi (Ide & Kemungkinan)", "#059669", "rgba(236, 253, 245, 0.85)", "#A7F3D0"),
+        "TF": ("Pemikiran (Logika Objektif)", "Perasaan (Rasa & Empati)", "#0284C7", "rgba(240, 249, 255, 0.85)", "#BAE6FD"),
+        "JP": ("Penilaian (Rencana Teratur)", "Eksplorasi (Fleksibel Santai)", "#D97706", "rgba(255, 251, 235, 0.85)", "#FDE68A"),
     }
     spectrum_html = ""
     for dim_code, (pos_name, neg_name, bar_col, bar_bg, bar_bdr) in dim_pairs.items():
@@ -1070,7 +1248,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         pct_pos = score_obj.pos_pct
         pct_neg = round(100.0 - pct_pos, 1)
 
-        # Standout winner vs muted loser
+        # Standout winner vs muted
         if pct_pos >= 50:
             left_class = "pole-winner"
             left_style = f"border:1.5px solid {bar_bdr}; background:{bar_bg}; color:{bar_col};"
@@ -1100,12 +1278,12 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         st.caption("Pola alami caramu berpikir dan mengolah energi (garis tengah menandai titik keseimbangan 50%):")
         render_html(spectrum_html)
 
-    # 4 Deep-Dive Tabs
+    # 4 Deep-Dive Tabs (Judul Ringkas Tanpa Scroll Horizontal)
     tab_cog, tab_strength, tab_work, tab_stress = st.tabs([
-        ":material/schema: Cara berpikir",
-        ":material/insights: Kelebihan & titik buta",
-        ":material/work: Gaya kerja & pertemanan",
-        ":material/shield: Menghadapi stres",
+        "Pola pikir",
+        "Kelebihan",
+        "Gaya kerja",
+        "Sisi stres",
     ])
 
     with tab_cog:
