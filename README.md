@@ -18,13 +18,10 @@ Aplikasi asesmen kepribadian spektrum MBTI berbasis web interaktif dengan **Stre
    - Tertiary (Mode Rekreasi)
    - Inferior (Titik Buta / Stres)
 5. **Optimasi UX & Aksesibilitas**:
-   - **Auto-Advance Cerdas**: Pilihan toggle di header kuis dengan jeda konfirmasi 350ms yang mulus.
-   - **Responsivitas Mobile**: Target sentuh tombol (min 46–52px) dan grid popover 4 kolom yang pas untuk layar sentuh HP.
-   - **Keyboard Shortcuts (Desktop)**:
-     - `A` / `1` : Memilih Opsi A
-     - `B` / `2` : Memilih Opsi B
-     - `←` / `→` : Navigasi butir soal
-6. **Ekspor Laporan**: Salin atau unduh laporan diagnosis lengkap dalam format `.txt`.
+   - **Randomisasi Opsi Butir**: Urutan letak opsi jawaban diacak secara dinamis per sesi asesmen.
+   - **Auto-Advance Cerdas**: Pilihan toggle di header kuis dengan jeda perpindahan yang mulus.
+   - **Responsivitas Mobile**: Target sentuh tombol (min 48px) dan tata letak popover yang pas di layar sentuh HP.
+6. **Ekspor Laporan**: Salin atau unduh ringkasan hasil evaluasi dalam format `.txt`.
 
 ---
 
@@ -49,7 +46,7 @@ Aplikasi akan otomatis terbuka di browser pada URL default `http://localhost:850
 ---
 
 ## Struktur Berkas
-- `app.py`: Antarmuka UI Streamlit, state management kuis, styling responsif kustom, dan shortcut listener.
+- `app.py`: Antarmuka UI Streamlit, state management kuis, styling responsif kustom (Claymorphism & Glassmorphism).
 - `engine.py`: Scoring engine psikometri, pemetaan dimensi spektrum, dan penentu fungsi kognitif.
 - `profiles.py`: Basis data deskripsi komprehensif ke-16 tipe kepribadian.
 - `questions.json`: Bank data 24 butir soal skenario realistis.

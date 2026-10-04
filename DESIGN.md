@@ -45,7 +45,7 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
 - **Implementasi:**
   - Badge Kategori & Metadata Butir
   - Pill Chips Fitur & Fungsi Kognitif Dominan
-  - Bar Status Navigasi & Pintasan Keyboard
+  - Bar Status Navigasi & Indikator Butir Soal
   - Kotak Tagline Arketipe
 
 ---
