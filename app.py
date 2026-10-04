@@ -17,14 +17,14 @@ def render_html(html: str) -> None:
     st.html(textwrap.dedent(html).strip())
 
 
-def render_avatar_img(code: str, size: int = 90, alt: str = "") -> str:
+def render_avatar_img(code: str, size: int = 80, alt: str = "") -> str:
     b64 = get_avatar_base64(code)
     if not b64:
         return ""
     return (
         f'<img src="data:image/svg+xml;base64,{b64}" alt="{alt}" '
         f'width="{size}" height="{size}" '
-        f'style="object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 6px 14px rgba(0,0,0,0.08));" />'
+        f'style="object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.08));" />'
     )
 
 
@@ -32,11 +32,11 @@ APP_STYLES = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 
-/* ==================== GLASSMORPHISM & TACTILE DESIGN TOKENS ==================== */
+/* ==================== GLASSMORPHISM & COMPACT DESIGN TOKENS ==================== */
 :root {
     --bg-canvas: #F8FAFC;
     --surface-glass: rgba(255, 255, 255, 0.78);
-    --surface-glass-strong: rgba(255, 255, 255, 0.90);
+    --surface-glass-strong: rgba(255, 255, 255, 0.92);
     --surface-glass-subtle: rgba(255, 255, 255, 0.58);
     
     --border-glass: 1.5px solid rgba(255, 255, 255, 0.85);
@@ -65,25 +65,25 @@ APP_STYLES = """
     --sp-bg: rgba(255, 251, 235, 0.85);
     --sp-border: #FDE68A;
 
-    /* Geometry */
-    --radius-hero: 24px;
-    --radius-card: 18px;
-    --radius-md: 12px;
+    /* Geometry (Lebih ramping & proporsional) */
+    --radius-hero: 20px;
+    --radius-card: 15px;
+    --radius-md: 10px;
     --radius-pill: 9999px;
     
     /* Pure Glassmorphic Soft Shadows */
     --glass-shadow: 
-        0 14px 34px -4px rgba(31, 38, 135, 0.07),
-        0 2px 8px -1px rgba(15, 23, 42, 0.03),
+        0 10px 28px -4px rgba(31, 38, 135, 0.06),
+        0 2px 6px -1px rgba(15, 23, 42, 0.03),
         inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
         
     --glass-shadow-hover: 
-        0 20px 42px -4px rgba(79, 70, 229, 0.14),
-        0 4px 12px -2px rgba(15, 23, 42, 0.04),
+        0 16px 36px -4px rgba(79, 70, 229, 0.12),
+        0 3px 8px -2px rgba(15, 23, 42, 0.04),
         inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
         
     --glass-shadow-soft:
-        0 8px 20px -3px rgba(31, 38, 135, 0.05),
+        0 4px 14px -2px rgba(31, 38, 135, 0.04),
         inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
@@ -103,9 +103,16 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     display: none !important;
 }
 
+/* Rampingkan Container Padding */
 .main .block-container {
-    padding: 2.2rem 1.4rem 4.5rem !important;
-    max-width: 880px !important;
+    padding: 1.2rem 1.1rem 2.8rem !important;
+    max-width: 820px !important;
+}
+
+@media (max-width: 640px) {
+    .main .block-container {
+        padding: 0.45rem 0.75rem 1.8rem !important;
+    }
 }
 
 /* Glassmorphism for Streamlit Native Containers */
@@ -120,15 +127,16 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
 
 /* Popover Glassmorphic Style */
 div[data-testid="stPopoverBody"] {
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
     border-radius: var(--radius-card) !important;
-    box-shadow: 0 18px 40px -4px rgba(31, 38, 135, 0.15) !important;
+    box-shadow: 0 16px 36px -4px rgba(31, 38, 135, 0.14) !important;
+    padding: 0.8rem !important;
 }
 
-/* ==================== GLASSMORPHIC HERO CONTAINER ==================== */
+/* ==================== GLASSMORPHIC HERO CONTAINER (COMPACT) ==================== */
 .friendly-hero {
     background: var(--surface-glass);
     backdrop-filter: blur(18px);
@@ -136,9 +144,9 @@ div[data-testid="stPopoverBody"] {
     border: var(--border-glass);
     border-radius: var(--radius-hero);
     box-shadow: var(--glass-shadow);
-    padding: 2.6rem 2.2rem 2.2rem;
+    padding: 1.8rem 1.6rem 1.4rem;
     text-align: center;
-    margin-bottom: 1.3rem;
+    margin-bottom: 0.95rem;
     position: relative;
     overflow: hidden;
 }
@@ -149,17 +157,17 @@ div[data-testid="stPopoverBody"] {
     top: 0;
     left: 0;
     right: 0;
-    height: 5px;
+    height: 4px;
     background: linear-gradient(90deg, #6366F1 0%, #3B82F6 40%, #10B981 70%, #F59E0B 100%);
 }
 
 .badge-friendly-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.38rem 1.1rem;
+    gap: 0.35rem;
+    padding: 0.26rem 0.85rem;
     border-radius: var(--radius-pill);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     background: rgba(255, 255, 255, 0.85);
@@ -167,41 +175,42 @@ div[data-testid="stPopoverBody"] {
     -webkit-backdrop-filter: blur(12px);
     color: #4338CA;
     border: 1px solid rgba(199, 210, 254, 0.7);
-    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.06);
 }
 
 .pill-row-cluster {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.55rem;
-    margin-top: 1.3rem;
+    gap: 0.4rem;
+    margin-top: 0.85rem;
 }
 
 .pill-feature-chip {
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     font-weight: 600;
     color: var(--text-body);
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 0.35rem 0.95rem;
+    padding: 0.25rem 0.75rem;
     border-radius: var(--radius-pill);
     border: 1px solid rgba(226, 232, 240, 0.8);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
 }
 
-/* ==================== 3 PILLARS GLASS GRID ==================== */
+/* ==================== 3 PILLARS GLASS GRID (COMPACT) ==================== */
 .pillar-grid-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.1rem;
-    margin-bottom: 1.3rem;
+    gap: 0.8rem;
+    margin-bottom: 0.95rem;
 }
 
 @media (max-width: 768px) {
     .pillar-grid-row {
         grid-template-columns: 1fr;
+        gap: 0.6rem;
     }
 }
 
@@ -212,64 +221,64 @@ div[data-testid="stPopoverBody"] {
     border-radius: var(--radius-card);
     border: var(--border-glass);
     box-shadow: var(--glass-shadow-soft);
-    padding: 1.35rem 1.25rem;
+    padding: 0.95rem 1.05rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
     box-sizing: border-box;
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .pillar-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-hover);
     background: var(--surface-glass-strong);
 }
 
 .pillar-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.02rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--text-title);
-    margin: 0 0 0.45rem;
+    margin: 0 0 0.25rem;
 }
 
 .pillar-desc {
-    font-size: 0.86rem;
+    font-size: 0.82rem;
     color: var(--text-body);
-    line-height: 1.58;
+    line-height: 1.5;
     margin: 0;
 }
 
-/* ==================== 16PERSONALITIES CHARACTER SHOWCASE ==================== */
+/* ==================== 16PERSONALITIES CHARACTER SHOWCASE (COMPACT) ==================== */
 .showcase-header-box {
     text-align: center;
-    margin: 2.2rem 0 1.2rem;
+    margin: 1.4rem 0 0.8rem;
 }
 
 .showcase-heading {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.28rem;
     font-weight: 800;
     color: var(--text-title);
-    margin: 0 0 0.35rem;
+    margin: 0 0 0.25rem;
     letter-spacing: -0.02em;
 }
 
 .showcase-subheading {
-    font-size: 0.92rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     margin: 0 auto;
-    max-width: 600px;
-    line-height: 1.6;
+    max-width: 560px;
+    line-height: 1.5;
 }
 
 .char-grid-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.1rem;
-    margin: 1.1rem 0;
+    gap: 0.75rem;
+    margin: 0.8rem 0;
 }
 
 @media (max-width: 860px) {
@@ -280,7 +289,8 @@ div[data-testid="stPopoverBody"] {
 
 @media (max-width: 520px) {
     .char-grid-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.55rem;
     }
 }
 
@@ -288,169 +298,138 @@ div[data-testid="stPopoverBody"] {
     background: var(--surface-glass);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-radius: 20px;
+    border-radius: var(--radius-card);
     border: var(--border-glass);
     box-shadow: var(--glass-shadow-soft);
-    padding: 1.4rem 1.1rem 1.25rem;
+    padding: 0.95rem 0.85rem 0.85rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     text-align: center;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     box-sizing: border-box;
     height: 100%;
 }
 
 .char-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     background: var(--surface-glass-strong);
     box-shadow: var(--glass-shadow-hover);
 }
 
 .char-avatar-pod {
-    width: 96px;
-    height: 96px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.65rem;
     border: 2px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 6px 16px rgba(31, 38, 135, 0.08);
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(31, 38, 135, 0.06);
+    transition: transform 0.2s ease;
 }
 
 .char-card:hover .char-avatar-pod {
-    transform: scale(1.07);
+    transform: scale(1.06);
 }
 
 .char-code-badge {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.76rem;
     font-weight: 800;
-    letter-spacing: 0.05em;
-    padding: 0.22rem 0.8rem;
+    letter-spacing: 0.04em;
+    padding: 0.16rem 0.65rem;
     border-radius: var(--radius-pill);
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.3rem;
     display: inline-block;
 }
 
 .char-name {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.02rem;
+    font-size: 0.92rem;
     font-weight: 700;
     color: var(--text-title);
-    margin: 0 0 0.45rem;
-    line-height: 1.35;
+    margin: 0 0 0.25rem;
+    line-height: 1.3;
 }
 
 .char-desc {
-    font-size: 0.81rem;
+    font-size: 0.77rem;
     color: var(--text-body);
-    line-height: 1.55;
-    margin: 0 0 0.85rem;
+    line-height: 1.45;
+    margin: 0 0 0.65rem;
     flex-grow: 1;
 }
 
 .char-cog-chip {
-    font-size: 0.74rem;
+    font-size: 0.71rem;
     font-weight: 700;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(226, 232, 240, 0.85);
     border-radius: var(--radius-pill);
-    padding: 0.22rem 0.7rem;
+    padding: 0.16rem 0.55rem;
     color: var(--text-muted);
 }
 
-/* ==================== REAL-TIME QUIZ PROGRESS BAR ==================== */
-.quiz-progress-wrapper {
-    margin: 0.9rem 0 1.25rem;
-    padding: 0.75rem 1.1rem;
-    background: var(--surface-glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: var(--border-glass);
-    border-radius: var(--radius-md);
-    box-shadow: var(--glass-shadow-soft);
-}
-
-.quiz-progress-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.45rem;
-    font-size: 0.82rem;
-    font-weight: 700;
-}
-
-.quiz-progress-text {
-    color: var(--text-title);
-    letter-spacing: 0.02em;
-}
-
-.quiz-progress-pct {
-    color: #4F46E5;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
-}
-
-.quiz-progress-track {
-    height: 10px;
+/* ==================== SLIM REAL-TIME PROGRESS TRACK ==================== */
+.quiz-compact-progress-track {
+    height: 6px;
     background: rgba(226, 232, 240, 0.75);
     border-radius: 9999px;
     position: relative;
     overflow: hidden;
+    margin: 0.35rem 0 0.55rem;
     box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
 }
 
-.quiz-progress-fill {
+.quiz-compact-progress-fill {
     height: 100%;
     border-radius: 9999px;
     background: linear-gradient(90deg, #6366F1 0%, #3B82F6 50%, #10B981 100%);
-    box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
-    transition: width 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ==================== QUIZ SCENARIO CONTAINER ==================== */
-.scenario-friendly-card {
+/* ==================== QUIZ SCENARIO CONTAINER (COMPACT & DENSE) ==================== */
+.scenario-compact-card {
     background: var(--surface-glass);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: var(--border-glass);
-    border-radius: var(--radius-hero);
-    padding: 1.85rem 2rem 1.6rem;
-    box-shadow: var(--glass-shadow);
-    margin-bottom: 1.1rem;
+    border-radius: var(--radius-card);
+    padding: 0.85rem 1.15rem;
+    box-shadow: var(--glass-shadow-soft);
+    margin: 0.35rem 0 0.65rem;
     position: relative;
 }
 
-.scenario-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.85rem;
-    padding-bottom: 0.65rem;
-    border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+.scenario-compact-dim-detail {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.01em;
 }
 
-.scenario-quote-highlight {
-    font-size: 1.15rem;
+.scenario-compact-text {
+    font-size: 1.02rem;
     font-weight: 700;
-    line-height: 1.72;
+    line-height: 1.55;
     color: var(--text-title);
-    margin: 0.5rem 0 1rem;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
+    margin: 0;
 }
 
-/* ==================== TACTILE QUIZ OPTION CARDS ==================== */
+/* ==================== TACTILE QUIZ OPTION CARDS (COMPACT) ==================== */
 .st-key-quiz_options_container {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.95rem !important;
-    margin: 1.1rem 0 1.25rem !important;
+    gap: 0.52rem !important;
+    margin: 0.35rem 0 0.65rem !important;
 }
 
 .st-key-quiz_options_container div[data-testid="stButton"] {
@@ -459,31 +438,31 @@ div[data-testid="stPopoverBody"] {
 
 .st-key-quiz_options_container div[data-testid="stButton"] button {
     width: 100% !important;
-    min-height: 76px !important;
-    padding: 1.2rem 1.55rem !important;
+    min-height: 48px !important;
+    padding: 0.75rem 1.1rem !important;
     text-align: left !important;
     justify-content: flex-start !important;
     align-items: center !important;
-    border-radius: var(--radius-card) !important;
+    border-radius: var(--radius-md) !important;
     background: var(--surface-glass) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     border: var(--border-glass) !important;
-    box-shadow: var(--glass-shadow) !important;
+    box-shadow: var(--glass-shadow-soft) !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
     white-space: normal !important;
     word-break: break-word !important;
     color: var(--text-body) !important;
-    font-size: 0.98rem !important;
-    line-height: 1.64 !important;
+    font-size: 0.92rem !important;
+    line-height: 1.48 !important;
     font-weight: 500 !important;
     cursor: pointer !important;
 }
 
 .st-key-quiz_options_container div[data-testid="stButton"] button:hover {
-    transform: translateY(-2.5px) scale(1.002) !important;
+    transform: translateY(-1.5px) !important;
     border-color: #818CF8 !important;
-    background: rgba(255, 255, 255, 0.95) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
     box-shadow: var(--glass-shadow-hover) !important;
     color: var(--text-title) !important;
 }
@@ -499,18 +478,18 @@ div[data-testid="stPopoverBody"] {
 
 .st-key-quiz_options_container div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] p {
     margin: 0 !important;
-    font-size: 0.98rem !important;
-    line-height: 1.64 !important;
+    font-size: 0.92rem !important;
+    line-height: 1.48 !important;
     text-align: left !important;
 }
 
 /* Selected Option Highlight State */
 .st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"],
 .st-key-quiz_options_container div[data-testid="stButton"] button[data-testid="baseButton-primary"] {
-    background: rgba(238, 242, 255, 0.95) !important;
+    background: rgba(238, 242, 255, 0.96) !important;
     border-color: #4F46E5 !important;
     color: #1E1B4B !important;
-    box-shadow: 0 0 0 2px #4F46E5, 0 12px 28px -4px rgba(79, 70, 229, 0.22) !important;
+    box-shadow: 0 0 0 1.5px #4F46E5, 0 8px 20px -3px rgba(79, 70, 229, 0.2) !important;
     font-weight: 600 !important;
 }
 
@@ -520,17 +499,17 @@ button[data-testid="baseButton-primary"] {
     color: #FFFFFF !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
     border-radius: var(--radius-md) !important;
-    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
-    min-height: 48px !important;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+    min-height: 42px !important;
     font-weight: 700 !important;
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     letter-spacing: -0.01em !important;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 button[data-testid="baseButton-primary"]:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 10px 26px rgba(79, 70, 229, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-1.5px) !important;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
     background: linear-gradient(135deg, #4338CA 0%, #3730A3 100%) !important;
 }
 
@@ -546,17 +525,17 @@ button[data-testid="baseButton-secondary"] {
     border: var(--border-glass) !important;
     border-radius: var(--radius-md) !important;
     box-shadow: var(--glass-shadow-soft) !important;
-    min-height: 48px !important;
+    min-height: 42px !important;
     font-weight: 700 !important;
-    font-size: 0.95rem !important;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    font-size: 0.92rem !important;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 button[data-testid="baseButton-secondary"]:hover {
     border-color: #CBD5E1 !important;
-    background: rgba(255, 255, 255, 0.92) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 22px rgba(31, 38, 135, 0.08) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    transform: translateY(-1.5px) !important;
+    box-shadow: 0 6px 16px rgba(31, 38, 135, 0.07) !important;
 }
 
 button[data-testid="baseButton-secondary"]:active {
@@ -567,26 +546,26 @@ button[data-testid="baseButton-secondary"]:active {
 div[data-baseweb="tab-list"] {
     display: flex !important;
     width: 100% !important;
-    gap: 0.35rem !important;
+    gap: 0.25rem !important;
     background: rgba(241, 245, 249, 0.75) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    padding: 0.35rem !important;
+    padding: 0.25rem !important;
     border-radius: var(--radius-md) !important;
     border: 1px solid rgba(226, 232, 240, 0.85) !important;
     overflow-x: hidden !important;
-    margin-bottom: 1.1rem !important;
+    margin-bottom: 0.85rem !important;
 }
 
 div[data-baseweb="tab-list"] button[data-baseweb="tab"] {
     flex: 1 1 0 !important;
     min-width: 0 !important;
-    padding: 0.55rem 0.35rem !important;
-    font-size: 0.86rem !important;
+    padding: 0.45rem 0.25rem !important;
+    font-size: 0.83rem !important;
     font-weight: 600 !important;
     text-align: center !important;
     justify-content: center !important;
-    border-radius: 9px !important;
+    border-radius: 8px !important;
     color: var(--text-body) !important;
     white-space: nowrap !important;
     border: none !important;
@@ -603,14 +582,14 @@ div[data-baseweb="tab-list"] button[data-baseweb="tab"][aria-selected="true"] {
     background: #FFFFFF !important;
     color: var(--text-title) !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.07), 0 1px 2px rgba(15, 23, 42, 0.04) !important;
 }
 
 div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     display: none !important;
 }
 
-/* ==================== RESULT HERO & SEAMLESS CHARACTER ==================== */
+/* ==================== RESULT HERO & SEAMLESS CHARACTER (COMPACT) ==================== */
 .friendly-result-hero {
     background: var(--surface-glass);
     backdrop-filter: blur(18px);
@@ -618,8 +597,8 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     border: var(--border-glass);
     border-radius: var(--radius-hero);
     box-shadow: var(--glass-shadow);
-    padding: 2.2rem 2.2rem 2rem;
-    margin-bottom: 1.4rem;
+    padding: 1.5rem 1.4rem 1.3rem;
+    margin-bottom: 0.95rem;
     position: relative;
     overflow: hidden;
 }
@@ -628,8 +607,8 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.8rem;
-    margin-bottom: 1.25rem;
+    gap: 1.2rem;
+    margin-bottom: 0.9rem;
 }
 
 .hero-result-identity {
@@ -643,41 +622,41 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
 .hero-badge-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.95rem;
+    gap: 0.35rem;
+    padding: 0.25rem 0.8rem;
     border-radius: var(--radius-pill);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     width: fit-content;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.35rem;
 }
 
 .hero-type-code {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.05;
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.2rem;
 }
 
 .hero-archetype-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--text-title);
     margin: 0;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     line-height: 1.25;
 }
 
 /* Seamless Avatar: Tanpa Card Pod, Karakter Menyatu Alami */
 .hero-avatar-seamless {
     flex-shrink: 0;
-    width: 140px;
-    height: 140px;
+    width: 110px;
+    height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -689,39 +668,39 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
 }
 
 .hero-avatar-seamless img {
-    width: 130px !important;
-    height: 130px !important;
+    width: 105px !important;
+    height: 105px !important;
     object-fit: contain;
-    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.10));
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
 }
 
 .hero-avatar-seamless:hover img {
     transform: scale(1.06) translateY(-2px);
-    filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.16));
+    filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.14));
 }
 
 .hero-tagline-quote {
-    font-size: 0.98rem;
-    line-height: 1.68;
+    font-size: 0.91rem;
+    line-height: 1.55;
     color: var(--text-body);
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: var(--radius-md);
-    padding: 1rem 1.35rem;
-    margin: 0 0 1.2rem;
+    padding: 0.75rem 1.05rem;
+    margin: 0 0 0.85rem;
     border: 1px solid rgba(226, 232, 240, 0.7);
     font-weight: 500;
     box-sizing: border-box;
 }
 
 .hero-narrative-text {
-    font-size: 0.96rem;
+    font-size: 0.88rem;
     color: #334155;
-    line-height: 1.76;
+    line-height: 1.65;
     margin: 0;
-    padding-top: 1.15rem;
+    padding-top: 0.85rem;
     border-top: 1px solid rgba(226, 232, 240, 0.7);
 }
 
@@ -730,7 +709,7 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
         flex-direction: column-reverse;
         align-items: center;
         text-align: center;
-        gap: 1.2rem;
+        gap: 0.9rem;
     }
     
     .hero-result-identity {
@@ -738,13 +717,13 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     }
     
     .hero-avatar-seamless {
-        width: 120px;
-        height: 120px;
+        width: 95px;
+        height: 95px;
     }
     
     .hero-avatar-seamless img {
-        width: 110px !important;
-        height: 110px !important;
+        width: 90px !important;
+        height: 90px !important;
     }
     
     .hero-tagline-quote {
@@ -752,53 +731,53 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     }
 }
 
-/* ==================== SPECTRUM TRACK ==================== */
+/* ==================== SPECTRUM TRACK (COMPACT) ==================== */
 .spectrum-row-box {
-    margin-bottom: 1.3rem;
+    margin-bottom: 0.85rem;
 }
 
 .spectrum-info-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.55rem;
-    font-size: 0.88rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.82rem;
 }
 
 .pole-winner {
     font-weight: 800 !important;
     color: #1E1B4B !important;
     opacity: 1 !important;
-    font-size: 0.92rem !important;
+    font-size: 0.86rem !important;
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.24rem 0.75rem;
+    gap: 0.3rem;
+    padding: 0.18rem 0.65rem;
     border-radius: var(--radius-pill);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .pole-muted {
     font-weight: 500 !important;
     color: #94A3B8 !important;
-    opacity: 0.52 !important;
-    font-size: 0.84rem !important;
-    padding: 0.24rem 0.5rem;
+    opacity: 0.55 !important;
+    font-size: 0.8rem !important;
+    padding: 0.18rem 0.4rem;
 }
 
 .spectrum-track-bg {
-    height: 16px;
+    height: 12px;
     background: rgba(226, 232, 240, 0.8);
-    border-radius: var(--radius-pill);
+    border-radius: 9999px;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.08);
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.06);
 }
 
 .spectrum-fill-progress {
     height: 100%;
-    border-radius: var(--radius-pill);
-    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 9999px;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .spectrum-center-divider {
@@ -810,10 +789,10 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     background: #FFFFFF;
     transform: translateX(-50%);
     z-index: 2;
-    box-shadow: 0 0 4px rgba(0,0,0,0.25);
+    box-shadow: 0 0 3px rgba(0,0,0,0.25);
 }
 
-/* ==================== COGNITIVE LAYERS ==================== */
+/* ==================== COGNITIVE LAYERS (COMPACT) ==================== */
 .cog-layer-friendly-card {
     background: var(--surface-glass);
     backdrop-filter: blur(12px);
@@ -821,13 +800,13 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     border: var(--border-glass-subtle);
     border-radius: var(--radius-md);
     box-shadow: var(--glass-shadow-soft);
-    padding: 1.15rem 1.3rem;
-    margin-bottom: 0.85rem;
+    padding: 0.85rem 1.05rem;
+    margin-bottom: 0.65rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cog-layer-friendly-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1.5px);
     box-shadow: var(--glass-shadow);
 }
 
@@ -835,11 +814,11 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.25rem;
 }
 
 .cog-role-badge {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 800;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -848,24 +827,24 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
 
 .cog-symbol-tag {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     font-weight: 800;
-    padding: 0.2rem 0.6rem;
+    padding: 0.15rem 0.5rem;
     border-radius: var(--radius-pill);
     border: 1px solid transparent;
 }
 
 .cog-func-heading {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--text-title);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 
 .cog-func-paragraph {
-    font-size: 0.88rem;
-    line-height: 1.62;
+    font-size: 0.82rem;
+    line-height: 1.52;
     color: var(--text-body);
     margin: 0;
 }
@@ -874,29 +853,49 @@ div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {
 .copy-box-area {
     background: rgba(248, 250, 252, 0.85);
     border-radius: var(--radius-md);
-    padding: 1.1rem;
+    padding: 0.85rem;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: var(--text-main);
-    line-height: 1.7;
+    line-height: 1.6;
     border: 1px solid rgba(226, 232, 240, 0.85);
     user-select: all;
-    margin: 0.6rem 0;
+    margin: 0.5rem 0;
     white-space: pre-wrap;
 }
 
+/* Mobile-Specific Refinement (Ultra-Compact) */
 @media (max-width: 640px) {
-    .main .block-container {
-        padding: 1.4rem 0.9rem 3.8rem !important;
-    }
     .friendly-hero, .friendly-result-hero {
-        padding: 1.85rem 1.3rem !important;
+        padding: 1.1rem 0.95rem 1rem !important;
     }
-    .scenario-friendly-card {
-        padding: 1.4rem 1.25rem !important;
+    .scenario-compact-card {
+        padding: 0.7rem 0.9rem !important;
+        margin: 0.25rem 0 0.5rem !important;
     }
-    .scenario-quote-highlight {
-        font-size: 1.06rem !important;
+    .scenario-compact-text {
+        font-size: 0.93rem !important;
+        line-height: 1.46 !important;
+    }
+    .st-key-quiz_options_container {
+        gap: 0.42rem !important;
+        margin: 0.25rem 0 0.5rem !important;
+    }
+    .st-key-quiz_options_container div[data-testid="stButton"] button {
+        min-height: 44px !important;
+        padding: 0.6rem 0.85rem !important;
+        font-size: 0.86rem !important;
+        line-height: 1.4 !important;
+        border-radius: 9px !important;
+    }
+    .st-key-quiz_options_container div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] p {
+        font-size: 0.86rem !important;
+        line-height: 1.4 !important;
+    }
+    button[data-testid="baseButton-primary"], button[data-testid="baseButton-secondary"] {
+        min-height: 38px !important;
+        font-size: 0.86rem !important;
+        padding: 0.35rem 0.75rem !important;
     }
 }
 </style>
@@ -929,15 +928,15 @@ def render_home(engine: PersonalityEngine) -> None:
     render_html("""
     <div class="friendly-hero">
         <div class="badge-friendly-tag">Tes Tipe Kepribadian</div>
-        <h1 style="font-family:'Space Grotesk',sans-serif; font-size:2.45rem; font-weight:800; color:#1E1B4B; margin:0.95rem 0 0.45rem; letter-spacing:-0.035em;">
+        <h1 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.5rem, 5vw, 2.1rem); font-weight:800; color:#1E1B4B; margin:0.6rem 0 0.35rem; letter-spacing:-0.03em;">
             Tes spektrum kepribadian MBTI
         </h1>
-        <p style="font-size:1.02rem; color:#475569; line-height:1.72; max-width:620px; margin:0 auto;">
+        <p style="font-size:0.92rem; color:#475569; line-height:1.6; max-width:580px; margin:0 auto;">
             Kenali tipe kepribadian dan cara unik otakmu memproses hal-hal di sekitarmu, mengambil keputusan, dan berinteraksi sehari-hari lewat 24 skenario yang dekat banget sama kehidupan nyata.
         </p>
         <div class="pill-row-cluster">
-            <span class="pill-feature-chip">24 Skenario kehidupan nyata</span>
-            <span class="pill-feature-chip">8 Pola pikir & naluri alami</span>
+            <span class="pill-feature-chip">24 Skenario nyata</span>
+            <span class="pill-feature-chip">8 Pola pikir alami</span>
             <span class="pill-feature-chip">Spektrum luwes 0–100%</span>
             <span class="pill-feature-chip">Bebas jawaban benar/salah</span>
         </div>
@@ -1006,10 +1005,10 @@ def render_home(engine: PersonalityEngine) -> None:
                 desc = p.get("tagline", "")
                 cog_dom = p.get("cognitive_roles", {}).get("dominant", "")
                 dom_code = cog_dom.split()[0] if cog_dom else ""
-                avatar_tag = render_avatar_img(code, size=75, alt=arch)
+                avatar_tag = render_avatar_img(code, size=60, alt=arch)
 
                 cards_html += f"""
-                <div class="char-card" style="border-top: 4px solid {col};">
+                <div class="char-card" style="border-top: 3.5px solid {col};">
                     <div class="char-avatar-pod" style="background:{bg};">
                         {avatar_tag}
                     </div>
@@ -1024,7 +1023,7 @@ def render_home(engine: PersonalityEngine) -> None:
             cards_html += "</div>"
             render_html(cards_html)
 
-    st.markdown("<div style='height:0.8rem;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:0.5rem;'></div>", unsafe_allow_html=True)
 
     with st.container(border=True):
         st.markdown("**:material/info: Panduan pengerjaan**")
@@ -1034,7 +1033,7 @@ def render_home(engine: PersonalityEngine) -> None:
             "• Cuma butuh waktu sekitar 5 sampai 7 menit. Progres jawabanmu tersimpan otomatis, jadi kamu bisa santai."
         )
 
-    st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:0.5rem;'></div>", unsafe_allow_html=True)
     if st.button("Mulai asesmen", key="btn_start_quiz", type="primary", icon=":material/arrow_forward:", width="stretch"):
         start_quiz_session(engine)
         st.rerun()
@@ -1062,56 +1061,47 @@ def render_quiz(engine: PersonalityEngine) -> None:
         q["dim"], (q["dim"], "", "#4F46E5", "rgba(238, 242, 255, 0.85)", "#C7D2FE")
     )
 
-    # Header and Navigation Container (Clean, no toggle)
-    with st.container(border=True):
-        col_meta, col_jump = st.columns([3.5, 1.5], vertical_alignment="center")
-        with col_meta:
-            badge_html = f'<span style="background:{dim_bg}; color:{dim_col}; border:1px solid {dim_bdr}; padding:0.25rem 0.85rem; border-radius:9999px; font-size:0.78rem; font-weight:800; letter-spacing:0.04em;">{dim_name} ({q["dim"]})</span>'
-            st.markdown(f"**Butir {current_idx + 1:02d} / {total:02d}** · {badge_html}", unsafe_allow_html=True)
-            st.caption(dim_detail)
-        with col_jump:
-            with st.popover(f"Daftar butir ({answered_count}/{total})", icon=":material/format_list_numbered:", width="stretch"):
-                st.caption("Pilih butir untuk meninjau status jawaban:")
-                grid_cols = st.columns(4)
-                for i in range(total):
-                    c_slot = grid_cols[i % 4]
-                    is_done = questions[i]["id"] in st.session_state.answers
-                    is_curr = i == current_idx
-                    lbl = f"#{i+1}"
-                    if is_curr:
-                        lbl += " ◉"
-                    elif is_done:
-                        lbl += " ✓"
-                    if c_slot.button(lbl, key=f"jump_{i}", width="stretch"):
-                        st.session_state.current_q = i
-                        st.rerun()
-
-    # Real-Time Glassmorphic Progress Bar
     pct = (answered_count / total) * 100.0
+
+    # 1. Compact Header Bar: Dimension badge, Question count, Live Progress text, Popover Jump
+    col_nav, col_jump = st.columns([3.8, 1.2], vertical_alignment="center")
+    with col_nav:
+        badge_html = f'<span style="background:{dim_bg}; color:{dim_col}; border:1px solid {dim_bdr}; padding:0.18rem 0.65rem; border-radius:9999px; font-size:0.75rem; font-weight:800;">{dim_name} ({q["dim"]})</span>'
+        pct_html = f'<span style="font-size:0.78rem; font-weight:700; color:#4F46E5; margin-left:0.35rem;">{answered_count}/{total} ({pct:.0f}%)</span>'
+        st.markdown(f"<div style='display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;'><strong>Butir {current_idx + 1:02d}</strong> · {badge_html} {pct_html}</div>", unsafe_allow_html=True)
+    with col_jump:
+        with st.popover(f"#{current_idx + 1:02d}", icon=":material/format_list_numbered:", width="stretch"):
+            st.caption("Pilih butir untuk melompat:")
+            grid_cols = st.columns(4)
+            for i in range(total):
+                c_slot = grid_cols[i % 4]
+                is_done = questions[i]["id"] in st.session_state.answers
+                is_curr = i == current_idx
+                lbl = f"#{i+1}"
+                if is_curr:
+                    lbl += " ◉"
+                elif is_done:
+                    lbl += " ✓"
+                if c_slot.button(lbl, key=f"jump_{i}", width="stretch"):
+                    st.session_state.current_q = i
+                    st.rerun()
+
+    # 2. Integrated Slim Real-Time Progress Bar (Hanya 6px, Tanpa Card Bulky)
     render_html(f"""
-    <div class="quiz-progress-wrapper">
-        <div class="quiz-progress-meta">
-            <span class="quiz-progress-text">Progres Jawaban</span>
-            <span class="quiz-progress-pct">{answered_count} dari {total} butir ({pct:.0f}%)</span>
-        </div>
-        <div class="quiz-progress-track">
-            <div class="quiz-progress-fill" style="width: {pct}%;"></div>
-        </div>
+    <div class="quiz-compact-progress-track">
+        <div class="quiz-compact-progress-fill" style="width: {pct}%;"></div>
     </div>
     """)
 
-    # Scenario Card (Glassmorphism)
+    # 3. Compact Scenario Card (Dilema Nyata Fokus & Ramping)
     render_html(f"""
-    <div class="scenario-friendly-card" style="border-top: 4px solid {dim_col};">
-        <div class="scenario-top-bar">
-            <span style="font-size:0.78rem; font-weight:800; color:{dim_col}; text-transform:uppercase; letter-spacing:0.04em;">Skenario Nyata #{current_idx + 1}</span>
-            <span style="font-size:0.78rem; color:#64748B; font-weight:600;">{answered_count} dari {total} butir terjawab</span>
-        </div>
-        <div class="scenario-quote-highlight">"{q['scenario']}"</div>
+    <div class="scenario-compact-card" style="border-left: 4px solid {dim_col};">
+        <div class="scenario-compact-dim-detail">{dim_detail}</div>
+        <div class="scenario-compact-text">"{q['scenario']}"</div>
     </div>
     """)
 
-    # Acak letak opsi A dan B
+    # 4. Acak letak opsi A dan B
     is_flipped = st.session_state.shuffled_options.get(q_id, False)
     opt_first = q["opt_b"] if is_flipped else q["opt_a"]
     opt_second = q["opt_a"] if is_flipped else q["opt_b"]
@@ -1130,7 +1120,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
     if is_second_sel:
         label_2 += " &nbsp; :material/check_circle: *(Terpilih)*"
 
-    # Options Interactive Cards: Sekali klik langsung tercatat & otomatis beralih butir
+    # 5. Options Interactive Cards (Ramping, Padat, Langsung Maju Sekali Klik)
     with st.container(key="quiz_options_container"):
         if st.button(
             label_1,
@@ -1154,35 +1144,33 @@ def render_quiz(engine: PersonalityEngine) -> None:
                 st.session_state.current_q = current_idx + 1
             st.rerun()
 
-    st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
-
-    # Bottom Navigation Controls (Sebelumnya + Selesaikan di akhir, Tanpa tombol Berikutnya)
+    # 6. Bottom Controls Compact (Sebelumnya + Selesaikan di akhir, Tanpa Tombol Berikutnya)
     if current_idx == total - 1:
-        col_prev, col_finish = st.columns([1, 1.6], gap="medium", vertical_alignment="center")
+        col_prev, col_finish = st.columns([1, 1.8], gap="small", vertical_alignment="center")
         with col_prev:
             if st.button("Sebelumnya", key=f"btn_p_{current_idx}", type="secondary", icon=":material/arrow_back:", disabled=(current_idx == 0), width="stretch"):
                 st.session_state.current_q -= 1
                 st.rerun()
         with col_finish:
             all_done = (len(st.session_state.answers) == total)
-            finish_label = "Lihat hasil analisis" if all_done else f"Jawab seluruh butir ({len(st.session_state.answers)}/{total})"
+            finish_label = "Lihat hasil analisis" if all_done else f"Jawab ({len(st.session_state.answers)}/{total})"
             if st.button(finish_label, key="btn_finish_test", type="primary", icon=":material/insights:", disabled=not all_done, width="stretch"):
-                with st.spinner("Mengkalkulasi kecenderungan tipe kepribadian dan pola pikirmu..."):
+                with st.spinner("Mengkalkulasi tipe kepribadian..."):
                     result = engine.compute_result(st.session_state.answers)
                     st.session_state.result = result
                     st.session_state.page = "result"
                     st.rerun()
     else:
-        col_prev, col_hint = st.columns([1, 1.6], gap="medium", vertical_alignment="center")
+        col_prev, col_hint = st.columns([1.2, 2.8], gap="small", vertical_alignment="center")
         with col_prev:
             if st.button("Sebelumnya", key=f"btn_p_{current_idx}", type="secondary", icon=":material/arrow_back:", disabled=(current_idx == 0), width="stretch"):
                 st.session_state.current_q -= 1
                 st.rerun()
         with col_hint:
             if q_id in st.session_state.answers:
-                st.caption(":material/check: Opsi tersimpan. Klik salah satu opsi untuk lanjut ke butir berikutnya.")
+                st.caption(":material/check: Tersimpan · klik opsi untuk lanjut.")
             else:
-                st.caption("Klik salah satu opsi di atas untuk langsung beralih ke butir selanjutnya.")
+                st.caption("Klik salah satu opsi untuk lanjut.")
 
 
 def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
@@ -1193,11 +1181,11 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     border_color = profile.get("border_color", "#C7D2FE")
     archetype = profile.get("archetype", result.mbti_type)
     summary_narrative = profile.get("summary", "")
-    avatar_hero_tag = render_avatar_img(result.mbti_type, size=130, alt=archetype)
+    avatar_hero_tag = render_avatar_img(result.mbti_type, size=105, alt=archetype)
 
-    # Hero Result: Karakter Menyatu Alami Tanpa Card Pod
+    # Hero Result: Karakter Menyatu Alami Tanpa Card Pod (Ramping & Proporsional)
     render_html(f"""
-    <div class="friendly-result-hero" style="border-top: 5px solid {theme_color};">
+    <div class="friendly-result-hero" style="border-top: 4px solid {theme_color};">
         <div class="hero-result-header">
             <div class="hero-result-identity">
                 <span class="hero-badge-pill" style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color};">
@@ -1210,7 +1198,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
                 {avatar_hero_tag}
             </div>
         </div>
-        <div class="hero-tagline-quote" style="border-left: 4px solid {theme_color}; background: {bg_tint}55;">
+        <div class="hero-tagline-quote" style="border-left: 3.5px solid {theme_color}; background: {bg_tint}55;">
             "{profile.get('tagline', '')}"
         </div>
         <p class="hero-narrative-text">
@@ -1235,7 +1223,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
                 "Ini tanda bagus kalau kamu punya fleksibilitas tinggi: bisa menyesuaikan diri dengan luwes sesuai situasi dan kebutuhan momen yang kamu hadapi!"
             )
 
-    # Spectrum Rows Generator
+    # Spectrum Rows Generator (Compact)
     dim_pairs = {
         "EI": ("Ekstraversi (Sosial)", "Introversi (Me-Time)", "#4F46E5", "rgba(238, 242, 255, 0.85)", "#C7D2FE"),
         "SN": ("Penginderaan (Fakta Nyata)", "Intuisi (Ide & Kemungkinan)", "#059669", "rgba(236, 253, 245, 0.85)", "#A7F3D0"),
@@ -1303,7 +1291,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             func_code = func_name.split()[0] if func_name else ""
 
             cog_items_html += f"""
-            <div class="cog-layer-friendly-card" style="border-left: 4px solid {theme_color};">
+            <div class="cog-layer-friendly-card" style="border-left: 3.5px solid {theme_color};">
                 <div class="cog-layer-header">
                     <span class="cog-role-badge">{r_label}</span>
                     <span class="cog-symbol-tag" style="color:{theme_color}; background:{bg_tint}; border-color:{border_color};">{func_code}</span>
@@ -1320,7 +1308,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
 
     with tab_strength:
         sb = profile.get("strengths_blindspots", {})
-        c_sup, c_bli = st.columns(2, gap="medium")
+        c_sup, c_bli = st.columns(2, gap="small")
         with c_sup:
             with st.container(border=True):
                 st.markdown("**:material/check_circle: Kelebihan utamamu**")
@@ -1367,10 +1355,10 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             width="stretch"
         )
 
-    st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:0.5rem;'></div>", unsafe_allow_html=True)
 
     # Action Buttons Row
-    c_ret, c_hom = st.columns(2, gap="medium")
+    c_ret, c_hom = st.columns(2, gap="small")
     with c_ret:
         if st.button("Ulangi asesmen", key="btn_repeat_test", type="primary", icon=":material/restart_alt:", width="stretch"):
             start_quiz_session(engine)

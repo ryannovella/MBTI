@@ -47,15 +47,18 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
 
 ---
 
-## 4. Alur & Efektivitas UI/UX Kuis
+## 4. Alur & Efektivitas UI/UX Kuis (Compact & No-Scroll Mobile)
 
+- **Layout Terpadu Bebas Scroll (Mobile-First):**
+  - Mengeliminasi container bertingkat yang boros ruang vertikal. Header, nomor butir, persentase, dan popover daftar dirampingkan ke dalam satu baris fleksibel kompak.
+  - Padding container utama di HP dipangkas menjadi `0.45rem 0.75rem` sehingga konten kuis langsung berada dalam pandangan mata (*above-the-fold*) tanpa perlu menggulir (*no scroll*).
 - **Opsi Jawaban Sekali Klik (Instant Advance):**
-  - Opsi jawaban berupa kartu tombol taktil full-width.
+  - Opsi jawaban berupa kartu tombol taktil full-width dengan tinggi kompak (`min-height: 44px - 48px`, padding `0.65rem 0.9rem`).
   - Memilih opsi langsung mencatat jawaban ke session state dan secara otomatis beralih ke butir soal berikutnya tanpa butuh tombol "Berikutnya".
   - Fitur toggle manual "Lanjut otomatis" dihilangkan karena mode langsung maju sudah menjadi perilaku bawaan (default).
-- **Bar Progresi Real-Time:**
-  - Bar progresi berbasis SVG/CSS responsif dengan kalkulasi instan `(answered_count / total) * 100%`.
-  - Transisi CSS halus `transition: width 0.38s cubic-bezier(0.16, 1, 0.3, 1)` bergerak realtime seketika saat opsi dipilih tanpa lag, glitch, atau jeda waktu `time.sleep`.
+- **Bar Progresi Ramping & Real-Time:**
+  - Bar progresi disematkan tepat di bawah bar navigasi dengan ketebalan ramping (`6px`) tanpa pembungkus card tebal.
+  - Transisi CSS halus `transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1)` bergerak realtime seketika saat opsi dipilih tanpa lag, glitch, atau jeda waktu `time.sleep`.
 - **Navigasi Fleksibel:**
   - Tombol `Sebelumnya` selalu tersedia untuk meninjau atau mengubah jawaban butir sebelumnya.
   - Mengklik kembali opsi yang telah dipilih langsung memvalidasi dan memajukan soal tanpa terjebak.
