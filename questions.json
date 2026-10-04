@@ -97,6 +97,102 @@
   },
   {
     "id": 7,
+    "dim": "EI",
+    "cog_tag": "Se/Ni",
+    "scenario": "Lagi hadir di sebuah acara gathering besar atau workshop komunitas. Pola interaksimu...",
+    "opt_a": {
+      "text": "Antusias keliling kenalan sama banyak orang baru dan bertukar kontak seluas-luasnya.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Lebih milih ngobrol intens mendalam bareng 1-2 orang yang satu frekuensi atau teman yang udah kenal.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 8,
+    "dim": "EI",
+    "cog_tag": "Te/Fi",
+    "scenario": "Waktu ngerjain tugas atau proyek, suasana kerja yang paling bikin performamu maksimal...",
+    "opt_a": {
+      "text": "Ruangan yang hidup dengan diskusi bolak-balik bareng rekan tim buat saling tukar masukan.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Ruangan tenang dengan headphones terpasang, fokus penuh tanpa gangguan interaksi luar.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 9,
+    "dim": "EI",
+    "cog_tag": "Ti/Fe",
+    "scenario": "Lagi menghadapi masalah pribadi yang cukup pelik dan bikin galau. Cara kamu mengurainya...",
+    "opt_a": {
+      "text": "Curhat dan ngobrol lepas sama orang terdekat, karena saat mengucapkannya pikiranmu jadi lebih terang.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Menyendiri dan membedah duduk perkaranya di kepala atau jurnal pribadi sebelum siap cerita.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 10,
+    "dim": "EI",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Grup chat teman atau komunitas lagi sepi seharian penuh. Kecenderunganmu...",
+    "opt_a": {
+      "text": "Gatal pengen nge-share meme, kabar seru, atau nanya sesuatu buat memancing keramaian lagi.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Santai aja menikmati keheningan notifikasi tanpa merasa perlu berinisiatif memecah kesunyian.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 11,
+    "dim": "EI",
+    "cog_tag": "Se/Ni",
+    "scenario": "Nongkrong di coffee shop atau ruang publik sendirian. Pilihan spot duduk favoritmu...",
+    "opt_a": {
+      "text": "Di dekat area tengah atau dekat lalu lalang orang, seru merasakan energi dinamis sekitar.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Di sudut meja sepi dekat jendela atau pojokan dinding, minim kontak mata dan minim distraksi.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 12,
+    "dim": "EI",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Pengen tahu kabar teman lama yang sudah berbulan-bulan nggak ketemu. Pendekatanmu...",
+    "opt_a": {
+      "text": "Langsung telepon atau voice note spontan biar bisa ngobrol santai tanpa perlu nunggu ketikan teks.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Kirim chat teks singkat dulu, biar masing-masing punya waktu luang nyaman buat merespon.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 13,
     "dim": "SN",
     "cog_tag": "Si/Ne",
     "scenario": "Waktu tim lagi brainstorming konsep baru, kamu paling nyaman kalau mulai dari mana...",
@@ -112,7 +208,7 @@
     }
   },
   {
-    "id": 8,
+    "id": 14,
     "dim": "SN",
     "cog_tag": "Si/Ne",
     "scenario": "Ada teman curhat panjang lebar soal masalah yang itu-itu lagi. Fokus perhatianmu...",
@@ -128,7 +224,7 @@
     }
   },
   {
-    "id": 9,
+    "id": 15,
     "dim": "SN",
     "cog_tag": "Se/Ni",
     "scenario": "Waktu kamu lagi belajar aplikasi, tools, atau keahlian baru, cara belajar yang paling nempel...",
@@ -144,7 +240,7 @@
     }
   },
   {
-    "id": 10,
+    "id": 16,
     "dim": "SN",
     "cog_tag": "Si/Ne",
     "scenario": "Waktu kamu lagi jelasin topik penting ke teman biar dia paham, gaya bicaramu cenderung...",
@@ -160,7 +256,7 @@
     }
   },
   {
-    "id": 11,
+    "id": 17,
     "dim": "SN",
     "cog_tag": "Si/Ne",
     "scenario": "Lagi santai, tiba-tiba ada instruksi revisi mendadak dengan tenggat mepet. Reaksi spontanmu...",
@@ -176,7 +272,7 @@
     }
   },
   {
-    "id": 12,
+    "id": 18,
     "dim": "SN",
     "cog_tag": "Se/Ni",
     "scenario": "Saat kamu dihadapkan pada pilihan besar yang belum jelas ujungnya, kamu lebih percaya pada...",
@@ -192,7 +288,103 @@
     }
   },
   {
-    "id": 13,
+    "id": 19,
+    "dim": "SN",
+    "cog_tag": "Si/Ne",
+    "scenario": "Menceritakan kembali kenangan liburan atau momen masa lalu ke orang lain. Yang paling kamu ingat...",
+    "opt_a": {
+      "text": "Detail kejadian faktual: rute jalan, menu makanan yang dipesan, harga tiket, dan tempat persisnya.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Suasana hati keseluruhan, obrolan bermakna di momen itu, serta kesan mendalam yang membekas.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 20,
+    "dim": "SN",
+    "cog_tag": "Se/Ni",
+    "scenario": "Waktu kamu lagi scrolling membaca artikel, thread, atau buku, bacaan yang paling bikin nagih...",
+    "opt_a": {
+      "text": "Panduan praktis, tips terapan harian, atau kisah nyata yang bisa langsung kamu praktekkan.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Konsep futuristik, gagasan abstrak, filosofi kehidupan, atau teori baru yang membuka cara pandang.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 21,
+    "dim": "SN",
+    "cog_tag": "Si/Ne",
+    "scenario": "Menilai sebuah karya seni, desain grafis, atau produk aplikasi digital. Hal utama yang menarik matamu...",
+    "opt_a": {
+      "text": "Kerapian visual, presisi tata letak, fungsi tombol, dan kegunaannya yang nyaman dipakai.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Makna tersirat, keunikan konsep di baliknya, dan pesan emosional yang berusaha disampaikan.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 22,
+    "dim": "SN",
+    "cog_tag": "Se/Ni",
+    "scenario": "Saat diajak berdiskusi tentang rencana hidup 3-5 tahun ke depan. Respon alamimu...",
+    "opt_a": {
+      "text": "Fokus pada langkah riil jangka pendek yang sudah pasti: target tabungan, jenjang karir, dan kesiapan saat ini.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Asyik mengeksplorasi visi masa depan, berbagai kemungkinan peran hidup, dan mimpi besar yang belum terbayang wujudnya.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 23,
+    "dim": "SN",
+    "cog_tag": "Se/Ni",
+    "scenario": "Sedang duduk santai sambil menunggu transportasi umum atau pesanan makanan. Pikiranmu biasanya...",
+    "opt_a": {
+      "text": "Mengamati lingkungan fisik sekitar: pakaian orang yang lewat, interior kafe, atau detail bunyi suara.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Melamun ke mana-mana, menghubung-hubungkan ide acak, atau memikirkan skenario imajiner di kepala.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 24,
+    "dim": "SN",
+    "cog_tag": "Si/Ne",
+    "scenario": "Menghadapi teka-teki logika atau misteri dalam sebuah permainan kelompok. Caramu mencari jawaban...",
+    "opt_a": {
+      "text": "Memeriksa bukti fisik dan petunjuk yang sudah terlihat satu per satu secara teliti tanpa terburu-buru.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Langsung membuat hipotesis besar dari firasat awal, lalu mencari kecocokan petunjuk dengan teori tersebut.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 25,
     "dim": "TF",
     "cog_tag": "Ti/Fe",
     "scenario": "Teman dekat minta pendapat jujur soal rencana bisnis atau keputusannya yang menurutmu rapuh. Pendekatanmu...",
@@ -208,7 +400,7 @@
     }
   },
   {
-    "id": 14,
+    "id": 26,
     "dim": "TF",
     "cog_tag": "Ti/Fe",
     "scenario": "Ada gesekan di kelompok atau tim karena salah paham. Naluri pertamamu adalah...",
@@ -224,7 +416,7 @@
     }
   },
   {
-    "id": 15,
+    "id": 27,
     "dim": "TF",
     "cog_tag": "Fi/Te",
     "scenario": "Kamu harus ngasih feedback ke rekan yang sudah capek-capek kerja tapi hasilnya masih jauh dari standar. Caramu...",
@@ -240,7 +432,7 @@
     }
   },
   {
-    "id": 16,
+    "id": 28,
     "dim": "TF",
     "cog_tag": "Ti/Fe",
     "scenario": "Saat mengambil keputusan yang memengaruhi banyak orang, tolok ukur utamamu...",
@@ -256,7 +448,7 @@
     }
   },
   {
-    "id": 17,
+    "id": 29,
     "dim": "TF",
     "cog_tag": "Fi/Te",
     "scenario": "Kamu dikritik cukup tajam soal hasil kerjamu di depan umum. Reaksi pertamamu...",
@@ -272,7 +464,7 @@
     }
   },
   {
-    "id": 18,
+    "id": 30,
     "dim": "TF",
     "cog_tag": "Ti/Fe",
     "scenario": "Cerita di film, buku, atau series yang biasanya paling berkesan buatmu...",
@@ -288,7 +480,103 @@
     }
   },
   {
-    "id": 19,
+    "id": 31,
+    "dim": "TF",
+    "cog_tag": "Te/Fi",
+    "scenario": "Mau beli barang elektronik atau gadget bernilai lumayan mahal. Pertimbangan utamamu sebelum checkout...",
+    "opt_a": {
+      "text": "Bandingkan spesifikasi teknis, rasio harga terhadap performa, dan ulasan objektif dari para reviewer.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Kenyamanan pemakaian, desain estetika yang bikin hati senang, dan kecocokan dengan gaya personalmu.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 32,
+    "dim": "TF",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Sahabatmu datang sambil menangis karena baru saja diputusin atau dapat masalah berat. Hal pertama yang kamu tawarkan...",
+    "opt_a": {
+      "text": "Bantu menganalisis masalahnya secara tenang dan cari solusi konkrit biar situasi dia lekas membaik.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Memberikan pelukan hangat, validasi kesedihannya, dan mendengarkan tanpa menghakimi atau buru-buru menyuruh solusi.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 33,
+    "dim": "TF",
+    "cog_tag": "Ti/Fe",
+    "scenario": "Lagi diskusi seru dan ada teman yang menyebarkan argumen atau informasi yang jelas-jelas keliru secara fakta. Responmu...",
+    "opt_a": {
+      "text": "Langsung mengoreksi faktanya secara tegas di forum, karena kebenaran data lebih penting daripada sungkan.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Menahan diri dan mencari momen berdua untuk meluruskan secara halus agar dia tidak merasa dipermalukan.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 34,
+    "dim": "TF",
+    "cog_tag": "Te/Fi",
+    "scenario": "Ada satu anggota tim yang kerjanya lambat sehingga menahan progres seluruh kelompok. Tindakanmu...",
+    "opt_a": {
+      "text": "Tegur langsung sesuai komitmen tugas bersama dan minta dia kejar ketertinggalan demi kepentingan seluruh tim.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Tanyakan dulu kondisi pribadinya secara empati, siapa tahu ada kendala personal yang sedang membebaninya.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 35,
+    "dim": "TF",
+    "cog_tag": "Te/Fi",
+    "scenario": "Saat mengevaluasi keberhasilan suatu proyek yang kamu selesaikan bersama tim. Tolok ukur kebanggaanmu...",
+    "opt_a": {
+      "text": "Tercapainya angka target, kualitas output yang lolos standar tinggi, dan efisiensi waktu pengerjaan.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Kekompakan tim yang terjaga, saling dukung antar anggota, dan rasa bangga bersama selama berproses.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 36,
+    "dim": "TF",
+    "cog_tag": "Ti/Fe",
+    "scenario": "Harus memilih satu keputusan berat di organisasi yang pastinya membuat sebagian pihak merasa kecewa...",
+    "opt_a": {
+      "text": "Ambil pilihan yang paling rasional dan berdampak optimal jangka panjang, walau harus ada pihak yang tidak puas.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Cari jalan tengah dan kompromi alternatif semaksimal mungkin agar tidak ada pihak yang merasa disisihkan.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 37,
     "dim": "JP",
     "cog_tag": "Je/Pe",
     "scenario": "Kamu dikasih tugas atau proyek yang tenggat waktunya masih dua minggu lagi. Ritme kerjamu...",
@@ -304,7 +592,7 @@
     }
   },
   {
-    "id": 20,
+    "id": 38,
     "dim": "JP",
     "cog_tag": "Je/Pe",
     "scenario": "Jumat malam tiba-tiba diajak teman liburan singkat ke luar kota besok pagi tanpa persiapan. Responmu...",
@@ -320,7 +608,7 @@
     }
   },
   {
-    "id": 21,
+    "id": 39,
     "dim": "JP",
     "cog_tag": "Je/Pe",
     "scenario": "Tentang to-do list atau daftar target harian, kebiasaanmu biasanya...",
@@ -336,7 +624,7 @@
     }
   },
   {
-    "id": 22,
+    "id": 40,
     "dim": "JP",
     "cog_tag": "Je/Pe",
     "scenario": "Melihat meja kerja, kamar, atau file-file di komputermu, kondisinya cenderung...",
@@ -352,7 +640,7 @@
     }
   },
   {
-    "id": 23,
+    "id": 41,
     "dim": "JP",
     "cog_tag": "Je/Pe",
     "scenario": "Hari Sabtu kamu sudah punya jadwal rapi dari pagi sampai sore, tapi tiba-tiba acaranya dibatalkan sepihak. Reaksimu...",
@@ -368,7 +656,7 @@
     }
   },
   {
-    "id": 24,
+    "id": 42,
     "dim": "JP",
     "cog_tag": "Je/Pe",
     "scenario": "Dalam menyelesaikan suatu pekerjaan, kondisi yang bikin kamu paling nyaman...",
@@ -379,6 +667,102 @@
     },
     "opt_b": {
       "text": "Ada ruang bebas buat improvisasi dan eksplorasi cara baru, daripada terkekang aturan yang terlalu kaku.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 43,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Persiapan sebelum pergi traveling atau bepergian ke luar kota untuk beberapa hari...",
+    "opt_a": {
+      "text": "Mulai mencicil packing barang dari beberapa hari sebelumnya dengan checklist lengkap agar tidak ada yang tertinggal.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Baru memasukkan barang ke koper beberapa jam sebelum berangkat atau malam sebelumnya secara spontan.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 44,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Dihadapkan pada aturan atau standar operasional prosedur (SOP) baru di tempat kerja/kampus...",
+    "opt_a": {
+      "text": "Merasa nyaman karena ada kejelasan alur yang pasti dan mengurangi ambiguitas dalam bekerja.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Cenderung mencari celah fleksibilitas atau cara jalan pintas sendiri yang terasa lebih ringkas dan leluasa.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 45,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Datang ke kafe atau restoran baru dan melihat buku menu yang sangat tebal. Cara kamu memesan...",
+    "opt_a": {
+      "text": "Cepat menentukan pilihan pasti dalam hitungan menit agar segera diproses dan tidak berlama-lama bingung.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Lama membolak-balik menu, mempertimbangkan berbagai opsi menarik, dan suka mencoba pesanan baru yang tak terduga.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 46,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Saat ada keputusan penting yang harus segera diambil untuk langkah hidupmu selanjutnya...",
+    "opt_a": {
+      "text": "Merasa jauh lebih tenang dan lega ketika keputusan sudah final 'dikunci', sehingga kamu bisa langsung melangkah.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Lebih suka membiarkan opsi tetap terbuka selama mungkin, berjaga-jaga jika ada peluang baru yang lebih menarik.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 47,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Menghadapi proyek kompleks yang terdiri dari beberapa tahap pengerjaan. Pola kerjamu...",
+    "opt_a": {
+      "text": "Menyelesaikan tuntas satu bagian secara sempurna sebelum beranjak menyentuh bagian berikutnya.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Suka mengerjakan beberapa bagian sekaligus secara paralel, berpindah-pindah tergantung inspirasi yang muncul.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 48,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Saat menjalani hari Minggu atau hari bebas tanpa kewajiban mendesak. Caramu menikmati waktu...",
+    "opt_a": {
+      "text": "Tetap punya gambaran rencana jam per jam (misal: olahraga jam 8, beres-beres jam 10, nonton jam 2) biar harinya produktif.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Mengalir begitu saja tanpa jadwal terikat; bangun jam berapa pun dan melakukan apa pun yang spontan terlintas.",
       "dim": "P",
       "val": 1
     }
