@@ -1,10 +1,10 @@
-# MBTI Assessment — Clinical Psychometrics & Jungian Cognitive Stack
+# MBTI Assessment: Clinical Psychometrics & Jungian Cognitive Stack
 
 Aplikasi asesmen kepribadian spektrum MBTI berbasis web interaktif dengan **Streamlit**, berlandaskan 8 fungsi kognitif Carl Jung dan pendekatan psikometri non-ekstrem.
 
 ---
 
-## 🌟 Fitur Utama
+## Fitur Utama
 1. **24 Skenario Realistis & Non-Ekstrem**: Dilema interaksi sosial dan profesional yang seimbang tanpa opsi jebakan/klise.
 2. **Spektrum Kontinu (0–100%)**: Menghitung persentase presisi untuk 4 dimensi utama:
    - Mind: *Extraversion (E) vs Introversion (I)*
@@ -28,7 +28,7 @@ Aplikasi asesmen kepribadian spektrum MBTI berbasis web interaktif dengan **Stre
 
 ---
 
-## 🚀 Cara Menjalankan
+## Cara Menjalankan
 
 ### 1. Prasyarat
 Pastikan Python 3.9+ sudah terpasang di perangkat.
@@ -48,7 +48,7 @@ Aplikasi akan otomatis terbuka di browser pada URL default `http://localhost:850
 
 ---
 
-## 📂 Struktur Berkas
+## Struktur Berkas
 - `app.py`: Antarmuka UI Streamlit, state management kuis, styling responsif kustom, dan shortcut listener.
 - `engine.py`: Scoring engine psikometri, pemetaan dimensi spektrum, dan penentu fungsi kognitif.
 - `profiles.py`: Basis data deskripsi komprehensif ke-16 tipe kepribadian.

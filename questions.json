@@ -26,7 +26,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Senang banget karena bisa akhirnya punya ruang buat recharge — nonton, baca, atau ngelanjutin project pribadi sendiri.",
+      "text": "Senang banget karena bisa akhirnya punya ruang buat recharge: nonton, baca, atau ngelanjutin project pribadi sendiri.",
       "dim": "I",
       "val": 1
     }
@@ -53,12 +53,12 @@
     "cog_tag": "Se/Ni",
     "scenario": "Setelah seharian penuh rapat dan interaksi sosial intens, cara kamu recharge paling efektif adalah...",
     "opt_a": {
-      "text": "Masih mau lanjut ngobrol santai atau keluar sebentar sama satu-dua orang dekat — justru itu yang bikin pikiran fresh.",
+      "text": "Masih mau lanjut ngobrol santai atau keluar sebentar sama satu-dua orang dekat, karena justru itu yang bikin pikiran fresh.",
       "dim": "E",
       "val": 1
     },
     "opt_b": {
-      "text": "Butuh waktu sendiri dulu, minimal sejam — sunyi, tenang, dan bebas dari ekspektasi harus merespon siapapun.",
+      "text": "Butuh waktu sendiri dulu, minimal sejam: sunyi, tenang, dan bebas dari ekspektasi harus merespon siapapun.",
       "dim": "I",
       "val": 1
     }
@@ -69,7 +69,7 @@
     "cog_tag": "Fe/Ti",
     "scenario": "Di tempat kerja/kuliah baru, kamu cenderung...",
     "opt_a": {
-      "text": "Aktif menyapa duluan, kenalan, dan mulai bangun koneksi sejak minggu pertama — nganggep itu bagian penting dari adaptasi.",
+      "text": "Aktif menyapa duluan, kenalan, dan mulai bangun koneksi sejak minggu pertama, menganggap itu bagian penting dari adaptasi.",
       "dim": "E",
       "val": 1
     },
@@ -85,7 +85,7 @@
     "cog_tag": "Fe/Ti",
     "scenario": "Saat kamu punya ide baru yang menarik, langkah pertama yang paling natural bagimu adalah...",
     "opt_a": {
-      "text": "Langsung cerita ke temen atau kolega yang relevan — diskusi langsung itu yang paling bantu kamu mikir dan validate ide.",
+      "text": "Langsung cerita ke temen atau kolega yang relevan, karena diskusi langsung itu yang paling bantu kamu mikir dan validate ide.",
       "dim": "E",
       "val": 1
     },
@@ -101,12 +101,12 @@
     "cog_tag": "Si/Ne",
     "scenario": "Kamu lagi brainstorming ide untuk project baru. Kamu lebih nyaman kalau...",
     "opt_a": {
-      "text": "Mulai dari referensi yang sudah terbukti — benchmark project serupa, data historis, atau best practice yang udah ada.",
+      "text": "Mulai dari referensi yang sudah terbukti (benchmark project serupa, data historis, atau best practice yang sudah ada).",
       "dim": "S",
       "val": 1
     },
     "opt_b": {
-      "text": "Eksplorasi konsep yang belum pernah dicoba — menghubungkan ide dari bidang berbeda dan menikmati proses 'what if'-nya.",
+      "text": "Eksplorasi konsep yang belum pernah dicoba, menghubungkan ide dari bidang berbeda dan menikmati proses 'what if'-nya.",
       "dim": "N",
       "val": 1
     }
@@ -122,7 +122,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Dengerin, tapi pikiranmu mulai analisis pola — kenapa ini terus berulang dan apa root cause di balik siklus ini.",
+      "text": "Dengerin, tapi pikiranmu mulai analisis pola: kenapa ini terus berulang dan apa root cause di balik siklus ini.",
       "dim": "N",
       "val": 1
     }
@@ -138,7 +138,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Pahami konsep dan framework besarnya dulu — gimana ini nyambung ke sistem yang lebih luas — baru eksekusi.",
+      "text": "Pahami konsep dan framework besarnya dulu (bagaimana ini terhubung ke sistem yang lebih luas), baru eksekusi.",
       "dim": "N",
       "val": 1
     }
@@ -154,7 +154,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Mulai dari gambaran besar dulu — konteks, pola, atau prinsip yang mendasari — sebelum ke detail spesifik.",
+      "text": "Mulai dari gambaran besar dulu (konteks, pola, atau prinsip yang mendasari) sebelum ke detail spesifik.",
       "dim": "N",
       "val": 1
     }
@@ -170,7 +170,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Sambil ngerjain revisi, pikiranmu udah running — kenapa revisi ini muncul, apakah ada gap ekspektasi yang perlu diatasi lebih awal lain kali.",
+      "text": "Sambil ngerjain revisi, pikiranmu sudah menganalisis: kenapa revisi ini muncul dan apakah ada gap ekspektasi yang perlu diatasi lebih awal.",
       "dim": "N",
       "val": 1
     }
@@ -181,12 +181,12 @@
     "cog_tag": "Se/Ni",
     "scenario": "Dalam membuat keputusan penting, kamu lebih percaya pada...",
     "opt_a": {
-      "text": "Data konkret, fakta yang bisa diverifikasi, dan pengalaman langsung — kalau belum ada buktinya, kamu tahan dulu.",
+      "text": "Data konkret, fakta yang bisa diverifikasi, dan pengalaman langsung. Kalau belum ada buktinya, kamu tahan dulu.",
       "dim": "S",
       "val": 1
     },
     "opt_b": {
-      "text": "Intuisi yang udah kamu bangun dari banyak observasi — kadang kamu 'tahu' jawabannya sebelum bisa explain kenapa.",
+      "text": "Intuisi yang sudah kamu bangun dari banyak observasi. Kadang kamu 'tahu' jawabannya sebelum bisa menjelaskan alasannya.",
       "dim": "N",
       "val": 1
     }
@@ -197,7 +197,7 @@
     "cog_tag": "Ti/Fe",
     "scenario": "Teman minta pendapat soal keputusan bisnis yang menurut kamu cukup berisiko. Kamu...",
     "opt_a": {
-      "text": "Kasih analisis objektif tentang risiko dan celah logisnya — meski mungkin bukan yang mau dia dengar, itu yang paling berguna buat dia.",
+      "text": "Kasih analisis objektif tentang risiko dan celah logisnya. Meski mungkin bukan yang mau dia dengar, itu yang paling berguna buat dia.",
       "dim": "T",
       "val": 1
     },
@@ -213,12 +213,12 @@
     "cog_tag": "Ti/Fe",
     "scenario": "Ada konflik kecil di grup/tim akibat miskomunikasi. Peranmu secara alami...",
     "opt_a": {
-      "text": "Fokus klarifikasi fakta dan duduk perkaranya dulu — emosi bisa dikelola setelah masalahnya jelas secara objektif.",
+      "text": "Fokus klarifikasi fakta dan duduk perkaranya dulu: emosi bisa dikelola setelah masalahnya jelas secara objektif.",
       "dim": "T",
       "val": 1
     },
     "opt_b": {
-      "text": "Duluan pastikan semua pihak merasa didengar dan gak ada yang defensif — baru cari solusi yang bisa diterima semua.",
+      "text": "Duluan pastikan semua pihak merasa didengar dan tidak ada yang defensif, baru cari solusi yang bisa diterima bersama.",
       "dim": "F",
       "val": 1
     }
@@ -229,7 +229,7 @@
     "cog_tag": "Fi/Te",
     "scenario": "Kamu perlu mengkritik hasil kerja rekan setim yang sudah kerja keras tapi outputnya masih kurang. Caramu...",
     "opt_a": {
-      "text": "Langsung ke poin spesifik yang perlu diperbaiki dengan jelas dan efisien — nada profesional lebih dihargai daripada basa-basi.",
+      "text": "Langsung ke poin spesifik yang perlu diperbaiki dengan jelas dan efisien, karena nada profesional lebih dihargai daripada basa-basi.",
       "dim": "T",
       "val": 1
     },
@@ -245,12 +245,12 @@
     "cog_tag": "Ti/Fe",
     "scenario": "Dalam mengambil keputusan yang memengaruhi orang lain, kamu cenderung lebih berat mempertimbangkan...",
     "opt_a": {
-      "text": "Logika, efisiensi, dan konsistensi — keputusan yang fair itu yang berbasis prinsip yang bisa diaplikasikan ke semua orang sama.",
+      "text": "Logika, efisiensi, dan konsistensi: keputusan yang adil adalah keputusan berbasis prinsip yang berlaku setara untuk semua orang.",
       "dim": "T",
       "val": 1
     },
     "opt_b": {
-      "text": "Dampak emosional dan kebutuhan spesifik tiap individu yang terlibat — karena konteks personal itu sering lebih penting dari aturan umum.",
+      "text": "Dampak emosional dan kebutuhan spesifik tiap individu yang terlibat, karena konteks personal sering kali lebih penting daripada aturan kaku.",
       "dim": "F",
       "val": 1
     }
@@ -282,7 +282,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Yang punya kedalaman emosional dan karakter yang relate — yang bikin kamu ikut ngerasain setiap momen perjalanan tokohnya.",
+      "text": "Yang punya kedalaman emosional dan karakter yang relate, sehingga kamu ikut merasakan setiap momen perjalanan tokohnya.",
       "dim": "F",
       "val": 1
     }
@@ -293,7 +293,7 @@
     "cog_tag": "Je/Pe",
     "scenario": "Kamu punya project besar dengan deadline 2 minggu lagi. Pendekatan kerjamu...",
     "opt_a": {
-      "text": "Bikin timeline dari awal — breakdown task per hari atau per minggu, dan usahakan tetap di jalur rencana itu.",
+      "text": "Bikin timeline dari awal: breakdown task per hari atau per minggu, dan berusaha tetap berada di jalur rencana itu.",
       "dim": "J",
       "val": 1
     },
@@ -314,7 +314,7 @@
       "val": 1
     },
     "opt_b": {
-      "text": "Langsung excited — justru ketidakpastian dan spontanitas itu yang bikin trip jadi lebih seru dan berkesan.",
+      "text": "Langsung antusias: justru ketidakpastian dan spontanitas itu yang membuat perjalanan jadi lebih seru dan berkesan.",
       "dim": "P",
       "val": 1
     }
@@ -325,12 +325,12 @@
     "cog_tag": "Je/Pe",
     "scenario": "Kamu punya to-do list kerjaan hari ini. Biasanya...",
     "opt_a": {
-      "text": "List itu rigid dan kamu usahakan semua tercentang — ada kepuasan tersendiri dari closure setiap task yang selesai.",
+      "text": "Daftar rencana bersifat pasti dan diusahakan semua tuntas: ada kepuasan tersendiri saat setiap tugas selesai tercentang.",
       "dim": "J",
       "val": 1
     },
     "opt_b": {
-      "text": "List itu lebih sebagai reminder longgar — kamu kerjain yang paling relevan atau yang paling menarik di momen itu.",
+      "text": "Daftar rencana lebih sebagai panduan longgar: kamu mengerjakan hal yang paling relevan atau menarik pada momen tersebut.",
       "dim": "P",
       "val": 1
     }
@@ -341,12 +341,12 @@
     "cog_tag": "Je/Pe",
     "scenario": "Cara kamu biasanya ngelola lingkungan kerja atau meja kerja...",
     "opt_a": {
-      "text": "Cukup terstruktur dan organized — kamu tahu di mana setiap hal berada, dan kalau berantakan kamu merasa productivitas drop.",
+      "text": "Cukup terstruktur dan teratur: kamu tahu letak setiap barang, dan jika berantakan kamu merasa produktivitas menurun.",
       "dim": "J",
       "val": 1
     },
     "opt_b": {
-      "text": "Terlihat chaos dari luar tapi kamu tahu sistem 'organikmu' sendiri — kamu bisa fungsi baik di lingkungan yang dinamis.",
+      "text": "Terlihat dinamis dari luar tapi kamu punya sistem sendiri: kamu dapat berfungsi dengan sangat baik di lingkungan yang fleksibel.",
       "dim": "P",
       "val": 1
     }
@@ -357,7 +357,7 @@
     "cog_tag": "Je/Pe",
     "scenario": "Saat ada perubahan rencana mendadak di hari yang sudah kamu jadwalkan rapi, perasaanmu...",
     "opt_a": {
-      "text": "Lumayan ganggu — kamu perlu sedikit waktu untuk adjust dan re-plan supaya hari tetap terkontrol dan produktif.",
+      "text": "Cukup mengganggu: kamu butuh sedikit waktu untuk menyesuaikan dan merencanakan ulang agar hari tetap terkontrol.",
       "dim": "J",
       "val": 1
     },
@@ -373,12 +373,12 @@
     "cog_tag": "Je/Pe",
     "scenario": "Kalau kamu lagi kerjain sesuatu, kamu lebih nyaman kalau...",
     "opt_a": {
-      "text": "Ada batasan yang jelas — scope, deadline, dan ekspektasi output yang spesifik — supaya kamu bisa deliver dengan optimal.",
+      "text": "Ada batasan yang jelas (ruang lingkup, tenggat waktu, dan target hasil yang spesifik) agar kamu bisa menghasilkan output optimal.",
       "dim": "J",
       "val": 1
     },
     "opt_b": {
-      "text": "Ada ruang untuk eksplorasi dan improvisasi — terlalu banyak constraint justru mematikan kreativitas dan ide-ide terbaik kamu.",
+      "text": "Ada ruang untuk eksplorasi dan improvisasi: terlalu banyak batasan justru membatasi kreativitas dan ide terbaikmu.",
       "dim": "P",
       "val": 1
     }
