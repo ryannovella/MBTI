@@ -3,304 +3,295 @@ from typing import Dict
 
 PROFILES: Dict[str, Dict] = {
     "INTJ": {
-        "title": "INTJ — Sang Arsitek Strategi",
-        "emoji": "🏛️",
-        "tagline": "Visi jauh ke depan, eksekusi presisi, toleransi rendah terhadap inefisiensi.",
+        "title": "INTJ — Strategic Architecture & Systems Thinking",
+        "tagline": "Konseptualisasi visi jangka panjang, pengorganisasian sistemik, dan efisiensi terukur.",
         "cognitive_roles": {
-            "dominant": "Ni (Driver Utama) — Mesin proyeksi internal yang terus-menerus mensintesis pola dan membangun model masa depan. INTJ tidak hanya melihat apa yang ada, tapi apa yang pasti akan terjadi jika variabel tertentu bergerak.",
-            "auxiliary": "Te (Co-Pilot) — Eksekutor logis yang mengubah visi Ni menjadi sistem, struktur, dan output yang terukur. Kalau Ni adalah peta, Te adalah kendaraan.",
-            "tertiary": "Fi (Mode Rekreasi) — Kompas nilai personal yang sering underused. Di waktu santai, INTJ bisa sangat opinionated soal hal-hal yang benar-benar mereka pedulikan.",
-            "inferior": "Se (Titik Buta) — Saat stres ekstrem, INTJ bisa lepas kendali ke sensasi fisik berlebihan atau justru freeze total karena overwhelmed oleh realitas present."
+            "dominant": "Ni (Introverted Intuition) — Pemetaan pola makro dan proyeksi kemungkinan masa depan secara konvergen. Mengabstraksikan realitas ke dalam kerangka model konseptual.",
+            "auxiliary": "Te (Extraverted Thinking) — Pengorganisasian sumber daya objektif, penataan logika eksternal, dan penegakan metrik keberhasilan yang terstruktur.",
+            "tertiary": "Fi (Introverted Feeling) — Kompas etika internal dan keselarasan nilai-nilai personal yang dipegang secara mendalam dan privat.",
+            "inferior": "Se (Extraverted Sensing) — Pengolahan data sensoris seketika. Di bawah tekanan berkepanjangan, dapat mengalami kepekaan berlebih terhadap lingkungan fisik atau kelelahan sensorik."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan melihat pola sistemik jangka panjang yang orang lain lewatkan. Mandiri, efisien, dan tidak mudah terbawa arus opini populer.",
-            "blindspot": "Bisa tampak arogan atau dismissive karena standar intelektual yang tinggi. Sering underestimasi pentingnya buy-in emosional dari orang lain dalam eksekusi rencana."
+            "strengths": "Kemampuan luar biasa dalam merancang arsitektur sistem jangka panjang, berpikir independen tanpa bias konsensus, serta ketajaman diagnostik terhadap inefisiensi prosedural.",
+            "blindspots": "Kecenderungan mengabaikan kebutuhan konsensus emosional tim, ekspektasi perfeksionisme yang kaku, serta potensi memandang remeh dinamika interpersonal."
         },
-        "daily_vibe": "Deep work in blocks panjang adalah habitat asli INTJ. Lebih suka async communication, dokumentasi yang rapi, dan meeting yang ada agenda-nya. Tidak butuh validasi eksternal tapi sangat butuh otonomi.",
-        "stress_response": "Saat burnout: menarik diri total, jadi hypercritical terhadap diri sendiri dan orang lain, atau justru tiba-tiba binge hal-hal yang sangat sensory (makan, scroll, olahraga ekstrim). Reset: solitude yang terstruktur, problem-solving kecil yang bisa langsung di-close, dan journaling untuk eksternalisasi loop pikiran.",
-        "color": "#6C63FF"
+        "work_style": "Berkinerja optimal dalam blok waktu fokus mandiri (deep work), komunikasi asinkron yang terstruktur, dan lingkungan yang memberikan otonomi strategis penuh tanpa mikromanajemen.",
+        "stress_dynamics": "Saat mengalami kejenuhan akut, cenderung mengisolasi diri, menjadi terlampau kritis terhadap detail kecil, atau terdistraksi oleh impuls sensorik. Pemulihan memerlukan ruang kesendirian terstruktur, refleksi tertulis, dan eliminasi komitmen sosial yang tidak esensial.",
+        "color": "#1E293B"
     },
     "INTP": {
-        "title": "INTP — Sang Arsitek Logika",
-        "emoji": "🔬",
-        "tagline": "Kalau ada celah logis di argumenmu, INTP sudah menemukannya bahkan sebelum kamu selesai bicara.",
+        "title": "INTP — Conceptual Analysis & Theoretical Logic",
+        "tagline": "Dekomposisi struktur logis, verifikasi ketepatan prinsip, dan pemodelan analitis independen.",
         "cognitive_roles": {
-            "dominant": "Ti (Driver Utama) — Framework internal yang terus-menerus membangun, merevisi, dan memverifikasi sistem logika secara mandiri. Kebenaran buat INTP harus konsisten secara internal, bukan hanya karena otoritas atau konsensus.",
-            "auxiliary": "Ne (Co-Pilot) — Generator kemungkinan dan koneksi lintas domain. Ne adalah yang bikin INTP bisa loncat dari topik ke topik dan menemukan link yang tak terduga.",
-            "tertiary": "Si (Mode Rekreasi) — Suka kembali ke hal-hal familiar dan nyaman — buku lama, genre musik yang sama, ritual kerja yang sudah terbukti.",
-            "inferior": "Fe (Titik Buta) — Saat tertekan, INTP bisa tiba-tiba sangat sensitif soal apakah orang menyukai mereka atau tidak, atau justru jadi blunt tanpa filter sosial."
+            "dominant": "Ti (Introverted Thinking) — Penataan kerangka berpikir logis internal yang presisi. Menguji keabsahan setiap premis berdasarkan konsistensi rasional tanpa kompromi.",
+            "auxiliary": "Ne (Extraverted Intuition) — Eksplorasi kemungkinan lintas domain, identifikasi relasi abstrak antar konsep yang tampak tidak saling berhubungan.",
+            "tertiary": "Si (Introverted Sensing) — Rujukan komparatif terhadap data faktual historis dan preseden yang telah teruji.",
+            "inferior": "Fe (Extraverted Feeling) — Keselarasan emosional antarpribadi. Pada kondisi tertekan, dapat merasa canggung dalam memproses ekspektasi sosial atau menjadi sangat reaktif terhadap penerimaan kelompok."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan dekonstruksi masalah kompleks ke elemen fundamentalnya. Objektif, tidak bias authority, dan sangat jujur dalam evaluasi intelektual.",
-            "blindspot": "Prokrastinasi kronis karena selalu ada angle yang belum dianalisa. Kesulitan finalisasi dan deliver karena perfectionism yang berakar di Ti."
+            "strengths": "Kapasitas dekonstruksi masalah kompleks ke komponen fundamental, objektivitas intelektual murni, serta toleransi tinggi terhadap ambiguitas teoritis.",
+            "blindspots": "Kecenderungan menunda finalisasi akibat siklus analisis berkelanjutan, keengganan mengeksekusi aspek administratif rutin, dan komunikasi yang terkadang terlalu abstrak bagi audiens umum."
         },
-        "daily_vibe": "Non-linear thinker. Bisa kelihatan distracted tapi otak terus jalan di background. Lebih produktif di lingkungan tanpa struktur kaku, suka rabbit hole riset dan problem-solving yang tidak ada deadline-nya.",
-        "stress_response": "Saat burnout: isolasi diri dan loop di dalam kepala sendiri (ruminasi), atau ekstrem — tiba-tiba sangat perlu validasi sosial yang tidak biasanya. Reset: waktu sendiri yang gak terstruktur, biarkan diri explore hal-hal yang murni karena interest tanpa output.",
-        "color": "#4ECDC4"
+        "work_style": "Bekerja paling produktif dalam lingkungan non-kaku yang mengutamakan otonomi intelektual. Membutuhkan ruang eksplorasi eksperimental sebelum berkomitmen pada satu jalur implementasi.",
+        "stress_dynamics": "Di bawah stres berat, dapat terjebak dalam perenungan berulang tanpa aksi (analysis paralysis) atau ledakan emosi sosial yang tidak terduga. Pemulihan dicapai melalui eksplorasi topik baru secara bebas tanpa target tenggat waktu.",
+        "color": "#334155"
     },
     "ENTJ": {
-        "title": "ENTJ — Sang Komandan",
-        "emoji": "⚡",
-        "tagline": "Sistem yang tidak efisien adalah personal insult. Visi besar, eksekusi agresif.",
+        "title": "ENTJ — Executive Leadership & Strategic Execution",
+        "tagline": "Mobilisasi sumber daya terarah, akselerasi efisiensi operasional, dan kepemimpinan berorientasi hasil.",
         "cognitive_roles": {
-            "dominant": "Te (Driver Utama) — Mengorganisir dunia eksternal menjadi sistem yang efisien dan terukur. ENTJ secara alami melihat inefisiensi dan langsung terpikir cara memperbaikinya.",
-            "auxiliary": "Ni (Co-Pilot) — Visi strategis jangka panjang. Bukan hanya tau mau ke mana, tapi sudah punya roadmap 5 langkah ke depannya.",
-            "tertiary": "Se (Mode Rekreasi) — Menikmati pengalaman fisik yang intens dan berkualitas: fine dining, olahraga kompetitif, travel yang well-curated.",
-            "inferior": "Fi (Titik Buta) — Saat stres, ENTJ bisa menjadi sangat kaku soal nilai personal dan tidak fleksibel, atau tiba-tiba crumble kalau nilai inti mereka dilanggar."
+            "dominant": "Te (Extraverted Thinking) — Penataan dunia eksternal melalui struktur logis, penetapan target terukur, dan eliminasi hambatan birokrasi secara tegas.",
+            "auxiliary": "Ni (Introverted Intuition) — Pandangan strategis masa depan yang memandu arah aksi jangka panjang dan mengantisipasi disrupsi pasar.",
+            "tertiary": "Se (Extraverted Sensing) — Ketangkasan memanfaatkan peluang nyata di lapangan dan keterlibatan aktif dengan realitas konkret.",
+            "inferior": "Fi (Introverted Feeling) — Integrasi keselarasan emosional personal. Rentan mengesampingkan kelelahan emosional pribadi demi pencapaian objektif eksternal."
         },
         "strengths_blindspots": {
-            "superpower": "Natural leader yang bisa mobilisasi orang dan resource dengan cepat menuju tujuan. Decisive, confident, dan tidak takut konflik produktif.",
-            "blindspot": "Bisa crushing orang-orang yang lebih lambat atau lebih emosional dalam prosesnya. Susah slow down dan appreciate progress kecil."
+            "strengths": "Ketegasan pengambilan keputusan dalam situasi krisis, artikulasi visi strategis yang persuasif, serta kemampuan mengonsolidasikan tim menuju target ambisius.",
+            "blindspots": "Potensi mengesampingkan kapasitas adaptasi rekan kerja yang memerlukan ritme lebih hati-hati, intoleransi terhadap ambiguitas proses, dan minimnya ruang jeda reflektif."
         },
-        "daily_vibe": "Agenda padat, high-stakes decisions, dan environment yang challenghing adalah comfort zone ENTJ. Perlu kontrol dan authority untuk perform optimal. Tidak suka micromanagement tapi juga tidak suka ambiguitas.",
-        "stress_response": "Saat burnout: jadi hypercritical dan controlling, atau tiba-tiba overwhelmed oleh perasaan yang selama ini ditekan (inferior Fi). Reset: exercise fisik intens, problem-solving dengan dampak cepat terlihat, dan space untuk reflect tanpa agenda.",
-        "color": "#FF6B6B"
+        "work_style": "Menguasai lingkungan berisiko tinggi dengan target jelas dan tanggung jawab terdefinisi. Lebih menyukai komunikasi ringkas, berbasis data, dan pertemuan yang memiliki tujuan terukur.",
+        "stress_dynamics": "Saat kelelahan melampaui batas, dapat beralih menjadi terlampau mengontrol atau justru merasa teralienasi dari tujuan internalnya. Pemulihan membutuhkan pelepasan kendali operasional sementara, latihan fisik intens, dan peninjauan kembali prinsip dasar personal.",
+        "color": "#0F172A"
     },
     "ENTP": {
-        "title": "ENTP — Sang Debater",
-        "emoji": "💡",
-        "tagline": "Devil's advocate bukan hobi — itu cara ENTP berpikir paling tajam.",
+        "title": "ENTP — Dialectical Innovation & Strategic Synthesis",
+        "tagline": "Dekomposisi paradigma lama, inovasi konseptual berkelanjutan, dan pemecahan masalah non-linear.",
         "cognitive_roles": {
-            "dominant": "Ne (Driver Utama) — Mesin eksplorasi kemungkinan yang tidak ada habisnya. ENTP melihat setiap situasi sebagai web of possibilities yang bisa dieksplor.",
-            "auxiliary": "Ti (Co-Pilot) — Filter logis yang mengevaluasi dan merangkum semua kemungkinan yang Ne hasilkan. Tidak semua ide diteruskan — hanya yang lolos uji konsistensi internal.",
-            "tertiary": "Fe (Mode Rekreasi) — Di waktu santai, ENTP sangat charming dan bisa sangat connect secara emosional dengan orang-orang yang mereka pedulikan.",
-            "inferior": "Si (Titik Buta) — Saat tertekan, ENTP bisa jadi sangat pesimis soal masa lalu atau terjebak di nostalgia dan kebiasaan lama yang tidak produktif."
+            "dominant": "Ne (Extraverted Intuition) — Penjelajahan hipotesis alternatif dan potensi inovatif. Terampil melihat koneksi di luar kelaziman yang membuka paradigma baru.",
+            "auxiliary": "Ti (Introverted Thinking) — Penyaringan rasional terhadap ide-ide baru guna memastikan integritas logika dan viabilitas teknis sebelum dieksekusi.",
+            "tertiary": "Fe (Extraverted Feeling) — Kemampuan diplomasi persuasif dan pembacaan dinamika audiensi saat mempresentasikan konsep.",
+            "inferior": "Si (Introverted Sensing) — Kepatuhan terhadap prosedur berulang dan dokumentasi terperinci. Cenderung merasa terkekang oleh protokol operasional yang kaku."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan melihat angle yang nobody else sees dan menghubungkan dots dari bidang yang sangat berbeda. Energi dan antusiasme yang genuinely contagious.",
-            "blindspot": "Banyak ide, sedikit follow-through. Bored setelah problem-solving selesai — execution phase terasa membosankan. Bisa tidak sengaja mempermalukan orang saat debat."
+            "strengths": "Kecerdasan dialektis tinggi, kemampuan adaptasi instan terhadap skenario dinamis, dan ketajaman dalam mengidentifikasi kelemahan mendasar dalam suatu sistem.",
+            "blindspots": "Penurunan motivasi ketika fase inisiasi konseptual berganti ke fase pemeliharaan rutin, serta kecenderungan mendebat asumsi orang lain melampaui kebutuhan praktis."
         },
-        "daily_vibe": "Butuh stimulasi intelektual konstan. Bisa hyperfocus kalau problem-nya genuinely menarik, tapi switch dengan cepat kalau sudah tidak ada novelty. Lingkungan kerja terbaik: fleksibel, banyak kolaborasi, dan toleran terhadap chaos kreatif.",
-        "stress_response": "Saat burnout: jadi sarcastic dan dismissive, atau tiba-tiba rigid dan pesimis. Reset: social interaction yang stimulating, ubah problem frame dari 'harus selesai' ke 'mau eksplorasi ke mana lagi'.",
-        "color": "#FFD93D"
+        "work_style": "Membutuhkan ritme kerja yang fleksibel dan sarat pertukaran gagasan intelektual. Paling efektif dalam peran riset, inisiasi proyek baru, strategi produk, atau pemecahan kebuntuan operasional.",
+        "stress_dynamics": "Saat tertekan oleh beban administratif monoton, dapat menjadi sinis, kehilangan arah prioritas, atau terjebak kekhawatiran berlebih terhadap detail historis. Pemulihan optimal melalui diskusi brainstorming lepas dan pergantian konteks masalah.",
+        "color": "#1E3A8A"
     },
     "INFJ": {
-        "title": "INFJ — Sang Advokat",
-        "emoji": "🌊",
-        "tagline": "Melihat manusia lebih dalam dari yang mereka lihat sendiri, dan ingin membantu mereka jadi versi terbaik.",
+        "title": "INFJ — Integrative Insight & Humanistic Vision",
+        "tagline": "Sintesis intuisi mendalam mengenai motif manusia, konsistensi etika, dan dedikasi pada transformasi sistemik.",
         "cognitive_roles": {
-            "dominant": "Ni (Driver Utama) — Intuisi konvergen yang mengintegrasikan informasi dari berbagai sumber menjadi satu insight yang dalam. INFJ sering 'tahu' sesuatu tanpa bisa explain kenapa.",
-            "auxiliary": "Fe (Co-Pilot) — Sangat peka terhadap dinamika emosional kelompok. INFJ secara natural calibrate komunikasi dan approach mereka untuk sesuai dengan kebutuhan orang di sekitar.",
-            "tertiary": "Ti (Mode Rekreasi) — Suka menganalisa sistem dan konsep secara mendalam di waktu sendiri. Bisa sangat perfectionistic soal konsistensi internal argumen.",
-            "inferior": "Se (Titik Buta) — Saat stres, bisa jadi sangat kaku dan perfectionistic soal hal-hal fisik dan detail, atau justru lepas kontrol ke sensasi berlebihan."
+            "dominant": "Ni (Introverted Intuition) — Persepsi konvergen terhadap motif tersembunyi, visi kemanusiaan jangka panjang, dan integrasi makna esensial di balik gejala permukaan.",
+            "auxiliary": "Fe (Extraverted Feeling) — Rekayasa keharmonisan interpersonal, artikulasi empati terarah, dan kepedulian aktif terhadap kesejahteraan komunitas.",
+            "tertiary": "Ti (Introverted Thinking) — Analisis struktural mandiri yang membedah koherensi argumen di balik keyakinan intuitif.",
+            "inferior": "Se (Extraverted Sensing) — Interaksi dengan beban sensoris fisik. Rentan mengalami kejenuhan lingkungan akibat overstimulasi kebisingan atau kerumunan."
         },
         "strengths_blindspots": {
-            "superpower": "Empati yang dalam dikombinasi dengan visi sistemik — langka dan powerful. Kemampuan membaca orang dan situasi yang sering terasa 'supernatural' bagi orang lain.",
-            "blindspot": "Burnout dari absorbing too much dari orang lain. Susah set boundaries karena genuinely peduli dan takut mengecewakan. Bisa jadi perfectionistic sampai paralysis."
+            "strengths": "Kapasitas luar biasa dalam memahami kompleksitas psikologis individu, perancangan visi strategis yang berbobot etis, serta integritas dedikatif terhadap misi jangka panjang.",
+            "blindspots": "Kerentanan terhadap kelelahan empati (compassion fatigue), kesulitan menetapkan batasan beban kerja pribadi, dan perfeksionisme ekspektasi yang sulit diimbangi realitas."
         },
-        "daily_vibe": "Butuh makna di balik pekerjaan — tidak bisa sustain long-term di lingkungan yang terasa shallow atau tidak aligned dengan values. Deep work solo diselingi meaningful 1-on-1 adalah ritme idealnya.",
-        "stress_response": "Saat burnout: isolasi total, overwhelmed oleh sensory input, dan jadi sangat self-critical. Reset: nature, creative expression (menulis/melukis), dan percakapan mendalam dengan orang yang genuinely dipercaya.",
-        "color": "#A29BFE"
+        "work_style": "Memerlukan ruang kerja tenang dengan tujuan institusional yang selaras dengan nilai moral personal. Efektif dalam konsultasi strategis, perumusan kebijakan, kepemimpinan transformatif, dan pendampingan profesional.",
+        "stress_dynamics": "Saat kewalahan emosional, cenderung menarik diri secara drastis (doorslam mode) atau menjadi terobsesi dengan keteraturan detail fisik. Pemulihan membutuhkan keheningan total, koneksi dengan alam, dan jeda tanpa tanggung jawab interpersonal.",
+        "color": "#14532D"
     },
     "INFP": {
-        "title": "INFP — Sang Mediator",
-        "emoji": "🌸",
-        "tagline": "Dunia terlihat berbeda kalau dilihat dari sudut pandang INFP — lebih dalam, lebih bermakna, lebih penuh kemungkinan.",
+        "title": "INFP — Principled Idealism & Values Integration",
+        "tagline": "Keteguhan kompas etika internal, apresiasi orisinalitas manusiawi, dan eksplorasi makna mendalam.",
         "cognitive_roles": {
-            "dominant": "Fi (Driver Utama) — Kompas nilai internal yang sangat kuat dan personal. INFP tahu apa yang penting buat mereka, dan integritas terhadap nilai itu adalah non-negotiable.",
-            "auxiliary": "Ne (Co-Pilot) — Eksplorasi kemungkinan yang kaya dan imajinatif. Bisa melihat multiple layers of meaning di balik satu kejadian.",
-            "tertiary": "Si (Mode Rekreasi) — Nostalgia, ritual familiar, dan kenangan bermakna adalah sumber comfort yang genuine.",
-            "inferior": "Te (Titik Buta) — Saat stres, bisa jadi hypercritical terhadap inefficiency atau tiba-tiba sangat demanding soal output dan hasil — tidak biasanya."
+            "dominant": "Fi (Introverted Feeling) — Penyelarasan batin dengan nilai-nilai kemanusiaan inti. Menilai keputusan berdasarkan keaslian motif, integritas moral, dan harmoni internal.",
+            "auxiliary": "Ne (Extraverted Intuition) — Penjelajahan perspektif imajinatif, simbolisme konseptual, dan keterbukaan terhadap berbagai kemungkinan alternatif.",
+            "tertiary": "Si (Introverted Sensing) — Penataan memori pengalaman subjektif dan apresiasi terhadap tradisi personal yang bermakna.",
+            "inferior": "Te (Extraverted Thinking) — Penegakan efisiensi eksternal yang kaku. Di bawah stres akut, dapat tiba-tiba bertindak menuntut atau menghakimi secara terburu-buru."
         },
         "strengths_blindspots": {
-            "superpower": "Kreativitas dan kedalaman emosional yang genuine. Kemampuan berempati dan memahami pengalaman subjektif orang lain. Sangat authentic.",
-            "blindspot": "Idealism yang bisa clash dengan realitas pragmatis. Prokrastinasi karena menunggu 'mood yang pas' atau takut hasil tidak sesuai standar internal yang tinggi."
+            "strengths": "Empati autentik tanpa penghakiman, orisinalitas perspektif konseptual, dan keteguhan membela prinsip-prinsip kemanusiaan yang sering terabaikan.",
+            "blindspots": "Kecenderungan menunda eksekusi menunggu kondisi emosional yang ideal, kesulitan menerima kritik objektif tanpa merasa terserang secara personal, dan keengganan berhadapan dengan konflik terbuka."
         },
-        "daily_vibe": "Butuh autonomy dan alignment antara pekerjaan dengan nilai. Creative projects, writing, dan helping professions adalah natural fit. Tidak suka struktur kaku atau lingkungan yang terlalu kompetitif.",
-        "stress_response": "Saat burnout: menarik diri, merasa disalahpahami, dan jadi sangat sensitif terhadap kritik. Reset: creative outlet, alam, dan waktu sendiri yang tidak ada agenda apapun.",
-        "color": "#FD79A8"
+        "work_style": "Berkembang dalam lingkungan kerja yang menghormati otonomi individual dan memiliki misi sosial jelas. Menghindari atmosfer kompetitif agresif atau protokol yang terasa mekanistik semata.",
+        "stress_dynamics": "Di bawah tekanan berat, dapat merasa terisolasi, putus asa terhadap realitas pragmatis, atau memunculkan kritik logis yang kaku terhadap rekan kerja. Pemulihan tercapai melalui ekspresi kreatif mandiri dan jeda refleksi bebas ekspektasi eksternal.",
+        "color": "#065F46"
     },
     "ENFJ": {
-        "title": "ENFJ — Sang Protagonis",
-        "emoji": "🌟",
-        "tagline": "Natural catalyst untuk pertumbuhan orang lain — ENFJ membuat orang-orang di sekitarnya jadi lebih baik tanpa terasa.",
+        "title": "ENFJ — Transformational Mentorship & Catalytic Leadership",
+        "tagline": "Pengembangan potensi insani, penyelarasan konsensus kelompok, dan artikulasi visi transformatif.",
         "cognitive_roles": {
-            "dominant": "Fe (Driver Utama) — Sangat aware terhadap dinamika emosional kelompok dan secara aktif menciptakan harmony. Bisa read the room dengan akurasi yang mengagumkan.",
-            "auxiliary": "Ni (Co-Pilot) — Visi jangka panjang tentang potensi orang dan situasi. ENFJ sering melihat siapa kamu bisa jadi sebelum kamu sendiri melihatnya.",
-            "tertiary": "Se (Mode Rekreasi) — Menikmati pengalaman sensorik yang kaya — event, food, travel, dan aesthetic yang indah.",
-            "inferior": "Ti (Titik Buta) — Saat stres, bisa jadi hypercritical secara logis terhadap diri sendiri atau orang lain, atau struggle dengan keputusan yang murni berbasis logika."
+            "dominant": "Fe (Extraverted Feeling) — Pembacaan dinamika sosial kelompok secara akurat serta pemfasilitasan dialog yang membangun keselarasan dan kohesi tim.",
+            "auxiliary": "Ni (Introverted Intuition) — Pemahaman prediktif terhadap lintasan pertumbuhan potensi individu serta arah perkembangan organisasi.",
+            "tertiary": "Se (Extraverted Sensing) — Keterlibatan responsif dalam momentum komunikasi langsung dan manajemen presentasi publik.",
+            "inferior": "Ti (Introverted Thinking) — Evaluasi logis imparsial. Pada kondisi lelah berkepanjangan, rentan merasa bingung saat menghadapi keputusan rasional yang bertentangan dengan harmoni sosial."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan inspire dan mobilisasi orang. Sangat charismatic dan empathetic — orang merasa genuinely diperhatikan dan dipahami.",
-            "blindspot": "Sangat sensitif terhadap konflik dan criticism. Bisa neglect kebutuhan sendiri karena terlalu fokus pada kebutuhan orang lain. People pleasing yang tidak disadari."
+            "strengths": "Kemampuan artikulasi inspiratif, kepekaan terhadap kebutuhan perkembangan orang lain, serta dedikasi tinggi dalam menciptakan kultur kolaborasi yang inklusif.",
+            "blindspots": "Kecenderungan mengorbankan kesejahteraan pribadi demi memenuhi ekspektasi lingkungan, resistensi terhadap konfrontasi yang memecah konsensus, dan potensi memaksakan apa yang dianggap terbaik bagi orang lain."
         },
-        "daily_vibe": "Thrives di lingkungan kolaboratif dengan dampak manusia yang nyata. Leadership, teaching, counseling, dan community building adalah comfort zone. Butuh appreciation dan feedback positif untuk sustain energy.",
-        "stress_response": "Saat burnout: anxious, overthinking dampak setiap tindakan terhadap orang lain, atau justru jadi cold dan withdrawn. Reset: waktu sendiri yang gak ada orang yang perlu di-take care of, dan self-compassion yang intentional.",
-        "color": "#00CEC9"
+        "work_style": "Sangat efektif dalam kepemimpinan organisasi, manajemen sumber daya manusia, edukasi, dan fasilitasi program strategis. Memerlukan interaksi tim yang terbuka dan umpan balik yang konstruktif.",
+        "stress_dynamics": "Saat kehabisan cadangan emosional, dapat menjadi cemas berlebih terhadap persepsi publik atau bersikap defensif. Pemulihan memerlukan pembatasan keterlibatan sosial dan alokasi waktu tenang untuk evaluasi diri secara objektif.",
+        "color": "#134E4A"
     },
     "ENFP": {
-        "title": "ENFP — Sang Katalisator",
-        "emoji": "🎨",
-        "tagline": "Antusiasme yang genuinely contagious — ENFP bisa membuat hal paling biasa terasa seperti petualangan.",
+        "title": "ENFP — Exploratory Synthesis & Creative Catalyst",
+        "tagline": "Inisiasi proyek transformatif, koneksi relasional lintas perspektif, dan antusiasme pengembangan gagasan.",
         "cognitive_roles": {
-            "dominant": "Ne (Driver Utama) — Explosion of possibilities dan connections. ENFP melihat potential di mana-mana — dalam ide, orang, dan situasi.",
-            "auxiliary": "Fi (Co-Pilot) — Filter nilai yang deep. Meski terlihat spontan, ENFP sangat selektif soal apa yang benar-benar penting dan worth their energy.",
-            "tertiary": "Te (Mode Rekreasi) — Di proyek yang benar-benar mereka passionate, bisa sangat focused dan driven untuk deliver hasil nyata.",
-            "inferior": "Si (Titik Buta) — Saat tertekan, bisa terjebak di rutinitas unhealthy atau overthinking masa lalu yang tidak bisa diubah."
+            "dominant": "Ne (Extraverted Intuition) — Persepsi cepat terhadap pola peluang baru dan artikulasi berbagai kemungkinan inovatif yang menghubungkan disiplin ilmu berbeda.",
+            "auxiliary": "Fi (Introverted Feeling) — Penapisan ide berdasarkan resonansi etis dan keaslian nilai personal yang mendalam.",
+            "tertiary": "Te (Extraverted Thinking) — Penataan rencana aksi terstruktur saat mengeksekusi proyek yang memiliki signifikansi personal tinggi.",
+            "inferior": "Si (Introverted Sensing) — Penanganan detail administratif berulang. Rentan merasa kelelahan saat dituntut menjaga kepatuhan prosedural harian tanpa variasi."
         },
         "strengths_blindspots": {
-            "superpower": "Kreativitas yang explosive dan kemampuan connect dengan orang dari berbagai latar belakang secara genuinely. Highly adaptable dan open-minded.",
-            "blindspot": "Start banyak, finish sedikit. Mudah excited tapi susah sustain energy saat fase 'boring' dari eksekusi. Bisa overpromise."
+            "strengths": "Kreativitas konseptual yang tinggi, adaptabilitas luar biasa terhadap perubahan konteks, serta kepiawaian dalam membangun jembatan kolaborasi antardisiplin.",
+            "blindspots": "Kecenderungan memulai inisiatif baru sebelum menuntaskan implementasi inisiatif sebelumnya, estimasi waktu yang kerap terlalu optimistik, dan resistensi terhadap tugas pemeliharaan rutin."
         },
-        "daily_vibe": "Butuh variety, human connection, dan freedom untuk eksplorasi. Paling produktif kalau ada tujuan besar yang meaningful, tapi dengan fleksibilitas besar dalam cara mencapainya.",
-        "stress_response": "Saat burnout: insecure, overthinking, dan jadi unusually self-critical. Reset: creative freedom tanpa ekspektasi output, quality time dengan inner circle, dan nature.",
-        "color": "#FDCB6E"
+        "work_style": "Membutuhkan kebebasan mengeksplorasi metodologi pemecahan masalah dengan batasan birokrasi minimal. Sangat produktif dalam lingkungan yang merayakan inovasi, iterasi cepat, dan pertukaran gagasan lintas fungsi.",
+        "stress_dynamics": "Saat terjebak dalam rutinitas mekanis tanpa stimulasi mental, dapat menjadi hiperkritis terhadap diri sendiri dan meragukan kompetensi dasarnya. Pemulihan diperoleh melalui dialog eksploratif dengan lingkaran terpercaya dan pengurangan beban administratif jangka pendek.",
+        "color": "#075985"
     },
     "ISTJ": {
-        "title": "ISTJ — Sang Logistik",
-        "emoji": "🗂️",
-        "tagline": "Reliable bukan hanya kata — itu identitas. Kalau ISTJ bilang akan deliver, itu sudah as good as done.",
+        "title": "ISTJ — Institutional Reliability & Systematic Governance",
+        "tagline": "Penegakan integritas prosedur, ketelitian verifikasi data, dan keandalan eksekusi tanpa kompromi.",
         "cognitive_roles": {
-            "dominant": "Si (Driver Utama) — Library internal pengalaman dan data historis yang sangat detail. ISTJ belajar dari apa yang sudah terbukti berhasil dan menerapkannya secara konsisten.",
-            "auxiliary": "Te (Co-Pilot) — Sistem dan struktur untuk mengeksekusi standar Si secara efisien. ISTJ adalah orang yang membuat SOP dan memastikan semua mengikutinya.",
-            "tertiary": "Fi (Mode Rekreasi) — Nilai personal yang kuat tapi jarang diekspresikan. Di dalam, ISTJ sangat peduli terhadap orang-orang yang mereka anggap dalam 'circle'.",
-            "inferior": "Ne (Titik Buta) — Saat stres, bisa tiba-tiba catastrophizing semua kemungkinan buruk yang mungkin terjadi, atau sebaliknya menolak perubahan apapun."
+            "dominant": "Si (Introverted Sensing) — Pengorganisasian memori institusional, rujukan preseden empiris yang solid, dan konsistensi operasional berstandar tinggi.",
+            "auxiliary": "Te (Extraverted Thinking) — Penerapan proses logis yang teratur, penjadwalan efisien, dan pengukuran hasil kerja berbasis metrik objektif.",
+            "tertiary": "Fi (Introverted Feeling) — Loyalitas prinsipil yang tenang terhadap tanggung jawab dan komitmen yang telah disepakati.",
+            "inferior": "Ne (Extraverted Intuition) — Adaptasi terhadap disrupsi tak terduga. Di bawah tekanan krisis, rentan mencemaskan kemungkinan terburuk secara berlebihan."
         },
         "strengths_blindspots": {
-            "superpower": "Reliabilitas, konsistensi, dan kemampuan execute dengan sangat detail-oriented. Orang tahu bisa depend on ISTJ.",
-            "blindspot": "Resistansi terhadap perubahan dan cara baru yang belum terbukti. Bisa kelihatan kaku atau kurang imajinatif dalam situasi yang butuh inovasi."
+            "strengths": "Keandalan luar biasa dalam menjaga kesinambungan operasional, ketelitian data tingkat tinggi, dan dedikasi tak tergoyahkan terhadap kepatuhan standar profesional.",
+            "blindspots": "Resistensi terhadap perubahan metodologi yang belum memiliki riwayat keberhasilan terbukti, serta kecenderungan bersikap skeptis terhadap inovasi yang bersifat spekulatif."
         },
-        "daily_vibe": "Struktur yang jelas, ekspektasi yang definite, dan lingkungan yang predictable adalah tempat ISTJ bersinar. Tidak suka surprises atau ambiguitas dalam pekerjaan.",
-        "stress_response": "Saat burnout: hiperfokus pada detail yang tidak relevan, atau tiba-tiba catastrophize tentang semua yang bisa salah. Reset: routine yang familiar, task yang jelas dan segera bisa diselesaikan.",
-        "color": "#636E72"
+        "work_style": "Berkinerja optimal dalam organisasi dengan rantai komando yang jelas, deskripsi tugas definitif, dan parameter kesuksesan yang terukur secara transparan.",
+        "stress_dynamics": "Saat menghadapi kekacauan struktural atau ambiguitas arahan yang berkepanjangan, dapat menjadi kaku atau terpaku pada detail minoritas. Pemulihan membutuhkan pemulihan keteraturan lingkungan kerja dan penugasan yang memiliki batas waktu jelas.",
+        "color": "#374151"
     },
     "ISFJ": {
-        "title": "ISFJ — Sang Pelindung",
-        "emoji": "🛡️",
-        "tagline": "Tanpa banyak suara, ISFJ adalah yang paling konsisten ada saat kamu butuh.",
+        "title": "ISFJ — Operational Stewardship & Sustained Support",
+        "tagline": "Konsistensi dukungan operasional, pemeliharaan stabilitas institusional, dan kepedulian praktis yang presisi.",
         "cognitive_roles": {
-            "dominant": "Si (Driver Utama) — Memory detail tentang orang-orang dan pengalaman bermakna. ISFJ ingat preferensi, kebutuhan, dan momen penting orang yang mereka pedulikan.",
-            "auxiliary": "Fe (Co-Pilot) — Sangat aware terhadap kebutuhan emosional orang lain. Secara natural ingin memastikan semua orang comfortable dan needs-nya terpenuhi.",
-            "tertiary": "Ti (Mode Rekreasi) — Suka memahami sistem dan cara kerja hal-hal secara logis, terutama yang relevan dengan bidang yang mereka kuasai.",
-            "inferior": "Ne (Titik Buta) — Saat stres, bisa jadi sangat pesimis soal masa depan dan catastrophize semua skenario buruk yang mungkin terjadi."
+            "dominant": "Si (Introverted Sensing) — Retensi memori operasional yang terperinci dan kepatuhan cermat terhadap protokol yang telah teruji efektivitasnya.",
+            "auxiliary": "Fe (Extraverted Feeling) — Responsivitas tinggi terhadap kebutuhan logistik dan emosional lingkungan kerja demi menjaga kestabilan tim.",
+            "tertiary": "Ti (Introverted Thinking) — Analisis pragmatis mandiri guna memastikan bahwa setiap langkah penanganan masalah berjalan efisien.",
+            "inferior": "Ne (Extraverted Intuition) — Antisipasi ketidakpastian masa depan. Rentan merasa kewalahan saat dihadapkan pada restrukturisasi besar yang mendadak."
         },
         "strengths_blindspots": {
-            "superpower": "Dedikasi, perhatian terhadap detail kebutuhan orang lain, dan konsistensi dalam merawat hubungan. Sangat trustworthy.",
-            "blindspot": "Kesulitan berkata 'tidak' dan asserting own needs. Sering overwork karena tidak enak menolak permintaan bantuan."
+            "strengths": "Dedikasi kerja yang konsisten, ketelitian luar biasa terhadap kebutuhan detail operasional, dan kesetiaan menjaga kesinambungan kultur kerja yang sehat.",
+            "blindspots": "Kecenderungan menanggung beban kerja melampaui kapasitas demi menghindari mengecewakan pihak lain, keengganan mendelegasikan tugas, dan kesulitan menyuarakan ketidaksetujuan secara terbuka."
         },
-        "daily_vibe": "Bekerja paling baik dalam lingkungan yang terstruktur dan supportive. Lebih suka roles yang ada dampak langsung ke individu. Tidak suka spotlight tapi sangat reliable di balik layar.",
-        "stress_response": "Saat burnout: jadi withdrawn dan passive-aggressive karena accumulated resentment. Reset: express needs secara eksplisit ke orang yang dipercaya, boundaries yang jelas, dan self-care tanpa guilt.",
-        "color": "#55EFC4"
+        "work_style": "Paling produktif dalam lingkungan yang stabil, suportif, dan terorganisir dengan rapi. Memberikan kontribusi signifikan dalam peran manajemen proses, administrasi terpadu, dan koordinasi layanan.",
+        "stress_dynamics": "Saat kelelahan kronis melanda akibat beban akumulatif, dapat memendam kekecewaan mendalam atau mencemaskan skenario risiko secara tidak rasional. Pemulihan membutuhkan pembagian beban tugas yang tegas, apresiasi yang tulus, dan istirahat tanpa gangguan pekerjaan.",
+        "color": "#1F2937"
     },
     "ESTJ": {
-        "title": "ESTJ — Sang Eksekutif",
-        "emoji": "📋",
-        "tagline": "Chaos adalah musuh. Order adalah bukan sekedar preferensi — itu standar hidup.",
+        "title": "ESTJ — Operational Oversight & Structured Execution",
+        "tagline": "Tata kelola organisasi yang disiplin, penetapan standar akuntabilitas, dan kepemimpinan operasional tegas.",
         "cognitive_roles": {
-            "dominant": "Te (Driver Utama) — Mengorganisir dunia eksternal secara efisien dan logis. ESTJ adalah natural administrator yang memastikan sistem berjalan sesuai aturan.",
-            "auxiliary": "Si (Co-Pilot) — Bergantung pada precedent, tradisi, dan cara-cara yang sudah terbukti. 'Ini sudah berhasil sebelumnya' adalah argumen yang sangat kuat bagi ESTJ.",
-            "tertiary": "Ne (Mode Rekreasi) — Di waktu santai, bisa lebih playful dan imaginative dari yang orang kira.",
-            "inferior": "Fi (Titik Buta) — Saat stres, bisa jadi sangat touchy soal nilai personal atau tiba-tiba bereaksi emosional yang tidak biasanya."
+            "dominant": "Te (Extraverted Thinking) — Penegakan standar operasional, alokasi sumber daya yang optimal, dan penuntasan target melalui sistematika kerja yang teruji.",
+            "auxiliary": "Si (Introverted Sensing) — Penerapan tata kelola berbasis preseden terbaik, dokumentasi regulasi, dan konsistensi kepatuhan prosedural.",
+            "tertiary": "Ne (Extraverted Intuition) — Fleksibilitas dalam mengevaluasi solusi taktis ketika metode baku menemui kendala praktis di lapangan.",
+            "inferior": "Fi (Introverted Feeling) — Kesadaran emosional personal. Rentan mengabaikan dampak emosional dari keputusan administratif terhadap dinamika individu."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan organisasi dan eksekusi yang luar biasa. Decisive, clear communicator, dan tidak takut membuat keputusan sulit.",
-            "blindspot": "Bisa intimidating dan tidak fleksibel. Sulit mempertimbangkan cara yang tidak conventional meskipun konteksnya berubah."
+            "strengths": "Kepemimpinan operasional yang kokoh, kejelasan dalam delegasi dan penegakan akuntabilitas, serta efisiensi tinggi dalam menertibkan proses kerja yang kacau.",
+            "blindspots": "Kecenderungan memaksakan keseragaman metode kerja tanpa mempertimbangkan gaya individu, minimnya toleransi terhadap kekeliruan pemula, dan komunikasi yang terkadang terkesan terlalu lugas."
         },
-        "daily_vibe": "Sangat efektif dalam struktur hierarkis yang jelas. Thrives sebagai manager, administrator, atau leader dalam organisasi yang established. Butuh authority yang proporsional dengan tanggung jawabnya.",
-        "stress_response": "Saat burnout: jadi sangat controlling dan hypercritical, atau tiba-tiba sangat emosional soal nilai personal. Reset: clear wins yang bisa segera diklaim, structure yang diperlonggar sedikit.",
-        "color": "#0984E3"
+        "work_style": "Menyukai lingkungan kerja profesional berstruktur hierarkis dengan wewenang proporsional terhadap tanggung jawab. Menghargai profesionalisme tepat waktu, integritas data, dan pelaporan yang ringkas.",
+        "stress_dynamics": "Di bawah stres tinggi akibat inefisiensi tim atau ketidakpatuhan aturan, dapat menjadi teramat mengendalikan atau bereaksi defensif secara emosional. Pemulihan menuntut delegasi beban kerja secara terukur dan rehat sementara dari tanggung jawab supervisi langsung.",
+        "color": "#111827"
     },
     "ESFJ": {
-        "title": "ESFJ — Sang Konsul",
-        "emoji": "🤝",
-        "tagline": "Lingkungan yang harmonis bukan kebetulan — ada ESFJ yang aktif memastikannya terjaga.",
+        "title": "ESFJ — Collaborative Facilitation & Social Harmony",
+        "tagline": "Pemeliharaan kohesi komunitas, koordinasi logistik yang suportif, dan penguatan nilai-nilai kerja sama.",
         "cognitive_roles": {
-            "dominant": "Fe (Driver Utama) — Sangat oriented terhadap kebutuhan dan feelings orang lain. ESFJ secara aktif menciptakan dan menjaga harmony dalam kelompok.",
-            "auxiliary": "Si (Co-Pilot) — Tradisi, kebiasaan, dan cara-cara yang sudah terbukti menjaga harmony adalah rujukan utama.",
-            "tertiary": "Ne (Mode Rekreasi) — Bisa cukup creative dan open to new ideas, terutama dalam konteks yang sudah feel safe.",
-            "inferior": "Ti (Titik Buta) — Saat tertekan, bisa jadi sangat kritis secara logis terhadap diri sendiri atau membuat keputusan yang tidak konsisten."
+            "dominant": "Fe (Extraverted Feeling) — Penyelarasan relasi antarpribadi dalam kelompok, pemastian terpenuhinya kebutuhan anggota tim, dan penciptaan lingkungan kerja yang inklusif.",
+            "auxiliary": "Si (Introverted Sensing) — Penyelenggaraan prosedur operasional harian yang tertib berlandaskan kebiasaan kerja yang solid dan dapat diandalkan.",
+            "tertiary": "Ne (Extraverted Intuition) — Keterbukaan terhadap ide-ide baru yang dapat meningkatkan kenyamanan dan kolaborasi bersama.",
+            "inferior": "Ti (Introverted Thinking) — Evaluasi sistematis yang independen dari pertimbangan emosional. Rentan merasa tertekan saat harus menyampaikan kritik murni yang berpotensi melukai hubungan."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan membangun dan menjaga relasi yang hangat dan genuine. Sangat reliable dan considerate.",
-            "blindspot": "Sangat bergantung pada approval eksternal. Kesulitan berhadapan dengan konflik langsung dan cenderung menghindarinya sampai jadi besar."
+            "strengths": "Kecerdasan interpersonal yang tinggi, keandalan dalam memfasilitasi kebutuhan bersama, dan kemampuan menggalang solidaritas tim secara berkelanjutan.",
+            "blindspots": "Sensitivitas tinggi terhadap kritik kinerja atau penolakan sosial, kecenderungan menghindari konflik krusial demi keharmonisan semu, dan ketergantungan pada validasi eksternal."
         },
-        "daily_vibe": "Paling happy di lingkungan yang collaborative, dengan clear roles dan expressive appreciation. Teaching, healthcare, customer-facing, dan community roles adalah sweet spot.",
-        "stress_response": "Saat burnout: jadi sangat khawatir soal apa yang orang pikirkan atau tiba-tiba sangat needy. Reset: affirmation dari orang yang dipercaya, routine yang familiar, dan space untuk vent.",
-        "color": "#FDCB6E"
+        "work_style": "Sangat produktif dalam peran yang membutuhkan interaksi langsung, koordinasi acara, hubungan masyarakat, dan manajemen layanan. Membutuhkan atmosfer kerja yang saling menghargai.",
+        "stress_dynamics": "Saat terjadi perpecahan interpersonal di lingkungan kerja, dapat mengalami kecemasan akut dan rasa bersalah yang tidak proporsional. Pemulihan memerlukan penegasan batas peran pribadi dan penerimaan bahwa tidak semua friksi sosial merupakan tanggung jawab pribadinya.",
+        "color": "#1E293B"
     },
     "ISTP": {
-        "title": "ISTP — Sang Virtuoso",
-        "emoji": "🔧",
-        "tagline": "Tangan lebih cepat dari kata-kata. Kalau ada yang perlu di-fix, ISTP sudah setengah jalan menyelesaikannya.",
+        "title": "ISTP — Pragmatic Engineering & Technical Mastery",
+        "tagline": "Analisis teknis mendalam, pemecahan masalah secara langsung, dan adaptabilitas tenang di bawah tekanan.",
         "cognitive_roles": {
-            "dominant": "Ti (Driver Utama) — Analisis logis internal yang terus-menerus mengevaluasi bagaimana sesuatu bekerja secara mekanis dan sistematis.",
-            "auxiliary": "Se (Co-Pilot) — Sangat aware terhadap dunia fisik dan present moment. ISTP sangat skilled dalam merespons dengan tepat terhadap situasi yang berkembang real-time.",
-            "tertiary": "Ni (Mode Rekreasi) — Bisa sangat focused dan strategic saat ada tujuan yang jelas dan menarik.",
-            "inferior": "Fe (Titik Buta) — Saat stres, bisa tiba-tiba sangat sensitif terhadap dinamika sosial atau justru jadi sangat blunt tanpa mempertimbangkan dampaknya."
+            "dominant": "Ti (Introverted Thinking) — Pemahaman analitis internal mengenai mekanisme kerja suatu sistem. Membedah komponen untuk menemukan efisiensi fungsional tertinggi.",
+            "auxiliary": "Se (Extraverted Sensing) — Pengamatan tajam terhadap dinamika fisik real-time, memungkinkan respons taktis yang presisi saat menghadapi anomali operasional.",
+            "tertiary": "Ni (Introverted Intuition) — Pengenalan pola laten yang membantu memprediksi jalur penyelesaian masalah teknis yang tidak konvensional.",
+            "inferior": "Fe (Extraverted Feeling) — Komunikasi emosional sosial. Cenderung merasa lelah oleh protokol sosial formal atau tuntutan ekspresi emosional yang intens."
         },
         "strengths_blindspots": {
-            "superpower": "Problem solver yang efektif dan calm under pressure. Kemampuan teknis dan hands-on yang sangat tinggi. Sangat adaptable.",
-            "blindspot": "Sulit express perasaan atau kebutuhan. Komitmen jangka panjang terasa mengekang. Bisa kelihatan detached atau tidak peduli."
+            "strengths": "Ketenangan luar biasa dalam situasi darurat, kapabilitas pemecahan masalah teknis secara langsung (troubleshooting), dan efisiensi tindakan tanpa pemborosan energi.",
+            "blindspots": "Keengganan terhadap komitmen jangka panjang yang kaku, kecenderungan bersikap tertutup dalam komunikasi tim, dan kurangnya perhatian terhadap dampak emosional dari respons analitisnya."
         },
-        "daily_vibe": "Butuh autonomy dan variety dalam pekerjaan. Tidak suka paperwork atau meetings yang tidak perlu. Best dengan hands-on work, problem-solving teknis, dan lingkungan yang memberi freedom untuk explore.",
-        "stress_response": "Saat burnout: isolasi, dismissive, atau tiba-tiba emotional outburst yang tidak biasanya. Reset: physical activity, proyek teknis yang bisa dikerjakan sendiri, dan minimum social obligation.",
-        "color": "#B2BEC3"
+        "work_style": "Membutuhkan kebebasan kerja tanpa intervensi mikromanajemen, berorientasi pada penyelesaian masalah konkret daripada perdebatan teoritis abstrak. Unggul dalam rekayasa sistem, investigasi anomali, dan operasional lapangan.",
+        "stress_dynamics": "Saat dipaksa beroperasi dalam birokrasi berbelit atau lingkungan yang sarat drama sosial, dapat menarik diri total atau melontarkan kritik pedas secara impulsif. Pemulihan optimal melalui aktivitas fisik mandiri atau eksplorasi proyek teknis mandiri.",
+        "color": "#334155"
     },
     "ISFP": {
-        "title": "ISFP — Sang Petualang",
-        "emoji": "🎵",
-        "tagline": "Authentic sampai ke tulang. ISFP tidak bisa pura-pura peduli pada hal yang tidak bermakna baginya.",
+        "title": "ISFP — Contextual Aesthetics & Experiential Authenticity",
+        "tagline": "Kepekaan estetika murni, keselarasan tindakan dengan integritas nilai batin, dan kepekaan kontekstual.",
         "cognitive_roles": {
-            "dominant": "Fi (Driver Utama) — Nilai internal yang sangat kuat dan personal. ISFP tahu secara intuitif apa yang authentic bagi mereka dan tidak bisa bertoleransi dengan hal yang terasa fake.",
-            "auxiliary": "Se (Co-Pilot) — Sangat present dan aware terhadap detail sensorik — beauty, texture, sound, dan atmosphere. ISFP sering sangat skilled secara artistik.",
-            "tertiary": "Ni (Mode Rekreasi) — Kadang mendapat insight mendalam yang mengejutkan, terutama soal orang dan situasi.",
-            "inferior": "Te (Titik Buta) — Saat stres, bisa jadi sangat kritis dan demanding soal efisiensi dan hasil, tidak biasanya bagi mereka."
+            "dominant": "Fi (Introverted Feeling) — Penilaian berbasis keaslian moral dan nilai personal yang dipegang teguh secara privat tanpa dorongan untuk memaksakannya kepada orang lain.",
+            "auxiliary": "Se (Extraverted Sensing) — Keterlibatan mendalam dengan detail sensoris, tekstur, ruang, dan momentum pengalaman saat ini.",
+            "tertiary": "Ni (Introverted Intuition) — Pembentukan wawasan intuitif mengenai arah perkembangan situasi secara bertahap.",
+            "inferior": "Te (Extraverted Thinking) — Penegakan struktur organisasi eksternal. Rentan merasa tertekan saat dituntut menyusun perencanaan birokratis jangka panjang yang kaku."
         },
         "strengths_blindspots": {
-            "superpower": "Sensitivitas estetik yang halus dan authentic presence yang genuinely menarik orang. Non-judgmental dan sangat open-minded.",
-            "blindspot": "Sulit planning jangka panjang. Bisa terlalu menghindari konflik sampai masalah jadi menumpuk."
+            "strengths": "Kepekaan estetika yang halus, integritas batin yang autentik, keterbukaan pikiran tanpa menghakimi, dan kemampuan adaptasi yang tenang terhadap situasi nyata.",
+            "blindspots": "Kecenderungan menghindari negosiasi batas kerja yang tegas, kesulitan menyusun strategi jangka panjang yang sistematis, dan keengganan menghadapi konfrontasi argumen terbuka."
         },
-        "daily_vibe": "Butuh freedom untuk express diri dan pekerjaan yang align dengan values. Art, music, craftsmanship, healing professions, dan apapun yang melibatkan keindahan dan care adalah natural habitat.",
-        "stress_response": "Saat burnout: menarik diri, jadi sangat secretive, atau tiba-tiba hypercritical terhadap ketidakefisienan. Reset: creative expression tanpa ekspektasi, nature, dan waktu sendiri yang non-negotiable.",
-        "color": "#A29BFE"
+        "work_style": "Bekerja paling optimal dalam ruang kerja yang fleksibel dengan atmosfer yang tidak menekan. Berkontribusi luar biasa dalam bidang desain visual, arsitektur interior, pemulihan kesehatan, dan seni terapan.",
+        "stress_dynamics": "Saat berada di bawah tekanan target agresif atau atmosfer yang tidak selaras dengan nilainya, cenderung menutup diri atau meragukan seluruh hasil karyanya. Pemulihan dicapai melalui kontak langsung dengan keindahan alam, kegiatan manual tanpa tenggat, dan ruang privasi yang aman.",
+        "color": "#475569"
     },
     "ESTP": {
-        "title": "ESTP — Sang Pengusaha",
-        "emoji": "🚀",
-        "tagline": "While others are still analyzing, ESTP sudah action dan sudah setengah jalan.",
+        "title": "ESTP — Real-Time Tactician & Adaptive Pragmatism",
+        "tagline": "Aksi taktis responsif, mitigasi risiko di garis depan, dan penyelesaian masalah berorientasi kenyataan.",
         "cognitive_roles": {
-            "dominant": "Se (Driver Utama) — Sangat present dan action-oriented. ESTP menyerap informasi dari lingkungan dan merespons dengan sangat cepat dan efektif.",
-            "auxiliary": "Ti (Co-Pilot) — Analisis logis yang cepat dan pragmatis. ESTP bukan hanya action — mereka juga sangat sharp secara logika.",
-            "tertiary": "Fe (Mode Rekreasi) — Bisa sangat charming dan socially intelligent, terutama saat mencoba memengaruhi atau meyakinkan seseorang.",
-            "inferior": "Ni (Titik Buta) — Saat stres, bisa jadi sangat pesimis atau paranoid tentang masa depan dan what-if scenarios."
+            "dominant": "Se (Extraverted Sensing) — Penyerapan data empiris langsung dari lingkungan fisik secara tajam, tangkas memanfaatkan peluang nyata tanpa keraguan.",
+            "auxiliary": "Ti (Introverted Thinking) — Kalkulasi risiko logis yang berlangsung seketika di balik setiap tindakan pragmatis.",
+            "tertiary": "Fe (Extraverted Feeling) — Kemampuan negosiasi dan diplomasi situasional guna menggerakkan orang lain menuju kesepakatan praktis.",
+            "inferior": "Ni (Introverted Intuition) — Pemikiran konseptual spekulatif jangka panjang. Cenderung tidak sabar terhadap teori yang tidak memiliki relevansi instan di lapangan."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan berpikir dan bertindak cepat di situasi yang berubah-ubah. Risk-tolerant dan sangat effective di crisis situation.",
-            "blindspot": "Boredom dengan hal-hal yang rutin dan long-term planning. Bisa impulsive dan tidak mempertimbangkan konsekuensi jangka panjang."
+            "strengths": "Keberanian mengambil keputusan cepat dalam kondisi ketidakpastian tinggi, ketahanan mental menghadapi krisis langsung, dan keahlian persuasi situasional.",
+            "blindspots": "Impulsivitas yang berpotensi mengabaikan konsekuensi jangka panjang, intoleransi terhadap perencanaan teoritis mendalam, dan kebosanan cepat terhadap fase pemeliharaan sistem yang stabil."
         },
-        "daily_vibe": "Butuh stimulasi dan variety konstan. Environment yang dynamic, high-stakes, dan butuh quick decision-making adalah sweet spot. Sales, trading, emergency response, dan entrepreneurship cocok.",
-        "stress_response": "Saat burnout: impulsive behavior yang ekstrem atau tiba-tiba sangat anxious tentang masa depan. Reset: physical activity, social interaction yang energizing, dan immediate small wins.",
-        "color": "#E17055"
+        "work_style": "Membutuhkan ritme kerja yang dinamis, penuh tantangan nyata, dan memberikan keleluasaan manuver langsung. Sangat efektif dalam manajemen krisis, negosiasi komersial, operasi lapangan, dan inisiatif wirausaha.",
+        "stress_dynamics": "Saat terkurung dalam tugas administratif tanpa aksi langsung, dapat menunjukkan perilaku berisiko berlebihan atau mengalami kecemasan spekulatif yang tidak proporsional. Pemulihan membutuhkan keterlibatan fisik aktif, kemenangan taktis jangka pendek, dan ruang gerak yang leluasa.",
+        "color": "#1E293B"
     },
     "ESFP": {
-        "title": "ESFP — Sang Entertainer",
-        "emoji": "🎭",
-        "tagline": "Hidup terlalu singkat untuk tidak dinikmati sepenuhnya — dan ESFP mengajak semua orang ikut merasakannya.",
+        "title": "ESFP — Experiential Engagement & Dynamic Facilitation",
+        "tagline": "Keterlibatan langsung yang memikat, kepekaan adaptif terhadap lingkungan, dan optimisme praktis.",
         "cognitive_roles": {
-            "dominant": "Se (Driver Utama) — Fully immersed dalam present moment. ESFP menemukan joy dan excitement dalam pengalaman langsung dan sensory.",
-            "auxiliary": "Fi (Co-Pilot) — Nilai personal yang kuat. Di balik energy sosialnya, ESFP sangat tahu apa yang penting bagi mereka dan tidak mudah dipengaruhi untuk melanggarnya.",
-            "tertiary": "Te (Mode Rekreasi) — Bisa sangat organized dan efficient saat ada tujuan konkret yang mereka peduli.",
-            "inferior": "Ni (Titik Buta) — Saat stres, bisa jadi sangat anxious tentang masa depan atau overthink meaning di balik setiap kejadian."
+            "dominant": "Se (Extraverted Sensing) — Keterlibatan penuh dengan momen nyata, penyerapan estetika lingkungan, dan penciptaan pengalaman sensoris yang bermakna bagi audiens.",
+            "auxiliary": "Fi (Introverted Feeling) — Kompas etika internal yang memastikan bahwa keterlibatan sosial tetap berpijak pada ketulusan dan kepedulian manusiawi.",
+            "tertiary": "Te (Extraverted Thinking) — Penerapan keteraturan praktis untuk mewujudkan ide konkret menjadi kenyataan yang terlihat.",
+            "inferior": "Ni (Introverted Intuition) — Analisis kemungkinan implisit jangka panjang. Rentan merasa terbebani oleh ramalan atau prediksi teoritis yang bernada pesimistis."
         },
         "strengths_blindspots": {
-            "superpower": "Kemampuan menciptakan atmosphere yang joyful dan membuat orang merasa welcome dan seen. Sangat adaptable dan present.",
-            "blindspot": "Penghindaran terhadap perencanaan jangka panjang dan konflik yang serius. Bisa kesulitan ketika harus deliver di situasi yang butuh sustained effort."
+            "strengths": "Kapasitas menyatukan kelompok secara organik, antusiasme yang membangun moral tim, serta kepekaan tinggi dalam membaca kebutuhan langsung dari audiens atau klien.",
+            "blindspots": "Penghindaran terhadap diskursus konflik yang berat, kesulitan mempertahankan fokus pada administrasi jangka panjang, dan kecenderungan mengutamakan kenyamanan saat ini dibanding keberlanjutan masa depan."
         },
-        "daily_vibe": "Thrives di environment yang people-centered, dynamic, dan penuh interaksi. Performance arts, hospitality, teaching anak-anak, dan roles yang butuh human warmth adalah natural fit.",
-        "stress_response": "Saat burnout: sangat anxious, overthinking, atau escape ke distraksi yang tidak sehat. Reset: social connection yang genuine, creative expression, dan physical movement.",
-        "color": "#FAB1A0"
+        "work_style": "Berkembang dalam lingkungan kerja yang interaktif, terbuka, dan kolaboratif. Sangat efektif dalam representasi merek, fasilitasi pelatihan publik, manajemen komunitas, dan sektor layanan primer.",
+        "stress_dynamics": "Saat menghadapi isolasi sosial atau tekanan birokrasi yang membatasi spontanitas, dapat menjadi cemas dan merasa tidak berdaya terhadap masa depan. Pemulihan memerlukan koneksi interpersonal yang autentik, aktivitas fisik yang menyenangkan, dan pelepasan beban tanggung jawab sementara.",
+        "color": "#334155"
     }
 }
 
 
 def get_profile(mbti_type: str) -> Dict:
     return PROFILES.get(mbti_type.upper(), {
-        "title": f"{mbti_type} — Tipe Unik",
-        "emoji": "🧩",
-        "tagline": "Hasil analisis sedang dalam pengembangan.",
-        "cognitive_roles": {},
-        "strengths_blindspots": {"superpower": "-", "blindspot": "-"},
-        "daily_vibe": "-",
-        "stress_response": "-",
-        "color": "#6C63FF"
+        "title": f"{mbti_type} — Analisis Tipologi",
+        "tagline": "Profil hasil evaluasi arsitektur kognitif.",
+        "cognitive_roles": {
+            "dominant": "Fungsi utama dalam mengarahkan orientasi kesadaran mental.",
+            "auxiliary": "Fungsi pendukung dalam menjaga keseimbangan persepsi dan evaluasi.",
+            "tertiary": "Fungsi penyangga dalam konteks pemulihan dan aktivitas relaksatif.",
+            "inferior": "Fungsi paling rentan yang menjadi indikator saat terjadi kelelahan mental."
+        },
+        "strengths_blindspots": {
+            "strengths": "Kapasitas adaptif dalam menyelesaikan tantangan fungsional.",
+            "blindspots": "Area kerentanan yang memerlukan pengamatan sadar secara berkala."
+        },
+        "work_style": "Orientasi kerja berimbang dengan kebutuhan otonomi dan kolaborasi proporsional.",
+        "stress_dynamics": "Menuntut manajemen energi yang disiplin dan ruang pemulihan yang cukup.",
+        "color": "#1E293B"
     })
