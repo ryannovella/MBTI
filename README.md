@@ -5,7 +5,7 @@ Aplikasi asesmen kepribadian spektrum MBTI berbasis web interaktif dengan **Stre
 ---
 
 ## Fitur Utama
-1. **24 Skenario Realistis & Non-Ekstrem**: Dilema interaksi sosial dan profesional yang seimbang tanpa opsi jebakan/klise.
+1. **48 Skenario Realistis & Non-Ekstrem**: Dilema interaksi sosial dan profesional yang seimbang tanpa opsi jebakan/klise (12 butir per dimensi).
 2. **Spektrum Kontinu (0–100%)**: Menghitung persentase presisi untuk 4 dimensi utama:
    - Mind: *Extraversion (E) vs Introversion (I)*
    - Energy: *Sensing (S) vs Intuition (N)*
@@ -49,5 +49,5 @@ Aplikasi akan otomatis terbuka di browser pada URL default `http://localhost:850
 - `app.py`: Antarmuka UI Streamlit, state management kuis, styling responsif kustom (Claymorphism & Glassmorphism).
 - `engine.py`: Scoring engine psikometri, pemetaan dimensi spektrum, dan penentu fungsi kognitif.
 - `profiles.py`: Basis data deskripsi komprehensif ke-16 tipe kepribadian.
-- `questions.json`: Bank data 24 butir soal skenario realistis.
+- `questions.json`: Bank data 48 butir soal skenario realistis (12 butir per dimensi: EI, SN, TF, JP).
 - `run.bat`: Skrip runner sekali klik untuk lingkungan Windows.

@@ -1695,18 +1695,19 @@ def render_top_bar() -> None:
 
 def render_home(engine: PersonalityEngine) -> None:
     render_top_bar()
+    total_q = len(engine.get_questions())
 
-    render_html("""
+    render_html(f"""
     <div class="friendly-hero">
         <div class="badge-friendly-tag">Tes Tipe Kepribadian</div>
         <h1 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.5rem, 5vw, 2.1rem); font-weight:800; color:var(--text-title); margin:0.6rem 0 0.35rem; letter-spacing:-0.03em;">
             Tes spektrum kepribadian MBTI
         </h1>
         <p style="font-size:0.92rem; color:var(--text-body); line-height:1.6; max-width:580px; margin:0 auto;">
-            Kenali tipe kepribadian dan cara unik otakmu memproses hal-hal di sekitarmu, mengambil keputusan, dan berinteraksi sehari-hari lewat 24 skenario yang dekat banget sama kehidupan nyata.
+            Kenali tipe kepribadian dan cara unik otakmu memproses hal-hal di sekitarmu, mengambil keputusan, dan berinteraksi sehari-hari lewat {total_q} skenario yang dekat banget sama kehidupan nyata.
         </p>
         <div class="pill-row-cluster">
-            <span class="pill-feature-chip">24 Skenario nyata</span>
+            <span class="pill-feature-chip">{total_q} Skenario nyata</span>
             <span class="pill-feature-chip">8 Pola pikir alami</span>
             <span class="pill-feature-chip">Spektrum luwes 0–100%</span>
             <span class="pill-feature-chip">Bebas jawaban benar/salah</span>
@@ -1796,10 +1797,12 @@ def render_home(engine: PersonalityEngine) -> None:
 
     with st.container(border=True):
         st.markdown("**:material/info: Panduan pengerjaan**")
+        est_min = max(5, round(total_q * 0.16))
+        est_max = max(7, round(total_q * 0.25))
         st.caption(
             "• Jawab santai dan spontan aja, pilih opsi yang paling menggambarkan kebiasaan nyatamu sehari-hari.\n"
             "• Nggak ada jawaban yang benar atau salah; semua pilihan itu normal dan manusiawi banget.\n"
-            "• Cuma butuh waktu sekitar 5 sampai 7 menit. Progres jawabanmu tersimpan otomatis, jadi kamu bisa santai."
+            f"• Cuma butuh waktu sekitar {est_min} sampai {est_max} menit. Progres jawabanmu tersimpan otomatis, jadi kamu bisa santai."
         )
 
     st.markdown("<div style='height:0.5rem;'></div>", unsafe_allow_html=True)

@@ -63,7 +63,7 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
   - Tombol `Sebelumnya` selalu tersedia untuk meninjau atau mengubah jawaban butir sebelumnya.
   - Mengklik kembali opsi yang telah dipilih langsung memvalidasi dan memajukan soal tanpa terjebak.
   - Popover `Daftar butir` memungkinkan lompatan instan ke nomor butir manapun.
-  - Di butir terakhir (24/24), setelah semua soal terjawab, tombol utama `Lihat hasil analisis` aktif dengan visual gradient yang menonjol.
+  - Di butir terakhir (misal 48/48), setelah semua soal terjawab, tombol utama `Lihat hasil analisis` aktif dengan visual gradient yang menonjol.
 
 ---
 

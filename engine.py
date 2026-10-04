@@ -109,14 +109,15 @@ class MBTIResult:
 
 
 @st.cache_data(show_spinner=False)
-def _load_questions_from_disk(path: str) -> List[dict]:
+def _load_questions_from_disk(path: str, mtime: float = 0.0) -> List[dict]:
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         if not isinstance(data, list) or len(data) == 0:
             raise ValueError("Empty or invalid questions file.")
         return data
-    except Exception:
+    except Exception as e:
+        print(f"[PersonalityEngine] Error loading questions from {path}: {e}")
         return FALLBACK_QUESTIONS
 
 
@@ -134,7 +135,11 @@ class PersonalityEngine:
                 os.path.dirname(os.path.abspath(__file__)), "questions.json"
             )
         self.questions_path = questions_path
-        self.questions: List[dict] = _load_questions_from_disk(questions_path)
+        try:
+            mtime = os.path.getmtime(questions_path)
+        except OSError:
+            mtime = 0.0
+        self.questions: List[dict] = _load_questions_from_disk(questions_path, mtime)
 
     def get_questions(self) -> List[dict]:
         return self.questions
