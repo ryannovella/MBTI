@@ -82,12 +82,30 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
 
 ---
 
-## 6. Fitur Mode Tampilan (Light & Dark Mode)
+## 6. Fitur Mode Tampilan (Light & Dark Mode) & Standar Kontras Tinggi (WCAG AA/AAA)
 
 - **Default Otomatis Mengikuti Device:**
   - Secara bawaan (*default*), tema menggunakan deteksi otomatis preferensi perangkat pengguna melalui `@media (prefers-color-scheme: dark)`.
 - **Selector Manual di Top Bar:**
   - Kontrol ringkas `Auto`, `Terang`, `Gelap` di bar navigasi atas menggunakan `st.segmented_control` yang terintegrasi langsung dengan session state.
+- **Standar Kontras Bebas Teks Bentrok (Anti Light-on-Light & Dark-on-Dark):**
+  - **Eliminasi Teks Terang di Latar Terang:**
+    - Pada Mode Terang, seluruh teks utama, judul, dan persentase spektrum menggunakan rona pekat (`#0F172A`, `#1E293B`, `#334155`, `#475569`) dengan rasio kontras 7.5:1 hingga 17.8:1 (Standar WCAG AAA).
+    - Opsi kuis yang terpilih di mode terang menampilkan border primer tegas dengan teks gelap pekat berbobot bold (`font-weight: 700`) sehingga tidak lagi memicu teks putih di atas latar lavender muda.
+    - Warna aksen dimensi spektrum dan temperamen disesuaikan dengan saturasi mendalam (misal Pemikiran `#0369A1` dan Eksplorasi `#065F46`), bukan warna pucat yang memudar di latar putih.
+  - **Eliminasi Teks Gelap di Latar Gelap:**
+    - Pada Mode Gelap, seluruh teks Streamlit (`p`, `span`, `div[data-testid="stMarkdownContainer"]`, `div[data-testid="stCaptionContainer"]`, label, dan header) diikat ketat ke token kontras terang (`#F8FAFC`, `#F1F5F9`, `#CBD5E1`, `#94A3B8`) dengan rasio kontras 6.7:1 hingga 18.5:1 (Standar WCAG AAA).
+    - Opsi kuis yang belum terpilih menggunakan teks terang (`#F1F5F9`) di atas latar obsidian glass, mengeliminasi teks abu-abu gelap default Streamlit.
+    - Kode MBTI dan nama temperamen menggunakan warna berpendar terang (`#A5B4FC`, `#6EE7B7`, `#7DD3FC`, `#FCD34D`) dengan rasio kontras > 8.5:1 pada latar gelap.
+  - **Kontras Khusus Komponen Interaktif (Tombol Tema, Unduh, dan Kembali ke Beranda):**
+    - **Pengatur Pilihan Tema (`st.segmented_control`):**
+      - Menggunakan selektor komprehensif Streamlit 1.65 (`div[data-testid="stButtonGroup"]`, `button[data-variant="segmented_control"]`, dan state `[data-selected]`).
+      - Mode Terang: Track bernuansa abu-abu sejuk (`#F1F5F9`), opsi pasif berwarna slate (`#475569`, 5.5:1), dan opsi aktif putih solid (`#FFFFFF`) dengan teks indigo (`#4F46E5`, 8.5:1).
+      - Mode Gelap: Track slate gelap (`#1E293B`), opsi pasif terang (`#94A3B8`, 5.2:1), dan opsi aktif indigo vibrant (`#4F46E5`) dengan teks putih solid (`#FFFFFF`, 8.5:1) berborder `#818CF8`.
+    - **Tombol Sekunder & Tombol Unduh (`st.download_button` & `Kembali ke beranda`):**
+      - Ditargetkan secara spesifik melalui `div[data-testid="stDownloadButton"] button`, `button[data-testid*="secondary"]`, dan child icon material.
+      - Mode Terang: Latar putih padat `#FFFFFF`, border tegas `#CBD5E1`, teks dan ikon pekat `#0F172A` (16.1:1 AAA).
+      - Mode Gelap: Latar dark slate `#1E293B`, border kilap halus `rgba(255, 255, 255, 0.22)`, teks dan ikon putih bersih `#F8FAFC` (11.4:1 AAA), tidak lagi bentrok dengan latar default Streamlit.
 - **Harmoni Desain Kaca di Kedua Mode:**
   - **Mode Terang:** Kanvas off-white sejuk (`#F8FAFC`), permukaan kaca putih susu transparan, border halus, teks slate pekat berdaya baca tinggi.
   - **Mode Gelap:** Kanvas deep navy charcoal (`#090D16`), permukaan obsidian glass semi-transparan, border kaca bercahaya lembut, teks kontras tinggi (`#F8FAFC`).

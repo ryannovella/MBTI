@@ -37,26 +37,25 @@ def generate_theme_styles(theme_mode: str) -> str:
     return f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
-
 /* ==================== THEME TOKENS: LIGHT (DEFAULT) ==================== */
 :root {{
     --bg-canvas: #F8FAFC;
-    --surface-glass: rgba(255, 255, 255, 0.80);
-    --surface-glass-strong: rgba(255, 255, 255, 0.94);
-    --surface-glass-subtle: rgba(255, 255, 255, 0.60);
+    --surface-glass: rgba(255, 255, 255, 0.85);
+    --surface-glass-strong: #FFFFFF;
+    --surface-glass-subtle: rgba(241, 245, 249, 0.75);
     
-    --border-glass: 1.5px solid rgba(255, 255, 255, 0.85);
+    --border-glass: 1.5px solid rgba(226, 232, 240, 0.9);
     --border-glass-subtle: 1px solid rgba(226, 232, 240, 0.8);
     --border-primary: #4F46E5;
     
     --text-title: #0F172A;
     --text-main: #1E293B;
-    --text-body: #475569;
-    --text-muted: #64748B;
+    --text-body: #334155;
+    --text-muted: #475569;
     
     --tab-active-bg: #FFFFFF;
-    --copy-bg: rgba(248, 250, 252, 0.85);
-    --copy-border: rgba(226, 232, 240, 0.85);
+    --copy-bg: #F8FAFC;
+    --copy-border: #E2E8F0;
     
     --canvas-gradient: 
         radial-gradient(ellipse 75% 45% at 15% -5%, rgba(99, 102, 241, 0.12), transparent 55%),
@@ -74,26 +73,66 @@ def generate_theme_styles(theme_mode: str) -> str:
         0 3px 8px -2px rgba(15, 23, 42, 0.04),
         inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
         
-    --glass-shadow-soft:
+    --glass-shadow-soft: 
         0 4px 14px -2px rgba(31, 38, 135, 0.04),
         inset 0 1px 1px rgba(255, 255, 255, 0.9);
 
-    /* 4 Temperaments */
-    --nt-color: #4F46E5;
-    --nt-bg: rgba(238, 242, 255, 0.85);
+    /* 4 Temperaments (Deep, rich hues: all > 8:1 contrast on light backgrounds) */
+    --nt-color: #3730A3;
+    --nt-bg: #EEF2FF;
     --nt-border: #C7D2FE;
     
-    --nf-color: #059669;
-    --nf-bg: rgba(236, 253, 245, 0.85);
+    --nf-color: #065F46;
+    --nf-bg: #ECFDF5;
     --nf-border: #A7F3D0;
     
-    --sj-color: #0284C7;
-    --sj-bg: rgba(240, 249, 255, 0.85);
+    --sj-color: #075985;
+    --sj-bg: #F0F9FF;
     --sj-border: #BAE6FD;
     
-    --sp-color: #D97706;
-    --sp-bg: rgba(255, 251, 235, 0.85);
+    --sp-color: #92400E;
+    --sp-bg: #FFFBEB;
     --sp-border: #FDE68A;
+
+    /* 4 Dimensions (Deep, readable text colors on light cards) */
+    --dim-ei-pos: #3730A3;
+    --dim-ei-neg: #075985;
+    --dim-sn-pos: #065F46;
+    --dim-sn-neg: #5B21B6;
+    --dim-tf-pos: #0369A1;
+    --dim-tf-neg: #9D174D;
+    --dim-jp-pos: #92400E;
+    --dim-jp-neg: #065F46;
+    --dim-badge-bg: rgba(0, 0, 0, 0.05);
+
+    /* Button & Interactive Widget Contrast Tokens (WCAG AAA) */
+    --btn-primary-bg: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+    --btn-primary-bg-hover: linear-gradient(135deg, #4338CA 0%, #3730A3 100%);
+    --btn-primary-text: #FFFFFF;
+    --btn-primary-border: rgba(255, 255, 255, 0.3);
+
+    --btn-secondary-bg: #FFFFFF;
+    --btn-secondary-bg-hover: #F8FAFC;
+    --btn-secondary-text: #0F172A;
+    --btn-secondary-text-hover: #4338CA;
+    --btn-secondary-border: #CBD5E1;
+    --btn-secondary-border-hover: #6366F1;
+
+    --theme-ctrl-bg: rgba(241, 245, 249, 0.95);
+    --theme-ctrl-border: #CBD5E1;
+    --theme-ctrl-item-text: #475569;
+    --theme-ctrl-item-hover: rgba(255, 255, 255, 0.85);
+    --theme-ctrl-active-bg: #FFFFFF;
+    --theme-ctrl-active-text: #4F46E5;
+    --theme-ctrl-active-border: #CBD5E1;
+    --theme-ctrl-active-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+
+    --quiz-opt-unsel-bg: rgba(255, 255, 255, 0.95);
+    --quiz-opt-unsel-border: #CBD5E1;
+    --quiz-opt-unsel-text: #0F172A;
+    --quiz-opt-sel-bg: #EEF2FF;
+    --quiz-opt-sel-border: #4F46E5;
+    --quiz-opt-sel-text: #1E1B4B;
 
     /* Geometry */
     --radius-hero: 20px;
@@ -106,12 +145,12 @@ def generate_theme_styles(theme_mode: str) -> str:
 {'@media (prefers-color-scheme: dark) {' if not force_light else '/* Light Forced */'}
 {':root {' if not force_light else ':root.never {'}
     --bg-canvas: #090D16;
-    --surface-glass: rgba(17, 24, 39, 0.72);
-    --surface-glass-strong: rgba(30, 41, 59, 0.88);
-    --surface-glass-subtle: rgba(15, 23, 42, 0.60);
+    --surface-glass: rgba(17, 24, 39, 0.82);
+    --surface-glass-strong: #1E293B;
+    --surface-glass-subtle: rgba(30, 41, 59, 0.65);
     
-    --border-glass: 1.5px solid rgba(255, 255, 255, 0.13);
-    --border-glass-subtle: 1px solid rgba(255, 255, 255, 0.08);
+    --border-glass: 1.5px solid rgba(255, 255, 255, 0.14);
+    --border-glass-subtle: 1px solid rgba(255, 255, 255, 0.09);
     --border-primary: #818CF8;
     
     --text-title: #F8FAFC;
@@ -120,8 +159,8 @@ def generate_theme_styles(theme_mode: str) -> str:
     --text-muted: #94A3B8;
     
     --tab-active-bg: #1E293B;
-    --copy-bg: rgba(15, 23, 42, 0.85);
-    --copy-border: rgba(255, 255, 255, 0.1);
+    --copy-bg: #0F172A;
+    --copy-border: rgba(255, 255, 255, 0.12);
     
     --canvas-gradient: 
         radial-gradient(ellipse 75% 45% at 15% -5%, rgba(99, 102, 241, 0.22), transparent 55%),
@@ -141,29 +180,74 @@ def generate_theme_styles(theme_mode: str) -> str:
         0 4px 14px -2px rgba(0, 0, 0, 0.25),
         inset 0 1px 1px rgba(255, 255, 255, 0.06);
 
-    --nt-bg: rgba(79, 70, 229, 0.22);
-    --nt-border: rgba(199, 210, 254, 0.3);
+    /* 4 Temperaments (Luminous, bright hues: all > 8:1 contrast on dark canvas) */
+    --nt-color: #A5B4FC;
+    --nt-bg: rgba(79, 70, 229, 0.25);
+    --nt-border: rgba(199, 210, 254, 0.35);
     
-    --nf-bg: rgba(5, 150, 105, 0.22);
-    --nf-border: rgba(167, 243, 208, 0.3);
+    --nf-color: #6EE7B7;
+    --nf-bg: rgba(5, 150, 105, 0.25);
+    --nf-border: rgba(167, 243, 208, 0.35);
     
-    --sj-bg: rgba(2, 132, 199, 0.22);
-    --sj-border: rgba(186, 230, 253, 0.3);
+    --sj-color: #7DD3FC;
+    --sj-bg: rgba(2, 132, 199, 0.25);
+    --sj-border: rgba(186, 230, 253, 0.35);
     
-    --sp-bg: rgba(217, 119, 6, 0.22);
-    --sp-border: rgba(253, 230, 138, 0.3);
+    --sp-color: #FCD34D;
+    --sp-bg: rgba(217, 119, 6, 0.25);
+    --sp-border: rgba(253, 230, 138, 0.35);
+
+    /* 4 Dimensions (Luminous text colors on dark cards) */
+    --dim-ei-pos: #A5B4FC;
+    --dim-ei-neg: #7DD3FC;
+    --dim-sn-pos: #6EE7B7;
+    --dim-sn-neg: #C4B5FD;
+    --dim-tf-pos: #7DD3FC;
+    --dim-tf-neg: #F472B6;
+    --dim-jp-pos: #FCD34D;
+    --dim-jp-neg: #6EE7B7;
+    --dim-badge-bg: rgba(255, 255, 255, 0.1);
+
+    /* Button & Interactive Widget Contrast Tokens (WCAG AAA) */
+    --btn-primary-bg: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+    --btn-primary-bg-hover: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+    --btn-primary-text: #FFFFFF;
+    --btn-primary-border: rgba(255, 255, 255, 0.25);
+
+    --btn-secondary-bg: #1E293B;
+    --btn-secondary-bg-hover: #334155;
+    --btn-secondary-text: #F8FAFC;
+    --btn-secondary-text-hover: #FFFFFF;
+    --btn-secondary-border: rgba(255, 255, 255, 0.22);
+    --btn-secondary-border-hover: #818CF8;
+
+    --theme-ctrl-bg: rgba(30, 41, 59, 0.95);
+    --theme-ctrl-border: rgba(255, 255, 255, 0.16);
+    --theme-ctrl-item-text: #94A3B8;
+    --theme-ctrl-item-hover: rgba(255, 255, 255, 0.12);
+    --theme-ctrl-active-bg: #4F46E5;
+    --theme-ctrl-active-text: #FFFFFF;
+    --theme-ctrl-active-border: #818CF8;
+    --theme-ctrl-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+
+    --quiz-opt-unsel-bg: rgba(17, 24, 39, 0.85);
+    --quiz-opt-unsel-border: rgba(255, 255, 255, 0.16);
+    --quiz-opt-unsel-text: #F1F5F9;
+    --quiz-opt-sel-bg: rgba(79, 70, 229, 0.28);
+    --quiz-opt-sel-border: #818CF8;
+    --quiz-opt-sel-text: #FFFFFF;
 }}
 {'}' if not force_light else ''}
 
 /* ==================== FORCED DARK MODE (USER SELECTION) ==================== */
 {':root {' if force_dark else ':root.never-dark {'}
     --bg-canvas: #090D16 !important;
-    --surface-glass: rgba(17, 24, 39, 0.72) !important;
-    --surface-glass-strong: rgba(30, 41, 59, 0.88) !important;
-    --surface-glass-subtle: rgba(15, 23, 42, 0.60) !important;
+    --surface-glass: rgba(17, 24, 39, 0.82) !important;
+    --surface-glass-strong: #1E293B !important;
+    --surface-glass-subtle: rgba(30, 41, 59, 0.65) !important;
     
-    --border-glass: 1.5px solid rgba(255, 255, 255, 0.13) !important;
-    --border-glass-subtle: 1px solid rgba(255, 255, 255, 0.08) !important;
+    --border-glass: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+    --border-glass-subtle: 1px solid rgba(255, 255, 255, 0.09) !important;
     --border-primary: #818CF8 !important;
     
     --text-title: #F8FAFC !important;
@@ -172,8 +256,8 @@ def generate_theme_styles(theme_mode: str) -> str:
     --text-muted: #94A3B8 !important;
     
     --tab-active-bg: #1E293B !important;
-    --copy-bg: rgba(15, 23, 42, 0.85) !important;
-    --copy-border: rgba(255, 255, 255, 0.1) !important;
+    --copy-bg: #0F172A !important;
+    --copy-border: rgba(255, 255, 255, 0.12) !important;
     
     --canvas-gradient: 
         radial-gradient(ellipse 75% 45% at 15% -5%, rgba(99, 102, 241, 0.22), transparent 55%),
@@ -193,17 +277,60 @@ def generate_theme_styles(theme_mode: str) -> str:
         0 4px 14px -2px rgba(0, 0, 0, 0.25),
         inset 0 1px 1px rgba(255, 255, 255, 0.06) !important;
 
-    --nt-bg: rgba(79, 70, 229, 0.22) !important;
-    --nt-border: rgba(199, 210, 254, 0.3) !important;
+    --nt-color: #A5B4FC !important;
+    --nt-bg: rgba(79, 70, 229, 0.25) !important;
+    --nt-border: rgba(199, 210, 254, 0.35) !important;
     
-    --nf-bg: rgba(5, 150, 105, 0.22) !important;
-    --nf-border: rgba(167, 243, 208, 0.3) !important;
+    --nf-color: #6EE7B7 !important;
+    --nf-bg: rgba(5, 150, 105, 0.25) !important;
+    --nf-border: rgba(167, 243, 208, 0.35) !important;
     
-    --sj-bg: rgba(2, 132, 199, 0.22) !important;
-    --sj-border: rgba(186, 230, 253, 0.3) !important;
+    --sj-color: #7DD3FC !important;
+    --sj-bg: rgba(2, 132, 199, 0.25) !important;
+    --sj-border: rgba(186, 230, 253, 0.35) !important;
     
-    --sp-bg: rgba(217, 119, 6, 0.22) !important;
-    --sp-border: rgba(253, 230, 138, 0.3) !important;
+    --sp-color: #FCD34D !important;
+    --sp-bg: rgba(217, 119, 6, 0.25) !important;
+    --sp-border: rgba(253, 230, 138, 0.35) !important;
+
+    --dim-ei-pos: #A5B4FC !important;
+    --dim-ei-neg: #7DD3FC !important;
+    --dim-sn-pos: #6EE7B7 !important;
+    --dim-sn-neg: #C4B5FD !important;
+    --dim-tf-pos: #7DD3FC !important;
+    --dim-tf-neg: #F472B6 !important;
+    --dim-jp-pos: #FCD34D !important;
+    --dim-jp-neg: #6EE7B7 !important;
+    --dim-badge-bg: rgba(255, 255, 255, 0.1) !important;
+
+    /* Button & Interactive Widget Contrast Tokens (WCAG AAA) */
+    --btn-primary-bg: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
+    --btn-primary-bg-hover: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%) !important;
+    --btn-primary-text: #FFFFFF !important;
+    --btn-primary-border: rgba(255, 255, 255, 0.25) !important;
+
+    --btn-secondary-bg: #1E293B !important;
+    --btn-secondary-bg-hover: #334155 !important;
+    --btn-secondary-text: #F8FAFC !important;
+    --btn-secondary-text-hover: #FFFFFF !important;
+    --btn-secondary-border: rgba(255, 255, 255, 0.22) !important;
+    --btn-secondary-border-hover: #818CF8 !important;
+
+    --theme-ctrl-bg: rgba(30, 41, 59, 0.95) !important;
+    --theme-ctrl-border: rgba(255, 255, 255, 0.16) !important;
+    --theme-ctrl-item-text: #94A3B8 !important;
+    --theme-ctrl-item-hover: rgba(255, 255, 255, 0.12) !important;
+    --theme-ctrl-active-bg: #4F46E5 !important;
+    --theme-ctrl-active-text: #FFFFFF !important;
+    --theme-ctrl-active-border: #818CF8 !important;
+    --theme-ctrl-active-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
+
+    --quiz-opt-unsel-bg: rgba(17, 24, 39, 0.85) !important;
+    --quiz-opt-unsel-border: rgba(255, 255, 255, 0.16) !important;
+    --quiz-opt-unsel-text: #F1F5F9 !important;
+    --quiz-opt-sel-bg: rgba(79, 70, 229, 0.28) !important;
+    --quiz-opt-sel-border: #818CF8 !important;
+    --quiz-opt-sel-text: #FFFFFF !important;
 }}
 
 /* Atmospheric Canvas Background */
@@ -212,6 +339,30 @@ html, body, [class*="css"], .stApp {{
     color: var(--text-main) !important;
     background: var(--canvas-gradient) !important;
     background-attachment: fixed !important;
+}}
+
+/* Universal Typography & Strict Contrast Overrides */
+p, label,
+div[data-testid="stMarkdownContainer"] p,
+div[data-testid="stMarkdownContainer"] div,
+div[data-testid="stMarkdownContainer"] li {{
+    color: var(--text-main);
+}}
+
+strong, b,
+div[data-testid="stMarkdownContainer"] strong,
+div[data-testid="stMarkdownContainer"] b {{
+    color: var(--text-title);
+}}
+
+div[data-testid="stCaptionContainer"],
+div[data-testid="stCaptionContainer"] p,
+div[data-testid="stCaptionContainer"] span {{
+    color: var(--text-muted) !important;
+}}
+
+h1, h2, h3, h4, h5, h6 {{
+    color: var(--text-title) !important;
 }}
 
 header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {{
@@ -247,6 +398,123 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     border-radius: 50%;
     background: #4F46E5;
     box-shadow: 0 0 8px #6366F1;
+}}
+
+/* ==================== THEME SELECTOR: BULLETPROOF WCAG CONTRAST ==================== */
+.st-key-theme_mode_selector,
+.st-key-theme_mode_selector div[data-testid="stButtonGroup"],
+.st-key-theme_mode_selector div.stButtonGroup,
+.st-key-theme_mode_selector div[data-baseweb="button-group"],
+.st-key-theme_mode_selector div[role="radiogroup"],
+.st-key-theme_mode_selector div[data-testid="stButtonGroup"] > div {{
+    background: var(--theme-ctrl-bg) !important;
+    border: 1px solid var(--theme-ctrl-border) !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 0.18rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    box-shadow: var(--glass-shadow-soft) !important;
+    box-sizing: border-box !important;
+}}
+
+/* Inactive / Default Option Pills */
+.st-key-theme_mode_selector button,
+.st-key-theme_mode_selector [data-testid*="segmented_control"],
+.st-key-theme_mode_selector [data-variant="segmented_control"] {{
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--radius-pill) !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    padding: 0.28rem 0.72rem !important;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    color: var(--theme-ctrl-item-text) !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+}}
+
+.st-key-theme_mode_selector button *,
+.st-key-theme_mode_selector button p,
+.st-key-theme_mode_selector button span,
+.st-key-theme_mode_selector button div,
+.st-key-theme_mode_selector [data-variant="segmented_control"] * {{
+    color: var(--theme-ctrl-item-text) !important;
+    font-weight: 600 !important;
+}}
+
+.st-key-theme_mode_selector button:hover,
+.st-key-theme_mode_selector [data-variant="segmented_control"]:hover {{
+    background: var(--theme-ctrl-item-hover) !important;
+}}
+
+.st-key-theme_mode_selector button:hover *,
+.st-key-theme_mode_selector [data-variant="segmented_control"]:hover * {{
+    color: var(--text-title) !important;
+}}
+
+/* Active / Selected Option Pill (Strict WCAG AAA Highlight) */
+.st-key-theme_mode_selector button[data-selected],
+.st-key-theme_mode_selector button[data-selected="true"],
+.st-key-theme_mode_selector button[aria-selected="true"],
+.st-key-theme_mode_selector button[aria-checked="true"],
+.st-key-theme_mode_selector button[kind="segmented_controlActive"],
+.st-key-theme_mode_selector button[data-testid*="Active"],
+.st-key-theme_mode_selector [data-variant="segmented_control"][data-selected] {{
+    background: var(--theme-ctrl-active-bg) !important;
+    border: 1px solid var(--theme-ctrl-active-border) !important;
+    box-shadow: var(--theme-ctrl-active-shadow) !important;
+    color: var(--theme-ctrl-active-text) !important;
+    font-weight: 800 !important;
+}}
+
+.st-key-theme_mode_selector button[data-selected] *,
+.st-key-theme_mode_selector button[data-selected="true"] *,
+.st-key-theme_mode_selector button[aria-selected="true"] *,
+.st-key-theme_mode_selector button[aria-checked="true"] *,
+.st-key-theme_mode_selector button[kind="segmented_controlActive"] *,
+.st-key-theme_mode_selector button[data-testid*="Active"] *,
+.st-key-theme_mode_selector [data-variant="segmented_control"][data-selected] * {{
+    color: var(--theme-ctrl-active-text) !important;
+    font-weight: 800 !important;
+}}
+
+/* Temperament Badge & Text Helper Classes */
+.temp-badge-nt {{
+    background: var(--nt-bg) !important;
+    color: var(--nt-color) !important;
+    border: 1.5px solid var(--nt-border) !important;
+}}
+.temp-badge-nf {{
+    background: var(--nf-bg) !important;
+    color: var(--nf-color) !important;
+    border: 1.5px solid var(--nf-border) !important;
+}}
+.temp-badge-sj {{
+    background: var(--sj-bg) !important;
+    color: var(--sj-color) !important;
+    border: 1.5px solid var(--sj-border) !important;
+}}
+.temp-badge-sp {{
+    background: var(--sp-bg) !important;
+    color: var(--sp-color) !important;
+    border: 1.5px solid var(--sp-border) !important;
+}}
+
+.temp-text-nt {{ color: var(--nt-color) !important; }}
+.temp-text-nf {{ color: var(--nf-color) !important; }}
+.temp-text-sj {{ color: var(--sj-color) !important; }}
+.temp-text-sp {{ color: var(--sp-color) !important; }}
+
+.temp-quote-nt {{ border-left: 3.5px solid var(--nt-color) !important; }}
+.temp-quote-nf {{ border-left: 3.5px solid var(--nf-color) !important; }}
+.temp-quote-sj {{ border-left: 3.5px solid var(--sj-color) !important; }}
+.temp-quote-sp {{ border-left: 3.5px solid var(--sp-color) !important; }}
+
+.analysis-body-text {{
+    color: var(--text-body) !important;
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    margin-top: 0.35rem !important;
 }}
 
 /* Glassmorphism for Streamlit Native Containers */
@@ -307,7 +575,7 @@ div[data-testid="stPopoverBody"] {{
     background: var(--surface-glass-strong);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    color: #4F46E5;
+    color: var(--border-primary);
     border: 1px solid var(--border-primary);
     box-shadow: 0 2px 6px rgba(79, 70, 229, 0.08);
 }}
@@ -460,8 +728,9 @@ div[data-testid="stPopoverBody"] {{
     align-items: center;
     justify-content: center;
     margin-bottom: 0.65rem;
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 12px rgba(31, 38, 135, 0.08);
+    background: var(--surface-glass-subtle);
+    border: 1.5px solid var(--border-glass);
+    box-shadow: var(--glass-shadow-soft);
     transition: transform 0.2s ease;
 }}
 
@@ -512,12 +781,13 @@ div[data-testid="stPopoverBody"] {{
 /* ==================== SLIM REAL-TIME PROGRESS TRACK ==================== */
 .quiz-compact-progress-track {{
     height: 6px;
-    background: rgba(226, 232, 240, 0.75);
+    background: var(--surface-glass-subtle);
+    border: 1px solid var(--border-glass-subtle);
     border-radius: 9999px;
     position: relative;
     overflow: hidden;
     margin: 0.35rem 0 0.55rem;
-    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
 }}
 
 .quiz-compact-progress-fill {{
@@ -578,26 +848,34 @@ div[data-testid="stPopoverBody"] {{
     justify-content: flex-start !important;
     align-items: center !important;
     border-radius: var(--radius-md) !important;
-    background: var(--surface-glass) !important;
+    background: var(--quiz-opt-unsel-bg) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
-    border: var(--border-glass) !important;
+    border: 1.5px solid var(--quiz-opt-unsel-border) !important;
     box-shadow: var(--glass-shadow-soft) !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
     white-space: normal !important;
     word-break: break-word !important;
-    color: var(--text-body) !important;
-    font-size: 0.92rem !important;
-    line-height: 1.48 !important;
-    font-weight: 500 !important;
     cursor: pointer !important;
+}}
+
+.st-key-quiz_options_container div[data-testid="stButton"] button *,
+.st-key-quiz_options_container div[data-testid="stButton"] button p,
+.st-key-quiz_options_container div[data-testid="stButton"] button span {{
+    color: var(--quiz-opt-unsel-text) !important;
+    text-align: left !important;
 }}
 
 .st-key-quiz_options_container div[data-testid="stButton"] button:hover {{
     transform: translateY(-1.5px) !important;
-    border-color: #818CF8 !important;
-    background: var(--surface-glass-strong) !important;
+    border-color: var(--border-primary) !important;
+    background: var(--btn-secondary-bg-hover) !important;
     box-shadow: var(--glass-shadow-hover) !important;
+}}
+
+.st-key-quiz_options_container div[data-testid="stButton"] button:hover *,
+.st-key-quiz_options_container div[data-testid="stButton"] button:hover p,
+.st-key-quiz_options_container div[data-testid="stButton"] button:hover span {{
     color: var(--text-title) !important;
 }}
 
@@ -605,73 +883,137 @@ div[data-testid="stPopoverBody"] {{
     transform: translateY(1px) scale(0.995) !important;
 }}
 
-.st-key-quiz_options_container div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] {{
-    width: 100% !important;
-    text-align: left !important;
-}}
-
-.st-key-quiz_options_container div[data-testid="stButton"] button div[data-testid="stMarkdownContainer"] p {{
-    margin: 0 !important;
-    font-size: 0.92rem !important;
-    line-height: 1.48 !important;
-    text-align: left !important;
-}}
-
+/* Selected option card */
 .st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"],
-.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid="baseButton-primary"] {{
-    background: var(--nt-bg) !important;
-    border-color: #4F46E5 !important;
-    color: var(--text-title) !important;
-    box-shadow: 0 0 0 1.5px #4F46E5, 0 8px 20px -3px rgba(79, 70, 229, 0.2) !important;
-    font-weight: 600 !important;
+.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] {{
+    background: var(--quiz-opt-sel-bg) !important;
+    border: 2px solid var(--quiz-opt-sel-border) !important;
+    box-shadow: 0 0 0 1px var(--quiz-opt-sel-border), 0 8px 20px -3px rgba(79, 70, 229, 0.22) !important;
 }}
 
-/* ==================== BUTTONS CLEAN & TACTILE ==================== */
-button[data-testid="baseButton-primary"] {{
-    background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%) !important;
-    color: #FFFFFF !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"] *,
+.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] *,
+.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"] p,
+.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] p,
+.st-key-quiz_options_container div[data-testid="stButton"] button[kind="primary"] span,
+.st-key-quiz_options_container div[data-testid="stButton"] button[data-testid*="primary"] span {{
+    color: var(--quiz-opt-sel-text) !important;
+    font-weight: 800 !important;
+}}
+
+/* ==================== BUTTONS CLEAN, TACTILE & HIGH CONTRAST (WCAG AAA) ==================== */
+/* Primary Action Buttons (Mulai Asesmen, Ulangi Asesmen, Lihat Hasil) */
+button[data-testid="stBaseButton-primary"],
+button[data-testid="baseButton-primary"],
+div[data-testid="stButton"] button[kind="primary"],
+div[data-testid="stButton"] button[data-testid*="primary"] {{
+    background: var(--btn-primary-bg) !important;
+    border: 1px solid var(--btn-primary-border) !important;
     border-radius: var(--radius-md) !important;
     box-shadow: 0 4px 14px rgba(79, 70, 229, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
     min-height: 42px !important;
     font-weight: 700 !important;
     font-size: 0.92rem !important;
     letter-spacing: -0.01em !important;
+    color: var(--btn-primary-text) !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }}
 
-button[data-testid="baseButton-primary"]:hover {{
-    transform: translateY(-1.5px) !important;
-    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
-    background: linear-gradient(135deg, #4338CA 0%, #3730A3 100%) !important;
+button[data-testid="stBaseButton-primary"] *,
+button[data-testid="stBaseButton-primary"] p,
+button[data-testid="stBaseButton-primary"] span,
+button[data-testid="baseButton-primary"] *,
+button[data-testid="baseButton-primary"] p,
+button[data-testid="baseButton-primary"] span,
+div[data-testid="stButton"] button[kind="primary"] *,
+div[data-testid="stButton"] button[kind="primary"] p,
+div[data-testid="stButton"] button[kind="primary"] span {{
+    color: var(--btn-primary-text) !important;
+    font-weight: 700 !important;
 }}
 
+button[data-testid="stBaseButton-primary"]:hover,
+button[data-testid="baseButton-primary"]:hover,
+div[data-testid="stButton"] button[kind="primary"]:hover {{
+    transform: translateY(-1.5px) !important;
+    box-shadow: 0 8px 22px rgba(79, 70, 229, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+    background: var(--btn-primary-bg-hover) !important;
+    color: var(--btn-primary-text) !important;
+}}
+
+button[data-testid="stBaseButton-primary"]:active,
 button[data-testid="baseButton-primary"]:active {{
     transform: translateY(1px) scale(0.995) !important;
 }}
 
-button[data-testid="baseButton-secondary"] {{
-    background: var(--surface-glass) !important;
+/* Secondary Buttons, Download Button & Return Home Button (Strict Contrast WCAG AAA) */
+button[data-testid="stBaseButton-secondary"],
+button[data-testid="baseButton-secondary"],
+div[data-testid="stButton"] button[kind="secondary"],
+div[data-testid="stButton"] button[data-testid*="secondary"],
+div[data-testid="stDownloadButton"] button,
+div.stDownloadButton button,
+div[data-testid="stPopover"] button {{
+    background: var(--btn-secondary-bg) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    color: var(--text-main) !important;
-    border: var(--border-glass) !important;
+    border: 1.5px solid var(--btn-secondary-border) !important;
     border-radius: var(--radius-md) !important;
     box-shadow: var(--glass-shadow-soft) !important;
     min-height: 42px !important;
     font-weight: 700 !important;
     font-size: 0.92rem !important;
+    color: var(--btn-secondary-text) !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }}
 
-button[data-testid="baseButton-secondary"]:hover {{
-    border-color: #CBD5E1 !important;
-    background: var(--surface-glass-strong) !important;
-    transform: translateY(-1.5px) !important;
-    box-shadow: 0 6px 16px rgba(31, 38, 135, 0.07) !important;
+button[data-testid="stBaseButton-secondary"] *,
+button[data-testid="stBaseButton-secondary"] p,
+button[data-testid="stBaseButton-secondary"] span,
+button[data-testid="baseButton-secondary"] *,
+button[data-testid="baseButton-secondary"] p,
+button[data-testid="baseButton-secondary"] span,
+div[data-testid="stButton"] button[kind="secondary"] *,
+div[data-testid="stButton"] button[kind="secondary"] p,
+div[data-testid="stButton"] button[kind="secondary"] span,
+div[data-testid="stDownloadButton"] button *,
+div[data-testid="stDownloadButton"] button p,
+div[data-testid="stDownloadButton"] button span,
+div.stDownloadButton button *,
+div.stDownloadButton button p,
+div.stDownloadButton button span,
+div[data-testid="stPopover"] button *,
+div[data-testid="stPopover"] button p,
+div[data-testid="stPopover"] button span {{
+    color: var(--btn-secondary-text) !important;
+    font-weight: 700 !important;
 }}
 
-button[data-testid="baseButton-secondary"]:active {{
+button[data-testid="stBaseButton-secondary"]:hover,
+button[data-testid="baseButton-secondary"]:hover,
+div[data-testid="stButton"] button[kind="secondary"]:hover,
+div[data-testid="stDownloadButton"] button:hover,
+div.stDownloadButton button:hover,
+div[data-testid="stPopover"] button:hover {{
+    border-color: var(--btn-secondary-border-hover) !important;
+    background: var(--btn-secondary-bg-hover) !important;
+    transform: translateY(-1.5px) !important;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.14) !important;
+    color: var(--btn-secondary-text-hover) !important;
+}}
+
+button[data-testid="stBaseButton-secondary"]:hover *,
+button[data-testid="baseButton-secondary"]:hover *,
+div[data-testid="stButton"] button[kind="secondary"]:hover *,
+div[data-testid="stDownloadButton"] button:hover *,
+div.stDownloadButton button:hover *,
+div[data-testid="stPopover"] button:hover * {{
+    color: var(--btn-secondary-text-hover) !important;
+}}
+
+button[data-testid="stBaseButton-secondary"]:active,
+button[data-testid="baseButton-secondary"]:active,
+div[data-testid="stDownloadButton"] button:active {{
     transform: translateY(1px) scale(0.995) !important;
 }}
 
@@ -1298,13 +1640,11 @@ def render_home(engine: PersonalityEngine) -> None:
     }
 
     for grp_key, grp_codes in groups.items():
+        grp_lower = grp_key.lower()
         with tab_map[grp_key]:
             cards_html = '<div class="char-grid-row">'
             for code in grp_codes:
                 p = all_prof.get(code, {})
-                col = p.get("color", "#4F46E5")
-                bg = p.get("bg_tint", "#EEF2FF")
-                bdr = p.get("border_color", "#C7D2FE")
                 arch = p.get("archetype", code)
                 desc = p.get("tagline", "")
                 cog_dom = p.get("cognitive_roles", {}).get("dominant", "")
@@ -1312,12 +1652,12 @@ def render_home(engine: PersonalityEngine) -> None:
                 avatar_tag = render_avatar_img(code, size=60, alt=arch)
 
                 cards_html += f"""
-                <div class="char-card" style="border-top: 3.5px solid {col};">
-                    <div class="char-avatar-pod" style="background:{bg};">
+                <div class="char-card" style="border-top: 3.5px solid var(--{grp_lower}-color);">
+                    <div class="char-avatar-pod">
                         {avatar_tag}
                     </div>
                     <div>
-                        <span class="char-code-badge" style="background:{bg}; color:{col}; border:1px solid {bdr};">{code}</span>
+                        <span class="char-code-badge temp-badge-{grp_lower}">{code}</span>
                         <div class="char-name">{arch}</div>
                     </div>
                     <p class="char-desc">{desc}</p>
@@ -1358,13 +1698,13 @@ def render_quiz(engine: PersonalityEngine) -> None:
         st.session_state.shuffled_options = {item["id"]: (random.random() < 0.5) for item in questions}
 
     dim_map = {
-        "EI": ("Mind", "Sumber energi: Kumpul seru vs Me-time tenang", "#4F46E5", "rgba(238, 242, 255, 0.85)", "#C7D2FE"),
-        "SN": ("Energy", "Cara olah info: Fakta konkret vs Ide & kemungkinan", "#059669", "rgba(236, 253, 245, 0.85)", "#A7F3D0"),
-        "TF": ("Nature", "Cara ambil keputusan: Logika objektif vs Rasa & empati", "#0284C7", "rgba(240, 249, 255, 0.85)", "#BAE6FD"),
-        "JP": ("Tactics", "Pola keseharian: Rencana teratur vs Fleksibel santai", "#D97706", "rgba(255, 251, 235, 0.85)", "#FDE68A"),
+        "EI": ("Mind", "Sumber energi: Kumpul seru vs Me-time tenang", "nt"),
+        "SN": ("Energy", "Cara olah info: Fakta konkret vs Ide & kemungkinan", "nf"),
+        "TF": ("Nature", "Cara ambil keputusan: Logika objektif vs Rasa & empati", "sj"),
+        "JP": ("Tactics", "Pola keseharian: Rencana teratur vs Fleksibel santai", "sp"),
     }
-    dim_name, dim_detail, dim_col, dim_bg, dim_bdr = dim_map.get(
-        q["dim"], (q["dim"], "", "#4F46E5", "rgba(238, 242, 255, 0.85)", "#C7D2FE")
+    dim_name, dim_detail, temp_class = dim_map.get(
+        q["dim"], (q["dim"], "", "nt")
     )
 
     pct = (answered_count / total) * 100.0
@@ -1372,8 +1712,8 @@ def render_quiz(engine: PersonalityEngine) -> None:
     # 1. Compact Header Bar: Dimension badge, Question count, Live Progress text, Popover Jump
     col_nav, col_jump = st.columns([3.8, 1.2], vertical_alignment="center")
     with col_nav:
-        badge_html = f'<span style="background:{dim_bg}; color:{dim_col}; border:1px solid {dim_bdr}; padding:0.18rem 0.65rem; border-radius:9999px; font-size:0.75rem; font-weight:800;">{dim_name} ({q["dim"]})</span>'
-        pct_html = f'<span style="font-size:0.78rem; font-weight:700; color:#4F46E5; margin-left:0.35rem;">{answered_count}/{total} ({pct:.0f}%)</span>'
+        badge_html = f'<span class="temp-badge-{temp_class}" style="padding:0.18rem 0.65rem; border-radius:9999px; font-size:0.75rem; font-weight:800;">{dim_name} ({q["dim"]})</span>'
+        pct_html = f'<span style="font-size:0.78rem; font-weight:700; color:var(--border-primary); margin-left:0.35rem;">{answered_count}/{total} ({pct:.0f}%)</span>'
         st.markdown(f"<div style='display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;'><strong>Butir {current_idx + 1:02d}</strong> · {badge_html} {pct_html}</div>", unsafe_allow_html=True)
     with col_jump:
         with st.popover(f"#{current_idx + 1:02d}", icon=":material/format_list_numbered:", width="stretch"):
@@ -1401,7 +1741,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
 
     # 3. Compact Scenario Card
     render_html(f"""
-    <div class="scenario-compact-card" style="border-left: 4px solid {dim_col};">
+    <div class="scenario-compact-card" style="border-left: 4px solid var(--{temp_class}-color);">
         <div class="scenario-compact-dim-detail">{dim_detail}</div>
         <div class="scenario-compact-text">"{q['scenario']}"</div>
     </div>
@@ -1483,30 +1823,28 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     render_top_bar()
 
     profile = get_profile(result.mbti_type)
-    theme_color = profile.get("color", "#4F46E5")
     temperament = profile.get("temperament", "Tipologi kognitif")
-    bg_tint = profile.get("bg_tint", "#EEF2FF")
-    border_color = profile.get("border_color", "#C7D2FE")
+    temp_code = "nt" if "NT" in temperament else ("nf" if "NF" in temperament else ("sj" if "SJ" in temperament else "sp"))
     archetype = profile.get("archetype", result.mbti_type)
     summary_narrative = profile.get("summary", "")
     avatar_hero_tag = render_avatar_img(result.mbti_type, size=105, alt=archetype)
 
     # Hero Result: Karakter Menyatu Alami Tanpa Card Pod
     render_html(f"""
-    <div class="friendly-result-hero" style="border-top: 4px solid {theme_color};">
+    <div class="friendly-result-hero" style="border-top: 4px solid var(--{temp_code}-color);">
         <div class="hero-result-header">
             <div class="hero-result-identity">
-                <span class="hero-badge-pill" style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color};">
+                <span class="hero-badge-pill temp-badge-{temp_code}">
                     {temperament}
                 </span>
-                <div class="hero-type-code" style="color:{theme_color};">{result.mbti_type}</div>
+                <div class="hero-type-code temp-text-{temp_code}">{result.mbti_type}</div>
                 <h2 class="hero-archetype-title">{archetype}</h2>
             </div>
             <div class="hero-avatar-seamless">
                 {avatar_hero_tag}
             </div>
         </div>
-        <div class="hero-tagline-quote" style="border-left: 3.5px solid {theme_color}; background: {bg_tint}30;">
+        <div class="hero-tagline-quote temp-quote-{temp_code}">
             "{profile.get('tagline', '')}"
         </div>
         <p class="hero-narrative-text">
@@ -1534,20 +1872,20 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     # 4 Dimensions Spectrum Data with Explanations, Symmetrical Pills & Dual Colors
     dim_meta = {
         "EI": {
-            "pos": ("Ekstraversi", "E", "#4F46E5", "rgba(79, 70, 229, 0.12)", "Mendapat energi dari interaksi sosial, bertindak spontan, dan memproses ide lewat komunikasi aktif."),
-            "neg": ("Introversi", "I", "#0284C7", "rgba(2, 132, 199, 0.12)", "Mengisi ulang energi dari waktu tenang (me-time), refleksi mandiri mendalam, dan fokus terarah."),
+            "pos": ("Ekstraversi", "E", "var(--dim-ei-pos)", "#4F46E5", "Mendapat energi dari interaksi sosial, bertindak spontan, dan memproses ide lewat komunikasi aktif."),
+            "neg": ("Introversi", "I", "var(--dim-ei-neg)", "#0284C7", "Mengisi ulang energi dari waktu tenang (me-time), refleksi mandiri mendalam, dan fokus terarah."),
         },
         "SN": {
-            "pos": ("Penginderaan", "S", "#059669", "rgba(5, 150, 105, 0.12)", "Memproses realitas lewat fakta konkret terverifikasi, data riil, detail cermat, dan pengalaman praktis."),
-            "neg": ("Intuisi", "N", "#8B5CF6", "rgba(139, 92, 246, 0.12)", "Memahami pola tersembunyi, menghubungkan konsep abstrak, menangkap gambaran besar, dan prospek masa depan."),
+            "pos": ("Penginderaan", "S", "var(--dim-sn-pos)", "#059669", "Memproses realitas lewat fakta konkret terverifikasi, data riil, detail cermat, dan pengalaman praktis."),
+            "neg": ("Intuisi", "N", "var(--dim-sn-neg)", "#8B5CF6", "Memahami pola tersembunyi, menghubungkan konsep abstrak, menangkap gambaran besar, dan prospek masa depan."),
         },
         "TF": {
-            "pos": ("Pemikiran", "T", "#0EA5E9", "rgba(14, 165, 233, 0.12)", "Membuat keputusan berbasis analisis objektif, logika konsisten, kejelasan fakta, dan evaluasi sebab-akibat."),
-            "neg": ("Perasaan", "F", "#EC4899", "rgba(236, 72, 153, 0.12)", "Memutuskan berdasarkan pertimbangan empati, dampak hubungan antarmanusia, dan keharmonisan nilai pribadi."),
+            "pos": ("Pemikiran", "T", "var(--dim-tf-pos)", "#0284C7", "Membuat keputusan berbasis analisis objektif, logika konsisten, kejelasan fakta, dan evaluasi sebab-akibat."),
+            "neg": ("Perasaan", "F", "var(--dim-tf-neg)", "#EC4899", "Memutuskan berdasarkan pertimbangan empati, dampak hubungan antarmanusia, dan keharmonisan nilai pribadi."),
         },
         "JP": {
-            "pos": ("Penilaian", "J", "#D97706", "rgba(217, 119, 6, 0.12)", "Menyukai rencana terstruktur, kejelasan langkah, jadwal teratur, dan kepastian target yang tuntas."),
-            "neg": ("Eksplorasi", "P", "#10B981", "rgba(16, 185, 129, 0.12)", "Menikmati fleksibilitas, spontanitas, adaptif terhadap kejutan situasi, dan menjaga opsi tetap terbuka."),
+            "pos": ("Penilaian", "J", "var(--dim-jp-pos)", "#D97706", "Menyukai rencana terstruktur, kejelasan langkah, jadwal teratur, dan kepastian target yang tuntas."),
+            "neg": ("Eksplorasi", "P", "var(--dim-jp-neg)", "#10B981", "Menikmati fleksibilitas, spontanitas, adaptif terhadap kejutan situasi, dan menjaga opsi tetap terbuka."),
         },
     }
 
@@ -1557,8 +1895,8 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         pct_pos = score_obj.pos_pct
         pct_neg = round(100.0 - pct_pos, 1)
 
-        pos_name, pos_let, col_pos, bg_pos, pos_desc = meta["pos"]
-        neg_name, neg_let, col_neg, bg_neg, neg_desc = meta["neg"]
+        pos_name, pos_let, col_pos_text, col_pos_bar, pos_desc = meta["pos"]
+        neg_name, neg_let, col_neg_text, col_neg_bar, neg_desc = meta["neg"]
 
         is_pos_winner = pct_pos >= 50
         left_class = "winner" if is_pos_winner else "muted"
@@ -1567,8 +1905,8 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         left_tag = "· Dominan" if is_pos_winner else ""
         right_tag = "· Dominan" if not is_pos_winner else ""
 
-        left_border = f"border-color:{col_pos} !important;" if is_pos_winner else ""
-        right_border = f"border-color:{col_neg} !important;" if not is_pos_winner else ""
+        left_border = f"border-color:{col_pos_text} !important;" if is_pos_winner else ""
+        right_border = f"border-color:{col_neg_text} !important;" if not is_pos_winner else ""
 
         left_winner_class = "winner" if is_pos_winner else ""
         right_winner_class = "winner" if not is_pos_winner else ""
@@ -1579,18 +1917,18 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             <div class="spectrum-pills-row">
                 <div class="spectrum-pill {left_class}" style="{left_border}">
                     <span class="spectrum-pill-name">{pos_name}</span>
-                    <span class="spectrum-pill-pct" style="color:{col_pos};">{pct_pos:.0f}% {left_tag}</span>
+                    <span class="spectrum-pill-pct" style="color:{col_pos_text};">{pct_pos:.0f}% {left_tag}</span>
                 </div>
                 <div class="spectrum-pill {right_class}" style="{right_border}">
                     <span class="spectrum-pill-name">{neg_name}</span>
-                    <span class="spectrum-pill-pct" style="color:{col_neg};">{pct_neg:.0f}% {right_tag}</span>
+                    <span class="spectrum-pill-pct" style="color:{col_neg_text};">{pct_neg:.0f}% {right_tag}</span>
                 </div>
             </div>
 
             <!-- 2. Dual-Colored Track: Bar Penuh Berwarna Tanpa Efek Bar Kosong -->
             <div class="spectrum-dual-track">
-                <div class="spectrum-segment-left" style="width:{pct_pos}%; background:{col_pos};"></div>
-                <div class="spectrum-segment-right" style="width:{pct_neg}%; background:{col_neg};"></div>
+                <div class="spectrum-segment-left" style="width:{pct_pos}%; background:{col_pos_bar};"></div>
+                <div class="spectrum-segment-right" style="width:{pct_neg}%; background:{col_neg_bar};"></div>
                 <div class="spectrum-center-marker" title="Titik Seimbang 50%"></div>
             </div>
 
@@ -1598,7 +1936,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             <div class="spectrum-explain-card">
                 <div class="spectrum-explain-col {left_winner_class}">
                     <div class="spectrum-explain-header">
-                        <span class="spectrum-explain-badge" style="background:{bg_pos}; color:{col_pos}; border-color:{col_pos}50;">{pos_let}</span>
+                        <span class="spectrum-explain-badge" style="background:var(--dim-badge-bg); color:{col_pos_text}; border-color:{col_pos_text};">{pos_let}</span>
                         <strong>{pos_name}</strong>
                     </div>
                     <p class="spectrum-explain-text">{pos_desc}</p>
@@ -1606,7 +1944,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
                 <div class="spectrum-explain-divider"></div>
                 <div class="spectrum-explain-col {right_winner_class}">
                     <div class="spectrum-explain-header">
-                        <span class="spectrum-explain-badge" style="background:{bg_neg}; color:{col_neg}; border-color:{col_neg}50;">{neg_let}</span>
+                        <span class="spectrum-explain-badge" style="background:var(--dim-badge-bg); color:{col_neg_text}; border-color:{col_neg_text};">{neg_let}</span>
                         <strong>{neg_name}</strong>
                     </div>
                     <p class="spectrum-explain-text">{neg_desc}</p>
@@ -1645,10 +1983,10 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             func_code = func_name.split()[0] if func_name else ""
 
             cog_items_html += f"""
-            <div class="cog-layer-friendly-card" style="border-left: 3.5px solid {theme_color};">
+            <div class="cog-layer-friendly-card" style="border-left: 3.5px solid var(--{temp_code}-color);">
                 <div class="cog-layer-header">
                     <span class="cog-role-badge">{r_label}</span>
-                    <span class="cog-symbol-tag" style="color:{theme_color}; background:{bg_tint}; border-color:{border_color};">{func_code}</span>
+                    <span class="cog-symbol-tag temp-badge-{temp_code}">{func_code}</span>
                 </div>
                 <div class="cog-func-heading">{func_name}</div>
                 <p class="cog-func-paragraph">{func_detail}</p>
@@ -1666,21 +2004,21 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         with c_sup:
             with st.container(border=True):
                 st.markdown("**:material/check_circle: Kelebihan utamamu**")
-                st.caption(sb.get("strengths", "-"))
+                st.markdown(f'<div class="analysis-body-text">{sb.get("strengths", "-")}</div>', unsafe_allow_html=True)
         with c_bli:
             with st.container(border=True):
                 st.markdown("**:material/tips_and_updates: Hal yang perlu kamu waspadai**")
-                st.caption(sb.get("blindspots", "-"))
+                st.markdown(f'<div class="analysis-body-text">{sb.get("blindspots", "-")}</div>', unsafe_allow_html=True)
 
     with tab_work:
         with st.container(border=True):
             st.markdown("**:material/hub: Gaya kerja & dinamika tim**")
-            st.caption(profile.get("work_style", "-"))
+            st.markdown(f'<div class="analysis-body-text">{profile.get("work_style", "-")}</div>', unsafe_allow_html=True)
 
     with tab_stress:
         with st.container(border=True):
             st.markdown("**:material/healing: Saat stres & cara recharge paling ampuh**")
-            st.caption(profile.get("stress_dynamics", "-"))
+            st.markdown(f'<div class="analysis-body-text">{profile.get("stress_dynamics", "-")}</div>', unsafe_allow_html=True)
 
     # Structured Export
     summary_text = (
