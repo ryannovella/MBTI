@@ -119,3 +119,22 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
   - Kuis: `Sebelumnya`, `Lihat hasil analisis`
   - Hasil: `Ulangi asesmen`, `Kembali ke beranda`, `Unduh dokumen laporan (.txt)`
 - **Bebas Emoticon Slop:** Tidak menggunakan emoji generic (🤖, ✨, 🧠, 🚀). Mengutamakan Google Material Symbols untuk ikon fungsional.
+
+---
+
+## 8. Indikator Visual Keseimbangan (Balanced / Adaptive Traits)
+
+Ketika skor dimensi berada di rentang tengah yang seimbang (50% : 50% atau 47%–53%), antarmuka secara otomatis mengaktifkan visual khusus keseimbangan adaptif alih-alih memaksakan salah satu kutub sebagai dominan:
+
+1. **Badge Keseimbangan di Hero Identity:**
+   - Ditampilkan chip `⚖️ {n} Dimensi Seimbang` mendampingi kode MBTI dan arketipe utama.
+2. **Kartu Khusus Analisis Seimbang (Balanced Advisory Card):**
+   - Kartu kaca bergradien aksen menampilkan penjelasan konsep *psychological adaptability* (keluwesan adaptif Carl Jung).
+   - Chip visual tiap dimensi seimbang: misal `⚖️ Mind: Ekstraversi 50% ⇄ 50% Introversi (Ambivert)`.
+3. **Pills Spektrum Co-Equal:**
+   - Kedua pill kutub (kiri dan kanan) aktif bersamaan dengan styling `balanced` bergaris aksen putus-putus (`1.5px dashed var(--border-primary)`).
+   - Label persentase menyematkan tag `· Seimbang` pada kedua sisi, mengeliminasi status "dimmed / muted".
+4. **Pin Keseimbangan Luminous (Gold Marker):**
+   - Garis pemisah tengah di track spektrum bertransformasi menjadi pin emas menyala (`#FFB800`) berikon `⚖` di atasnya.
+5. **Catatan Adaptif pada Kartu Penjelasan:**
+   - Kedua kartu penjelasan definisi kognitif diaktifkan secara simetris, disertai panel catatan: *"Kedua Kutub Seimbang: Kamu tidak terkunci pada satu kutub dominan, melainkan memiliki keluwesan alami beralih mode berpikir sesuai situasi nyata."*

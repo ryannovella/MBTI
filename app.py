@@ -1409,6 +1409,118 @@ div[data-baseweb="tab-panel"] {{
     }}
 }}
 
+/* ==================== BALANCED (SEIMBANG) VISUAL STYLES ==================== */
+.balanced-banner-card {{
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1.5px solid var(--border-primary) !important;
+    border-radius: var(--radius-card) !important;
+    padding: 0.95rem 1.15rem !important;
+    box-shadow: 0 4px 18px rgba(79, 70, 229, 0.12) !important;
+    margin-bottom: 0.95rem !important;
+    position: relative !important;
+    overflow: hidden !important;
+}}
+
+.balanced-banner-card::before {{
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 4px !important;
+    background: linear-gradient(180deg, #6366F1 0%, #10B981 100%) !important;
+}}
+
+.balanced-banner-header {{
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.55rem !important;
+    margin-bottom: 0.35rem !important;
+}}
+
+.balanced-dim-chips-row {{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.45rem !important;
+    margin: 0.55rem 0 0.2rem !important;
+}}
+
+.balanced-dim-chip {{
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: var(--radius-pill) !important;
+    background: var(--surface-glass-strong) !important;
+    border: 1.5px solid var(--border-primary) !important;
+    color: var(--text-title) !important;
+    box-shadow: var(--glass-shadow-soft) !important;
+}}
+
+.spectrum-balance-tag-badge {{
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.3rem !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    padding: 0.16rem 0.6rem !important;
+    border-radius: var(--radius-pill) !important;
+    background: var(--nt-bg) !important;
+    color: var(--border-primary) !important;
+    border: 1px solid var(--border-primary) !important;
+    margin-bottom: 0.4rem !important;
+    box-shadow: var(--glass-shadow-soft) !important;
+}}
+
+.spectrum-pill.balanced {{
+    font-weight: 800 !important;
+    background: var(--surface-glass-strong) !important;
+    border: 1.5px dashed var(--border-primary) !important;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1) !important;
+}}
+
+.spectrum-center-marker.balanced {{
+    width: 4px !important;
+    background: #FFB800 !important;
+    box-shadow: 0 0 10px #FFB800, 0 0 3px #FFFFFF !important;
+    z-index: 5 !important;
+}}
+
+.spectrum-center-marker.balanced::after {{
+    content: "⚖" !important;
+    position: absolute !important;
+    top: -16px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)) !important;
+}}
+
+.spectrum-explain-col.balanced {{
+    background: var(--surface-glass-strong) !important;
+    border: 1px dashed var(--border-primary) !important;
+    box-shadow: 0 1px 4px rgba(79, 70, 229, 0.08) !important;
+}}
+
+.spectrum-explain-balanced-notice {{
+    margin-top: 0.48rem !important;
+    padding: 0.45rem 0.7rem !important;
+    background: var(--surface-glass-subtle) !important;
+    border-radius: var(--radius-md) !important;
+    font-size: 0.75rem !important;
+    line-height: 1.45 !important;
+    color: var(--text-body) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    border-left: 3.5px solid var(--border-primary) !important;
+}}
+
 /* ==================== COGNITIVE LAYERS ==================== */
 .cog-layer-friendly-card {{
     background: var(--surface-glass);
@@ -1834,9 +1946,12 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     <div class="friendly-result-hero" style="border-top: 4px solid var(--{temp_code}-color);">
         <div class="hero-result-header">
             <div class="hero-result-identity">
-                <span class="hero-badge-pill temp-badge-{temp_code}">
-                    {temperament}
-                </span>
+                <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.35rem;">
+                    <span class="hero-badge-pill temp-badge-{temp_code}">
+                        {temperament}
+                    </span>
+                    {f'<span class="hero-badge-pill" style="background:var(--nt-bg); border:1px solid var(--border-primary); color:var(--border-primary);">⚖️ {len(result.borderline_dims)} Dimensi Seimbang</span>' if result.borderline_dims else ''}
+                </div>
                 <div class="hero-type-code temp-text-{temp_code}">{result.mbti_type}</div>
                 <h2 class="hero-archetype-title">{archetype}</h2>
             </div>
@@ -1853,21 +1968,45 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     </div>
     """)
 
-    # Borderline Advisory
+    # Borderline / Balanced Advisory Card
     if result.borderline_dims:
-        dim_labels = {
-            "EI": "Mind (Sosial vs Me-Time)",
-            "SN": "Energy (Fakta Nyata vs Ide & Kemungkinan)",
-            "TF": "Nature (Logika Objektif vs Rasa & Empati)",
-            "JP": "Tactics (Rencana Teratur vs Fleksibel Santai)",
+        dim_chips_meta = {
+            "EI": ("Mind", "Ekstraversi", "Introversi", "Ambivert (Sosial Luwes)"),
+            "SN": ("Energy", "Penginderaan", "Intuisi", "Pragmatis Visioner"),
+            "TF": ("Nature", "Pemikiran", "Perasaan", "Empati Rasional"),
+            "JP": ("Tactics", "Penilaian", "Eksplorasi", "Terencana Adaptif"),
         }
-        bl_text = ", ".join(dim_labels.get(d, d) for d in result.borderline_dims)
-        with st.container(border=True):
-            st.markdown("**:material/info: Sifat fleksibel (seimbang)**")
-            st.caption(
-                f"Skormu pada dimensi **{bl_text}** berada di rentang tengah yang seimbang (47%–53%). "
-                "Ini tanda bagus kalau kamu punya fleksibilitas tinggi: bisa menyesuaikan diri dengan luwes sesuai situasi dan kebutuhan momen yang kamu hadapi!"
-            )
+        chips_html = ""
+        for d in result.borderline_dims:
+            d_name, p_name, n_name, syn = dim_chips_meta.get(d, (d, "Positif", "Negatif", "Seimbang"))
+            s_obj = result.dimensions.get(d)
+            p_val = s_obj.pos_pct if s_obj else 50.0
+            n_val = s_obj.neg_pct if s_obj else 50.0
+            chips_html += f"""
+            <div class="balanced-dim-chip">
+                <span>⚖️</span>
+                <strong>{d_name}:</strong> {p_name} {p_val:.0f}% ⇄ {n_val:.0f}% {n_name}
+                <span style="opacity:0.75; font-size:0.72rem;">({syn})</span>
+            </div>
+            """
+
+        render_html(f"""
+        <div class="balanced-banner-card">
+            <div class="balanced-banner-header">
+                <span style="font-size:1.2rem;">⚖️</span>
+                <div>
+                    <strong style="font-size:0.96rem; color:var(--text-title); letter-spacing:-0.01em;">Pola Pikir Cenderung Seimbang Terdeteksi</strong>
+                    <div style="font-size:0.76rem; color:var(--text-muted); font-weight:600;">Keluwesan kognitif alami (Adaptive Dual-Mode)</div>
+                </div>
+            </div>
+            <p style="font-size:0.84rem; color:var(--text-body); line-height:1.55; margin:0 0 0.45rem;">
+                Skormu pada dimensi di bawah ini berada tepat di titik seimbang (50% : 50%). Ini adalah bukti keunggulan adaptasi psikologis: kamu tidak terkunci pada satu polaritas kaku, melainkan memiliki keluwesan alami untuk beralih mode berpikir sesuai tuntutan situasi nyata.
+            </p>
+            <div class="balanced-dim-chips-row">
+                {chips_html}
+            </div>
+        </div>
+        """)
 
     # 4 Dimensions Spectrum Data with Explanations, Symmetrical Pills & Dual Colors
     dim_meta = {
@@ -1898,21 +2037,46 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         pos_name, pos_let, col_pos_text, col_pos_bar, pos_desc = meta["pos"]
         neg_name, neg_let, col_neg_text, col_neg_bar, neg_desc = meta["neg"]
 
-        is_pos_winner = pct_pos >= 50
-        left_class = "winner" if is_pos_winner else "muted"
-        right_class = "winner" if not is_pos_winner else "muted"
+        is_balanced = score_obj.is_borderline or (47.0 <= pct_pos <= 53.0)
 
-        left_tag = "· Dominan" if is_pos_winner else ""
-        right_tag = "· Dominan" if not is_pos_winner else ""
-
-        left_border = f"border-color:{col_pos_text} !important;" if is_pos_winner else ""
-        right_border = f"border-color:{col_neg_text} !important;" if not is_pos_winner else ""
-
-        left_winner_class = "winner" if is_pos_winner else ""
-        right_winner_class = "winner" if not is_pos_winner else ""
+        if is_balanced:
+            left_class = "balanced"
+            right_class = "balanced"
+            left_tag = "· Seimbang"
+            right_tag = "· Seimbang"
+            left_border = f"border-color:{col_pos_text} !important;"
+            right_border = f"border-color:{col_neg_text} !important;"
+            left_winner_class = "balanced"
+            right_winner_class = "balanced"
+            marker_class = "spectrum-center-marker balanced"
+            balance_tag_html = f"""
+            <div class="spectrum-balance-tag-badge">
+                <span>⚖️</span> <strong>Cenderung Seimbang</strong> · Adaptif ({pct_pos:.0f}% : {pct_neg:.0f}%)
+            </div>
+            """
+            balance_explain_html = f"""
+            <div class="spectrum-explain-balanced-notice">
+                <span>⚖️</span>
+                <span><strong>Kedua Kutub Seimbang:</strong> Kamu tidak terkunci pada satu kutub dominan. Dalam keseharianmu, kamu luwes menggunakan pendekatan <strong>{pos_name}</strong> maupun <strong>{neg_name}</strong> sesuai kebutuhan situasi.</span>
+            </div>
+            """
+        else:
+            is_pos_winner = pct_pos >= 50
+            left_class = "winner" if is_pos_winner else "muted"
+            right_class = "winner" if not is_pos_winner else "muted"
+            left_tag = "· Dominan" if is_pos_winner else ""
+            right_tag = "· Dominan" if not is_pos_winner else ""
+            left_border = f"border-color:{col_pos_text} !important;" if is_pos_winner else ""
+            right_border = f"border-color:{col_neg_text} !important;" if not is_pos_winner else ""
+            left_winner_class = "winner" if is_pos_winner else ""
+            right_winner_class = "winner" if not is_pos_winner else ""
+            marker_class = "spectrum-center-marker"
+            balance_tag_html = ""
+            balance_explain_html = ""
 
         spectrum_html += f"""
         <div class="spectrum-block">
+            {balance_tag_html}
             <!-- 1. Symmetrical Pills: Lebar & Tinggi Sama Persis -->
             <div class="spectrum-pills-row">
                 <div class="spectrum-pill {left_class}" style="{left_border}">
@@ -1929,7 +2093,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             <div class="spectrum-dual-track">
                 <div class="spectrum-segment-left" style="width:{pct_pos}%; background:{col_pos_bar};"></div>
                 <div class="spectrum-segment-right" style="width:{pct_neg}%; background:{col_neg_bar};"></div>
-                <div class="spectrum-center-marker" title="Titik Seimbang 50%"></div>
+                <div class="{marker_class}" title="Titik Seimbang 50%"></div>
             </div>
 
             <!-- 3. Compact Explanatory Card di Bawah Bar -->
@@ -1950,6 +2114,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
                     <p class="spectrum-explain-text">{neg_desc}</p>
                 </div>
             </div>
+            {balance_explain_html}
         </div>
         """
 
