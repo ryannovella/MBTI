@@ -1,0 +1,386 @@
+[
+  {
+    "id": 1,
+    "dim": "EI",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Lagi nongkrong rame-rame sama temen kerja/kampus, tapi di tengah obrolan baterai sosial kamu mulai drop drastis...",
+    "opt_a": {
+      "text": "Tetap stay di obrolan, mengimbangi vibe dengan interaksi ringan sesekali sambil nunggu momen yang pas buat pamit barengan.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Mulai meminimalisir respon, switch ke mode pendengar pasif atau fokus ke makanan/HP tanpa merusak suasana tongkrongan.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 2,
+    "dim": "EI",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Ada long weekend mendadak. Kamu punya waktu 3 hari bebas tanpa agenda wajib. Naluri pertama kamu...",
+    "opt_a": {
+      "text": "Langsung WhatsApp beberapa teman atau grup, cari yang mau jalan bareng atau ngumpul spontan buat ngisi weekend.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Senang banget karena bisa akhirnya punya ruang buat recharge — nonton, baca, atau ngelanjutin project pribadi sendiri.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 3,
+    "dim": "EI",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Kamu diminta presentasi dadakan di depan tim besar, padahal baru tau 30 menit sebelumnya. Reaksimu...",
+    "opt_a": {
+      "text": "Agak kaget tapi langsung fokus nyusun poin-poin kunci dan justru merasa adrenalin ini bikin kamu lebih hidup saat presentasi.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Geregetan karena gak ada waktu prepare, tapi tetap lakuin dengan memanfaatkan catatan yang ada dan menjaga ekspresi tenang.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 4,
+    "dim": "EI",
+    "cog_tag": "Se/Ni",
+    "scenario": "Setelah seharian penuh rapat dan interaksi sosial intens, cara kamu recharge paling efektif adalah...",
+    "opt_a": {
+      "text": "Masih mau lanjut ngobrol santai atau keluar sebentar sama satu-dua orang dekat — justru itu yang bikin pikiran fresh.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Butuh waktu sendiri dulu, minimal sejam — sunyi, tenang, dan bebas dari ekspektasi harus merespon siapapun.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 5,
+    "dim": "EI",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Di tempat kerja/kuliah baru, kamu cenderung...",
+    "opt_a": {
+      "text": "Aktif menyapa duluan, kenalan, dan mulai bangun koneksi sejak minggu pertama — nganggep itu bagian penting dari adaptasi.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Observasi dulu, kenali dinamika yang ada, dan baru mulai buka diri secara bertahap ke orang-orang yang terasa klik.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 6,
+    "dim": "EI",
+    "cog_tag": "Fe/Ti",
+    "scenario": "Saat kamu punya ide baru yang menarik, langkah pertama yang paling natural bagimu adalah...",
+    "opt_a": {
+      "text": "Langsung cerita ke temen atau kolega yang relevan — diskusi langsung itu yang paling bantu kamu mikir dan validate ide.",
+      "dim": "E",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Kamu olah dan matangkan dulu sendiri di kepala atau catatan pribadi, baru dibagikan kalau sudah cukup solid.",
+      "dim": "I",
+      "val": 1
+    }
+  },
+  {
+    "id": 7,
+    "dim": "SN",
+    "cog_tag": "Si/Ne",
+    "scenario": "Kamu lagi brainstorming ide untuk project baru. Kamu lebih nyaman kalau...",
+    "opt_a": {
+      "text": "Mulai dari referensi yang sudah terbukti — benchmark project serupa, data historis, atau best practice yang udah ada.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Eksplorasi konsep yang belum pernah dicoba — menghubungkan ide dari bidang berbeda dan menikmati proses 'what if'-nya.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 8,
+    "dim": "SN",
+    "cog_tag": "Si/Ne",
+    "scenario": "Teman curhat soal masalah yang sama berulang kali tanpa ada perubahan nyata. Responmu...",
+    "opt_a": {
+      "text": "Tetap dengerin, tapi mulai kasih saran konkret yang spesifik dan actionable berdasarkan situasi riil yang dia ceritain.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Dengerin, tapi pikiranmu mulai analisis pola — kenapa ini terus berulang dan apa root cause di balik siklus ini.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 9,
+    "dim": "SN",
+    "cog_tag": "Se/Ni",
+    "scenario": "Saat belajar hal baru atau skill baru, kamu lebih suka...",
+    "opt_a": {
+      "text": "Langsung praktek dengan contoh konkret, lihat tutorial step-by-step, dan belajar dari trial-error nyata.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Pahami konsep dan framework besarnya dulu — gimana ini nyambung ke sistem yang lebih luas — baru eksekusi.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 10,
+    "dim": "SN",
+    "cog_tag": "Si/Ne",
+    "scenario": "Kalau kamu lagi ngobrol serius, cara kamu biasanya menjelaskan sesuatu...",
+    "opt_a": {
+      "text": "Pakai contoh nyata, kasus spesifik, atau analogi dari pengalaman hidup yang bisa langsung dibayangkan lawan bicara.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Mulai dari gambaran besar dulu — konteks, pola, atau prinsip yang mendasari — sebelum ke detail spesifik.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 11,
+    "dim": "SN",
+    "cog_tag": "Si/Ne",
+    "scenario": "Atasan kasih revisi mendadak pas jam istirahat dengan deadline hari ini juga. Responmu paling pertama...",
+    "opt_a": {
+      "text": "Segera identifikasi bagian mana yang perlu diubah, kerjakan yang paling kritikal duluan, dan pastikan deliverable tetap realistis.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Sambil ngerjain revisi, pikiranmu udah running — kenapa revisi ini muncul, apakah ada gap ekspektasi yang perlu diatasi lebih awal lain kali.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 12,
+    "dim": "SN",
+    "cog_tag": "Se/Ni",
+    "scenario": "Dalam membuat keputusan penting, kamu lebih percaya pada...",
+    "opt_a": {
+      "text": "Data konkret, fakta yang bisa diverifikasi, dan pengalaman langsung — kalau belum ada buktinya, kamu tahan dulu.",
+      "dim": "S",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Intuisi yang udah kamu bangun dari banyak observasi — kadang kamu 'tahu' jawabannya sebelum bisa explain kenapa.",
+      "dim": "N",
+      "val": 1
+    }
+  },
+  {
+    "id": 13,
+    "dim": "TF",
+    "cog_tag": "Ti/Fe",
+    "scenario": "Teman minta pendapat soal keputusan bisnis yang menurut kamu cukup berisiko. Kamu...",
+    "opt_a": {
+      "text": "Kasih analisis objektif tentang risiko dan celah logisnya — meski mungkin bukan yang mau dia dengar, itu yang paling berguna buat dia.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Tanya dulu kondisi dan perasaan dia soal ini, kasih feedback yang konstruktif tapi tetap mempertimbangkan semangat dan effort dia.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 14,
+    "dim": "TF",
+    "cog_tag": "Ti/Fe",
+    "scenario": "Ada konflik kecil di grup/tim akibat miskomunikasi. Peranmu secara alami...",
+    "opt_a": {
+      "text": "Fokus klarifikasi fakta dan duduk perkaranya dulu — emosi bisa dikelola setelah masalahnya jelas secara objektif.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Duluan pastikan semua pihak merasa didengar dan gak ada yang defensif — baru cari solusi yang bisa diterima semua.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 15,
+    "dim": "TF",
+    "cog_tag": "Fi/Te",
+    "scenario": "Kamu perlu mengkritik hasil kerja rekan setim yang sudah kerja keras tapi outputnya masih kurang. Caramu...",
+    "opt_a": {
+      "text": "Langsung ke poin spesifik yang perlu diperbaiki dengan jelas dan efisien — nada profesional lebih dihargai daripada basa-basi.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Mulai dengan acknowledge usahanya dulu, baru kasih feedback spesifik dengan nada yang menjaga motivasi dia tetap terjaga.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 16,
+    "dim": "TF",
+    "cog_tag": "Ti/Fe",
+    "scenario": "Dalam mengambil keputusan yang memengaruhi orang lain, kamu cenderung lebih berat mempertimbangkan...",
+    "opt_a": {
+      "text": "Logika, efisiensi, dan konsistensi — keputusan yang fair itu yang berbasis prinsip yang bisa diaplikasikan ke semua orang sama.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Dampak emosional dan kebutuhan spesifik tiap individu yang terlibat — karena konteks personal itu sering lebih penting dari aturan umum.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 17,
+    "dim": "TF",
+    "cog_tag": "Fi/Te",
+    "scenario": "Kamu dapet kritik keras dari seseorang yang kamu hormati atas pekerjaan kamu. Reaksi internalmu...",
+    "opt_a": {
+      "text": "Agak gak enak, tapi lebih fokus mengevaluasi apakah kritik itu valid secara objektif dan apa yang perlu diperbaiki.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Butuh waktu sebentar untuk proses perasaan dulu, tapi setelah itu bisa menerima dan refleksikan isi kritiknya.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 18,
+    "dim": "TF",
+    "cog_tag": "Ti/Fe",
+    "scenario": "Film atau buku yang paling berkesan bagimu biasanya...",
+    "opt_a": {
+      "text": "Yang punya plot cerdas, twist logis, atau eksplorasi konsep yang bikin kamu mikir keras setelah selesai nonton/baca.",
+      "dim": "T",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Yang punya kedalaman emosional dan karakter yang relate — yang bikin kamu ikut ngerasain setiap momen perjalanan tokohnya.",
+      "dim": "F",
+      "val": 1
+    }
+  },
+  {
+    "id": 19,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Kamu punya project besar dengan deadline 2 minggu lagi. Pendekatan kerjamu...",
+    "opt_a": {
+      "text": "Bikin timeline dari awal — breakdown task per hari atau per minggu, dan usahakan tetap di jalur rencana itu.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Punya gambaran umum yang mau dicapai, tapi biarkan ritme kerja dan urutan task berkembang sesuai energi dan kondisi hari itu.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 20,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Teman ngajak trip dadakan akhir pekan ini tanpa planning matang. Responmu...",
+    "opt_a": {
+      "text": "Mau ikut, tapi perlu pastiin dulu ada itinerary kasar, akomodasi fix, dan budget jelas sebelum commit.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Langsung excited — justru ketidakpastian dan spontanitas itu yang bikin trip jadi lebih seru dan berkesan.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 21,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Kamu punya to-do list kerjaan hari ini. Biasanya...",
+    "opt_a": {
+      "text": "List itu rigid dan kamu usahakan semua tercentang — ada kepuasan tersendiri dari closure setiap task yang selesai.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "List itu lebih sebagai reminder longgar — kamu kerjain yang paling relevan atau yang paling menarik di momen itu.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 22,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Cara kamu biasanya ngelola lingkungan kerja atau meja kerja...",
+    "opt_a": {
+      "text": "Cukup terstruktur dan organized — kamu tahu di mana setiap hal berada, dan kalau berantakan kamu merasa productivitas drop.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Terlihat chaos dari luar tapi kamu tahu sistem 'organikmu' sendiri — kamu bisa fungsi baik di lingkungan yang dinamis.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 23,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Saat ada perubahan rencana mendadak di hari yang sudah kamu jadwalkan rapi, perasaanmu...",
+    "opt_a": {
+      "text": "Lumayan ganggu — kamu perlu sedikit waktu untuk adjust dan re-plan supaya hari tetap terkontrol dan produktif.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Fine-fine aja, bahkan sering kali perubahan mendadak itu buka peluang atau pengalaman yang lebih menarik dari rencana awal.",
+      "dim": "P",
+      "val": 1
+    }
+  },
+  {
+    "id": 24,
+    "dim": "JP",
+    "cog_tag": "Je/Pe",
+    "scenario": "Kalau kamu lagi kerjain sesuatu, kamu lebih nyaman kalau...",
+    "opt_a": {
+      "text": "Ada batasan yang jelas — scope, deadline, dan ekspektasi output yang spesifik — supaya kamu bisa deliver dengan optimal.",
+      "dim": "J",
+      "val": 1
+    },
+    "opt_b": {
+      "text": "Ada ruang untuk eksplorasi dan improvisasi — terlalu banyak constraint justru mematikan kreativitas dan ide-ide terbaik kamu.",
+      "dim": "P",
+      "val": 1
+    }
+  }
+]

@@ -1,0 +1,2 @@
+# Core Web Application Framework
+streamlit>=1.33.0
