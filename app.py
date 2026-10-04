@@ -1333,15 +1333,34 @@ div[data-baseweb="tab-panel"] {{
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.45) !important;
 }}
 
+.spectrum-center-marker.balanced {{
+    width: 4px !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 2px var(--border-primary), 0 0 10px rgba(99, 102, 241, 0.6) !important;
+}}
+
+.spectrum-pill.balanced {{
+    font-weight: 700 !important;
+    background: var(--surface-glass-strong) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+}}
+
 /* Compact Explanatory Card */
 .spectrum-explain-card {{
     display: flex !important;
+    flex-direction: column !important;
     background: var(--surface-glass) !important;
     border: var(--border-glass-subtle) !important;
     border-radius: var(--radius-card) !important;
     padding: 0.65rem 0.85rem !important;
-    gap: 0.75rem !important;
+    gap: 0.55rem !important;
     box-shadow: var(--glass-shadow-soft) !important;
+}}
+
+.spectrum-explain-cols-wrap {{
+    display: flex !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
 }}
 
 .spectrum-explain-col {{
@@ -1354,9 +1373,115 @@ div[data-baseweb="tab-panel"] {{
     transition: background 0.2s ease !important;
 }}
 
-.spectrum-explain-col.winner {{
+.spectrum-explain-col.winner,
+.spectrum-explain-col.balanced {{
     background: var(--surface-glass-strong) !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}}
+
+.spectrum-balance-footer {{
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    padding-top: 0.48rem !important;
+    border-top: 1px dashed var(--border-glass-subtle) !important;
+    font-size: 0.76rem !important;
+    color: var(--text-body) !important;
+    line-height: 1.45 !important;
+    flex-wrap: wrap !important;
+}}
+
+.spectrum-balance-badge {{
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.3rem !important;
+    padding: 0.12rem 0.5rem !important;
+    border-radius: var(--radius-pill) !important;
+    background: var(--surface-glass-subtle) !important;
+    border: 1px solid var(--border-primary) !important;
+    font-size: 0.7rem !important;
+    font-weight: 800 !important;
+    color: var(--border-primary) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}}
+
+/* Hero Balance Chips Row */
+.hero-balance-row {{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.4rem !important;
+    margin-top: 0.45rem !important;
+    margin-bottom: 0.2rem !important;
+}}
+
+.hero-balance-chip {{
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    padding: 0.2rem 0.65rem !important;
+    border-radius: var(--radius-pill) !important;
+    background: var(--surface-glass-strong) !important;
+    border: 1px solid var(--border-primary) !important;
+    font-size: 0.74rem !important;
+    font-weight: 700 !important;
+    color: var(--text-title) !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}}
+
+.hero-balance-chip .balance-dot {{
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: var(--border-primary) !important;
+    box-shadow: 0 0 6px var(--border-primary) !important;
+    flex-shrink: 0 !important;
+}}
+
+/* Balance Advisory Card */
+.balance-advisory-card {{
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: var(--border-glass) !important;
+    border-left: 3.5px solid var(--border-primary) !important;
+    border-radius: var(--radius-card) !important;
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 0.85rem !important;
+    box-shadow: var(--glass-shadow-soft) !important;
+}}
+
+.balance-advisory-header {{
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 0.25rem !important;
+}}
+
+.balance-advisory-pill {{
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    color: var(--border-primary) !important;
+    background: var(--surface-glass-strong) !important;
+    padding: 0.12rem 0.55rem !important;
+    border-radius: var(--radius-pill) !important;
+    border: 1px solid var(--border-primary) !important;
+}}
+
+.balance-advisory-dims {{
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    color: var(--text-title) !important;
+}}
+
+.balance-advisory-desc {{
+    font-size: 0.78rem !important;
+    color: var(--text-body) !important;
+    line-height: 1.48 !important;
+    margin: 0 !important;
 }}
 
 .spectrum-explain-divider {{
@@ -1407,118 +1532,6 @@ div[data-baseweb="tab-panel"] {{
         width: 100% !important;
         height: 1px !important;
     }}
-}}
-
-/* ==================== BALANCED (SEIMBANG) VISUAL STYLES ==================== */
-.balanced-banner-card {{
-    background: var(--surface-glass) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1.5px solid var(--border-primary) !important;
-    border-radius: var(--radius-card) !important;
-    padding: 0.95rem 1.15rem !important;
-    box-shadow: 0 4px 18px rgba(79, 70, 229, 0.12) !important;
-    margin-bottom: 0.95rem !important;
-    position: relative !important;
-    overflow: hidden !important;
-}}
-
-.balanced-banner-card::before {{
-    content: "" !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    bottom: 0 !important;
-    width: 4px !important;
-    background: linear-gradient(180deg, #6366F1 0%, #10B981 100%) !important;
-}}
-
-.balanced-banner-header {{
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.55rem !important;
-    margin-bottom: 0.35rem !important;
-}}
-
-.balanced-dim-chips-row {{
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 0.45rem !important;
-    margin: 0.55rem 0 0.2rem !important;
-}}
-
-.balanced-dim-chip {{
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.35rem !important;
-    font-size: 0.78rem !important;
-    font-weight: 700 !important;
-    padding: 0.25rem 0.75rem !important;
-    border-radius: var(--radius-pill) !important;
-    background: var(--surface-glass-strong) !important;
-    border: 1.5px solid var(--border-primary) !important;
-    color: var(--text-title) !important;
-    box-shadow: var(--glass-shadow-soft) !important;
-}}
-
-.spectrum-balance-tag-badge {{
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.3rem !important;
-    font-size: 0.72rem !important;
-    font-weight: 800 !important;
-    padding: 0.16rem 0.6rem !important;
-    border-radius: var(--radius-pill) !important;
-    background: var(--nt-bg) !important;
-    color: var(--border-primary) !important;
-    border: 1px solid var(--border-primary) !important;
-    margin-bottom: 0.4rem !important;
-    box-shadow: var(--glass-shadow-soft) !important;
-}}
-
-.spectrum-pill.balanced {{
-    font-weight: 800 !important;
-    background: var(--surface-glass-strong) !important;
-    border: 1.5px dashed var(--border-primary) !important;
-    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1) !important;
-}}
-
-.spectrum-center-marker.balanced {{
-    width: 4px !important;
-    background: #FFB800 !important;
-    box-shadow: 0 0 10px #FFB800, 0 0 3px #FFFFFF !important;
-    z-index: 5 !important;
-}}
-
-.spectrum-center-marker.balanced::after {{
-    content: "⚖" !important;
-    position: absolute !important;
-    top: -16px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    font-size: 11px !important;
-    line-height: 1 !important;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)) !important;
-}}
-
-.spectrum-explain-col.balanced {{
-    background: var(--surface-glass-strong) !important;
-    border: 1px dashed var(--border-primary) !important;
-    box-shadow: 0 1px 4px rgba(79, 70, 229, 0.08) !important;
-}}
-
-.spectrum-explain-balanced-notice {{
-    margin-top: 0.48rem !important;
-    padding: 0.45rem 0.7rem !important;
-    background: var(--surface-glass-subtle) !important;
-    border-radius: var(--radius-md) !important;
-    font-size: 0.75rem !important;
-    line-height: 1.45 !important;
-    color: var(--text-body) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.45rem !important;
-    border-left: 3.5px solid var(--border-primary) !important;
 }}
 
 /* ==================== COGNITIVE LAYERS ==================== */
@@ -1941,19 +1954,32 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     summary_narrative = profile.get("summary", "")
     avatar_hero_tag = render_avatar_img(result.mbti_type, size=105, alt=archetype)
 
+    # Hero Balance Chips
+    balance_chips_html = ""
+    if result.borderline_dims:
+        dim_short_labels = {
+            "EI": "Ambiversi (E/I Seimbang)",
+            "SN": "Sensing & Intuisi Seimbang",
+            "TF": "Logika & Empati Seimbang",
+            "JP": "Rencana & Spontan Seimbang",
+        }
+        chips_inside = "".join(
+            f'<span class="hero-balance-chip"><span class="balance-dot"></span>{dim_short_labels.get(d, d)}</span>'
+            for d in result.borderline_dims
+        )
+        balance_chips_html = f'<div class="hero-balance-row">{chips_inside}</div>'
+
     # Hero Result: Karakter Menyatu Alami Tanpa Card Pod
     render_html(f"""
     <div class="friendly-result-hero" style="border-top: 4px solid var(--{temp_code}-color);">
         <div class="hero-result-header">
             <div class="hero-result-identity">
-                <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.35rem;">
-                    <span class="hero-badge-pill temp-badge-{temp_code}">
-                        {temperament}
-                    </span>
-                    {f'<span class="hero-badge-pill" style="background:var(--nt-bg); border:1px solid var(--border-primary); color:var(--border-primary);">⚖️ {len(result.borderline_dims)} Dimensi Seimbang</span>' if result.borderline_dims else ''}
-                </div>
+                <span class="hero-badge-pill temp-badge-{temp_code}">
+                    {temperament}
+                </span>
                 <div class="hero-type-code temp-text-{temp_code}">{result.mbti_type}</div>
                 <h2 class="hero-archetype-title">{archetype}</h2>
+                {balance_chips_html}
             </div>
             <div class="hero-avatar-seamless">
                 {avatar_hero_tag}
@@ -1968,43 +1994,24 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     </div>
     """)
 
-    # Borderline / Balanced Advisory Card
+    # Borderline / Balanced Advisory Card (Clean, Compact, Jungian)
     if result.borderline_dims:
-        dim_chips_meta = {
-            "EI": ("Mind", "Ekstraversi", "Introversi", "Ambivert (Sosial Luwes)"),
-            "SN": ("Energy", "Penginderaan", "Intuisi", "Pragmatis Visioner"),
-            "TF": ("Nature", "Pemikiran", "Perasaan", "Empati Rasional"),
-            "JP": ("Tactics", "Penilaian", "Eksplorasi", "Terencana Adaptif"),
+        dim_labels = {
+            "EI": "Mind (Ekstraversi &middot; Introversi)",
+            "SN": "Energy (Penginderaan &middot; Intuisi)",
+            "TF": "Nature (Pemikiran &middot; Perasaan)",
+            "JP": "Tactics (Penilaian &middot; Eksplorasi)",
         }
-        chips_html = ""
-        for d in result.borderline_dims:
-            d_name, p_name, n_name, syn = dim_chips_meta.get(d, (d, "Positif", "Negatif", "Seimbang"))
-            s_obj = result.dimensions.get(d)
-            p_val = s_obj.pos_pct if s_obj else 50.0
-            n_val = s_obj.neg_pct if s_obj else 50.0
-            chips_html += f"""
-            <div class="balanced-dim-chip">
-                <span>⚖️</span>
-                <strong>{d_name}:</strong> {p_name} {p_val:.0f}% ⇄ {n_val:.0f}% {n_name}
-                <span style="opacity:0.75; font-size:0.72rem;">({syn})</span>
-            </div>
-            """
-
+        bl_chips = " &bull; ".join(dim_labels.get(d, d) for d in result.borderline_dims)
         render_html(f"""
-        <div class="balanced-banner-card">
-            <div class="balanced-banner-header">
-                <span style="font-size:1.2rem;">⚖️</span>
-                <div>
-                    <strong style="font-size:0.96rem; color:var(--text-title); letter-spacing:-0.01em;">Pola Pikir Cenderung Seimbang Terdeteksi</strong>
-                    <div style="font-size:0.76rem; color:var(--text-muted); font-weight:600;">Keluwesan kognitif alami (Adaptive Dual-Mode)</div>
-                </div>
+        <div class="balance-advisory-card">
+            <div class="balance-advisory-header">
+                <span class="balance-advisory-pill">Kecenderungan Seimbang</span>
+                <span class="balance-advisory-dims">{bl_chips}</span>
             </div>
-            <p style="font-size:0.84rem; color:var(--text-body); line-height:1.55; margin:0 0 0.45rem;">
-                Skormu pada dimensi di bawah ini berada tepat di titik seimbang (50% : 50%). Ini adalah bukti keunggulan adaptasi psikologis: kamu tidak terkunci pada satu polaritas kaku, melainkan memiliki keluwesan alami untuk beralih mode berpikir sesuai tuntutan situasi nyata.
+            <p class="balance-advisory-desc">
+                Skormu pada dimensi di atas berada di titik tengah seimbang (50% : 50%). Ini mencerminkan keluwesan kognitif situasional: kamu mampu beralih strategi secara luwes sesuai tuntutan situasi nyata tanpa terkunci kaku pada satu kutub.
             </p>
-            <div class="balanced-dim-chips-row">
-                {chips_html}
-            </div>
         </div>
         """)
 
@@ -2037,7 +2044,7 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         pos_name, pos_let, col_pos_text, col_pos_bar, pos_desc = meta["pos"]
         neg_name, neg_let, col_neg_text, col_neg_bar, neg_desc = meta["neg"]
 
-        is_balanced = score_obj.is_borderline or (47.0 <= pct_pos <= 53.0)
+        is_balanced = score_obj.is_borderline or (pct_pos == 50.0) or (abs(pct_pos - 50.0) <= 3.0)
 
         if is_balanced:
             left_class = "balanced"
@@ -2048,20 +2055,15 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             right_border = f"border-color:{col_neg_text} !important;"
             left_winner_class = "balanced"
             right_winner_class = "balanced"
-            marker_class = "spectrum-center-marker balanced"
-            balance_tag_html = f"""
-            <div class="spectrum-balance-tag-badge">
-                <span>⚖️</span> <strong>Cenderung Seimbang</strong> · Adaptif ({pct_pos:.0f}% : {pct_neg:.0f}%)
-            </div>
-            """
-            balance_explain_html = f"""
-            <div class="spectrum-explain-balanced-notice">
-                <span>⚖️</span>
-                <span><strong>Kedua Kutub Seimbang:</strong> Kamu tidak terkunci pada satu kutub dominan. Dalam keseharianmu, kamu luwes menggunakan pendekatan <strong>{pos_name}</strong> maupun <strong>{neg_name}</strong> sesuai kebutuhan situasi.</span>
+            marker_class = "balanced"
+            balance_footer_html = f"""
+            <div class="spectrum-balance-footer">
+                <span class="spectrum-balance-badge">Seimbang 50:50</span>
+                <span>Kamu memiliki keluwesan menggunakan <strong>{pos_name}</strong> maupun <strong>{neg_name}</strong> sesuai kebutuhan situasi nyata.</span>
             </div>
             """
         else:
-            is_pos_winner = pct_pos >= 50
+            is_pos_winner = pct_pos > 50
             left_class = "winner" if is_pos_winner else "muted"
             right_class = "winner" if not is_pos_winner else "muted"
             left_tag = "· Dominan" if is_pos_winner else ""
@@ -2070,13 +2072,11 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             right_border = f"border-color:{col_neg_text} !important;" if not is_pos_winner else ""
             left_winner_class = "winner" if is_pos_winner else ""
             right_winner_class = "winner" if not is_pos_winner else ""
-            marker_class = "spectrum-center-marker"
-            balance_tag_html = ""
-            balance_explain_html = ""
+            marker_class = ""
+            balance_footer_html = ""
 
         spectrum_html += f"""
         <div class="spectrum-block">
-            {balance_tag_html}
             <!-- 1. Symmetrical Pills: Lebar & Tinggi Sama Persis -->
             <div class="spectrum-pills-row">
                 <div class="spectrum-pill {left_class}" style="{left_border}">
@@ -2093,28 +2093,30 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             <div class="spectrum-dual-track">
                 <div class="spectrum-segment-left" style="width:{pct_pos}%; background:{col_pos_bar};"></div>
                 <div class="spectrum-segment-right" style="width:{pct_neg}%; background:{col_neg_bar};"></div>
-                <div class="{marker_class}" title="Titik Seimbang 50%"></div>
+                <div class="spectrum-center-marker {marker_class}" title="Titik Seimbang 50%"></div>
             </div>
 
             <!-- 3. Compact Explanatory Card di Bawah Bar -->
             <div class="spectrum-explain-card">
-                <div class="spectrum-explain-col {left_winner_class}">
-                    <div class="spectrum-explain-header">
-                        <span class="spectrum-explain-badge" style="background:var(--dim-badge-bg); color:{col_pos_text}; border-color:{col_pos_text};">{pos_let}</span>
-                        <strong>{pos_name}</strong>
+                <div class="spectrum-explain-cols-wrap">
+                    <div class="spectrum-explain-col {left_winner_class}">
+                        <div class="spectrum-explain-header">
+                            <span class="spectrum-explain-badge" style="background:var(--dim-badge-bg); color:{col_pos_text}; border-color:{col_pos_text};">{pos_let}</span>
+                            <strong>{pos_name}</strong>
+                        </div>
+                        <p class="spectrum-explain-text">{pos_desc}</p>
                     </div>
-                    <p class="spectrum-explain-text">{pos_desc}</p>
-                </div>
-                <div class="spectrum-explain-divider"></div>
-                <div class="spectrum-explain-col {right_winner_class}">
-                    <div class="spectrum-explain-header">
-                        <span class="spectrum-explain-badge" style="background:var(--dim-badge-bg); color:{col_neg_text}; border-color:{col_neg_text};">{neg_let}</span>
-                        <strong>{neg_name}</strong>
+                    <div class="spectrum-explain-divider"></div>
+                    <div class="spectrum-explain-col {right_winner_class}">
+                        <div class="spectrum-explain-header">
+                            <span class="spectrum-explain-badge" style="background:var(--dim-badge-bg); color:{col_neg_text}; border-color:{col_neg_text};">{neg_let}</span>
+                            <strong>{neg_name}</strong>
+                        </div>
+                        <p class="spectrum-explain-text">{neg_desc}</p>
                     </div>
-                    <p class="spectrum-explain-text">{neg_desc}</p>
                 </div>
+                {balance_footer_html}
             </div>
-            {balance_explain_html}
         </div>
         """
 
@@ -2186,15 +2188,25 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             st.markdown(f'<div class="analysis-body-text">{profile.get("stress_dynamics", "-")}</div>', unsafe_allow_html=True)
 
     # Structured Export
+    summary_spectrum_lines = []
+    for dim_k, dim_lbl, p_name, n_name in [
+        ("EI", "Mind", "Ekstraversi", "Introversi"),
+        ("SN", "Energy", "Penginderaan", "Intuisi"),
+        ("TF", "Nature", "Pemikiran", "Perasaan"),
+        ("JP", "Tactics", "Penilaian", "Eksplorasi"),
+    ]:
+        sc = result.dimensions[dim_k]
+        is_bal = sc.is_borderline or (sc.pos_pct == 50.0) or (abs(sc.pos_pct - 50.0) <= 3.0)
+        b_tag = " · [Seimbang / Fleksibel]" if is_bal else ""
+        summary_spectrum_lines.append(f"• {dim_lbl:7s}: {sc.pos_pct:.0f}% {p_name} / {sc.neg_pct:.0f}% {n_name}{b_tag}")
+    summary_spectrum_text = "\n".join(summary_spectrum_lines)
+
     summary_text = (
         f"[HASIL ASESMEN TIPE MBTI]\n"
         f"Tipe: {result.mbti_type}: {archetype}\n"
         f"Kelompok: {temperament}\n\n"
         f"Kecenderungan Spektrum:\n"
-        f"• Mind:    {result.dimensions['EI'].pos_pct:.0f}% Ekstraversi / {result.dimensions['EI'].neg_pct:.0f}% Introversi\n"
-        f"• Energy:  {result.dimensions['SN'].pos_pct:.0f}% Penginderaan / {result.dimensions['SN'].neg_pct:.0f}% Intuisi\n"
-        f"• Nature:  {result.dimensions['TF'].pos_pct:.0f}% Pemikiran / {result.dimensions['TF'].neg_pct:.0f}% Perasaan\n"
-        f"• Tactics: {result.dimensions['JP'].pos_pct:.0f}% Penilaian / {result.dimensions['JP'].neg_pct:.0f}% Eksplorasi\n\n"
+        f"{summary_spectrum_text}\n\n"
         f"Fungsi Dominan: {result.cognitive_stack.get('dominant', '-')}\n"
         f"Catatan: \"{profile.get('tagline', '')}\""
     )

@@ -75,7 +75,12 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
 - **Spektrum Kecenderungan 4 Dimensi (Dual-Color & Anti Bar Kosong):**
   - **Pill Kategori Simetris:** Pill penanda kutub kiri dan kanan (misal Ekstraversi vs Introversi) memiliki lebar identik (50% dari row), tinggi seragam, dan tata letak simetris dengan indikator persentase serta tag dominan.
   - **Bar Dua Warna Penuh:** Menggantikan track abu-abu kosong dengan bar split dua warna yang terisi penuh 100% secara proporsional sesuai rasio persentase kedua kutub, dilengkapi marker tengah putih di titik seimbang 50%.
-  - **Kartu Penjelasan Kompak:** Di bawah setiap bar spektrum, disematkan kartu penjelasan ringkas dan rapi dua kolom yang menguraikan definisi kognitif masing-masing kutub kecenderungan dengan penekanan visual pada sisi dominan.
+- **Visual Keseimbangan Adaptif (Saat Hasil Cenderung Seimbang 50:50):**
+  - **Pill Spektrum Seimbang:** Ketika skor berada di titik tengah (misal 50% Ekstraversi vs 50% Introversi), kedua pill ditandai `· Seimbang` secara setara dan diberi aksen border warna masing-masing. Tidak ada kutub yang dipaksa menjadi "Dominan" atau diredupkan ("muted").
+  - **Marker Titik Seimbang:** Garis penanda tengah pada bar spektrum 50% menyala dengan ring glow aksen (`.spectrum-center-marker.balanced`), memberi isyarat visual langsung bahwa distribusi preferensi berada tepat di titik ekuilibrium.
+  - **Footer Kartu Penjelasan Seimbang:** Di bawah kartu penjelasan dimensi, disematkan callout ramping dengan badge `Seimbang 50:50` yang menjelaskan keluwesan kognitif pengguna dalam beralih antar-kutub sesuai konteks situasi nyata.
+  - **Chip Keseimbangan pada Hero Card:** Di bawah judul arketipe hasil hero, ditampilkan deretan chip kompak (`Ambiversi (E/I Seimbang)`, dll.) dengan dot indikator berkarakter yang langsung mengapresiasi sifat fleksibel pengguna tanpa bloating.
+  - **Kartu Informasi Keseimbangan Situasional:** Kartu glassmorphism ringkas di atas spektrum yang merangkum dimensi seimbang secara elegan dan berbasis psikologi Carl Jung (bukan klise AI-slop).
 - **Tab Simetris & Proporsional:**
   - Tombol tab di beranda (`Analis (NT)`, `Diplomat (NF)`, `Pengawal (SJ)`, `Penjelajah (SP)`) dan di halaman hasil (`Pola pikir`, `Kelebihan`, `Gaya kerja`, `Sisi stres`) diatur dengan lebar simetris dan proporsional (25% per tombol), sejajar presisi dengan lebar card di bawahnya.
   - Dilengkapi optimasi media query untuk resolusi mobile dan tablet agar tidak memicu scroll horizontal dan tetap terbaca jernih.
@@ -119,22 +124,3 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
   - Kuis: `Sebelumnya`, `Lihat hasil analisis`
   - Hasil: `Ulangi asesmen`, `Kembali ke beranda`, `Unduh dokumen laporan (.txt)`
 - **Bebas Emoticon Slop:** Tidak menggunakan emoji generic (🤖, ✨, 🧠, 🚀). Mengutamakan Google Material Symbols untuk ikon fungsional.
-
----
-
-## 8. Indikator Visual Keseimbangan (Balanced / Adaptive Traits)
-
-Ketika skor dimensi berada di rentang tengah yang seimbang (50% : 50% atau 47%–53%), antarmuka secara otomatis mengaktifkan visual khusus keseimbangan adaptif alih-alih memaksakan salah satu kutub sebagai dominan:
-
-1. **Badge Keseimbangan di Hero Identity:**
-   - Ditampilkan chip `⚖️ {n} Dimensi Seimbang` mendampingi kode MBTI dan arketipe utama.
-2. **Kartu Khusus Analisis Seimbang (Balanced Advisory Card):**
-   - Kartu kaca bergradien aksen menampilkan penjelasan konsep *psychological adaptability* (keluwesan adaptif Carl Jung).
-   - Chip visual tiap dimensi seimbang: misal `⚖️ Mind: Ekstraversi 50% ⇄ 50% Introversi (Ambivert)`.
-3. **Pills Spektrum Co-Equal:**
-   - Kedua pill kutub (kiri dan kanan) aktif bersamaan dengan styling `balanced` bergaris aksen putus-putus (`1.5px dashed var(--border-primary)`).
-   - Label persentase menyematkan tag `· Seimbang` pada kedua sisi, mengeliminasi status "dimmed / muted".
-4. **Pin Keseimbangan Luminous (Gold Marker):**
-   - Garis pemisah tengah di track spektrum bertransformasi menjadi pin emas menyala (`#FFB800`) berikon `⚖` di atasnya.
-5. **Catatan Adaptif pada Kartu Penjelasan:**
-   - Kedua kartu penjelasan definisi kognitif diaktifkan secara simetris, disertai panel catatan: *"Kedua Kutub Seimbang: Kamu tidak terkunci pada satu kutub dominan, melainkan memiliki keluwesan alami beralih mode berpikir sesuai situasi nyata."*
