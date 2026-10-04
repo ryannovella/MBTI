@@ -3,7 +3,7 @@ import textwrap
 import time
 import streamlit as st
 from engine import PersonalityEngine, MBTIResult
-from profiles import get_profile
+from profiles import get_profile, get_all_profiles, get_avatar_base64
 
 st.set_page_config(
     page_title="Asesmen Spektrum MBTI · Arsitektur Kognitif",
@@ -17,16 +17,26 @@ def render_html(html: str) -> None:
     st.html(textwrap.dedent(html).strip())
 
 
+def render_avatar_img(code: str, size: int = 90, alt: str = "") -> str:
+    b64 = get_avatar_base64(code)
+    if not b64:
+        return ""
+    return (
+        f'<img src="data:image/svg+xml;base64,{b64}" alt="{alt}" '
+        f'width="{size}" height="{size}" '
+        f'style="object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.06));" />'
+    )
+
+
 APP_STYLES = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 
-/* ==================== STREAMLIT & ANTI-SLOP HARMONIZED TOKENS ==================== */
+/* ==================== CLAYMORPHISM & GLASSMORPHISM DESIGN TOKENS ==================== */
 :root {
     --bg-canvas: #F8FAFC;
     --surface-card: #FFFFFF;
     --surface-subtle: #F1F5F9;
-    --surface-tint: #FAF5FF;
     
     --border-light: #E2E8F0;
     --border-medium: #CBD5E1;
@@ -55,18 +65,35 @@ APP_STYLES = """
     --sp-border: #FDE68A;
 
     /* Geometry */
-    --radius-xl: 18px;
-    --radius-lg: 14px;
-    --radius-md: 10px;
+    --radius-clay: 22px;
+    --radius-card: 18px;
+    --radius-md: 12px;
     --radius-pill: 9999px;
     
-    /* Tactile Shadows */
-    --shadow-soft: 0 2px 4px 0 rgba(79, 70, 229, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
-    --shadow-card: 0 4px 12px -2px rgba(79, 70, 229, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
-    --shadow-lift: 0 12px 24px -4px rgba(79, 70, 229, 0.10), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+    /* Claymorphism Dual Shadows */
+    --shadow-clay: 
+        0 14px 28px -4px rgba(79, 70, 229, 0.08),
+        0 4px 10px -2px rgba(15, 23, 42, 0.03),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
+        inset -4px -4px 8px rgba(15, 23, 42, 0.035);
+        
+    --shadow-clay-hover: 
+        0 18px 36px -4px rgba(79, 70, 229, 0.12),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
+        inset -4px -4px 8px rgba(15, 23, 42, 0.035);
+        
+    --shadow-clay-soft:
+        0 8px 18px -3px rgba(79, 70, 229, 0.05),
+        inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+        inset -3px -3px 6px rgba(15, 23, 42, 0.025);
+        
+    /* Glassmorphism Accents */
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.65);
+    --glass-shadow: 0 4px 14px rgba(31, 38, 135, 0.05);
 }
 
-/* Base Typography */
+/* Base App Layout */
 html, body, [class*="css"], .stApp {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
     color: var(--text-main) !important;
@@ -78,19 +105,19 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
 }
 
 .main .block-container {
-    padding: 2.2rem 1.2rem 4.5rem !important;
-    max-width: 760px !important;
+    padding: 2.4rem 1.4rem 4.8rem !important;
+    max-width: 880px !important;
 }
 
-/* ==================== HERO & CARD CONTAINERS ==================== */
+/* ==================== CLAYMORPHIC HERO CONTAINER ==================== */
 .friendly-hero {
     background: var(--surface-card);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-card);
-    padding: 2.4rem 2rem 2.2rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-clay);
+    box-shadow: var(--shadow-clay);
+    padding: 2.6rem 2.2rem 2.2rem;
     text-align: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.4rem;
     position: relative;
     overflow: hidden;
 }
@@ -102,21 +129,24 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(90deg, #6366F1 0%, #3B82F6 50%, #10B981 100%);
+    background: linear-gradient(90deg, #6366F1 0%, #3B82F6 40%, #10B981 70%, #F59E0B 100%);
 }
 
 .badge-friendly-tag {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.38rem 1rem;
+    padding: 0.38rem 1.1rem;
     border-radius: var(--radius-pill);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.04em;
-    background: #EEF2FF;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #4338CA;
-    border: 1px solid #C7D2FE;
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
 }
 
 .pill-row-cluster {
@@ -124,28 +154,202 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.55rem;
-    margin-top: 1.2rem;
+    margin-top: 1.3rem;
 }
 
 .pill-feature-chip {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-body);
-    background: #F8FAFC;
-    padding: 0.32rem 0.9rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    padding: 0.35rem 0.95rem;
     border-radius: var(--radius-pill);
     border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+/* ==================== 3 PILLARS PROPORTIONAL GRID ==================== */
+.pillar-grid-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1rem;
+    margin-bottom: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .pillar-grid-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pillar-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-card);
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-clay-soft);
+    padding: 1.35rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pillar-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-clay);
+}
+
+.pillar-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text-title);
+    margin: 0 0 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.pillar-desc {
+    font-size: 0.86rem;
+    color: var(--text-body);
+    line-height: 1.58;
+    margin: 0;
+}
+
+/* ==================== 16PERSONALITIES CHARACTER SHOWCASE ==================== */
+.showcase-header-box {
+    text-align: center;
+    margin: 2.2rem 0 1.2rem;
+}
+
+.showcase-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-title);
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.02em;
+}
+
+.showcase-subheading {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin: 0 auto;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.char-grid-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+    margin: 1.1rem 0;
+}
+
+@media (max-width: 860px) {
+    .char-grid-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .char-grid-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.char-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-clay-soft);
+    padding: 1.4rem 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.char-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-clay-hover);
+}
+
+.char-avatar-pod {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    box-shadow: 
+        inset 3px 3px 6px rgba(15, 23, 42, 0.04),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.95),
+        0 6px 14px rgba(79, 70, 229, 0.06);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    transition: transform 0.2s ease;
+}
+
+.char-card:hover .char-avatar-pod {
+    transform: scale(1.06);
+}
+
+.char-code-badge {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 0.22rem 0.8rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 0.45rem;
+    display: inline-block;
+}
+
+.char-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text-title);
+    margin: 0 0 0.45rem;
+    line-height: 1.35;
+}
+
+.char-desc {
+    font-size: 0.81rem;
+    color: var(--text-body);
+    line-height: 1.55;
+    margin: 0 0 0.85rem;
+    flex-grow: 1;
+}
+
+.char-cog-chip {
+    font-size: 0.74rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(226, 232, 240, 0.85);
+    border-radius: var(--radius-pill);
+    padding: 0.22rem 0.7rem;
+    color: var(--text-muted);
 }
 
 /* ==================== QUIZ SCENARIO CONTAINER ==================== */
 .scenario-friendly-card {
     background: var(--surface-card);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-xl);
-    padding: 1.65rem 1.85rem 1.45rem;
-    box-shadow: var(--shadow-card);
-    margin-bottom: 1.1rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-clay);
+    padding: 1.85rem 2rem 1.6rem;
+    box-shadow: var(--shadow-clay);
+    margin-bottom: 1.2rem;
     position: relative;
 }
 
@@ -153,47 +357,47 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.8rem;
-    padding-bottom: 0.6rem;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.7rem;
     border-bottom: 1px solid #F1F5F9;
 }
 
 .scenario-quote-highlight {
-    font-size: 1.14rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    line-height: 1.7;
+    line-height: 1.72;
     color: var(--text-title);
-    margin: 0.6rem 0 1.2rem;
+    margin: 0.6rem 0 1.25rem;
     letter-spacing: -0.015em;
 }
 
-/* ==================== TACTILE & ERGONOMIC OPTION CARDS ==================== */
+/* ==================== TACTILE CLAY RADIO OPTIONS ==================== */
 div[data-testid="stRadio"] > div[role="radiogroup"] {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.9rem !important;
+    gap: 0.95rem !important;
 }
 
 div[data-testid="stRadio"] label[data-baseweb="radio"] {
     background: var(--surface-card) !important;
-    border-radius: var(--radius-lg) !important;
+    border-radius: var(--radius-card) !important;
     border: 1.5px solid var(--border-light) !important;
-    padding: 1.15rem 1.4rem !important;
+    padding: 1.25rem 1.45rem !important;
     margin: 0 !important;
     cursor: pointer !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    box-shadow: var(--shadow-soft) !important;
+    box-shadow: var(--shadow-clay-soft) !important;
     display: flex !important;
     align-items: flex-start !important;
     gap: 1rem !important;
-    min-height: 58px !important;
+    min-height: 60px !important;
 }
 
 div[data-testid="stRadio"] label[data-baseweb="radio"]:hover {
     border-color: #A5B4FC !important;
     background: #FAF5FF !important;
     transform: translateY(-2px) !important;
-    box-shadow: var(--shadow-lift) !important;
+    box-shadow: var(--shadow-clay) !important;
 }
 
 div[data-testid="stRadio"] label[data-baseweb="radio"]:active {
@@ -203,7 +407,7 @@ div[data-testid="stRadio"] label[data-baseweb="radio"]:active {
 div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) {
     background: #FFFFFF !important;
     border-color: #4F46E5 !important;
-    box-shadow: 0 0 0 2px #4F46E5, var(--shadow-card) !important;
+    box-shadow: 0 0 0 2px #4F46E5, var(--shadow-clay) !important;
     transform: translateY(-1px) !important;
 }
 
@@ -220,7 +424,7 @@ div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) div[da
     color: var(--text-title) !important;
 }
 
-/* ==================== BUTTONS WITH STREAMLIT & ANTI-SLOP STANDARDS ==================== */
+/* ==================== BUTTONS CLEAN & TACTILE ==================== */
 button[data-testid="baseButton-primary"], button[data-testid="baseButton-secondary"] {
     min-height: 48px !important;
     font-weight: 700 !important;
@@ -233,12 +437,12 @@ button[data-testid="baseButton-primary"] {
     background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%) !important;
     color: #FFFFFF !important;
     border: none !important;
-    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25) !important;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25) !important;
 }
 
 button[data-testid="baseButton-primary"]:hover {
     transform: translateY(-1.5px) !important;
-    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35) !important;
+    box-shadow: 0 8px 22px rgba(79, 70, 229, 0.35) !important;
     background: linear-gradient(135deg, #4338CA 0%, #3730A3 100%) !important;
 }
 
@@ -248,96 +452,127 @@ button[data-testid="baseButton-primary"]:active {
 
 button[data-testid="baseButton-secondary"] {
     background: #FFFFFF !important;
-    border: 1.5px solid var(--border-light) !important;
     color: var(--text-main) !important;
+    border: 1.5px solid var(--border-light) !important;
+    box-shadow: var(--shadow-clay-soft) !important;
 }
 
 button[data-testid="baseButton-secondary"]:hover {
+    border-color: var(--border-medium) !important;
     background: #F8FAFC !important;
-    border-color: #CBD5E1 !important;
-    transform: translateY(-1px) !important;
+    transform: translateY(-1.5px) !important;
 }
 
-/* ==================== RESULT PRESENTATION ==================== */
+/* ==================== RESULT HERO CLAY & GLASS ==================== */
 .friendly-result-hero {
     background: var(--surface-card);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-card);
-    padding: 2.4rem 2rem 2.2rem;
-    text-align: center;
-    margin-bottom: 1.25rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-clay);
+    box-shadow: var(--shadow-clay);
+    padding: 2.2rem 2.2rem 2rem;
+    margin-bottom: 1.4rem;
     position: relative;
     overflow: hidden;
 }
 
-.hero-type-display {
+.hero-result-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.8rem;
+}
+
+@media (max-width: 680px) {
+    .hero-result-flex {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+}
+
+.hero-result-content {
+    flex: 1;
+}
+
+.hero-result-avatar-box {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clay-avatar-hero {
+    width: 140px;
+    height: 140px;
+    border-radius: 26px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 14px 28px rgba(79, 70, 229, 0.12),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
+        inset -4px -4px 8px rgba(15, 23, 42, 0.04);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    padding: 0.6rem;
+    transition: transform 0.25s ease;
+}
+
+.clay-avatar-hero:hover {
+    transform: scale(1.04) rotate(-1deg);
+}
+
+.hero-type-code {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 3.6rem;
+    font-size: 2.8rem;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.05;
-    margin: 0.35rem 0 0.25rem;
+    margin: 0.5rem 0 0.2rem;
 }
 
 .tagline-callout {
-    font-size: 1.04rem;
+    font-size: 0.98rem;
+    line-height: 1.68;
     color: var(--text-body);
-    line-height: 1.7;
-    max-width: 580px;
-    margin: 0.8rem auto 0;
-    font-style: italic;
-    background: #F8FAFC;
-    padding: 0.85rem 1.35rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
+    background: rgba(248, 250, 252, 0.7);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-md);
+    padding: 0.95rem 1.25rem;
+    margin-top: 1rem;
+    border: 1px solid var(--border-light);
 }
 
-/* ==================== CONTINUOUS SPECTRUM METERS ==================== */
+/* ==================== SPECTRUM TRACK ==================== */
 .spectrum-row-box {
-    margin-bottom: 1.45rem;
-}
-
-.spectrum-row-box:last-child {
-    margin-bottom: 0.3rem;
+    margin-bottom: 1.2rem;
 }
 
 .spectrum-info-bar {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    font-size: 0.88rem;
-    margin-bottom: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.45rem;
+    font-size: 0.86rem;
 }
 
 .pole-tag {
+    font-weight: 600;
     color: var(--text-muted);
-    font-weight: 500;
 }
 
 .pole-tag.active {
-    color: var(--text-title);
     font-weight: 800;
+    color: var(--text-title);
 }
 
 .spectrum-track-bg {
-    position: relative;
-    height: 12px;
-    background: #EEF2F6;
+    height: 16px;
+    background: #E2E8F0;
     border-radius: var(--radius-pill);
+    position: relative;
     overflow: hidden;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.spectrum-center-divider {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #FFFFFF;
-    z-index: 2;
-    transform: translateX(-50%);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
 }
 
 .spectrum-fill-progress {
@@ -346,107 +581,85 @@ button[data-testid="baseButton-secondary"]:hover {
     transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.spectrum-center-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #FFFFFF;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
 .badge-balance-pill {
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
     background: #FEF3C7;
     color: #92400E;
-    padding: 0.2rem 0.7rem;
-    border-radius: var(--radius-pill);
     border: 1px solid #FDE68A;
-    margin-left: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-pill);
+    margin-left: 0.4rem;
 }
 
-/* ==================== 4-LAYER COGNITIVE STACK CARDS ==================== */
+/* ==================== COGNITIVE LAYERS ==================== */
 .cog-layer-friendly-card {
-    background: var(--surface-card);
+    background: #FFFFFF;
     border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 1.45rem;
-    margin-bottom: 0.9rem;
-    transition: all 0.16s ease;
-    box-shadow: var(--shadow-soft);
-}
-
-.cog-layer-friendly-card:hover {
-    border-color: #CBD5E1;
-    box-shadow: var(--shadow-card);
-    transform: translateY(-1.5px);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-clay-soft);
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 0.85rem;
 }
 
 .cog-layer-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
 }
 
 .cog-role-badge {
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
     color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .cog-symbol-tag {
-    font-family: 'Space Grotesk', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.88rem;
     font-weight: 800;
-    padding: 0.22rem 0.7rem;
-    border-radius: 8px;
-    border: 1.5px solid;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
 }
 
 .cog-func-heading {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.08rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text-title);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.3rem;
 }
 
 .cog-func-paragraph {
-    font-size: 0.92rem;
+    font-size: 0.88rem;
+    line-height: 1.62;
     color: var(--text-body);
-    line-height: 1.68;
     margin: 0;
 }
 
-/* Keyboard hint bar */
-.kbd-legend-bar {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    background: var(--surface-subtle);
-    padding: 0.38rem 0.95rem;
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--border-light);
-    margin-top: 0.7rem;
-}
-
-.kbd-chip {
-    background: #FFFFFF;
-    border: 1px solid #CBD5E1;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-    border-radius: 4px;
-    padding: 0.08rem 0.48rem;
-    font-family: monospace;
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--text-title);
-}
-
+/* ==================== TEXT COPY AREA ==================== */
 .copy-box-area {
-    background: var(--surface-subtle);
+    background: #F8FAFC;
     border-radius: var(--radius-md);
-    padding: 1.2rem 1.4rem;
+    padding: 1.1rem;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     color: var(--text-main);
     line-height: 1.7;
     border: 1px solid var(--border-light);
@@ -457,19 +670,16 @@ button[data-testid="baseButton-secondary"]:hover {
 
 @media (max-width: 640px) {
     .main .block-container {
-        padding: 1.2rem 0.8rem 3.5rem !important;
+        padding: 1.4rem 0.9rem 3.8rem !important;
     }
     .friendly-hero, .friendly-result-hero {
-        padding: 1.75rem 1.25rem !important;
+        padding: 1.85rem 1.3rem !important;
     }
     .scenario-friendly-card {
-        padding: 1.35rem 1.2rem !important;
+        padding: 1.4rem 1.25rem !important;
     }
     .scenario-quote-highlight {
-        font-size: 1.05rem !important;
-    }
-    .kbd-legend-bar {
-        display: none !important;
+        font-size: 1.06rem !important;
     }
 }
 </style>
@@ -494,11 +704,11 @@ def render_home() -> None:
     render_html("""
     <div class="friendly-hero">
         <div class="badge-friendly-tag">Tipologi & arsitektur kognitif</div>
-        <h1 style="font-family:'Space Grotesk',sans-serif; font-size:2.4rem; font-weight:800; color:#1E1B4B; margin:0.95rem 0 0.45rem; letter-spacing:-0.035em;">
+        <h1 style="font-family:'Space Grotesk',sans-serif; font-size:2.45rem; font-weight:800; color:#1E1B4B; margin:0.95rem 0 0.45rem; letter-spacing:-0.035em;">
             Asesmen spektrum MBTI
         </h1>
-        <p style="font-size:1.02rem; color:#475569; line-height:1.72; max-width:580px; margin:0 auto;">
-            Pahami cara unik pikiran Anda memproses informasi, mengambil keputusan, dan beradaptasi dengan dunia melalui 24 skenario pertimbangan terukur tanpa bias respon sosial.
+        <p style="font-size:1.02rem; color:#475569; line-height:1.72; max-width:620px; margin:0 auto;">
+            Temukan arsitektur kognitif unik pikiran Anda, cara mengolah informasi, dan pola adaptasi alami melalui 24 skenario pertimbangan berimbang tanpa penghakiman sosial.
         </p>
         <div class="pill-row-cluster">
             <span class="pill-feature-chip">24 Skenario riil</span>
@@ -509,31 +719,98 @@ def render_home() -> None:
     </div>
     """)
 
-    # 3 Methodology Pillars (Sentence casing per Streamlit guidelines)
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        with st.container(border=True):
-            st.markdown("**:material/balance: Dilema realistis**")
-            st.caption("Pilihan situasi sehari-hari yang berimbang tanpa opsi klise atau jebakan ideal.")
-    with c2:
-        with st.container(border=True):
-            st.markdown("**:material/tune: Spektrum fleksibel**")
-            st.caption("Kuantifikasi proporsional 0–100% yang menghargai fleksibilitas adaptif Anda.")
-    with c3:
-        with st.container(border=True):
-            st.markdown("**:material/schema: Arsitektur kognitif**")
-            st.caption("Pemetaan 4 lapisan fungsi kognitif yang memandu proses berpikir sadar hingga bawah sadar.")
+    # 3 Methodology Pillars (Proportional Grid)
+    render_html("""
+    <div class="pillar-grid-row">
+        <div class="pillar-card">
+            <div class="pillar-title">Dilema realistis</div>
+            <p class="pillar-desc">Pilihan situasi nyata sehari-hari yang berimbang tanpa opsi klise atau jebakan ideal.</p>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-title">Spektrum fleksibel</div>
+            <p class="pillar-desc">Kuantifikasi proporsional 0–100% yang menghargai kelenturan adaptif Anda.</p>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-title">Arsitektur kognitif</div>
+            <p class="pillar-desc">Pemetaan 4 lapisan fungsi kognitif Carl Jung dari proses sadar hingga bawah sadar.</p>
+        </div>
+    </div>
+    """)
+
+    # 16Personalities Character Showcase
+    render_html("""
+    <div class="showcase-header-box">
+        <div class="showcase-heading">Eksplorasi 16 arketipe kepribadian</div>
+        <div class="showcase-subheading">
+            Tiap arketipe memiliki karakter visual, cara berpikir, dan kontribusi unik dalam memandang serta mengubah dunia:
+        </div>
+    </div>
+    """)
+
+    all_prof = get_all_profiles()
+    tab_nt, tab_nf, tab_sj, tab_sp = st.tabs([
+        ":material/psychology: Analis (NT)",
+        ":material/favorite: Diplomat (NF)",
+        ":material/shield: Pengawal (SJ)",
+        ":material/explore: Penjelajah (SP)",
+    ])
+
+    groups = {
+        "NT": ["INTJ", "INTP", "ENTJ", "ENTP"],
+        "NF": ["INFJ", "INFP", "ENFJ", "ENFP"],
+        "SJ": ["ISTJ", "ISFJ", "ESTJ", "ESFJ"],
+        "SP": ["ISTP", "ISFP", "ESTP", "ESFP"],
+    }
+
+    tab_map = {
+        "NT": tab_nt,
+        "NF": tab_nf,
+        "SJ": tab_sj,
+        "SP": tab_sp,
+    }
+
+    for grp_key, grp_codes in groups.items():
+        with tab_map[grp_key]:
+            cards_html = '<div class="char-grid-row">'
+            for code in grp_codes:
+                p = all_prof.get(code, {})
+                col = p.get("color", "#4F46E5")
+                bg = p.get("bg_tint", "#EEF2FF")
+                bdr = p.get("border_color", "#C7D2FE")
+                arch = p.get("archetype", code)
+                desc = p.get("tagline", "")
+                cog_dom = p.get("cognitive_roles", {}).get("dominant", "")
+                dom_code = cog_dom.split()[0] if cog_dom else ""
+                avatar_tag = render_avatar_img(code, size=75, alt=arch)
+
+                cards_html += f"""
+                <div class="char-card" style="border-top: 4px solid {col};">
+                    <div class="char-avatar-pod" style="background:{bg};">
+                        {avatar_tag}
+                    </div>
+                    <div>
+                        <span class="char-code-badge" style="background:{bg}; color:{col}; border:1px solid {bdr};">{code}</span>
+                        <div class="char-name">{arch}</div>
+                    </div>
+                    <p class="char-desc">{desc}</p>
+                    <span class="char-cog-chip">{dom_code} Dominan</span>
+                </div>
+                """
+            cards_html += "</div>"
+            render_html(cards_html)
+
+    st.markdown("<div style='height:0.8rem;'></div>", unsafe_allow_html=True)
 
     with st.container(border=True):
         st.markdown("**:material/info: Panduan pengerjaan**")
         st.caption(
             "• Jawab secara spontan berdasarkan kecenderungan tindakan nyata Anda sehari-hari.\n"
             "• Seluruh pilihan mencerminkan pola adaptasi manusiawi yang valid tanpa nilai benar atau salah.\n"
-            "• Estimasi durasi pengerjaan: 5 hingga 7 menit. Progres tersimpan secara otomatis sehingga Anda bisa santai."
+            "• Estimasi durasi pengerjaan: 5 hingga 7 menit. Progres tersimpan secara otomatis."
         )
 
     st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
-    if st.button("Mulai asesmen sekarang", key="btn_start_quiz", type="primary", icon=":material/arrow_forward:", width="stretch"):
+    if st.button("Mulai asesmen", key="btn_start_quiz", type="primary", icon=":material/arrow_forward:", width="stretch"):
         st.session_state.page = "quiz"
         st.session_state.current_q = 0
         st.session_state.answers = {}
@@ -548,7 +825,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
     q = questions[current_idx]
     q_id = q["id"]
 
-    # Keyboard shortcut listener using safe HTML/JS script
+    # Keyboard shortcut listener using parent window safe JS
     render_html("""
     <script>
     const pDoc = window.parent.document;
@@ -577,7 +854,6 @@ def render_quiz(engine: PersonalityEngine) -> None:
     </script>
     """)
 
-    pct = int((answered_count / total) * 100)
     dim_map = {
         "EI": ("Mind", "Ekstraversi vs Introversi", "#4F46E5", "#EEF2FF", "#C7D2FE"),
         "SN": ("Energy", "Penginderaan vs Intuisi", "#059669", "#ECFDF5", "#A7F3D0"),
@@ -600,102 +876,76 @@ def render_quiz(engine: PersonalityEngine) -> None:
                 st.caption("Pilih butir untuk meninjau status jawaban:")
                 grid_cols = st.columns(4)
                 for i in range(total):
-                    item_qid = questions[i]["id"]
-                    is_cur = (i == current_idx)
-                    is_ans = (item_qid in st.session_state.answers)
-                    lbl = f"{i + 1:02d}{' •' if is_ans else ''}"
-                    btn_kind = "primary" if is_cur else "secondary"
-                    if grid_cols[i % 4].button(lbl, key=f"jump_{i}", type=btn_kind, width="stretch"):
+                    c_slot = grid_cols[i % 4]
+                    is_done = questions[i]["id"] in st.session_state.answers
+                    is_curr = i == current_idx
+                    lbl = f"#{i+1}"
+                    if is_curr:
+                        lbl += " ◉"
+                    elif is_done:
+                        lbl += " ✓"
+                    if c_slot.button(lbl, key=f"jump_{i}", width="stretch"):
                         st.session_state.current_q = i
                         st.rerun()
         with col_adv:
-            auto_val = st.toggle(
-                "Otomatis lanjut",
-                value=st.session_state.get("auto_advance", True),
-                key="quiz_auto_adv_toggle",
-                help="Otomatis beralih ke butir berikutnya setelah opsi dipilih",
-            )
+            auto_val = st.toggle("Lanjut otomatis", value=st.session_state.auto_advance, key="toggle_auto_adv")
             st.session_state.auto_advance = auto_val
 
-        st.progress(answered_count / total, text=f"{pct}% selesai ({answered_count} dari {total} butir terjawab)")
+    st.progress((answered_count) / total)
 
-    # Scenario and Choice Box
-    with st.container(border=True):
-        render_html(f"""
-        <div style="border-left: 4px solid {dim_col}; padding-left: 1rem; margin-bottom: 0.9rem;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.3rem;">
-                <span style="font-size:0.76rem; font-weight:800; color:{dim_col}; text-transform:uppercase; letter-spacing:0.06em;">
-                    Skenario #{current_idx + 1:02d}
-                </span>
-                <span style="font-size:0.76rem; color:var(--text-muted); font-weight:700;">Dinamika: {q.get('cog_tag', '')}</span>
-            </div>
-            <div class="scenario-quote-highlight">"{q['scenario']}"</div>
+    # Scenario Card
+    render_html(f"""
+    <div class="scenario-friendly-card" style="border-top: 4px solid {dim_col};">
+        <div class="scenario-top-bar">
+            <span style="font-size:0.78rem; font-weight:800; color:{dim_col}; text-transform:uppercase; letter-spacing:0.04em;">Skenario Pertimbangan #{current_idx + 1}</span>
+            <span style="font-size:0.78rem; color:#64748B; font-weight:600;">{answered_count} dari {total} butir terjawab</span>
         </div>
-        <div style="font-size:0.86rem; font-weight:700; color:var(--text-body); margin-bottom:0.9rem;">
-            Pilih respon yang paling mendekati kecenderungan spontan Anda:
-        </div>
-        """)
+        <div class="scenario-quote-highlight">"{q['scenario']}"</div>
+    </div>
+    """)
 
-        prev_answer = st.session_state.answers.get(q_id)
-        default_idx = 0 if prev_answer == "A" else (1 if prev_answer == "B" else None)
+    opt_a_text = q["opt_a"]["text"]
+    opt_b_text = q["opt_b"]["text"]
+    options = [opt_a_text, opt_b_text]
 
-        def format_choice(val: str) -> str:
-            if val == "A":
-                return f"A.  {q['opt_a']['text']}"
-            return f"B.  {q['opt_b']['text']}"
+    current_ans = st.session_state.answers.get(q_id)
+    default_idx = None
+    if current_ans == "A":
+        default_idx = 0
+    elif current_ans == "B":
+        default_idx = 1
 
-        def on_radio_selected() -> None:
-            chosen = st.session_state.get(f"radio_q_{q_id}")
-            if chosen:
-                st.session_state.answers[q_id] = chosen
-                if st.session_state.get("auto_advance", True):
-                    st.session_state["trigger_advance_for"] = q_id
+    selected_option = st.radio(
+        label=f"Pilihan Butir {current_idx + 1}",
+        options=options,
+        index=default_idx,
+        key=f"radio_q_{current_idx}",
+        label_visibility="collapsed"
+    )
 
-        chosen_option = st.radio(
-            label=f"Pilihan butir {q_id}:",
-            options=["A", "B"],
-            format_func=format_choice,
-            index=default_idx,
-            key=f"radio_q_{q_id}",
-            label_visibility="collapsed",
-            on_change=on_radio_selected,
-        )
+    if selected_option is not None:
+        new_ans = "A" if selected_option == opt_a_text else "B"
+        if st.session_state.answers.get(q_id) != new_ans:
+            st.session_state.answers[q_id] = new_ans
+            if st.session_state.auto_advance and current_idx < total - 1:
+                st.session_state.trigger_advance_for = current_idx
 
-        if chosen_option:
-            st.session_state.answers[q_id] = chosen_option
+    # Keyboard shortcut hint bar
+    render_html("""
+    <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:#64748B; margin:0.8rem 0 1.2rem; padding:0.4rem 0.75rem; background:rgba(255,255,255,0.7); backdrop-filter:blur(8px); border-radius:8px; border:1px solid #E2E8F0;">
+        <span>Pintasan keyboard: <kbd style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:4px; padding:0.15rem 0.4rem; font-weight:700;">1</kbd> / <kbd style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:4px; padding:0.15rem 0.4rem; font-weight:700;">A</kbd> Opsi atas &nbsp;·&nbsp; <kbd style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:4px; padding:0.15rem 0.4rem; font-weight:700;">2</kbd> / <kbd style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:4px; padding:0.15rem 0.4rem; font-weight:700;">B</kbd> Opsi bawah</span>
+        <span>Navigasi: <kbd style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:4px; padding:0.15rem 0.4rem; font-weight:700;">←</kbd> Sebelumnya &nbsp;·&nbsp; <kbd style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:4px; padding:0.15rem 0.4rem; font-weight:700;">→</kbd> Berikutnya</span>
+    </div>
+    """)
 
-        render_html("""
-        <div class="kbd-legend-bar">
-            <span>Pintasan keyboard: <span class="kbd-chip">A</span> / <span class="kbd-chip">1</span> Opsi A &bull; <span class="kbd-chip">B</span> / <span class="kbd-chip">2</span> Opsi B &bull; <span class="kbd-chip">&larr;</span> <span class="kbd-chip">&rarr;</span> Navigasi</span>
-        </div>
-        """)
-
-    # Auto-advance handling
-    if st.session_state.get("trigger_advance_for") == q_id:
-        st.session_state["trigger_advance_for"] = None
-        if current_idx < total - 1:
-            st.toast(f"Butir {current_idx + 1:02d} tersimpan", icon=":material/check_circle:")
-            time.sleep(0.35)
-            st.session_state.current_q += 1
+    # Bottom Navigation Controls
+    col_prev, col_next = st.columns([1, 1], gap="medium")
+    with col_prev:
+        if st.button("Sebelumnya", key=f"btn_p_{current_idx}", type="secondary", icon=":material/arrow_back:", disabled=(current_idx == 0), width="stretch"):
+            st.session_state.current_q -= 1
             st.rerun()
-        else:
-            st.toast("Seluruh butir telah terjawab", icon=":material/task_alt:")
 
-    st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
-
-    # Navigation Buttons (Sentence case)
-    c_prev, c_next = st.columns(2, gap="medium")
-    with c_prev:
-        if current_idx > 0:
-            if st.button("Sebelumnya", key=f"btn_p_{current_idx}", type="secondary", icon=":material/arrow_back:", width="stretch"):
-                st.session_state.current_q -= 1
-                st.rerun()
-        else:
-            if st.button("Kembali ke beranda", key="btn_home_nav", type="secondary", icon=":material/home:", width="stretch"):
-                st.session_state.page = "home"
-                st.rerun()
-
-    with c_next:
+    with col_next:
         if current_idx < total - 1:
             is_answered = q_id in st.session_state.answers
             next_label = "Berikutnya" if is_answered else "Pilih satu opsi terlebih dahulu"
@@ -712,6 +962,13 @@ def render_quiz(engine: PersonalityEngine) -> None:
                     st.session_state.page = "result"
                     st.rerun()
 
+    # Trigger auto-advance if activated
+    if st.session_state.trigger_advance_for == current_idx:
+        st.session_state.trigger_advance_for = None
+        time.sleep(0.18)
+        st.session_state.current_q += 1
+        st.rerun()
+
 
 def render_result(result: MBTIResult) -> None:
     profile = get_profile(result.mbti_type)
@@ -719,20 +976,36 @@ def render_result(result: MBTIResult) -> None:
     temperament = profile.get("temperament", "Tipologi kognitif")
     bg_tint = profile.get("bg_tint", "#EEF2FF")
     border_color = profile.get("border_color", "#C7D2FE")
+    archetype = profile.get("archetype", result.mbti_type)
+    summary_narrative = profile.get("summary", "")
+    avatar_hero_tag = render_avatar_img(result.mbti_type, size=115, alt=archetype)
 
-    # Hero Result Presentation
+    # Hero Result Presentation (Claymorphic + Glassmorphic Hero Split)
     render_html(f"""
     <div class="friendly-result-hero" style="border-top: 5px solid {theme_color};">
-        <span style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color}; padding:0.35rem 1rem; border-radius:9999px; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">
-            {temperament}
-        </span>
-        <div class="hero-type-display" style="color:{theme_color};">{result.mbti_type}</div>
-        <h2 style="font-family:'Space Grotesk',sans-serif; font-size:1.48rem; font-weight:800; color:#1E1B4B; margin:0 0 0.4rem; letter-spacing:-0.025em;">
-            {profile.get('title', result.mbti_type)}
-        </h2>
-        <div class="tagline-callout" style="border-left: 4px solid {theme_color};">
-            "{profile.get('tagline', '')}"
+        <div class="hero-result-flex">
+            <div class="hero-result-content">
+                <span style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color}; padding:0.35rem 1rem; border-radius:9999px; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; display:inline-block; margin-bottom:0.4rem;">
+                    {temperament}
+                </span>
+                <div class="hero-type-code" style="color:{theme_color};">{result.mbti_type}</div>
+                <h2 style="font-family:'Space Grotesk',sans-serif; font-size:1.55rem; font-weight:800; color:#1E1B4B; margin:0 0 0.35rem; letter-spacing:-0.025em;">
+                    {archetype}
+                </h2>
+                <div class="tagline-callout" style="border-left: 4px solid {theme_color};">
+                    "{profile.get('tagline', '')}"
+                </div>
+            </div>
+            <div class="hero-result-avatar-box">
+                <div class="clay-avatar-hero" style="background:{bg_tint}; border-color:{border_color};">
+                    {avatar_hero_tag}
+                </div>
+                <span style="font-family:'Space Grotesk',sans-serif; font-size:0.82rem; font-weight:700; color:{theme_color}; margin-top:0.6rem;">{result.mbti_type}</span>
+            </div>
         </div>
+        <p style="font-size:0.95rem; color:#334155; line-height:1.74; margin:1.3rem 0 0; border-top:1px solid #F1F5F9; padding-top:1.1rem;">
+            {summary_narrative}
+        </p>
     </div>
     """)
 
@@ -790,7 +1063,7 @@ def render_result(result: MBTIResult) -> None:
         st.caption("Distribusi proporsional proses mental dan orientasi energi (garis tengah menandai ekuilibrium 50%):")
         render_html(spectrum_html)
 
-    # 4 Deep-Dive Tabs (Sentence case per Streamlit design guidelines)
+    # 4 Deep-Dive Tabs
     tab_cog, tab_strength, tab_work, tab_stress = st.tabs([
         ":material/schema: Arsitektur kognitif",
         ":material/insights: Kompetensi & potensi",
@@ -812,8 +1085,6 @@ def render_result(result: MBTIResult) -> None:
             parts = val.split(": ", 1) if ": " in val else (val, "")
             func_name = parts[0]
             func_detail = parts[1] if len(parts) > 1 else ""
-            
-            # Extract function abbreviation (e.g. "Ni", "Te")
             func_code = func_name.split()[0] if func_name else ""
 
             cog_items_html += f"""
@@ -838,26 +1109,26 @@ def render_result(result: MBTIResult) -> None:
         with c_sup:
             with st.container(border=True):
                 st.markdown("**:material/check_circle: Kompetensi utama**")
-                st.caption(sb.get("strengths", sb.get("superpower", "-")))
+                st.caption(sb.get("strengths", "-"))
         with c_bli:
             with st.container(border=True):
                 st.markdown("**:material/tips_and_updates: Area pengembangan diri**")
-                st.caption(sb.get("blindspots", sb.get("blindspot", "-")))
+                st.caption(sb.get("blindspots", "-"))
 
     with tab_work:
         with st.container(border=True):
             st.markdown("**:material/hub: Modalitas kerja & pola kolaborasi**")
-            st.caption(profile.get("work_style", profile.get("daily_vibe", "-")))
+            st.caption(profile.get("work_style", "-"))
 
     with tab_stress:
         with st.container(border=True):
             st.markdown("**:material/healing: Dinamika stres & protokol pemulihan**")
-            st.caption(profile.get("stress_dynamics", profile.get("stress_response", "-")))
+            st.caption(profile.get("stress_dynamics", "-"))
 
     # Structured Export
     summary_text = (
         f"[LAPORAN ASESMEN TIPOLOGI MBTI]\n"
-        f"Tipe: {result.mbti_type}: {profile.get('title', '')}\n"
+        f"Tipe: {result.mbti_type}: {archetype}\n"
         f"Temperamen: {temperament}\n\n"
         f"Distribusi Spektrum:\n"
         f"• Mind:    {result.dimensions['EI'].pos_pct:.0f}% Extraversion / {result.dimensions['EI'].neg_pct:.0f}% Introversion\n"
@@ -870,7 +1141,7 @@ def render_result(result: MBTIResult) -> None:
 
     with st.container(border=True):
         st.markdown("**Unduh laporan asesmen**")
-        st.caption("Salin ringkasan teks atau unduh dokumen evaluasi untuk keperluan arsip pribadi maupun profesional:")
+        st.caption("Salin ringkasan teks atau unduh dokumen evaluasi untuk arsip pribadi maupun profesional:")
         render_html(f'<div class="copy-box-area">{summary_text}</div>')
         st.download_button(
             label="Unduh dokumen laporan (.txt)",

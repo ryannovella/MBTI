@@ -1,14 +1,20 @@
 from __future__ import annotations
-from typing import Dict
+import base64
+import os
+from typing import Dict, List, Optional
 
 PROFILES: Dict[str, Dict] = {
     "INTJ": {
-        "title": "INTJ: Strategic Architecture & Systems Thinking",
-        "tagline": "Konseptualisasi visi jangka panjang, pengorganisasian sistemik, dan efisiensi terukur.",
+        "code": "INTJ",
+        "archetype": "Sang Arsitek Strategis",
+        "title": "INTJ · Sang Arsitek Strategis",
+        "tagline": "Merancang cetak biru masa depan dengan kalkulasi tajam, visi jangka panjang, dan ketahanan independen yang kokoh.",
+        "summary": "Pikiran seorang INTJ bekerja seperti ruang simulasi taktis. Mereka tidak sekadar melihat apa yang ada di depan mata, melainkan membaca pola tersembunyi, memprediksi skenario bertahun-tahun ke depan, dan menyusun arsitektur sistem yang efisien untuk mencapai tujuan ambisius tanpa terpengaruh oleh kebisingan opini publik.",
+        "avatar": "assets/avatars/intj.svg",
         "cognitive_roles": {
             "dominant": "Ni (Introverted Intuition): Pemetaan pola makro dan proyeksi kemungkinan masa depan secara konvergen. Mengabstraksikan realitas ke dalam kerangka model konseptual.",
             "auxiliary": "Te (Extraverted Thinking): Pengorganisasian sumber daya objektif, penataan logika eksternal, dan penegakan metrik keberhasilan yang terstruktur.",
-            "tertiary": "Fi (Introverted Feeling): Kompas etika internal dan keselarasan nilai-nilai personal yang dipegang secara mendalam dan privat.",
+            "tertiary": "Fi (Introverted Feeling): Kompas etika internal dan keselarasan nilai personal yang dipegang secara mendalam dan privat.",
             "inferior": "Se (Extraverted Sensing): Pengolahan data sensoris seketika. Di bawah tekanan berkepanjangan, dapat mengalami kepekaan berlebih terhadap lingkungan fisik atau kelelahan sensorik."
         },
         "strengths_blindspots": {
@@ -23,8 +29,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#C7D2FE"
     },
     "INTP": {
-        "title": "INTP: Conceptual Analysis & Theoretical Logic",
-        "tagline": "Dekomposisi struktur logis, verifikasi ketepatan prinsip, dan pemodelan analitis independen.",
+        "code": "INTP",
+        "archetype": "Sang Pemikir Teoretis",
+        "title": "INTP · Sang Pemikir Teoretis",
+        "tagline": "Membedah setiap lapis realitas untuk menemukan prinsip kebenaran fundamental yang berdiri kokoh tanpa kontradiksi.",
+        "summary": "Bagi seorang INTP, dunia adalah sebuah teka-teki intelektual yang tak pernah selesai dikaji. Mereka terdorong untuk menelusuri akar dari setiap konsep, menguji logika di balik asumsi umum, dan membangun teori elegan yang sanggup menjelaskan fenomena paling rumit dengan presisi konseptual yang tinggi.",
+        "avatar": "assets/avatars/intp.svg",
         "cognitive_roles": {
             "dominant": "Ti (Introverted Thinking): Penataan kerangka berpikir logis internal yang presisi. Menguji keabsahan setiap premis berdasarkan konsistensi rasional tanpa kompromi.",
             "auxiliary": "Ne (Extraverted Intuition): Eksplorasi kemungkinan lintas domain, identifikasi relasi abstrak antar konsep yang tampak tidak saling berhubungan.",
@@ -43,8 +53,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#C7D2FE"
     },
     "ENTJ": {
-        "title": "ENTJ: Executive Leadership & Strategic Execution",
-        "tagline": "Mobilisasi sumber daya terarah, akselerasi efisiensi operasional, dan kepemimpinan berorientasi hasil.",
+        "code": "ENTJ",
+        "archetype": "Sang Komandan Visioner",
+        "title": "ENTJ · Sang Komandan Visioner",
+        "tagline": "Mengubah visi strategis menjadi realitas nyata melalui komando terarah dan orkestrasi sumber daya tanpa kompromi.",
+        "summary": "ENTJ dilahirkan untuk memimpin dan membangun. Mereka memiliki bakat alami dalam mengenali potensi efisiensi, memetakan langkah aksi, dan menggalang sumber daya untuk menaklukkan tantangan skala besar. Keraguan dan kemalasan segera diubah menjadi momentum eksekusi yang penuh energi dan kejelasan arah.",
+        "avatar": "assets/avatars/entj.svg",
         "cognitive_roles": {
             "dominant": "Te (Extraverted Thinking): Penataan dunia eksternal melalui struktur logis, penetapan target terukur, dan eliminasi hambatan birokrasi secara tegas.",
             "auxiliary": "Ni (Introverted Intuition): Pandangan strategis masa depan yang memandu arah aksi jangka panjang dan mengantisipasi disrupsi pasar.",
@@ -63,8 +77,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#C7D2FE"
     },
     "ENTP": {
-        "title": "ENTP: Dialectical Innovation & Strategic Synthesis",
-        "tagline": "Dekomposisi paradigma lama, inovasi konseptual berkelanjutan, dan pemecahan masalah non-linear.",
+        "code": "ENTP",
+        "archetype": "Sang Pendebat Inovatif",
+        "title": "ENTP · Sang Pendebat Inovatif",
+        "tagline": "Menantang kemapanan lewat percikan ide berani, dekonstruksi paradigma usang, dan navigasi kemungkinan tanpa batas.",
+        "summary": "Bagi ENTP, tidak ada batas pemikiran yang tidak boleh dijelajahi. Mereka adalah katalisator perubahan yang gemar membedah argumen dari segala sudut pandang, merangkai hubungan tak terduga antara ide-ide yang saling terpisah, dan menyalakan percakapan intelektual yang memicu gebrakan baru.",
+        "avatar": "assets/avatars/entp.svg",
         "cognitive_roles": {
             "dominant": "Ne (Extraverted Intuition): Penjelajahan hipotesis alternatif dan potensi inovatif. Terampil melihat koneksi di luar kelaziman yang membuka paradigma baru.",
             "auxiliary": "Ti (Introverted Thinking): Penyaringan rasional terhadap ide-ide baru guna memastikan integritas logika dan viabilitas teknis sebelum dieksekusi.",
@@ -83,8 +101,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#C7D2FE"
     },
     "INFJ": {
-        "title": "INFJ: Integrative Insight & Humanistic Vision",
-        "tagline": "Sintesis intuisi mendalam mengenai motif manusia, konsistensi etika, dan dedikasi pada transformasi sistemik.",
+        "code": "INFJ",
+        "archetype": "Sang Advokat Humanis",
+        "title": "INFJ · Sang Advokat Humanis",
+        "tagline": "Membaca denyut jiwa manusia di balik kata-kata, merajut visi transformasi batin dengan keteguhan prinsip yang tenang.",
+        "summary": "INFJ bergerak di dunia dengan kombinasi langka antara visi idealis mendalam dan determinasi sunyi. Mereka mampu memahami motif tersembunyi orang lain hampir secara naluriah, mendedikasikan energi mereka untuk menolong sesama, dan memperjuangkan nilai-nilai kemanusiaan yang berakar kuat pada integritas etika personal.",
+        "avatar": "assets/avatars/infj.svg",
         "cognitive_roles": {
             "dominant": "Ni (Introverted Intuition): Persepsi konvergen terhadap motif tersembunyi, visi kemanusiaan jangka panjang, dan integrasi makna esensial di balik gejala permukaan.",
             "auxiliary": "Fe (Extraverted Feeling): Rekayasa keharmonisan interpersonal, artikulasi empati terarah, dan kepedulian aktif terhadap kesejahteraan komunitas.",
@@ -103,8 +125,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#A7F3D0"
     },
     "INFP": {
-        "title": "INFP: Principled Idealism & Values Integration",
-        "tagline": "Keteguhan kompas etika internal, apresiasi orisinalitas manusiawi, dan eksplorasi makna mendalam.",
+        "code": "INFP",
+        "archetype": "Sang Mediator Autentik",
+        "title": "INFP · Sang Mediator Autentik",
+        "tagline": "Menjaga api integritas nurani di tengah bising dunia, menyuarakan keindahan makna dan empati yang murni.",
+        "summary": "INFP adalah penjaga keaslian jiwa. Dipandu oleh kompas moral batin yang sangat peka, mereka selalu mencari kebenaran yang bermakna dan keindahan di tempat-tempat yang sering dilewatkan orang lain. Karya dan tindakan mereka memancarkan empati yang tulus serta apresiasi hangat terhadap keunikan setiap insan.",
+        "avatar": "assets/avatars/infp.svg",
         "cognitive_roles": {
             "dominant": "Fi (Introverted Feeling): Penyelarasan batin dengan nilai-nilai kemanusiaan inti. Menilai keputusan berdasarkan keaslian motif, integritas moral, dan harmoni internal.",
             "auxiliary": "Ne (Extraverted Intuition): Penjelajahan perspektif imajinatif, simbolisme konseptual, dan keterbukaan terhadap berbagai kemungkinan alternatif.",
@@ -123,8 +149,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#A7F3D0"
     },
     "ENFJ": {
-        "title": "ENFJ: Transformational Mentorship & Catalytic Leadership",
-        "tagline": "Pengembangan potensi insani, penyelarasan konsensus kelompok, dan artikulasi visi transformatif.",
+        "code": "ENFJ",
+        "archetype": "Sang Protagonis Katalisator",
+        "title": "ENFJ · Sang Protagonis Katalisator",
+        "tagline": "Menyalakan api potensi dalam diri orang lain, memimpin lewat ketulusan empati dan orkestrasi harmoni kolektif.",
+        "summary": "ENFJ memiliki karisma hangat yang mampu menyatukan berbagai lapisan orang menuju tujuan bersama yang mulia. Mereka membaca kebutuhan emosional kelompok dengan cepat, memotivasi rekan kerja dengan ketulusan yang menggetarkan, dan membangun lingkungan di mana setiap individu merasa memiliki peran yang bernilai.",
+        "avatar": "assets/avatars/enfj.svg",
         "cognitive_roles": {
             "dominant": "Fe (Extraverted Feeling): Pembacaan dinamika sosial kelompok secara akurat serta pemfasilitasan dialog yang membangun keselarasan dan kohesi tim.",
             "auxiliary": "Ni (Introverted Intuition): Pemahaman prediktif terhadap lintasan pertumbuhan potensi individu serta arah perkembangan organisasi.",
@@ -143,8 +173,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#A7F3D0"
     },
     "ENFP": {
-        "title": "ENFP: Exploratory Synthesis & Creative Catalyst",
-        "tagline": "Inisiasi proyek transformatif, koneksi relasional lintas perspektif, dan antusiasme pengembangan gagasan.",
+        "code": "ENFP",
+        "archetype": "Sang Juru Kampanye Eksploratif",
+        "title": "ENFP · Sang Juru Kampanye Eksploratif",
+        "tagline": "Menghubungkan titik-titik kemungkinan dengan antusiasme menular, melihat keajaiban dalam potensi setiap manusia.",
+        "summary": "Energi seorang ENFP bagaikan percikan listrik yang menyulut inspirasi di sekitarnya. Penuh rasa ingin tahu dan keterbukaan hati, mereka gemar menelusuri gagasan baru, merangkul perspektif yang berbeda, dan merajut jalinan relasi yang hangat serta penuh harapan akan masa depan yang lebih baik.",
+        "avatar": "assets/avatars/enfp.svg",
         "cognitive_roles": {
             "dominant": "Ne (Extraverted Intuition): Persepsi cepat terhadap pola peluang baru dan artikulasi berbagai kemungkinan inovatif yang menghubungkan disiplin ilmu berbeda.",
             "auxiliary": "Fi (Introverted Feeling): Penapisan ide berdasarkan resonansi etis dan keaslian nilai personal yang mendalam.",
@@ -163,8 +197,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#A7F3D0"
     },
     "ISTJ": {
-        "title": "ISTJ: Institutional Reliability & Systematic Governance",
-        "tagline": "Penegakan integritas prosedur, ketelitian verifikasi data, dan keandalan eksekusi tanpa kompromi.",
+        "code": "ISTJ",
+        "archetype": "Sang Inspektur Berdedikasi",
+        "title": "ISTJ · Sang Inspektur Berdedikasi",
+        "tagline": "Menjadi jangkar kestabilan dunia dengan kedisiplinan tanpa cela, ketelitian fakta, dan komitmen yang tak pernah goyah.",
+        "summary": "ISTJ adalah benteng keandalan dalam setiap organisasi. Mereka berpegang pada fakta terverifikasi, menghormati aturan yang terbukti efektif, dan menyelesaikan setiap kewajiban dengan dedikasi penuh. Tanpa perlu banyak bicara, hasil kerja mereka menjadi standar kepastian dan kualitas yang menopang sistem.",
+        "avatar": "assets/avatars/istj.svg",
         "cognitive_roles": {
             "dominant": "Si (Introverted Sensing): Pengorganisasian memori institusional, rujukan preseden empiris yang solid, dan konsistensi operasional berstandar tinggi.",
             "auxiliary": "Te (Extraverted Thinking): Penerapan proses logis yang teratur, penjadwalan efisien, dan pengukuran hasil kerja berbasis metrik objektif.",
@@ -183,8 +221,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#BAE6FD"
     },
     "ISFJ": {
-        "title": "ISFJ: Operational Stewardship & Sustained Support",
-        "tagline": "Konsistensi dukungan operasional, pemeliharaan stabilitas institusional, dan kepedulian praktis yang presisi.",
+        "code": "ISFJ",
+        "archetype": "Sang Pelindung Setia",
+        "title": "ISFJ · Sang Pelindung Setia",
+        "tagline": "Merawat harmoni dan kebutuhan sesama dengan kehangatan tanpa pamrih, ketelitian praktis, dan kesetiaan yang kokoh.",
+        "summary": "Kebaikan hati seorang ISFJ selalu berwujud aksi konkret. Mereka mengingat detail kecil tentang preferensi orang lain, sigap menyediakan dukungan logistik di balik layar, dan menjaga stabilitas lingkungan kerja dengan kelembutan yang menenteramkan tanpa pernah menuntut sorotan panggung.",
+        "avatar": "assets/avatars/isfj.svg",
         "cognitive_roles": {
             "dominant": "Si (Introverted Sensing): Retensi memori operasional yang terperinci dan kepatuhan cermat terhadap protokol yang telah teruji efektivitasnya.",
             "auxiliary": "Fe (Extraverted Feeling): Responsivitas tinggi terhadap kebutuhan logistik dan emosional lingkungan kerja demi menjaga kestabilan tim.",
@@ -203,8 +245,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#BAE6FD"
     },
     "ESTJ": {
-        "title": "ESTJ: Operational Oversight & Structured Execution",
-        "tagline": "Tata kelola organisasi yang disiplin, penetapan standar akuntabilitas, dan kepemimpinan operasional tegas.",
+        "code": "ESTJ",
+        "archetype": "Sang Eksekutif Pengarah",
+        "title": "ESTJ · Sang Eksekutif Pengarah",
+        "tagline": "Menegakkan keteraturan dan efisiensi operasional dengan kepemimpinan nyata yang menghargai akuntabilitas dan hasil terukur.",
+        "summary": "ESTJ adalah penggerak roda tata kelola yang tangkas dan tegas. Mereka melihat kekacauan sebagai panggilan tugas untuk menertibkan, membagi peran secara proporsional, dan memastikan setiap target selesai tepat waktu dengan kualitas standar profesional tanpa kompromi.",
+        "avatar": "assets/avatars/estj.svg",
         "cognitive_roles": {
             "dominant": "Te (Extraverted Thinking): Penegakan standar operasional, alokasi sumber daya yang optimal, dan penuntasan target melalui sistematika kerja yang teruji.",
             "auxiliary": "Si (Introverted Sensing): Penerapan tata kelola berbasis preseden terbaik, dokumentasi regulasi, dan konsistensi kepatuhan prosedural.",
@@ -223,8 +269,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#BAE6FD"
     },
     "ESFJ": {
-        "title": "ESFJ: Collaborative Facilitation & Social Harmony",
-        "tagline": "Pemeliharaan kohesi komunitas, koordinasi logistik yang suportif, dan penguatan nilai-nilai kerja sama.",
+        "code": "ESFJ",
+        "archetype": "Sang Konsul Pengayom",
+        "title": "ESFJ · Sang Konsul Pengayom",
+        "tagline": "Merajut kehangatan komunitas dengan kepedulian aktif, memastikan setiap orang merasa dihargai, didengar, dan terhubung.",
+        "summary": "ESFJ adalah perekat sosial sejati. Dengan intuisi hubungan yang peka dan keterampilan organisasi yang rapi, mereka memastikan dinamika tim berjalan hangat dan selaras. Bagi mereka, kesuksesan sejati adalah ketika seluruh anggota kelompok maju bersama dalam suasana persaudaraan yang rukun.",
+        "avatar": "assets/avatars/esfj.svg",
         "cognitive_roles": {
             "dominant": "Fe (Extraverted Feeling): Penyelarasan relasi antarpribadi dalam kelompok, pemastian terpenuhinya kebutuhan anggota tim, dan penciptaan lingkungan kerja yang inklusif.",
             "auxiliary": "Si (Introverted Sensing): Penyelenggaraan prosedur operasional harian yang tertib berlandaskan kebiasaan kerja yang solid dan dapat diandalkan.",
@@ -243,8 +293,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#BAE6FD"
     },
     "ISTP": {
-        "title": "ISTP: Pragmatic Engineering & Technical Mastery",
-        "tagline": "Analisis teknis mendalam, pemecahan masalah secara langsung, dan adaptabilitas tenang di bawah tekanan.",
+        "code": "ISTP",
+        "archetype": "Sang Virtuoso Teknis",
+        "title": "ISTP · Sang Virtuoso Teknis",
+        "tagline": "Menjinakkan kekacauan teknis dengan ketenangan pikiran, ketangkasan instrumen, dan penguasaan metode di lapangan.",
+        "summary": "Tenang, observatif, dan sangat pragmatis. ISTP memahami cara kerja benda dan sistem lewat eksperimen langsung. Saat krisis teknis melanda, mereka adalah figur pertama yang turun tangan dengan kepala dingin, membongkar masalah hingga ke akar fisiknya, dan memulihkan fungsi dengan presisi hemat energi.",
+        "avatar": "assets/avatars/istp.svg",
         "cognitive_roles": {
             "dominant": "Ti (Introverted Thinking): Pemahaman analitis internal mengenai mekanisme kerja suatu sistem. Membedah komponen untuk menemukan efisiensi fungsional tertinggi.",
             "auxiliary": "Se (Extraverted Sensing): Pengamatan tajam terhadap dinamika fisik real-time, memungkinkan respons taktis yang presisi saat menghadapi anomali operasional.",
@@ -263,8 +317,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#FDE68A"
     },
     "ISFP": {
-        "title": "ISFP: Contextual Aesthetics & Experiential Authenticity",
-        "tagline": "Kepekaan estetika murni, keselarasan tindakan dengan integritas nilai batin, dan kepekaan kontekstual.",
+        "code": "ISFP",
+        "archetype": "Sang Seniman Autentik",
+        "title": "ISFP · Sang Seniman Autentik",
+        "tagline": "Menerjemahkan getaran rasa ke dalam estetika hidup yang mengalir, selaras dengan nilai nurani tanpa kepura-puraan.",
+        "summary": "ISFP menghidupi keindahan secara bersahaja. Mereka memiliki kepekaan sensoris dan estetika yang lembut, memandang dunia lewat lensa orisinalitas yang damai. Tanpa dorongan untuk mendominasi, kehadiran mereka membawa ketenangan dan warna autentik ke dalam ruang mana pun mereka berada.",
+        "avatar": "assets/avatars/isfp.svg",
         "cognitive_roles": {
             "dominant": "Fi (Introverted Feeling): Penilaian berbasis keaslian moral dan nilai personal yang dipegang teguh secara privat tanpa dorongan untuk memaksakannya kepada orang lain.",
             "auxiliary": "Se (Extraverted Sensing): Keterlibatan mendalam dengan detail sensoris, tekstur, ruang, dan momentum pengalaman saat ini.",
@@ -283,8 +341,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#FDE68A"
     },
     "ESTP": {
-        "title": "ESTP: Real-Time Tactician & Adaptive Pragmatism",
-        "tagline": "Aksi taktis responsif, mitigasi risiko di garis depan, dan penyelesaian masalah berorientasi kenyataan.",
+        "code": "ESTP",
+        "archetype": "Sang Pengusaha Responsif",
+        "title": "ESTP · Sang Pengusaha Responsif",
+        "tagline": "Menembus dinamika krisis dengan keberanian aksi seketika, membaca peluang lapangan, dan ketahanan fisik berenergi tinggi.",
+        "summary": "ESTP adalah ahli navigasi momentum seketika. Mereka membaca lingkungan fisik dan sosial dengan kecepatan kilat, berani mengambil risiko yang telah diperhitungkan, dan mengatasi hambatan di lapangan dengan akal praktis serta semangat kompetisi yang menyala.",
+        "avatar": "assets/avatars/estp.svg",
         "cognitive_roles": {
             "dominant": "Se (Extraverted Sensing): Penyerapan data empiris langsung dari lingkungan fisik secara tajam, tangkas memanfaatkan peluang nyata tanpa keraguan.",
             "auxiliary": "Ti (Introverted Thinking): Kalkulasi risiko logis yang berlangsung seketika di balik setiap tindakan pragmatis.",
@@ -303,8 +365,12 @@ PROFILES: Dict[str, Dict] = {
         "border_color": "#FDE68A"
     },
     "ESFP": {
-        "title": "ESFP: Experiential Engagement & Dynamic Facilitation",
-        "tagline": "Keterlibatan langsung yang memikat, kepekaan adaptif terhadap lingkungan, dan optimisme praktis.",
+        "code": "ESFP",
+        "archetype": "Sang Penghibur Karismatik",
+        "title": "ESFP · Sang Penghibur Karismatik",
+        "tagline": "Menghidupkan setiap ruangan dengan spontanitas hangat, merayakan keindahan momen sekarang, dan membagikan energi positif.",
+        "summary": "Bagi ESFP, kehidupan adalah panggung perayaan yang patut dinikmati bersama. Mereka menularkan kegembiraan ke mana pun mereka melangkah, peka terhadap suasana hati orang-orang di sekitar, dan terampil mengubah situasi monoton menjadi pengalaman interaktif yang penuh tawa dan kebersamaan.",
+        "avatar": "assets/avatars/esfp.svg",
         "cognitive_roles": {
             "dominant": "Se (Extraverted Sensing): Keterlibatan penuh dengan momen nyata, penyerapan estetika lingkungan, dan penciptaan pengalaman sensoris yang bermakna bagi audiens.",
             "auxiliary": "Fi (Introverted Feeling): Kompas etika internal yang memastikan bahwa keterlibatan sosial tetap berpijak pada ketulusan dan kepedulian manusiawi.",
@@ -326,9 +392,14 @@ PROFILES: Dict[str, Dict] = {
 
 
 def get_profile(mbti_type: str) -> Dict:
-    return PROFILES.get(mbti_type.upper(), {
-        "title": f"{mbti_type}: Analisis Tipologi",
+    code = mbti_type.upper().strip()
+    return PROFILES.get(code, {
+        "code": code,
+        "archetype": "Tipologi Kognitif",
+        "title": f"{code} · Analisis Tipologi",
         "tagline": "Profil hasil evaluasi arsitektur kognitif.",
+        "summary": "Kombinasi proses berpikir dan orientasi adaptasi yang memandu tindakan Anda.",
+        "avatar": "assets/avatars/intj.svg",
         "cognitive_roles": {
             "dominant": "Fungsi utama dalam mengarahkan orientasi kesadaran mental.",
             "auxiliary": "Fungsi pendukung dalam menjaga keseimbangan persepsi dan evaluasi.",
@@ -341,5 +412,33 @@ def get_profile(mbti_type: str) -> Dict:
         },
         "work_style": "Orientasi kerja berimbang dengan kebutuhan otonomi dan kolaborasi proporsional.",
         "stress_dynamics": "Menuntut manajemen energi yang disiplin dan ruang pemulihan yang cukup.",
-        "color": "#1E293B"
+        "color": "#4F46E5",
+        "temperament": "Tipologi kognitif",
+        "bg_tint": "#EEF2FF",
+        "border_color": "#C7D2FE"
     })
+
+
+def get_all_profiles() -> Dict[str, Dict]:
+    return PROFILES
+
+
+_AVATAR_CACHE: Dict[str, str] = {}
+
+
+def get_avatar_base64(mbti_code: str) -> str:
+    code = mbti_code.lower().strip()
+    if code in _AVATAR_CACHE:
+        return _AVATAR_CACHE[code]
+    
+    file_path = os.path.join(os.path.dirname(__file__), "assets", "avatars", f"{code}.svg")
+    if not os.path.exists(file_path):
+        return ""
+    
+    try:
+        with open(file_path, "rb") as f:
+            encoded = base64.b64encode(f.read()).decode("utf-8")
+            _AVATAR_CACHE[code] = encoded
+            return encoded
+    except Exception:
+        return ""
