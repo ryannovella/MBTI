@@ -465,64 +465,46 @@ button[data-testid="baseButton-secondary"]:hover {
 }
 
 /* ==================== RESULT HERO CLAY & GLASS ==================== */
+/* ==================== RESULT HERO CLAY & GLASS ==================== */
 .friendly-result-hero {
     background: var(--surface-card);
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
     border-radius: var(--radius-clay);
     box-shadow: var(--shadow-clay);
-    padding: 2.4rem 2.2rem 2.2rem;
+    padding: 2.2rem 2.2rem 2rem;
     margin-bottom: 1.4rem;
     position: relative;
     overflow: hidden;
 }
 
-.hero-result-flex {
+.hero-result-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1.8rem;
+    margin-bottom: 1.25rem;
 }
 
-@media (max-width: 680px) {
-    .hero-result-flex {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 1.4rem;
-    }
-}
-
-.hero-result-content {
+.hero-result-identity {
     flex: 1;
     min-width: 0;
-}
-
-.hero-result-avatar-box {
-    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
 }
 
-.clay-avatar-hero {
-    width: 148px;
-    height: 148px;
-    border-radius: 28px;
-    background: #FFFFFF;
-    display: flex;
+.hero-badge-pill {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: 
-        0 14px 28px rgba(79, 70, 229, 0.12),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
-        inset -4px -4px 8px rgba(15, 23, 42, 0.04);
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    padding: 0.8rem;
-    transition: transform 0.25s ease;
-}
-
-.clay-avatar-hero:hover {
-    transform: scale(1.04) rotate(-1deg);
+    gap: 0.4rem;
+    padding: 0.35rem 0.95rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: fit-content;
+    margin-bottom: 0.45rem;
 }
 
 .hero-type-code {
@@ -531,19 +513,89 @@ button[data-testid="baseButton-secondary"]:hover {
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.05;
-    margin: 0.5rem 0 0.2rem;
+    margin: 0 0 0.25rem;
 }
 
-.tagline-callout {
+.hero-archetype-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-title);
+    margin: 0;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+}
+
+.hero-avatar-pod {
+    flex-shrink: 0;
+    width: 140px;
+    height: 140px;
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 12px 24px rgba(79, 70, 229, 0.10),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
+        inset -4px -4px 8px rgba(15, 23, 42, 0.04);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    padding: 0.7rem;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    box-sizing: border-box;
+}
+
+.hero-avatar-pod:hover {
+    transform: scale(1.04) rotate(-1deg);
+    box-shadow: 
+        0 16px 32px rgba(79, 70, 229, 0.14),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.95),
+        inset -4px -4px 8px rgba(15, 23, 42, 0.04);
+}
+
+.hero-tagline-quote {
     font-size: 0.98rem;
     line-height: 1.68;
     color: var(--text-body);
     background: rgba(248, 250, 252, 0.75);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: var(--radius-md);
-    padding: 0.95rem 1.25rem;
-    margin-top: 1rem;
+    padding: 1rem 1.35rem;
+    margin: 0 0 1.2rem;
     border: 1px solid var(--border-light);
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.hero-narrative-text {
+    font-size: 0.96rem;
+    color: #334155;
+    line-height: 1.76;
+    margin: 0;
+    padding-top: 1.15rem;
+    border-top: 1px solid #F1F5F9;
+}
+
+@media (max-width: 680px) {
+    .hero-result-header {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+        gap: 1.2rem;
+    }
+    
+    .hero-result-identity {
+        align-items: center;
+    }
+    
+    .hero-avatar-pod {
+        width: 124px;
+        height: 124px;
+    }
+    
+    .hero-tagline-quote {
+        text-align: center;
+    }
 }
 
 /* ==================== SPECTRUM TRACK ==================== */
@@ -965,30 +1017,25 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
     summary_narrative = profile.get("summary", "")
     avatar_hero_tag = render_avatar_img(result.mbti_type, size=110, alt=archetype)
 
-    # Hero Result Presentation (Claymorphic + Glassmorphic Hero Split yang Rapi & Proporsional)
+    # Hero Result Presentation (Claymorphic + Glassmorphic Hero yang Presisi & Simetris)
     render_html(f"""
     <div class="friendly-result-hero" style="border-top: 5px solid {theme_color};">
-        <div class="hero-result-flex">
-            <div class="hero-result-content">
-                <span style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color}; padding:0.35rem 1rem; border-radius:9999px; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; display:inline-block; margin-bottom:0.4rem;">
+        <div class="hero-result-header">
+            <div class="hero-result-identity">
+                <span class="hero-badge-pill" style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color};">
                     {temperament}
                 </span>
                 <div class="hero-type-code" style="color:{theme_color};">{result.mbti_type}</div>
-                <h2 style="font-family:'Space Grotesk',sans-serif; font-size:1.55rem; font-weight:800; color:#1E1B4B; margin:0 0 0.35rem; letter-spacing:-0.025em;">
-                    {archetype}
-                </h2>
-                <div class="tagline-callout" style="border-left: 4px solid {theme_color};">
-                    "{profile.get('tagline', '')}"
-                </div>
+                <h2 class="hero-archetype-title">{archetype}</h2>
             </div>
-            <div class="hero-result-avatar-box">
-                <div class="clay-avatar-hero" style="background:{bg_tint}; border-color:{border_color};">
-                    {avatar_hero_tag}
-                </div>
-                <span style="font-family:'Space Grotesk',sans-serif; font-size:0.82rem; font-weight:700; color:{theme_color}; margin-top:0.6rem;">{result.mbti_type}</span>
+            <div class="hero-avatar-pod" style="background:{bg_tint}; border-color:{border_color};">
+                {avatar_hero_tag}
             </div>
         </div>
-        <p style="font-size:0.95rem; color:#334155; line-height:1.74; margin:1.3rem 0 0; border-top:1px solid #F1F5F9; padding-top:1.1rem;">
+        <div class="hero-tagline-quote" style="border-left: 4px solid {theme_color}; background: {bg_tint}45;">
+            "{profile.get('tagline', '')}"
+        </div>
+        <p class="hero-narrative-text">
             {summary_narrative}
         </p>
     </div>
