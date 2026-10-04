@@ -1587,61 +1587,179 @@ div[data-baseweb="tab-panel"] {{
     }}
 }}
 
-/* ==================== COGNITIVE LAYERS ==================== */
-.cog-layer-friendly-card {{
-    background: var(--surface-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: var(--border-glass-subtle);
-    border-radius: var(--radius-md);
-    box-shadow: var(--glass-shadow-soft);
-    padding: 0.85rem 1.05rem;
-    margin-bottom: 0.65rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* ==================== QUICK DOSSIER GRID ==================== */
+.quick-dossier-grid {{
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.65rem !important;
+    margin-bottom: 0.85rem !important;
 }}
 
-.cog-layer-friendly-card:hover {{
-    transform: translateY(-1.5px);
-    box-shadow: var(--glass-shadow);
+@media (max-width: 640px) {{
+    .quick-dossier-grid {{
+        grid-template-columns: 1fr !important;
+    }}
 }}
 
-.cog-layer-header {{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.25rem;
+.quick-dossier-card {{
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: var(--border-glass-subtle) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 0.75rem 0.95rem !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.7rem !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }}
 
-.cog-role-badge {{
-    font-size: 0.74rem;
-    font-weight: 800;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+.quick-dossier-card:hover {{
+    transform: translateY(-1.5px) !important;
+    box-shadow: var(--glass-shadow-soft) !important;
 }}
 
-.cog-symbol-tag {{
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 800;
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--radius-pill);
-    border: 1px solid transparent;
+.quick-dossier-icon-box {{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: var(--radius-sm) !important;
+    flex-shrink: 0 !important;
+    font-size: 1.05rem !important;
 }}
 
-.cog-func-heading {{
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--text-title);
-    margin-bottom: 0.2rem;
+.quick-dossier-content {{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.15rem !important;
+    flex: 1 !important;
 }}
 
-.cog-func-paragraph {{
-    font-size: 0.82rem;
-    line-height: 1.52;
-    color: var(--text-body);
-    margin: 0;
+.quick-dossier-label {{
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    color: var(--text-muted) !important;
+}}
+
+.quick-dossier-value {{
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    color: var(--text-title) !important;
+    line-height: 1.35 !important;
+}}
+
+/* ==================== INSIGHT & COGNITIVE CARDS ==================== */
+.insight-friendly-card, .cog-layer-friendly-card {{
+    background: var(--surface-glass) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: var(--border-glass-subtle) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--glass-shadow-soft) !important;
+    padding: 0.85rem 1.05rem !important;
+    margin-bottom: 0.7rem !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}}
+
+.insight-friendly-card:hover, .cog-layer-friendly-card:hover {{
+    transform: translateY(-1.5px) !important;
+    box-shadow: var(--glass-shadow) !important;
+}}
+
+.insight-card-header, .cog-layer-header {{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 0.25rem !important;
+}}
+
+.insight-card-badge, .cog-role-badge {{
+    font-size: 0.74rem !important;
+    font-weight: 800 !important;
+    color: var(--text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+}}
+
+.insight-card-tag, .cog-symbol-tag {{
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 0.8rem !important;
+    font-weight: 800 !important;
+    padding: 0.15rem 0.55rem !important;
+    border-radius: var(--radius-pill) !important;
+    border: 1px solid transparent !important;
+}}
+
+.insight-card-heading, .cog-func-heading {{
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: var(--text-title) !important;
+    margin-bottom: 0.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+}}
+
+.insight-card-desc, .cog-func-paragraph {{
+    font-size: 0.83rem !important;
+    line-height: 1.55 !important;
+    color: var(--text-body) !important;
+    margin: 0 !important;
+}}
+
+.insight-grid-2 {{
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.7rem !important;
+    margin-bottom: 0.7rem !important;
+}}
+
+@media (max-width: 640px) {{
+    .insight-grid-2 {{
+        grid-template-columns: 1fr !important;
+    }}
+}}
+
+.insight-bullet-list {{
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0.4rem 0 0 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.45rem !important;
+}}
+
+.insight-bullet-item {{
+    position: relative !important;
+    padding-left: 1.25rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.5 !important;
+    color: var(--text-body) !important;
+}}
+
+.insight-bullet-item::before {{
+    content: "•" !important;
+    position: absolute !important;
+    left: 0.35rem !important;
+    color: var(--text-muted) !important;
+    font-weight: bold !important;
+}}
+
+.insight-bullet-item.do-item::before {{
+    content: "✓" !important;
+    color: #10B981 !important;
+    left: 0.2rem !important;
+}}
+
+.insight-bullet-item.dont-item::before {{
+    content: "✕" !important;
+    color: #EF4444 !important;
+    left: 0.2rem !important;
 }}
 
 /* ==================== TEXT COPY AREA ==================== */
@@ -2189,12 +2307,57 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
         st.caption("Keseimbangan dua kutub alami caramu berinteraksi, mengolah informasi, memutuskan, dan bertindak:")
         render_html(spectrum_html)
 
-    # 4 Deep-Dive Tabs (Simetris & Proporsional dengan Lebar Card)
-    tab_cog, tab_strength, tab_work, tab_stress = st.tabs([
-        "Pola pikir",
-        "Kelebihan",
-        "Gaya kerja",
-        "Sisi stres",
+    # Quick Persona Dossier / Cheat Sheet Grid (Banner Ringkasan Cepat)
+    qd = profile.get("quick_dossier", {})
+    if qd:
+        render_html(f"""
+        <div class="quick-dossier-grid">
+            <div class="quick-dossier-card" style="border-left: 3.5px solid var(--{temp_code}-color);">
+                <div class="quick-dossier-icon-box" style="background: var(--{temp_code}-bg); color: var(--{temp_code}-color);">⚡</div>
+                <div class="quick-dossier-content">
+                    <span class="quick-dossier-label">Superpower Utama</span>
+                    <span class="quick-dossier-value">{qd.get('superpower', '-')}</span>
+                </div>
+            </div>
+            <div class="quick-dossier-card" style="border-left: 3.5px solid var(--dim-tf-neg);">
+                <div class="quick-dossier-icon-box" style="background: rgba(236, 72, 153, 0.12); color: var(--dim-tf-neg);">💖</div>
+                <div class="quick-dossier-content">
+                    <span class="quick-dossier-label">Gaya Asmara & Hubungan</span>
+                    <span class="quick-dossier-value">{qd.get('love_language', '-')}</span>
+                </div>
+            </div>
+            <div class="quick-dossier-card" style="border-left: 3.5px solid #EF4444;">
+                <div class="quick-dossier-icon-box" style="background: rgba(239, 68, 68, 0.12); color: #EF4444;">🚫</div>
+                <div class="quick-dossier-content">
+                    <span class="quick-dossier-label">Pet Peeve / Paling Nggak Suka</span>
+                    <span class="quick-dossier-value">{qd.get('pet_peeve', '-')}</span>
+                </div>
+            </div>
+            <div class="quick-dossier-card" style="border-left: 3.5px solid #10B981;">
+                <div class="quick-dossier-icon-box" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">🔋</div>
+                <div class="quick-dossier-content">
+                    <span class="quick-dossier-label">Emergency Recharge</span>
+                    <span class="quick-dossier-value">{qd.get('emergency_recharge', '-')}</span>
+                </div>
+            </div>
+        </div>
+        """)
+
+    # Helper function for rendering bullet lists in cards
+    def _render_bullets_html(items: list, item_cls: str = "") -> str:
+        if not items:
+            return ""
+        cls_str = f' class="insight-bullet-item {item_cls}"' if item_cls else ' class="insight-bullet-item"'
+        lis = "".join(f'<li{cls_str}>{it}</li>' for it in items)
+        return f'<ul class="insight-bullet-list">{lis}</ul>'
+
+    # 5 Deep-Dive Tabs (Enriched, Relatable, Symmetrical & Consistent Card Styling)
+    tab_cog, tab_realita, tab_work, tab_love, tab_guide = st.tabs([
+        "🧠 Pola pikir",
+        "⚡ Ciri & realita",
+        "💼 Karier & kerja",
+        "💖 Asmara & teman",
+        "🔋 Panduan & recharge",
     ])
 
     with tab_cog:
@@ -2214,42 +2377,220 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
             func_code = func_name.split()[0] if func_name else ""
 
             cog_items_html += f"""
-            <div class="cog-layer-friendly-card" style="border-left: 3.5px solid var(--{temp_code}-color);">
-                <div class="cog-layer-header">
-                    <span class="cog-role-badge">{r_label}</span>
-                    <span class="cog-symbol-tag temp-badge-{temp_code}">{func_code}</span>
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--{temp_code}-color);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge">{r_label}</span>
+                    <span class="insight-card-tag temp-badge-{temp_code}">{func_code}</span>
                 </div>
-                <div class="cog-func-heading">{func_name}</div>
-                <p class="cog-func-paragraph">{func_detail}</p>
+                <div class="insight-card-heading">{func_name}</div>
+                <p class="insight-card-desc">{func_detail}</p>
             </div>
             """
 
         with st.container(border=True):
             st.markdown("**4 Lapisan cara otakmu bekerja**")
-            st.caption("Memetakan cara kerja pikiranmu dari naluri yang paling aktif sampai sisi yang rentan lelah:")
+            st.caption("Memetakan arsitektur fungsi kognitif dari naluri terkuat hingga titik rawan lelah:")
             render_html(cog_items_html)
 
-    with tab_strength:
+    with tab_realita:
+        rt = profile.get("relatable_traits", {})
         sb = profile.get("strengths_blindspots", {})
-        c_sup, c_bli = st.columns(2, gap="small")
-        with c_sup:
-            with st.container(border=True):
-                st.markdown("**:material/check_circle: Kelebihan utamamu**")
-                st.markdown(f'<div class="analysis-body-text">{sb.get("strengths", "-")}</div>', unsafe_allow_html=True)
-        with c_bli:
-            with st.container(border=True):
-                st.markdown("**:material/tips_and_updates: Hal yang perlu kamu waspadai**")
-                st.markdown(f'<div class="analysis-body-text">{sb.get("blindspots", "-")}</div>', unsafe_allow_html=True)
+
+        daily_habits_html = _render_bullets_html(rt.get("daily_habits", []))
+        pet_peeves_html = _render_bullets_html(rt.get("pet_peeves", []))
+        flow_triggers_html = _render_bullets_html(rt.get("flow_triggers", []))
+        superpower_list_html = _render_bullets_html(sb.get("superpower_list", []))
+        blindspot_list_html = _render_bullets_html(sb.get("blindspot_list", []))
+
+        with st.container(border=True):
+            st.markdown("**Ciri khas nyata & validasi diri**")
+            st.caption("Potret nyata caramu menjalani hari, kebiasaan refleks, dan situasi saat energimu mengalir paling lancar:")
+
+            render_html(f"""
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--{temp_code}-color);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge">Refleks Sehari-Hari</span>
+                    <span class="insight-card-tag temp-badge-{temp_code}">Ini Gue Banget!</span>
+                </div>
+                <div class="insight-card-heading">🎯 Kebiasaan Nyata yang Sangat Relatable</div>
+                {daily_habits_html}
+                
+                <div style="margin-top: 0.85rem; border-top: 1px dashed var(--border-glass-subtle); padding-top: 0.75rem;">
+                    <span class="insight-card-badge" style="color: #EF4444;">Pemicu Kesal (Pet Peeves)</span>
+                    {pet_peeves_html}
+                </div>
+
+                <div style="margin-top: 0.85rem; border-top: 1px dashed var(--border-glass-subtle); padding-top: 0.75rem;">
+                    <span class="insight-card-badge" style="color: #10B981;">Kondisi Flow Terbaik</span>
+                    {flow_triggers_html}
+                </div>
+            </div>
+
+            <div class="insight-grid-2">
+                <div class="insight-friendly-card" style="border-left: 3.5px solid #10B981;">
+                    <div class="insight-card-header">
+                        <span class="insight-card-badge" style="color: #10B981;">Superpower Alami</span>
+                        <span class="insight-card-tag" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">Kekuatan</span>
+                    </div>
+                    <div class="insight-card-heading">✨ Keunggulan Paling Berdampak</div>
+                    <p class="insight-card-desc">{sb.get('strengths', '-')}</p>
+                    {superpower_list_html}
+                </div>
+
+                <div class="insight-friendly-card" style="border-left: 3.5px solid #F59E0B;">
+                    <div class="insight-card-header">
+                        <span class="insight-card-badge" style="color: #F59E0B;">Titik Buta (Blindspot)</span>
+                        <span class="insight-card-tag" style="background: rgba(245, 158, 11, 0.12); color: #F59E0B;">Waspada</span>
+                    </div>
+                    <div class="insight-card-heading">⚠️ Hal yang Perlu Diwaspadai</div>
+                    <p class="insight-card-desc">{sb.get('blindspots', '-')}</p>
+                    {blindspot_list_html}
+                </div>
+            </div>
+            """)
 
     with tab_work:
+        cw = profile.get("career_work", {})
         with st.container(border=True):
-            st.markdown("**:material/hub: Gaya kerja & dinamika tim**")
-            st.markdown(f'<div class="analysis-body-text">{profile.get("work_style", "-")}</div>', unsafe_allow_html=True)
+            st.markdown("**Gaya kerja, lingkungan, & kontribusi tim**")
+            st.caption("Bagaimana caramu memecahkan masalah kerja, standar hasil, dan suasana kantor yang paling menumbuhkan potensi:")
 
-    with tab_stress:
+            render_html(f"""
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--{temp_code}-color);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge">Standar Eksekusi</span>
+                    <span class="insight-card-tag temp-badge-{temp_code}">Etos Kerja</span>
+                </div>
+                <div class="insight-card-heading">💼 Pendekatan & Etos Kerja Profesional</div>
+                <p class="insight-card-desc">{cw.get('work_ethic', profile.get('work_style', '-'))}</p>
+            </div>
+
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--dim-ei-pos);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge" style="color: var(--dim-ei-pos);">Kondisi Optimal</span>
+                    <span class="insight-card-tag" style="background: var(--dim-badge-bg); color: var(--dim-ei-pos);">Kondusif</span>
+                </div>
+                <div class="insight-card-heading">🏢 Lingkungan Kerja yang Bikin Produktif Maksimal</div>
+                <p class="insight-card-desc">{cw.get('ideal_env', '-')}</p>
+            </div>
+
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--dim-sn-pos);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge" style="color: var(--dim-sn-pos);">Kolaborasi</span>
+                    <span class="insight-card-tag" style="background: rgba(5, 150, 105, 0.12); color: var(--dim-sn-pos);">Team Role</span>
+                </div>
+                <div class="insight-card-heading">🤝 Peran Alami Saat Berada di Dalam Tim</div>
+                <p class="insight-card-desc">{cw.get('team_role', '-')}</p>
+            </div>
+            """)
+
+    with tab_love:
+        rel = profile.get("love_relationships", {})
+        fri = profile.get("friendship", {})
+
         with st.container(border=True):
-            st.markdown("**:material/healing: Saat stres & cara recharge paling ampuh**")
-            st.markdown(f'<div class="analysis-body-text">{profile.get("stress_dynamics", "-")}</div>', unsafe_allow_html=True)
+            st.markdown("**Dinamika asmara & lingkaran pertemanan**")
+            st.caption("Cara kamu mencintai, tanda kecocokan (green/red flags), serta dinamika saat berkumpul dengan sahabat:")
+
+            render_html(f"""
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--dim-tf-neg);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge" style="color: var(--dim-tf-neg);">Hubungan Romantis</span>
+                    <span class="insight-card-tag" style="background: rgba(236, 72, 153, 0.12); color: var(--dim-tf-neg);">Love Style</span>
+                </div>
+                <div class="insight-card-heading">💘 Cara Menyayangi & Membangun Kedekatan</div>
+                <p class="insight-card-desc">{rel.get('love_style', '-')}</p>
+            </div>
+
+            <div class="insight-grid-2">
+                <div class="insight-friendly-card" style="border-left: 3.5px solid #10B981;">
+                    <div class="insight-card-header">
+                        <span class="insight-card-badge" style="color: #10B981;">Kecocokan</span>
+                        <span class="insight-card-tag" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">Green Flag</span>
+                    </div>
+                    <div class="insight-card-heading">🟢 Yang Bikin Kamu Nyaman & Percaya</div>
+                    <p class="insight-card-desc">{rel.get('green_flags', '-')}</p>
+                </div>
+
+                <div class="insight-friendly-card" style="border-left: 3.5px solid #EF4444;">
+                    <div class="insight-card-header">
+                        <span class="insight-card-badge" style="color: #EF4444;">Ketidakcocokan</span>
+                        <span class="insight-card-tag" style="background: rgba(239, 68, 68, 0.12); color: #EF4444;">Red Flag</span>
+                    </div>
+                    <div class="insight-card-heading">🔴 Yang Bikin Kamu Menjauh & Ilfil</div>
+                    <p class="insight-card-desc">{rel.get('red_flags', '-')}</p>
+                </div>
+            </div>
+
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--dim-jp-pos);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge" style="color: var(--dim-jp-pos);">Tongkrongan & Circle</span>
+                    <span class="insight-card-tag" style="background: rgba(217, 119, 6, 0.12); color: var(--dim-jp-pos);">Pertemanan</span>
+                </div>
+                <div class="insight-card-heading">🍻 Posisi di Tongkrongan & Sahabat Dekat</div>
+                <p class="insight-card-desc"><strong>Peran di circle:</strong> {fri.get('circle_role', '-')}</p>
+                <p class="insight-card-desc" style="margin-top: 0.35rem !important;"><strong>Dinamika pertemanan:</strong> {fri.get('circle_style', '-')}</p>
+            </div>
+            """)
+
+    with tab_guide:
+        guide = profile.get("interaction_guide", {})
+        sr = profile.get("stress_recharge", {})
+
+        do_list_html = _render_bullets_html(guide.get("do", []), item_cls="do-item")
+        dont_list_html = _render_bullets_html(guide.get("dont", []), item_cls="dont-item")
+        burnout_triggers_html = _render_bullets_html(sr.get("burnout_triggers", []))
+        stress_signals_html = _render_bullets_html(sr.get("stress_signals", []))
+        recharge_remedy_html = _render_bullets_html(sr.get("recharge_remedy", []))
+
+        with st.container(border=True):
+            st.markdown("**Panduan komunikasi & manajemen energi**")
+            st.caption("Cheat sheet praktis cara berkomunikasi denganmu, pemicu burnout, dan solusi recharge paling efektif:")
+
+            render_html(f"""
+            <div class="insight-friendly-card" style="border-left: 3.5px solid var(--{temp_code}-color);">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge">Tips Komunikasi</span>
+                    <span class="insight-card-tag temp-badge-{temp_code}">Cheat Sheet</span>
+                </div>
+                <div class="insight-card-heading">🗣️ Panduan Praktis Berinteraksi Denganku</div>
+                
+                <div class="insight-grid-2" style="margin-top: 0.65rem; margin-bottom: 0;">
+                    <div>
+                        <strong style="font-size: 0.8rem; color: #10B981; text-transform: uppercase; letter-spacing: 0.03em;">✓ Hal yang Dianjurkan (Do's)</strong>
+                        {do_list_html}
+                    </div>
+                    <div>
+                        <strong style="font-size: 0.8rem; color: #EF4444; text-transform: uppercase; letter-spacing: 0.03em;">✕ Hal yang Perlu Dihindari (Don'ts)</strong>
+                        {dont_list_html}
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-friendly-card" style="border-left: 3.5px solid #6366F1;">
+                <div class="insight-card-header">
+                    <span class="insight-card-badge" style="color: #6366F1;">Manajemen Baterai Diri</span>
+                    <span class="insight-card-tag" style="background: rgba(99, 102, 241, 0.12); color: #6366F1;">Recharge</span>
+                </div>
+                <div class="insight-card-heading">🔋 Saat Baterai Habis & Cara Pemulihan Cepat</div>
+                <p class="insight-card-desc">{profile.get('stress_dynamics', '-')}</p>
+
+                <div style="margin-top: 0.85rem; border-top: 1px dashed var(--border-glass-subtle); padding-top: 0.75rem;">
+                    <span class="insight-card-badge" style="color: #EF4444;">Pemicu Utama Burnout</span>
+                    {burnout_triggers_html}
+                </div>
+
+                <div style="margin-top: 0.85rem; border-top: 1px dashed var(--border-glass-subtle); padding-top: 0.75rem;">
+                    <span class="insight-card-badge" style="color: #F59E0B;">Sinyal Alarm Bahwa Kamu Mulai Lelah</span>
+                    {stress_signals_html}
+                </div>
+
+                <div style="margin-top: 0.85rem; border-top: 1px dashed var(--border-glass-subtle); padding-top: 0.75rem;">
+                    <span class="insight-card-badge" style="color: #10B981;">Resep Recharge Paling Ampuh</span>
+                    {recharge_remedy_html}
+                </div>
+            </div>
+            """)
 
     # Structured Export
     summary_spectrum_lines = []
@@ -2267,12 +2608,18 @@ def render_result(result: MBTIResult, engine: PersonalityEngine) -> None:
 
     summary_text = (
         f"[HASIL ASESMEN TIPE MBTI]\n"
-        f"Tipe: {result.mbti_type}: {archetype}\n"
+        f"Tipe: {result.mbti_type} · {archetype}\n"
         f"Kelompok: {temperament}\n\n"
-        f"Kecenderungan Spektrum:\n"
+        f"Ringkasan Karakter:\n"
+        f"\"{profile.get('tagline', '')}\"\n\n"
+        f"Kecenderungan Spektrum 4 Dimensi:\n"
         f"{summary_spectrum_text}\n\n"
-        f"Fungsi Dominan: {result.cognitive_stack.get('dominant', '-')}\n"
-        f"Catatan: \"{profile.get('tagline', '')}\""
+        f"Fungsi Dominan: {result.cognitive_stack.get('dominant', '-')}\n\n"
+        f"[QUICK DOSSIER & CHEAT SHEET]\n"
+        f"• Superpower: {qd.get('superpower', '-')}\n"
+        f"• Gaya Asmara: {qd.get('love_language', '-')}\n"
+        f"• Pet Peeve: {qd.get('pet_peeve', '-')}\n"
+        f"• Emergency Recharge: {qd.get('emergency_recharge', '-')}\n"
     )
 
     with st.container(border=True):
