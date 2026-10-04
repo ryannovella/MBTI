@@ -2,12 +2,11 @@ from __future__ import annotations
 import textwrap
 import time
 import streamlit as st
-import streamlit.components.v1 as components
 from engine import PersonalityEngine, MBTIResult
 from profiles import get_profile
 
 st.set_page_config(
-    page_title="MBTI Assessment · Jungian Cognitive Architecture",
+    page_title="Asesmen Spektrum MBTI · Arsitektur Kognitif",
     page_icon=":material/psychology:",
     layout="centered",
     initial_sidebar_state="collapsed",
@@ -22,22 +21,23 @@ APP_STYLES = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 
-/* ==================== DESIGN TOKENS ==================== */
+/* ==================== STREAMLIT & ANTI-SLOP HARMONIZED TOKENS ==================== */
 :root {
     --bg-canvas: #F8FAFC;
     --surface-card: #FFFFFF;
     --surface-subtle: #F1F5F9;
-    --surface-elevated: #FFFFFF;
+    --surface-tint: #FAF5FF;
     
     --border-light: #E2E8F0;
     --border-medium: #CBD5E1;
-    --border-dark: #0F172A;
+    --border-primary: #4F46E5;
     
-    --text-main: #0F172A;
-    --text-body: #334155;
+    --text-title: #1E1B4B;
+    --text-main: #1E293B;
+    --text-body: #475569;
     --text-muted: #64748B;
     
-    /* 4 Temperament Colors */
+    /* 4 Temperament Theme Colors */
     --nt-color: #4F46E5;
     --nt-bg: #EEF2FF;
     --nt-border: #C7D2FE;
@@ -54,20 +54,19 @@ APP_STYLES = """
     --sp-bg: #FFFBEB;
     --sp-border: #FDE68A;
 
-    /* Radii */
-    --radius-xl: 16px;
-    --radius-lg: 12px;
+    /* Geometry */
+    --radius-xl: 18px;
+    --radius-lg: 14px;
     --radius-md: 10px;
     --radius-pill: 9999px;
     
     /* Tactile Shadows */
-    --shadow-soft: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
-    --shadow-card: 0 4px 8px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-    --shadow-lift: 0 12px 22px -4px rgba(15, 23, 42, 0.09), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
-    --shadow-glow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+    --shadow-soft: 0 2px 4px 0 rgba(79, 70, 229, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+    --shadow-card: 0 4px 12px -2px rgba(79, 70, 229, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+    --shadow-lift: 0 12px 24px -4px rgba(79, 70, 229, 0.10), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
 }
 
-/* Global Typography & Layout */
+/* Base Typography */
 html, body, [class*="css"], .stApp {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
     color: var(--text-main) !important;
@@ -83,117 +82,116 @@ header, footer, [data-testid="stHeader"], [data-testid="stToolbar"], #MainMenu {
     max-width: 760px !important;
 }
 
-/* ==================== HERO & CONTAINER CARDS ==================== */
-.hero-box {
+/* ==================== HERO & CARD CONTAINERS ==================== */
+.friendly-hero {
     background: var(--surface-card);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-card);
-    padding: 2.3rem 2rem 2.1rem;
+    padding: 2.4rem 2rem 2.2rem;
     text-align: center;
     margin-bottom: 1.25rem;
     position: relative;
     overflow: hidden;
 }
 
-.hero-box::before {
+.friendly-hero::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #0F172A 0%, #334155 50%, #0F172A 100%);
+    height: 5px;
+    background: linear-gradient(90deg, #6366F1 0%, #3B82F6 50%, #10B981 100%);
 }
 
-.badge-tag-main {
+.badge-friendly-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.95rem;
+    gap: 0.45rem;
+    padding: 0.38rem 1rem;
     border-radius: var(--radius-pill);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: var(--surface-subtle);
-    color: var(--text-body);
-    border: 1px solid var(--border-light);
+    letter-spacing: 0.04em;
+    background: #EEF2FF;
+    color: #4338CA;
+    border: 1px solid #C7D2FE;
 }
 
-.feature-pill-cluster {
+.pill-row-cluster {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.55rem;
-    margin-top: 1.1rem;
+    margin-top: 1.2rem;
 }
 
-.feature-pill-item {
-    font-size: 0.78rem;
+.pill-feature-chip {
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-body);
     background: #F8FAFC;
-    padding: 0.3rem 0.85rem;
+    padding: 0.32rem 0.9rem;
     border-radius: var(--radius-pill);
     border: 1px solid var(--border-light);
     box-shadow: var(--shadow-soft);
 }
 
 /* ==================== QUIZ SCENARIO CONTAINER ==================== */
-.scenario-box {
+.scenario-friendly-card {
     background: var(--surface-card);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-xl);
-    padding: 1.6rem 1.8rem 1.4rem;
+    padding: 1.65rem 1.85rem 1.45rem;
     box-shadow: var(--shadow-card);
     margin-bottom: 1.1rem;
     position: relative;
 }
 
-.scenario-header-row {
+.scenario-top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.55rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
     border-bottom: 1px solid #F1F5F9;
 }
 
-.scenario-quote-text {
-    font-size: 1.12rem;
+.scenario-quote-highlight {
+    font-size: 1.14rem;
     font-weight: 700;
-    line-height: 1.68;
-    color: var(--text-main);
-    margin: 0.5rem 0 1.15rem;
+    line-height: 1.7;
+    color: var(--text-title);
+    margin: 0.6rem 0 1.2rem;
     letter-spacing: -0.015em;
 }
 
-/* ==================== TACTILE RADIO BUTTON CARDS ==================== */
+/* ==================== TACTILE & ERGONOMIC OPTION CARDS ==================== */
 div[data-testid="stRadio"] > div[role="radiogroup"] {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.85rem !important;
+    gap: 0.9rem !important;
 }
 
 div[data-testid="stRadio"] label[data-baseweb="radio"] {
     background: var(--surface-card) !important;
     border-radius: var(--radius-lg) !important;
     border: 1.5px solid var(--border-light) !important;
-    padding: 1.15rem 1.35rem !important;
+    padding: 1.15rem 1.4rem !important;
     margin: 0 !important;
     cursor: pointer !important;
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
     box-shadow: var(--shadow-soft) !important;
     display: flex !important;
     align-items: flex-start !important;
-    gap: 0.95rem !important;
-    min-height: 56px !important;
+    gap: 1rem !important;
+    min-height: 58px !important;
 }
 
 div[data-testid="stRadio"] label[data-baseweb="radio"]:hover {
-    border-color: var(--border-medium) !important;
-    background: #FAFBFD !important;
+    border-color: #A5B4FC !important;
+    background: #FAF5FF !important;
     transform: translateY(-2px) !important;
     box-shadow: var(--shadow-lift) !important;
 }
@@ -204,14 +202,14 @@ div[data-testid="stRadio"] label[data-baseweb="radio"]:active {
 
 div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) {
     background: #FFFFFF !important;
-    border-color: var(--border-dark) !important;
-    box-shadow: 0 0 0 2px var(--border-dark), var(--shadow-card) !important;
+    border-color: #4F46E5 !important;
+    box-shadow: 0 0 0 2px #4F46E5, var(--shadow-card) !important;
     transform: translateY(-1px) !important;
 }
 
 div[data-testid="stRadio"] label[data-baseweb="radio"] div[data-testid="stMarkdownContainer"] p {
     font-size: 0.98rem !important;
-    line-height: 1.62 !important;
+    line-height: 1.64 !important;
     color: var(--text-body) !important;
     font-weight: 500 !important;
     margin: 0 !important;
@@ -219,111 +217,119 @@ div[data-testid="stRadio"] label[data-baseweb="radio"] div[data-testid="stMarkdo
 
 div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) div[data-testid="stMarkdownContainer"] p {
     font-weight: 700 !important;
-    color: var(--text-main) !important;
+    color: var(--text-title) !important;
 }
 
-/* ==================== BUTTON POLISH ==================== */
+/* ==================== BUTTONS WITH STREAMLIT & ANTI-SLOP STANDARDS ==================== */
 button[data-testid="baseButton-primary"], button[data-testid="baseButton-secondary"] {
     min-height: 48px !important;
     font-weight: 700 !important;
-    font-size: 0.94rem !important;
+    font-size: 0.95rem !important;
     border-radius: var(--radius-md) !important;
-    transition: all 0.16s ease !important;
+    transition: all 0.18s ease !important;
 }
 
 button[data-testid="baseButton-primary"] {
-    background: #0F172A !important;
+    background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.12) !important;
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25) !important;
 }
 
 button[data-testid="baseButton-primary"]:hover {
     transform: translateY(-1.5px) !important;
-    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18) !important;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35) !important;
+    background: linear-gradient(135deg, #4338CA 0%, #3730A3 100%) !important;
 }
 
 button[data-testid="baseButton-primary"]:active {
     transform: translateY(0.5px) !important;
 }
 
+button[data-testid="baseButton-secondary"] {
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--border-light) !important;
+    color: var(--text-main) !important;
+}
+
 button[data-testid="baseButton-secondary"]:hover {
-    background: #F1F5F9 !important;
-    border-color: var(--border-medium) !important;
+    background: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
     transform: translateY(-1px) !important;
 }
 
-/* ==================== RESULT HERO & ARCHETYPE CARD ==================== */
-.result-hero-box {
+/* ==================== RESULT PRESENTATION ==================== */
+.friendly-result-hero {
     background: var(--surface-card);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-card);
-    padding: 2.3rem 2rem 2.1rem;
+    padding: 2.4rem 2rem 2.2rem;
     text-align: center;
     margin-bottom: 1.25rem;
     position: relative;
     overflow: hidden;
 }
 
-.hero-type-code {
+.hero-type-display {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 3.4rem;
+    font-size: 3.6rem;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.05;
     margin: 0.35rem 0 0.25rem;
 }
 
-.result-tagline-quote {
-    font-size: 1.02rem;
+.tagline-callout {
+    font-size: 1.04rem;
     color: var(--text-body);
-    line-height: 1.68;
+    line-height: 1.7;
     max-width: 580px;
-    margin: 0.75rem auto 0;
+    margin: 0.8rem auto 0;
     font-style: italic;
     background: #F8FAFC;
-    padding: 0.75rem 1.25rem;
-    border-radius: var(--radius-md);
+    padding: 0.85rem 1.35rem;
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-soft);
 }
 
-/* ==================== SPECTRUM METER ROWS ==================== */
-.spectrum-row {
-    margin-bottom: 1.4rem;
+/* ==================== CONTINUOUS SPECTRUM METERS ==================== */
+.spectrum-row-box {
+    margin-bottom: 1.45rem;
 }
 
-.spectrum-row:last-child {
+.spectrum-row-box:last-child {
     margin-bottom: 0.3rem;
 }
 
-.spectrum-meta {
+.spectrum-info-bar {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     margin-bottom: 0.5rem;
 }
 
-.pole-title {
+.pole-tag {
     color: var(--text-muted);
     font-weight: 500;
 }
 
-.pole-title.active {
-    color: var(--text-main);
+.pole-tag.active {
+    color: var(--text-title);
     font-weight: 800;
 }
 
-.spectrum-track {
+.spectrum-track-bg {
     position: relative;
-    height: 11px;
-    background: #E2E8F0;
+    height: 12px;
+    background: #EEF2F6;
     border-radius: var(--radius-pill);
     overflow: hidden;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.spectrum-mid-line {
+.spectrum-center-divider {
     position: absolute;
     left: 50%;
     top: 0;
@@ -334,115 +340,115 @@ button[data-testid="baseButton-secondary"]:hover {
     transform: translateX(-50%);
 }
 
-.spectrum-bar {
+.spectrum-fill-progress {
     height: 100%;
     border-radius: var(--radius-pill);
     transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.badge-borderline-pill {
-    font-size: 0.72rem;
+.badge-balance-pill {
+    font-size: 0.74rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     background: #FEF3C7;
     color: #92400E;
-    padding: 0.18rem 0.65rem;
+    padding: 0.2rem 0.7rem;
     border-radius: var(--radius-pill);
     border: 1px solid #FDE68A;
     margin-left: 0.45rem;
 }
 
 /* ==================== 4-LAYER COGNITIVE STACK CARDS ==================== */
-.cog-layer-card {
+.cog-layer-friendly-card {
     background: var(--surface-card);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
-    padding: 1.2rem 1.4rem;
+    padding: 1.25rem 1.45rem;
     margin-bottom: 0.9rem;
     transition: all 0.16s ease;
     box-shadow: var(--shadow-soft);
 }
 
-.cog-layer-card:hover {
-    border-color: var(--border-medium);
+.cog-layer-friendly-card:hover {
+    border-color: #CBD5E1;
     box-shadow: var(--shadow-card);
-    transform: translateY(-1px);
+    transform: translateY(-1.5px);
 }
 
-.cog-layer-head {
+.cog-layer-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
 }
 
-.cog-role-name {
-    font-size: 0.74rem;
+.cog-role-badge {
+    font-size: 0.76rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     color: var(--text-muted);
 }
 
-.cog-symbol {
+.cog-symbol-tag {
     font-family: 'Space Grotesk', monospace;
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     font-weight: 800;
-    padding: 0.2rem 0.65rem;
-    border-radius: 6px;
-    border: 1px solid;
+    padding: 0.22rem 0.7rem;
+    border-radius: 8px;
+    border: 1.5px solid;
 }
 
-.cog-func-title {
+.cog-func-heading {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 0.3rem;
+    color: var(--text-title);
+    margin-bottom: 0.35rem;
 }
 
-.cog-func-desc {
-    font-size: 0.91rem;
+.cog-func-paragraph {
+    font-size: 0.92rem;
     color: var(--text-body);
-    line-height: 1.65;
+    line-height: 1.68;
     margin: 0;
 }
 
-/* Keyboard hint badge */
-.kbd-bar {
+/* Keyboard hint bar */
+.kbd-legend-bar {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
     font-size: 0.78rem;
     color: var(--text-muted);
     background: var(--surface-subtle);
-    padding: 0.35rem 0.9rem;
+    padding: 0.38rem 0.95rem;
     border-radius: var(--radius-pill);
     border: 1px solid var(--border-light);
-    margin-top: 0.65rem;
+    margin-top: 0.7rem;
 }
 
-.kbd-badge {
+.kbd-chip {
     background: #FFFFFF;
     border: 1px solid #CBD5E1;
     box-shadow: 0 1px 2px rgba(0,0,0,0.06);
     border-radius: 4px;
-    padding: 0.08rem 0.45rem;
+    padding: 0.08rem 0.48rem;
     font-family: monospace;
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     font-weight: 800;
-    color: var(--text-main);
+    color: var(--text-title);
 }
 
-.copy-area-box {
+.copy-box-area {
     background: var(--surface-subtle);
     border-radius: var(--radius-md);
-    padding: 1.15rem 1.35rem;
+    padding: 1.2rem 1.4rem;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.84rem;
     color: var(--text-main);
-    line-height: 1.68;
+    line-height: 1.7;
     border: 1px solid var(--border-light);
     user-select: all;
     margin: 0.6rem 0;
@@ -453,16 +459,16 @@ button[data-testid="baseButton-secondary"]:hover {
     .main .block-container {
         padding: 1.2rem 0.8rem 3.5rem !important;
     }
-    .hero-box, .result-hero-box {
+    .friendly-hero, .friendly-result-hero {
         padding: 1.75rem 1.25rem !important;
     }
-    .scenario-box {
-        padding: 1.3rem 1.2rem !important;
+    .scenario-friendly-card {
+        padding: 1.35rem 1.2rem !important;
     }
-    .scenario-quote-text {
-        font-size: 1.02rem !important;
+    .scenario-quote-highlight {
+        font-size: 1.05rem !important;
     }
-    .kbd-bar {
+    .kbd-legend-bar {
         display: none !important;
     }
 }
@@ -486,48 +492,48 @@ def init_session() -> None:
 
 def render_home() -> None:
     render_html("""
-    <div class="hero-box">
-        <div class="badge-tag-main">Instrumen Tipologi & Arsitektur Kognitif</div>
-        <h1 style="font-family:'Space Grotesk',sans-serif; font-size:2.35rem; font-weight:800; color:#0F172A; margin:0.9rem 0 0.45rem; letter-spacing:-0.035em;">
-            Asesmen Spektrum MBTI
+    <div class="friendly-hero">
+        <div class="badge-friendly-tag">Tipologi & arsitektur kognitif</div>
+        <h1 style="font-family:'Space Grotesk',sans-serif; font-size:2.4rem; font-weight:800; color:#1E1B4B; margin:0.95rem 0 0.45rem; letter-spacing:-0.035em;">
+            Asesmen spektrum MBTI
         </h1>
-        <p style="font-size:1rem; color:#334155; line-height:1.7; max-width:560px; margin:0 auto;">
-            Mengevaluasi preferensi mental dan dinamika 8 fungsi kognitif Carl Jung melalui 24 skenario pertimbangan terukur tanpa bias respon sosial.
+        <p style="font-size:1.02rem; color:#475569; line-height:1.72; max-width:580px; margin:0 auto;">
+            Pahami cara unik pikiran Anda memproses informasi, mengambil keputusan, dan beradaptasi dengan dunia melalui 24 skenario pertimbangan terukur tanpa bias respon sosial.
         </p>
-        <div class="feature-pill-cluster">
-            <span class="feature-pill-item">24 Skenario Riil</span>
-            <span class="feature-pill-item">8 Fungsi Kognitif Carl Jung</span>
-            <span class="feature-pill-item">Spektrum 0–100% Kontinu</span>
-            <span class="feature-pill-item">Deteksi Zona Ekuilibrium</span>
+        <div class="pill-row-cluster">
+            <span class="pill-feature-chip">24 Skenario riil</span>
+            <span class="pill-feature-chip">8 Fungsi kognitif Jung</span>
+            <span class="pill-feature-chip">Spektrum 0–100% kontinu</span>
+            <span class="pill-feature-chip">Deteksi zona ekuilibrium</span>
         </div>
     </div>
     """)
 
-    # 3 Methodology Pillars
+    # 3 Methodology Pillars (Sentence casing per Streamlit guidelines)
     c1, c2, c3 = st.columns(3)
     with c1:
         with st.container(border=True):
-            st.markdown("**:material/balance: Dilema Rasional**")
-            st.caption("Pilihan situasi realistis yang berimbang tanpa opsi klise atau jebakan ideal.")
+            st.markdown("**:material/balance: Dilema realistis**")
+            st.caption("Pilihan situasi sehari-hari yang berimbang tanpa opsi klise atau jebakan ideal.")
     with c2:
         with st.container(border=True):
-            st.markdown("**:material/tune: Spektrum Kontinu**")
-            st.caption("Kuantifikasi proporsional 0–100% serta deteksi ekuilibrium adaptif.")
+            st.markdown("**:material/tune: Spektrum fleksibel**")
+            st.caption("Kuantifikasi proporsional 0–100% yang menghargai fleksibilitas adaptif Anda.")
     with c3:
         with st.container(border=True):
-            st.markdown("**:material/schema: Arsitektur Kognitif**")
-            st.caption("Pemetaan hierarki 4 lapisan fungsi kognitif yang memandu proses pengambilan keputusan.")
+            st.markdown("**:material/schema: Arsitektur kognitif**")
+            st.caption("Pemetaan 4 lapisan fungsi kognitif yang memandu proses berpikir sadar hingga bawah sadar.")
 
     with st.container(border=True):
-        st.markdown("**:material/info: Panduan Pengerjaan**")
+        st.markdown("**:material/info: Panduan pengerjaan**")
         st.caption(
             "• Jawab secara spontan berdasarkan kecenderungan tindakan nyata Anda sehari-hari.\n"
             "• Seluruh pilihan mencerminkan pola adaptasi manusiawi yang valid tanpa nilai benar atau salah.\n"
-            "• Estimasi durasi pengerjaan: 5 hingga 7 menit. Seluruh progres tersimpan secara otomatis."
+            "• Estimasi durasi pengerjaan: 5 hingga 7 menit. Progres tersimpan secara otomatis sehingga Anda bisa santai."
         )
 
     st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
-    if st.button("Mulai Asesmen", key="btn_start_quiz", type="primary", icon=":material/arrow_forward:", width="stretch"):
+    if st.button("Mulai asesmen sekarang", key="btn_start_quiz", type="primary", icon=":material/arrow_forward:", width="stretch"):
         st.session_state.page = "quiz"
         st.session_state.current_q = 0
         st.session_state.answers = {}
@@ -542,8 +548,8 @@ def render_quiz(engine: PersonalityEngine) -> None:
     q = questions[current_idx]
     q_id = q["id"]
 
-    # Keyboard shortcut listener
-    components.html("""
+    # Keyboard shortcut listener using safe HTML/JS script
+    render_html("""
     <script>
     const pDoc = window.parent.document;
     if (!window.parent._mbti_keys_bound) {
@@ -569,7 +575,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
         });
     }
     </script>
-    """, height=0, width=0)
+    """)
 
     pct = int((answered_count / total) * 100)
     dim_map = {
@@ -579,18 +585,18 @@ def render_quiz(engine: PersonalityEngine) -> None:
         "JP": ("Tactics", "Penilaian vs Eksplorasi", "#D97706", "#FFFBEB", "#FDE68A"),
     }
     dim_name, dim_detail, dim_col, dim_bg, dim_bdr = dim_map.get(
-        q["dim"], (q["dim"], "", "#0F172A", "#F1F5F9", "#E2E8F0")
+        q["dim"], (q["dim"], "", "#4F46E5", "#EEF2FF", "#C7D2FE")
     )
 
     # Header and Navigation Container
     with st.container(border=True):
         col_meta, col_jump, col_adv = st.columns([3, 1.8, 1.6], vertical_alignment="center")
         with col_meta:
-            badge_html = f'<span style="background:{dim_bg}; color:{dim_col}; border:1px solid {dim_bdr}; padding:0.25rem 0.75rem; border-radius:9999px; font-size:0.75rem; font-weight:800; letter-spacing:0.04em;">{dim_name} ({q["dim"]})</span>'
+            badge_html = f'<span style="background:{dim_bg}; color:{dim_col}; border:1px solid {dim_bdr}; padding:0.28rem 0.85rem; border-radius:9999px; font-size:0.78rem; font-weight:800; letter-spacing:0.04em;">{dim_name} ({q["dim"]})</span>'
             st.markdown(f"**Butir {current_idx + 1:02d} / {total:02d}** · {badge_html}", unsafe_allow_html=True)
             st.caption(dim_detail)
         with col_jump:
-            with st.popover(f"Daftar Butir ({answered_count}/{total})", icon=":material/format_list_numbered:", width="stretch"):
+            with st.popover(f"Daftar butir ({answered_count}/{total})", icon=":material/format_list_numbered:", width="stretch"):
                 st.caption("Pilih butir untuk meninjau status jawaban:")
                 grid_cols = st.columns(4)
                 for i in range(total):
@@ -604,28 +610,28 @@ def render_quiz(engine: PersonalityEngine) -> None:
                         st.rerun()
         with col_adv:
             auto_val = st.toggle(
-                "Auto-Next",
+                "Otomatis lanjut",
                 value=st.session_state.get("auto_advance", True),
                 key="quiz_auto_adv_toggle",
                 help="Otomatis beralih ke butir berikutnya setelah opsi dipilih",
             )
             st.session_state.auto_advance = auto_val
 
-        st.progress(answered_count / total, text=f"{pct}% Selesai ({answered_count} dari {total} butir terjawab)")
+        st.progress(answered_count / total, text=f"{pct}% selesai ({answered_count} dari {total} butir terjawab)")
 
     # Scenario and Choice Box
     with st.container(border=True):
         render_html(f"""
-        <div style="border-left: 4px solid {dim_col}; padding-left: 0.95rem; margin-bottom: 0.85rem;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.25rem;">
-                <span style="font-size:0.75rem; font-weight:800; color:{dim_col}; text-transform:uppercase; letter-spacing:0.06em;">
+        <div style="border-left: 4px solid {dim_col}; padding-left: 1rem; margin-bottom: 0.9rem;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.3rem;">
+                <span style="font-size:0.76rem; font-weight:800; color:{dim_col}; text-transform:uppercase; letter-spacing:0.06em;">
                     Skenario #{current_idx + 1:02d}
                 </span>
-                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Dinamika: {q.get('cog_tag', '')}</span>
+                <span style="font-size:0.76rem; color:var(--text-muted); font-weight:700;">Dinamika: {q.get('cog_tag', '')}</span>
             </div>
-            <div class="scenario-quote-text">"{q['scenario']}"</div>
+            <div class="scenario-quote-highlight">"{q['scenario']}"</div>
         </div>
-        <div style="font-size:0.84rem; font-weight:700; color:var(--text-body); margin-bottom:0.85rem;">
+        <div style="font-size:0.86rem; font-weight:700; color:var(--text-body); margin-bottom:0.9rem;">
             Pilih respon yang paling mendekati kecenderungan spontan Anda:
         </div>
         """)
@@ -646,7 +652,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
                     st.session_state["trigger_advance_for"] = q_id
 
         chosen_option = st.radio(
-            label=f"Pilihan Butir {q_id}:",
+            label=f"Pilihan butir {q_id}:",
             options=["A", "B"],
             format_func=format_choice,
             index=default_idx,
@@ -659,8 +665,8 @@ def render_quiz(engine: PersonalityEngine) -> None:
             st.session_state.answers[q_id] = chosen_option
 
         render_html("""
-        <div class="kbd-bar">
-            <span>Pintasan Keyboard: <span class="kbd-badge">A</span> / <span class="kbd-badge">1</span> Opsi A &bull; <span class="kbd-badge">B</span> / <span class="kbd-badge">2</span> Opsi B &bull; <span class="kbd-badge">&larr;</span> <span class="kbd-badge">&rarr;</span> Navigasi</span>
+        <div class="kbd-legend-bar">
+            <span>Pintasan keyboard: <span class="kbd-chip">A</span> / <span class="kbd-chip">1</span> Opsi A &bull; <span class="kbd-chip">B</span> / <span class="kbd-chip">2</span> Opsi B &bull; <span class="kbd-chip">&larr;</span> <span class="kbd-chip">&rarr;</span> Navigasi</span>
         </div>
         """)
 
@@ -677,7 +683,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
 
     st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
 
-    # Navigation Buttons
+    # Navigation Buttons (Sentence case)
     c_prev, c_next = st.columns(2, gap="medium")
     with c_prev:
         if current_idx > 0:
@@ -685,7 +691,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
                 st.session_state.current_q -= 1
                 st.rerun()
         else:
-            if st.button("Kembali ke Beranda", key="btn_home_nav", type="secondary", icon=":material/home:", width="stretch"):
+            if st.button("Kembali ke beranda", key="btn_home_nav", type="secondary", icon=":material/home:", width="stretch"):
                 st.session_state.page = "home"
                 st.rerun()
 
@@ -698,7 +704,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
                 st.rerun()
         else:
             all_done = (len(st.session_state.answers) == total)
-            btn_finish_label = "Lihat Hasil Analisis" if all_done else f"Jawab Seluruh Butir ({answered_count}/{total})"
+            btn_finish_label = "Lihat hasil analisis" if all_done else f"Jawab seluruh butir ({answered_count}/{total})"
             if st.button(btn_finish_label, key="btn_finish_test", type="primary", icon=":material/insights:", disabled=not all_done, width="stretch"):
                 with st.spinner("Mengkalkulasi spektrum psikometrik dan arsitektur fungsi kognitif..."):
                     result = engine.compute_result(st.session_state.answers)
@@ -709,22 +715,22 @@ def render_quiz(engine: PersonalityEngine) -> None:
 
 def render_result(result: MBTIResult) -> None:
     profile = get_profile(result.mbti_type)
-    theme_color = profile.get("color", "#0F172A")
-    temperament = profile.get("temperament", "Tipologi Kognitif")
-    bg_tint = profile.get("bg_tint", "#F1F5F9")
-    border_color = profile.get("border_color", "#E2E8F0")
+    theme_color = profile.get("color", "#4F46E5")
+    temperament = profile.get("temperament", "Tipologi kognitif")
+    bg_tint = profile.get("bg_tint", "#EEF2FF")
+    border_color = profile.get("border_color", "#C7D2FE")
 
     # Hero Result Presentation
     render_html(f"""
-    <div class="result-hero-box" style="border-top: 5px solid {theme_color};">
-        <span style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color}; padding:0.32rem 0.95rem; border-radius:9999px; font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">
+    <div class="friendly-result-hero" style="border-top: 5px solid {theme_color};">
+        <span style="background:{bg_tint}; color:{theme_color}; border:1.5px solid {border_color}; padding:0.35rem 1rem; border-radius:9999px; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">
             {temperament}
         </span>
-        <div class="hero-type-code" style="color:{theme_color};">{result.mbti_type}</div>
-        <h2 style="font-family:'Space Grotesk',sans-serif; font-size:1.42rem; font-weight:800; color:#0F172A; margin:0 0 0.35rem; letter-spacing:-0.02em;">
+        <div class="hero-type-display" style="color:{theme_color};">{result.mbti_type}</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-size:1.48rem; font-weight:800; color:#1E1B4B; margin:0 0 0.4rem; letter-spacing:-0.025em;">
             {profile.get('title', result.mbti_type)}
         </h2>
-        <div class="result-tagline-quote" style="border-left: 4px solid {theme_color};">
+        <div class="tagline-callout" style="border-left: 4px solid {theme_color};">
             "{profile.get('tagline', '')}"
         </div>
     </div>
@@ -740,10 +746,10 @@ def render_result(result: MBTIResult) -> None:
         }
         bl_text = ", ".join(dim_labels.get(d, d) for d in result.borderline_dims)
         with st.container(border=True):
-            st.markdown("**:material/info: Zona Ekuilibrium (Borderline Trait)**")
+            st.markdown("**:material/info: Zona ekuilibrium (fleksibilitas adaptif)**")
             st.caption(
-                f"Hasil evaluasi pada dimensi **{bl_text}** berada dalam rentang ekuilibrium (47%–53%). "
-                "Hal ini mencerminkan fleksibilitas kontekstual di mana Anda dapat beroperasi secara seimbang pada kedua kutub sesuai tuntutan situasi."
+                f"Hasil evaluasi pada dimensi **{bl_text}** berada dalam rentang ekuilibrium seimbang (47%–53%). "
+                "Hal ini mencerminkan fleksibilitas kontekstual di mana Anda dapat beroperasi secara luwes pada kedua kutub sesuai kebutuhan situasi."
             )
 
     # Spectrum Rows Generator
@@ -760,44 +766,44 @@ def render_result(result: MBTIResult) -> None:
         pct_neg = round(100.0 - pct_pos, 1)
         dom_side = pos_name if pct_pos >= 50 else neg_name
         dom_pct = pct_pos if pct_pos >= 50 else pct_neg
-        bl_tag = '<span class="badge-borderline-pill">Ekuilibrium</span>' if score_obj.is_borderline else ""
+        bl_tag = '<span class="badge-balance-pill">Ekuilibrium</span>' if score_obj.is_borderline else ""
 
         spectrum_html += f"""
-        <div class="spectrum-row">
-            <div class="spectrum-meta">
-                <span class="pole-title {'active' if pct_pos >= 50 else ''}">{pos_name} {pct_pos:.0f}%</span>
+        <div class="spectrum-row-box">
+            <div class="spectrum-info-bar">
+                <span class="pole-tag {'active' if pct_pos >= 50 else ''}">{pos_name} {pct_pos:.0f}%</span>
                 <div>
-                    <strong style="color:#0F172A; font-size:0.9rem;">{dom_side} {dom_pct:.0f}%</strong>
+                    <strong style="color:#1E1B4B; font-size:0.92rem;">{dom_side} {dom_pct:.0f}%</strong>
                     {bl_tag}
                 </div>
-                <span class="pole-title {'active' if pct_neg > 50 else ''}">{neg_name} {pct_neg:.0f}%</span>
+                <span class="pole-tag {'active' if pct_neg > 50 else ''}">{neg_name} {pct_neg:.0f}%</span>
             </div>
-            <div class="spectrum-track">
-                <div class="spectrum-mid-line" title="Garis Keseimbangan 50%"></div>
-                <div class="spectrum-bar" style="width: {pct_pos}%; background: {bar_col};"></div>
+            <div class="spectrum-track-bg">
+                <div class="spectrum-center-divider" title="Garis Keseimbangan 50%"></div>
+                <div class="spectrum-fill-progress" style="width: {pct_pos}%; background: {bar_col};"></div>
             </div>
         </div>
         """
 
     with st.container(border=True):
-        st.markdown("**Spektrum Kontinu 4 Dimensi**")
+        st.markdown("**Spektrum kontinu 4 dimensi**")
         st.caption("Distribusi proporsional proses mental dan orientasi energi (garis tengah menandai ekuilibrium 50%):")
         render_html(spectrum_html)
 
-    # 4 Deep-Dive Tabs
+    # 4 Deep-Dive Tabs (Sentence case per Streamlit design guidelines)
     tab_cog, tab_strength, tab_work, tab_stress = st.tabs([
-        ":material/schema: Arsitektur Kognitif",
-        ":material/insights: Kompetensi & Kerentanan",
-        ":material/work: Modalitas Kerja",
-        ":material/shield: Regulasi Stres",
+        ":material/schema: Arsitektur kognitif",
+        ":material/insights: Kompetensi & potensi",
+        ":material/work: Modalitas kerja",
+        ":material/shield: Regulasi stres",
     ])
 
     with tab_cog:
         role_meta = {
-            "dominant": ("Pilar Utama (Dominant)", "Fungsi utama yang memandu keputusan sadar sehari-hari"),
-            "auxiliary": ("Pemandu Sekunder (Auxiliary)", "Fungsi penyeimbang yang memperkaya perspektif pilar utama"),
-            "tertiary": ("Arah Relaksasi (Tertiary)", "Fungsi pemulihan energi dan eksplorasi non-tekanan"),
-            "inferior": ("Titik Buta & Stres (Inferior)", "Fungsi bawah sadar yang rentan tertekan dalam kondisi stres akut")
+            "dominant": ("Pilar utama (Dominant)", "Fungsi utama yang memandu keputusan sadar sehari-hari"),
+            "auxiliary": ("Pemandu sekunder (Auxiliary)", "Fungsi penyeimbang yang memperkaya perspektif pilar utama"),
+            "tertiary": ("Arah relaksasi (Tertiary)", "Fungsi pemulihan energi dan eksplorasi non-tekanan"),
+            "inferior": ("Titik buta & stres (Inferior)", "Fungsi bawah sadar yang rentan tertekan dalam kondisi stres akut")
         }
         cog_stack = profile.get("cognitive_roles", result.cognitive_stack)
         cog_items_html = ""
@@ -811,18 +817,18 @@ def render_result(result: MBTIResult) -> None:
             func_code = func_name.split()[0] if func_name else ""
 
             cog_items_html += f"""
-            <div class="cog-layer-card" style="border-left: 4px solid {theme_color};">
-                <div class="cog-layer-head">
-                    <span class="cog-role-name">{r_label}</span>
-                    <span class="cog-symbol" style="color:{theme_color}; background:{bg_tint}; border-color:{border_color};">{func_code}</span>
+            <div class="cog-layer-friendly-card" style="border-left: 4px solid {theme_color};">
+                <div class="cog-layer-header">
+                    <span class="cog-role-badge">{r_label}</span>
+                    <span class="cog-symbol-tag" style="color:{theme_color}; background:{bg_tint}; border-color:{border_color};">{func_code}</span>
                 </div>
-                <div class="cog-func-title">{func_name}</div>
-                <p class="cog-func-desc">{func_detail}</p>
+                <div class="cog-func-heading">{func_name}</div>
+                <p class="cog-func-paragraph">{func_detail}</p>
             </div>
             """
 
         with st.container(border=True):
-            st.markdown("**Hierarki 4 Lapisan Fungsi Kognitif Carl Jung**")
+            st.markdown("**Hierarki 4 lapisan fungsi kognitif Carl Jung**")
             st.caption("Pemetaan arsitektur mental dari fungsi yang paling sadar hingga titik buta bawah sadar:")
             render_html(cog_items_html)
 
@@ -831,21 +837,21 @@ def render_result(result: MBTIResult) -> None:
         c_sup, c_bli = st.columns(2, gap="medium")
         with c_sup:
             with st.container(border=True):
-                st.markdown("**:material/check_circle: Kompetensi Inti**")
+                st.markdown("**:material/check_circle: Kompetensi utama**")
                 st.caption(sb.get("strengths", sb.get("superpower", "-")))
         with c_bli:
             with st.container(border=True):
-                st.markdown("**:material/warning: Area Kerentanan**")
+                st.markdown("**:material/tips_and_updates: Area pengembangan diri**")
                 st.caption(sb.get("blindspots", sb.get("blindspot", "-")))
 
     with tab_work:
         with st.container(border=True):
-            st.markdown("**:material/hub: Modalitas Kerja & Pola Kolaborasi**")
+            st.markdown("**:material/hub: Modalitas kerja & pola kolaborasi**")
             st.caption(profile.get("work_style", profile.get("daily_vibe", "-")))
 
     with tab_stress:
         with st.container(border=True):
-            st.markdown("**:material/healing: Dinamika Stres & Protokol Pemulihan**")
+            st.markdown("**:material/healing: Dinamika stres & protokol pemulihan**")
             st.caption(profile.get("stress_dynamics", profile.get("stress_response", "-")))
 
     # Structured Export
@@ -863,11 +869,11 @@ def render_result(result: MBTIResult) -> None:
     )
 
     with st.container(border=True):
-        st.markdown("**Unduh Laporan Asesmen**")
-        st.caption("Salin ringkasan teks atau unduh dokumen evaluasi untuk keperluan arsip profesional:")
-        render_html(f'<div class="copy-area-box">{summary_text}</div>')
+        st.markdown("**Unduh laporan asesmen**")
+        st.caption("Salin ringkasan teks atau unduh dokumen evaluasi untuk keperluan arsip pribadi maupun profesional:")
+        render_html(f'<div class="copy-box-area">{summary_text}</div>')
         st.download_button(
-            label="Unduh Dokumen Laporan (.txt)",
+            label="Unduh dokumen laporan (.txt)",
             data=summary_text,
             file_name=f"Laporan_MBTI_{result.mbti_type}.txt",
             mime="text/plain",
@@ -880,14 +886,14 @@ def render_result(result: MBTIResult) -> None:
     # Action Buttons Row
     c_ret, c_hom = st.columns(2, gap="medium")
     with c_ret:
-        if st.button("Ulangi Asesmen", key="btn_repeat_test", type="primary", icon=":material/restart_alt:", width="stretch"):
+        if st.button("Ulangi asesmen", key="btn_repeat_test", type="primary", icon=":material/restart_alt:", width="stretch"):
             st.session_state.page = "quiz"
             st.session_state.answers = {}
             st.session_state.current_q = 0
             st.session_state.result = None
             st.rerun()
     with c_hom:
-        if st.button("Kembali ke Beranda", key="btn_return_home_res", type="secondary", icon=":material/home:", width="stretch"):
+        if st.button("Kembali ke beranda", key="btn_return_home_res", type="secondary", icon=":material/home:", width="stretch"):
             st.session_state.page = "home"
             st.session_state.answers = {}
             st.session_state.current_q = 0
