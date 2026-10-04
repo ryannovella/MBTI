@@ -67,18 +67,34 @@ Setiap tipe MBTI dikelompokkan ke dalam 4 kuadran temperamen klasik Keirsey/Jung
 
 ---
 
-## 5. Tata Letak Hasil Analisis & Segmented Tabs
+## 5. Tata Letak Hasil Analisis, Spektrum 4 Dimensi & Segmented Tabs
 
 - **Karakter Menyatu Alami (Seamless Avatar):**
   - Pada hero card hasil analisis, karakter SVG tidak lagi dibingkai oleh pod/card terpisah.
   - Karakter berdiri bebas secara organik berdampingan dengan identitas teks dan memiliki efek `drop-shadow` lembut sehingga menyatu harmonis dengan kanvas hero.
-- **Tab Ringkas Bebas Scroll Horizontal:**
-  - Label 4 tab analisa dibuat ringkas dan padat: `Pola pikir`, `Kelebihan`, `Gaya kerja`, dan `Sisi stres`.
-  - Tab bar diformat sebagai segmented switch glass pill yang membagi kolom secara proporsional (`flex: 1 1 0`) sehingga muat sempurna pada desktop maupun ponsel tanpa memicu scroll horizontal.
+- **Spektrum Kecenderungan 4 Dimensi (Dual-Color & Anti Bar Kosong):**
+  - **Pill Kategori Simetris:** Pill penanda kutub kiri dan kanan (misal Ekstraversi vs Introversi) memiliki lebar identik (50% dari row), tinggi seragam, dan tata letak simetris dengan indikator persentase serta tag dominan.
+  - **Bar Dua Warna Penuh:** Menggantikan track abu-abu kosong dengan bar split dua warna yang terisi penuh 100% secara proporsional sesuai rasio persentase kedua kutub, dilengkapi marker tengah putih di titik seimbang 50%.
+  - **Kartu Penjelasan Kompak:** Di bawah setiap bar spektrum, disematkan kartu penjelasan ringkas dan rapi dua kolom yang menguraikan definisi kognitif masing-masing kutub kecenderungan dengan penekanan visual pada sisi dominan.
+- **Tab Simetris & Proporsional:**
+  - Tombol tab di beranda (`Analis (NT)`, `Diplomat (NF)`, `Pengawal (SJ)`, `Penjelajah (SP)`) dan di halaman hasil (`Pola pikir`, `Kelebihan`, `Gaya kerja`, `Sisi stres`) diatur dengan lebar simetris dan proporsional (25% per tombol), sejajar presisi dengan lebar card di bawahnya.
+  - Dilengkapi optimasi media query untuk resolusi mobile dan tablet agar tidak memicu scroll horizontal dan tetap terbaca jernih.
 
 ---
 
-## 6. Diksi Tombol & Copywriting (Clean Anti-Slop Standard)
+## 6. Fitur Mode Tampilan (Light & Dark Mode)
+
+- **Default Otomatis Mengikuti Device:**
+  - Secara bawaan (*default*), tema menggunakan deteksi otomatis preferensi perangkat pengguna melalui `@media (prefers-color-scheme: dark)`.
+- **Selector Manual di Top Bar:**
+  - Kontrol ringkas `Auto`, `Terang`, `Gelap` di bar navigasi atas menggunakan `st.segmented_control` yang terintegrasi langsung dengan session state.
+- **Harmoni Desain Kaca di Kedua Mode:**
+  - **Mode Terang:** Kanvas off-white sejuk (`#F8FAFC`), permukaan kaca putih susu transparan, border halus, teks slate pekat berdaya baca tinggi.
+  - **Mode Gelap:** Kanvas deep navy charcoal (`#090D16`), permukaan obsidian glass semi-transparan, border kaca bercahaya lembut, teks kontras tinggi (`#F8FAFC`).
+
+---
+
+## 7. Diksi Tombol & Copywriting (Clean Anti-Slop Standard)
 
 - **Tombol Utama (Clean CTAs):**
   - Beranda: `Mulai asesmen`
