@@ -708,13 +708,13 @@ def render_home() -> None:
             Asesmen spektrum MBTI
         </h1>
         <p style="font-size:1.02rem; color:#475569; line-height:1.72; max-width:620px; margin:0 auto;">
-            Temukan arsitektur kognitif unik pikiran Anda, cara mengolah informasi, dan pola adaptasi alami melalui 24 skenario pertimbangan berimbang tanpa penghakiman sosial.
+            Kenali tipe kepribadian dan cara unik otakmu memproses hal-hal di sekitarmu, mengambil keputusan, dan berinteraksi sehari-hari lewat 24 skenario yang dekat banget sama kehidupan nyata.
         </p>
         <div class="pill-row-cluster">
-            <span class="pill-feature-chip">24 Skenario riil</span>
-            <span class="pill-feature-chip">8 Fungsi kognitif Jung</span>
-            <span class="pill-feature-chip">Spektrum 0–100% kontinu</span>
-            <span class="pill-feature-chip">Deteksi zona ekuilibrium</span>
+            <span class="pill-feature-chip">24 Skenario kehidupan nyata</span>
+            <span class="pill-feature-chip">8 Fungsi kognitif Carl Jung</span>
+            <span class="pill-feature-chip">Spektrum kontinu 0–100%</span>
+            <span class="pill-feature-chip">Bebas jawaban benar/salah</span>
         </div>
     </div>
     """)
@@ -724,15 +724,15 @@ def render_home() -> None:
     <div class="pillar-grid-row">
         <div class="pillar-card">
             <div class="pillar-title">Dilema realistis</div>
-            <p class="pillar-desc">Pilihan situasi nyata sehari-hari yang berimbang tanpa opsi klise atau jebakan ideal.</p>
+            <p class="pillar-desc">Pilihan situasinya membumi dan nyata, nggak ada opsi klise atau jebakan jawaban yang dibuat-buat.</p>
         </div>
         <div class="pillar-card">
             <div class="pillar-title">Spektrum fleksibel</div>
-            <p class="pillar-desc">Kuantifikasi proporsional 0–100% yang menghargai kelenturan adaptif Anda.</p>
+            <p class="pillar-desc">Kuantifikasi proporsional 0–100% yang menghargai bahwa manusia itu dinamis dan adaptif.</p>
         </div>
         <div class="pillar-card">
             <div class="pillar-title">Arsitektur kognitif</div>
-            <p class="pillar-desc">Pemetaan 4 lapisan fungsi kognitif Carl Jung dari proses sadar hingga bawah sadar.</p>
+            <p class="pillar-desc">Menelusuri 4 lapisan cara berpikirmu, dari yang paling naluriah sampai sisi yang rentan lelah saat stres.</p>
         </div>
     </div>
     """)
@@ -742,7 +742,7 @@ def render_home() -> None:
     <div class="showcase-header-box">
         <div class="showcase-heading">Eksplorasi 16 arketipe kepribadian</div>
         <div class="showcase-subheading">
-            Tiap arketipe memiliki karakter visual, cara berpikir, dan kontribusi unik dalam memandang serta mengubah dunia:
+            Tiap arketipe punya karakter visual unik, cara pandang tersendiri, dan kontribusi seru dalam menjalani hidup:
         </div>
     </div>
     """)
@@ -804,9 +804,9 @@ def render_home() -> None:
     with st.container(border=True):
         st.markdown("**:material/info: Panduan pengerjaan**")
         st.caption(
-            "• Jawab secara spontan berdasarkan kecenderungan tindakan nyata Anda sehari-hari.\n"
-            "• Seluruh pilihan mencerminkan pola adaptasi manusiawi yang valid tanpa nilai benar atau salah.\n"
-            "• Estimasi durasi pengerjaan: 5 hingga 7 menit. Progres tersimpan secara otomatis."
+            "• Jawab santai dan spontan aja, pilih opsi yang paling menggambarkan kebiasaan nyatamu sehari-hari.\n"
+            "• Nggak ada jawaban yang benar atau salah; semua pilihan itu normal dan manusiawi banget.\n"
+            "• Cuma butuh waktu sekitar 5 sampai 7 menit. Progres jawabanmu tersimpan otomatis, jadi kamu bisa santai."
         )
 
     st.markdown("<div style='height:0.6rem;'></div>", unsafe_allow_html=True)
@@ -855,10 +855,10 @@ def render_quiz(engine: PersonalityEngine) -> None:
     """)
 
     dim_map = {
-        "EI": ("Mind", "Ekstraversi vs Introversi", "#4F46E5", "#EEF2FF", "#C7D2FE"),
-        "SN": ("Energy", "Penginderaan vs Intuisi", "#059669", "#ECFDF5", "#A7F3D0"),
-        "TF": ("Nature", "Pemikiran vs Perasaan", "#0284C7", "#F0F9FF", "#BAE6FD"),
-        "JP": ("Tactics", "Penilaian vs Eksplorasi", "#D97706", "#FFFBEB", "#FDE68A"),
+        "EI": ("Mind", "Sumber energi: Kumpul seru vs Me-time tenang", "#4F46E5", "#EEF2FF", "#C7D2FE"),
+        "SN": ("Energy", "Cara olah info: Fakta konkret vs Ide & kemungkinan", "#059669", "#ECFDF5", "#A7F3D0"),
+        "TF": ("Nature", "Cara ambil keputusan: Logika objektif vs Rasa & empati", "#0284C7", "#F0F9FF", "#BAE6FD"),
+        "JP": ("Tactics", "Pola keseharian: Rencana teratur vs Fleksibel santai", "#D97706", "#FFFBEB", "#FDE68A"),
     }
     dim_name, dim_detail, dim_col, dim_bg, dim_bdr = dim_map.get(
         q["dim"], (q["dim"], "", "#4F46E5", "#EEF2FF", "#C7D2FE")
@@ -897,7 +897,7 @@ def render_quiz(engine: PersonalityEngine) -> None:
     render_html(f"""
     <div class="scenario-friendly-card" style="border-top: 4px solid {dim_col};">
         <div class="scenario-top-bar">
-            <span style="font-size:0.78rem; font-weight:800; color:{dim_col}; text-transform:uppercase; letter-spacing:0.04em;">Skenario Pertimbangan #{current_idx + 1}</span>
+            <span style="font-size:0.78rem; font-weight:800; color:{dim_col}; text-transform:uppercase; letter-spacing:0.04em;">Skenario Nyata #{current_idx + 1}</span>
             <span style="font-size:0.78rem; color:#64748B; font-weight:600;">{answered_count} dari {total} butir terjawab</span>
         </div>
         <div class="scenario-quote-highlight">"{q['scenario']}"</div>
@@ -1012,25 +1012,25 @@ def render_result(result: MBTIResult) -> None:
     # Borderline Advisory
     if result.borderline_dims:
         dim_labels = {
-            "EI": "Mind (Ekstraversi vs Introversi)",
-            "SN": "Energy (Penginderaan vs Intuisi)",
-            "TF": "Nature (Pemikiran vs Perasaan)",
-            "JP": "Tactics (Penilaian vs Eksplorasi)",
+            "EI": "Mind (Sosial vs Me-Time)",
+            "SN": "Energy (Fakta Nyata vs Ide & Kemungkinan)",
+            "TF": "Nature (Logika Objektif vs Rasa & Empati)",
+            "JP": "Tactics (Rencana Teratur vs Fleksibel Santai)",
         }
         bl_text = ", ".join(dim_labels.get(d, d) for d in result.borderline_dims)
         with st.container(border=True):
-            st.markdown("**:material/info: Zona ekuilibrium (fleksibilitas adaptif)**")
+            st.markdown("**:material/info: Zona fleksibel (keseimbangan adaptif)**")
             st.caption(
-                f"Hasil evaluasi pada dimensi **{bl_text}** berada dalam rentang ekuilibrium seimbang (47%–53%). "
-                "Hal ini mencerminkan fleksibilitas kontekstual di mana Anda dapat beroperasi secara luwes pada kedua kutub sesuai kebutuhan situasi."
+                f"Skormu pada dimensi **{bl_text}** berada di rentang tengah yang seimbang (47%–53%). "
+                "Ini tanda bagus kalau kamu punya fleksibilitas tinggi: bisa menyesuaikan diri dengan luwes sesuai situasi dan kebutuhan momen yang kamu hadapi!"
             )
 
     # Spectrum Rows Generator
     dim_pairs = {
-        "EI": ("Ekstraversi (E)", "Introversi (I)", "#4F46E5"),
-        "SN": ("Penginderaan (S)", "Intuisi (N)", "#059669"),
-        "TF": ("Pemikiran (T)", "Perasaan (F)", "#0284C7"),
-        "JP": ("Penilaian (J)", "Eksplorasi (P)", "#D97706"),
+        "EI": ("Ekstraversi (Sosial)", "Introversi (Me-Time)", "#4F46E5"),
+        "SN": ("Penginderaan (Fakta Nyata)", "Intuisi (Ide & Pola)", "#059669"),
+        "TF": ("Pemikiran (Logika Objektif)", "Perasaan (Rasa & Empati)", "#0284C7"),
+        "JP": ("Penilaian (Rencana Teratur)", "Eksplorasi (Fleksibel Spontan)", "#D97706"),
     }
     spectrum_html = ""
     for dim_code, (pos_name, neg_name, bar_col) in dim_pairs.items():
@@ -1039,7 +1039,7 @@ def render_result(result: MBTIResult) -> None:
         pct_neg = round(100.0 - pct_pos, 1)
         dom_side = pos_name if pct_pos >= 50 else neg_name
         dom_pct = pct_pos if pct_pos >= 50 else pct_neg
-        bl_tag = '<span class="badge-balance-pill">Ekuilibrium</span>' if score_obj.is_borderline else ""
+        bl_tag = '<span class="badge-balance-pill">Fleksibel</span>' if score_obj.is_borderline else ""
 
         spectrum_html += f"""
         <div class="spectrum-row-box">
@@ -1059,24 +1059,24 @@ def render_result(result: MBTIResult) -> None:
         """
 
     with st.container(border=True):
-        st.markdown("**Spektrum kontinu 4 dimensi**")
-        st.caption("Distribusi proporsional proses mental dan orientasi energi (garis tengah menandai ekuilibrium 50%):")
+        st.markdown("**Spektrum kecenderungan 4 dimensi**")
+        st.caption("Pola alami caramu berpikir dan mengolah energi (garis tengah menandai titik keseimbangan 50%):")
         render_html(spectrum_html)
 
     # 4 Deep-Dive Tabs
     tab_cog, tab_strength, tab_work, tab_stress = st.tabs([
-        ":material/schema: Arsitektur kognitif",
-        ":material/insights: Kompetensi & potensi",
-        ":material/work: Modalitas kerja",
-        ":material/shield: Regulasi stres",
+        ":material/schema: Cara berpikir",
+        ":material/insights: Kelebihan & titik buta",
+        ":material/work: Gaya kerja & pertemanan",
+        ":material/shield: Menghadapi stres",
     ])
 
     with tab_cog:
         role_meta = {
-            "dominant": ("Pilar utama (Dominant)", "Fungsi utama yang memandu keputusan sadar sehari-hari"),
-            "auxiliary": ("Pemandu sekunder (Auxiliary)", "Fungsi penyeimbang yang memperkaya perspektif pilar utama"),
-            "tertiary": ("Arah relaksasi (Tertiary)", "Fungsi pemulihan energi dan eksplorasi non-tekanan"),
-            "inferior": ("Titik buta & stres (Inferior)", "Fungsi bawah sadar yang rentan tertekan dalam kondisi stres akut")
+            "dominant": ("Pilar utama (Dominant)", "Kekuatan naluriah terbesarmu dalam mengambil keputusan sehari-hari"),
+            "auxiliary": ("Pemandu pendukung (Auxiliary)", "Teman berpikir yang bikin langkahmu tetap seimbang dan realistis"),
+            "tertiary": ("Sisi santai (Tertiary)", "Sisi rileks yang muncul waktu kamu lagi santai dan nggak ada beban"),
+            "inferior": ("Titik rawan lelah (Inferior)", "Sisi yang paling cepat capek saat kamu burnout atau stres berat")
         }
         cog_stack = profile.get("cognitive_roles", result.cognitive_stack)
         cog_items_html = ""
@@ -1100,7 +1100,7 @@ def render_result(result: MBTIResult) -> None:
 
         with st.container(border=True):
             st.markdown("**Hierarki 4 lapisan fungsi kognitif Carl Jung**")
-            st.caption("Pemetaan arsitektur mental dari fungsi yang paling sadar hingga titik buta bawah sadar:")
+            st.caption("Memetakan cara kerja otakmu dari naluri yang paling aktif sampai sisi yang rentan lelah:")
             render_html(cog_items_html)
 
     with tab_strength:
@@ -1108,35 +1108,35 @@ def render_result(result: MBTIResult) -> None:
         c_sup, c_bli = st.columns(2, gap="medium")
         with c_sup:
             with st.container(border=True):
-                st.markdown("**:material/check_circle: Kompetensi utama**")
+                st.markdown("**:material/check_circle: Kelebihan utamamu**")
                 st.caption(sb.get("strengths", "-"))
         with c_bli:
             with st.container(border=True):
-                st.markdown("**:material/tips_and_updates: Area pengembangan diri**")
+                st.markdown("**:material/tips_and_updates: Hal yang perlu kamu waspadai**")
                 st.caption(sb.get("blindspots", "-"))
 
     with tab_work:
         with st.container(border=True):
-            st.markdown("**:material/hub: Modalitas kerja & pola kolaborasi**")
+            st.markdown("**:material/hub: Gaya kerja & dinamika tim**")
             st.caption(profile.get("work_style", "-"))
 
     with tab_stress:
         with st.container(border=True):
-            st.markdown("**:material/healing: Dinamika stres & protokol pemulihan**")
+            st.markdown("**:material/healing: Saat stres & cara recharge paling ampuh**")
             st.caption(profile.get("stress_dynamics", "-"))
 
     # Structured Export
     summary_text = (
-        f"[LAPORAN ASESMEN TIPOLOGI MBTI]\n"
+        f"[HASIL ASESMEN TIPE MBTI]\n"
         f"Tipe: {result.mbti_type}: {archetype}\n"
-        f"Temperamen: {temperament}\n\n"
-        f"Distribusi Spektrum:\n"
-        f"• Mind:    {result.dimensions['EI'].pos_pct:.0f}% Extraversion / {result.dimensions['EI'].neg_pct:.0f}% Introversion\n"
-        f"• Energy:  {result.dimensions['SN'].pos_pct:.0f}% Sensing / {result.dimensions['SN'].neg_pct:.0f}% Intuition\n"
-        f"• Nature:  {result.dimensions['TF'].pos_pct:.0f}% Thinking / {result.dimensions['TF'].neg_pct:.0f}% Feeling\n"
-        f"• Tactics: {result.dimensions['JP'].pos_pct:.0f}% Judging / {result.dimensions['JP'].neg_pct:.0f}% Prospecting\n\n"
+        f"Kelompok: {temperament}\n\n"
+        f"Kecenderungan Spektrum:\n"
+        f"• Mind:    {result.dimensions['EI'].pos_pct:.0f}% Ekstraversi / {result.dimensions['EI'].neg_pct:.0f}% Introversi\n"
+        f"• Energy:  {result.dimensions['SN'].pos_pct:.0f}% Penginderaan / {result.dimensions['SN'].neg_pct:.0f}% Intuisi\n"
+        f"• Nature:  {result.dimensions['TF'].pos_pct:.0f}% Pemikiran / {result.dimensions['TF'].neg_pct:.0f}% Perasaan\n"
+        f"• Tactics: {result.dimensions['JP'].pos_pct:.0f}% Penilaian / {result.dimensions['JP'].neg_pct:.0f}% Eksplorasi\n\n"
         f"Fungsi Dominan: {result.cognitive_stack.get('dominant', '-')}\n"
-        f"Ringkasan: \"{profile.get('tagline', '')}\""
+        f"Catatan: \"{profile.get('tagline', '')}\""
     )
 
     with st.container(border=True):

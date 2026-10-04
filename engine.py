@@ -9,27 +9,27 @@ import streamlit as st
 FALLBACK_QUESTIONS: List[dict] = [
     {
         "id": 1, "dim": "EI", "cog_tag": "Fe/Ti",
-        "scenario": "Setelah seharian interaksi sosial intens, cara terbaik kamu recharge adalah...",
-        "opt_a": {"text": "Ngobrol santai sama orang-orang dekat.", "dim": "E", "val": 1},
-        "opt_b": {"text": "Butuh waktu sendiri yang tenang.", "dim": "I", "val": 1}
+        "scenario": "Lagi asyik nongkrong bareng teman, tiba-tiba di tengah acara baterai sosialmu mulai habis drastis. Biasanya respon alamimu...",
+        "opt_a": {"text": "Tetap lanjut nimbrung dan nyari obrolan seru, karena interaksi justru bisa naikin mood dan energimu lagi.", "dim": "E", "val": 1},
+        "opt_b": {"text": "Memilih diam, menyimak obrolan saja, dan mengurangi ngomong sambil pelan-pelan istirahatin pikiran.", "dim": "I", "val": 1}
     },
     {
         "id": 7, "dim": "SN", "cog_tag": "Si/Ne",
-        "scenario": "Saat brainstorming ide project baru, kamu lebih nyaman...",
-        "opt_a": {"text": "Mulai dari referensi dan best practice yang ada.", "dim": "S", "val": 1},
-        "opt_b": {"text": "Eksplorasi konsep baru yang belum pernah dicoba.", "dim": "N", "val": 1}
+        "scenario": "Waktu tim lagi brainstorming konsep baru, kamu paling nyaman kalau mulai dari mana...",
+        "opt_a": {"text": "Dari contoh nyata dan referensi yang sudah terbukti berhasil, baru kita modifikasi sesuai kebutuhan.", "dim": "S", "val": 1},
+        "opt_b": {"text": "Dari ide liar dan konsep yang belum pernah dicoba, membayangkan potensi ke depan tanpa batasan dulu.", "dim": "N", "val": 1}
     },
     {
         "id": 13, "dim": "TF", "cog_tag": "Ti/Fe",
-        "scenario": "Teman minta pendapat soal keputusan berisiko. Kamu...",
-        "opt_a": {"text": "Kasih analisis objektif tentang risiko dan celahnya.", "dim": "T", "val": 1},
-        "opt_b": {"text": "Tanya kondisinya dulu, lalu kasih feedback konstruktif.", "dim": "F", "val": 1}
+        "scenario": "Teman dekat minta pendapat jujur soal rencana bisnis atau keputusannya yang menurutmu rapuh. Pendekatanmu...",
+        "opt_a": {"text": "Kasih analisis kritis apa adanya soal titik lemah dan risikonya, karena itu yang paling dia butuhkan biar nggak rugi.", "dim": "T", "val": 1},
+        "opt_b": {"text": "Jaga perasaannya dulu dan apresiasi niat baiknya, baru sampaikan masukan secara halus biar dia tetap semangat.", "dim": "F", "val": 1}
     },
     {
         "id": 19, "dim": "JP", "cog_tag": "Je/Pe",
-        "scenario": "Punya project besar dengan deadline 2 minggu. Pendekatanmu...",
-        "opt_a": {"text": "Bikin timeline terstruktur dari awal.", "dim": "J", "val": 1},
-        "opt_b": {"text": "Punya gambaran umum, detail mengikuti kondisi hari itu.", "dim": "P", "val": 1}
+        "scenario": "Kamu dikasih tugas atau proyek yang tenggat waktunya masih dua minggu lagi. Ritme kerjamu...",
+        "opt_a": {"text": "Bikin jadwal cicilan per hari atau per minggu dari sekarang, biar di akhir waktu tinggal finishing santai.", "dim": "J", "val": 1},
+        "opt_b": {"text": "Kumpulin bahan santai dulu di awal, lalu eksekusi ngebut dengan fokus penuh pas momentum dan energinya lagi dapet.", "dim": "P", "val": 1}
     }
 ]
 
