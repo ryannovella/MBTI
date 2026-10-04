@@ -1,6 +1,8 @@
 from __future__ import annotations
 import textwrap
+import time
 import streamlit as st
+import streamlit.components.v1 as components
 from engine import PersonalityEngine, MBTIResult
 from profiles import get_profile
 
@@ -347,6 +349,59 @@ div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) div[da
     margin: 0.8rem 0;
     white-space: pre-wrap;
 }
+
+/* Touch targets and mobile optimization */
+button[data-testid="baseButton-primary"], button[data-testid="baseButton-secondary"] {
+    min-height: 46px !important;
+    font-weight: 700 !important;
+    border-radius: var(--radius-md) !important;
+}
+
+.keyboard-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    background: #EAF2EE;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-pill);
+    margin-top: 0.5rem;
+}
+
+.kbd-key {
+    background: #FFFFFF;
+    border: 1px solid #CBDCD5;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-headline);
+}
+
+@media (max-width: 640px) {
+    .main .block-container {
+        padding: 1.2rem 0.75rem 3.5rem !important;
+    }
+    .clay-hero {
+        padding: 1.8rem 1.1rem !important;
+    }
+    .scenario-box {
+        padding: 1rem 1.1rem !important;
+    }
+    .scenario-text {
+        font-size: 1rem !important;
+    }
+    div[data-testid="stRadio"] label[data-baseweb="radio"] {
+        padding: 1rem 1.1rem !important;
+        min-height: 52px !important;
+    }
+    .keyboard-hint {
+        display: none !important;
+    }
+}
 </style>
 """
 
@@ -357,6 +412,8 @@ def init_session() -> None:
         "answers": {},
         "current_q": 0,
         "result": None,
+        "auto_advance": True,
+        "trigger_advance_for": None,
     }
     for key, val in defaults.items():
         if key not in st.session_state:
@@ -438,6 +495,35 @@ def render_quiz(engine: PersonalityEngine) -> None:
     q = questions[current_idx]
     q_id = q["id"]
 
+    # Inject Keyboard Navigation Shortcuts Listener
+    components.html("""
+    <script>
+    const pDoc = window.parent.document;
+    if (!window.parent._mbti_keys_bound) {
+        window.parent._mbti_keys_bound = true;
+        pDoc.addEventListener('keydown', function(e) {
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+            const key = e.key.toLowerCase();
+            if (key === 'a' || key === '1') {
+                const radios = pDoc.querySelectorAll('div[data-testid="stRadio"] label[data-baseweb="radio"]');
+                if (radios.length >= 1) radios[0].click();
+            } else if (key === 'b' || key === '2') {
+                const radios = pDoc.querySelectorAll('div[data-testid="stRadio"] label[data-baseweb="radio"]');
+                if (radios.length >= 2) radios[1].click();
+            } else if (e.key === 'ArrowLeft') {
+                const btns = Array.from(pDoc.querySelectorAll('button'));
+                const prev = btns.find(b => b.innerText.includes('Sebelumnya'));
+                if (prev) prev.click();
+            } else if (e.key === 'ArrowRight') {
+                const btns = Array.from(pDoc.querySelectorAll('button'));
+                const next = btns.find(b => b.innerText.includes('Berikutnya'));
+                if (next && !next.disabled) next.click();
+            }
+        });
+    }
+    </script>
+    """, height=0, width=0)
+
     pct = int((answered_count / total) * 100)
     dim_map = {
         "EI": ("Mind", "Ekstraversi vs Introversi"),
@@ -461,23 +547,31 @@ def render_quiz(engine: PersonalityEngine) -> None:
 
     # Progress & Header Container
     with st.container(border=True):
-        col_meta, col_jump = st.columns([3, 2], vertical_alignment="center")
+        col_meta, col_jump, col_adv = st.columns([3, 2, 1.8], vertical_alignment="center")
         with col_meta:
             st.markdown(f"**Butir {current_idx + 1} dari {total}** · <span class='badge-dim-code'>{dim_name} ({q['dim']})</span>", unsafe_allow_html=True)
             st.caption(dim_detail)
         with col_jump:
-            with st.popover(f"Daftar Soal ({answered_count}/{total})", icon=":material/format_list_numbered:", width="stretch"):
+            with st.popover(f"Daftar ({answered_count}/{total})", icon=":material/format_list_numbered:", width="stretch"):
                 st.markdown("**Pilih butir untuk langsung meninjau:**")
-                grid_cols = st.columns(6)
+                grid_cols = st.columns(4)
                 for i in range(total):
                     item_qid = questions[i]["id"]
                     is_cur = (i == current_idx)
                     is_ans = (item_qid in st.session_state.answers)
                     lbl = f"{i + 1}{'✓' if is_ans else ''}"
                     btn_kind = "primary" if is_cur else "secondary"
-                    if grid_cols[i % 6].button(lbl, key=f"jump_{i}", type=btn_kind, width="stretch"):
+                    if grid_cols[i % 4].button(lbl, key=f"jump_{i}", type=btn_kind, width="stretch"):
                         st.session_state.current_q = i
                         st.rerun()
+        with col_adv:
+            auto_val = st.toggle(
+                "Auto-Next",
+                value=st.session_state.get("auto_advance", True),
+                key="quiz_auto_adv_toggle",
+                help="Otomatis melompat ke butir berikutnya setelah memilih opsi",
+            )
+            st.session_state.auto_advance = auto_val
 
         st.progress(answered_count / total, text=f"Progres: {pct}% Selesai ({answered_count} dari {total} butir terjawab)")
         render_html(f'<div class="matrix-row">{dots_html}</div>')
@@ -507,6 +601,13 @@ def render_quiz(engine: PersonalityEngine) -> None:
                 return f"🔹 Opsi A:  {q['opt_a']['text']}"
             return f"🔹 Opsi B:  {q['opt_b']['text']}"
 
+        def on_radio_selected() -> None:
+            chosen = st.session_state.get(f"radio_q_{q_id}")
+            if chosen:
+                st.session_state.answers[q_id] = chosen
+                if st.session_state.get("auto_advance", True):
+                    st.session_state["trigger_advance_for"] = q_id
+
         chosen_option = st.radio(
             label=f"Pilihan Butir {q_id}:",
             options=["A", "B"],
@@ -514,10 +615,28 @@ def render_quiz(engine: PersonalityEngine) -> None:
             index=default_idx,
             key=f"radio_q_{q_id}",
             label_visibility="collapsed",
+            on_change=on_radio_selected,
         )
 
         if chosen_option:
             st.session_state.answers[q_id] = chosen_option
+
+        render_html("""
+        <div class="keyboard-hint">
+            <span>💡 <b>Shortcut:</b> Tekan <span class="kbd-key">A</span> / <span class="kbd-key">1</span> untuk Opsi A &bull; <span class="kbd-key">B</span> / <span class="kbd-key">2</span> untuk Opsi B &bull; <span class="kbd-key">&larr;</span> <span class="kbd-key">&rarr;</span> navigasi</span>
+        </div>
+        """)
+
+    # Handle Auto-Advance Transition
+    if st.session_state.get("trigger_advance_for") == q_id:
+        st.session_state["trigger_advance_for"] = None
+        if current_idx < total - 1:
+            st.toast(f"Pilihan Butir #{current_idx + 1} tersimpan! Melanjutkan...", icon="✅")
+            time.sleep(0.35)
+            st.session_state.current_q += 1
+            st.rerun()
+        else:
+            st.toast("Semua butir telah dijawab! Siap melihat hasil analisis.", icon="🎉")
 
     st.markdown("<div style='height:0.8rem;'></div>", unsafe_allow_html=True)
 
